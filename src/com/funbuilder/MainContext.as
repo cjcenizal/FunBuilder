@@ -1,5 +1,13 @@
 package com.funbuilder
 {
+	import com.funbuilder.controller.commands.NewFileCommand;
+	import com.funbuilder.controller.commands.OpenFileCommand;
+	import com.funbuilder.controller.commands.SaveFileCommand;
+	import com.funbuilder.controller.commands.UndoEditCommand;
+	import com.funbuilder.controller.signals.NewFileRequest;
+	import com.funbuilder.controller.signals.OpenFileRequest;
+	import com.funbuilder.controller.signals.SaveFileRequest;
+	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.view.components.MainView;
 	import com.funbuilder.view.components.MenuBarView;
 	import com.funbuilder.view.mediators.AppMediator;
@@ -27,7 +35,10 @@ package com.funbuilder
 			
 			// Map signals.
 			//injector.mapSingleton( AddNametagRequest );
-			//signalCommandMap.mapSignalClass( AddAiCompetitorsRequest,				AddAiCompetitorsCommand );
+			signalCommandMap.mapSignalClass( NewFileRequest,				NewFileCommand );
+			signalCommandMap.mapSignalClass( OpenFileRequest,				OpenFileCommand );
+			signalCommandMap.mapSignalClass( SaveFileRequest,				SaveFileCommand );
+			signalCommandMap.mapSignalClass( UndoEditRequest,				UndoEditCommand );
 			
 			// Map views to mediators.
 			mediatorMap.mapView( MenuBarView,					MenuBarMediator );
