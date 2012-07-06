@@ -2,6 +2,7 @@ package {
 
 	import com.funbuilder.MainContext;
 	import com.funbuilder.view.components.MainView;
+	import com.bit101.components.Style;
 	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -17,6 +18,7 @@ package {
 
 		public function FunBuilder() {
 			super();
+			Style.setStyle( Style.DARK );
 			addEventListener( Event.ADDED_TO_STAGE, init );
 		}
 
@@ -28,7 +30,6 @@ package {
 		}
 
 		public function createChildren():void {
-			trace(createChildren);
 			_mainView = new MainView( this );
 		}
 

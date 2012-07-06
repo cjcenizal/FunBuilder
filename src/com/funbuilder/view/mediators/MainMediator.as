@@ -8,7 +8,7 @@ package com.funbuilder.view.mediators {
 	public class MainMediator extends Mediator implements IMediator {
 		
 		[Inject]
-		public var view:com.funbuilder.view.components.MainView;
+		public var view:MainView;
 		
 		override public function onRegister():void {
 		}

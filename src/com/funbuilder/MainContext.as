@@ -1,8 +1,10 @@
 package com.funbuilder
 {
 	import com.funbuilder.view.components.MainView;
+	import com.funbuilder.view.components.MenuBarView;
 	import com.funbuilder.view.mediators.AppMediator;
 	import com.funbuilder.view.mediators.MainMediator;
+	import com.funbuilder.view.mediators.MenuBarMediator;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
@@ -28,7 +30,8 @@ package com.funbuilder
 			//signalCommandMap.mapSignalClass( AddAiCompetitorsRequest,				AddAiCompetitorsCommand );
 			
 			// Map views to mediators.
-			mediatorMap.mapView( MainView, 					MainMediator );
+			mediatorMap.mapView( MenuBarView,					MenuBarMediator );
+			mediatorMap.mapView( MainView, 						MainMediator );
 			
 			// Do this last, since it causes our entire view system to be built.
 			mediatorMap.mapView( FunBuilder, 					AppMediator );
