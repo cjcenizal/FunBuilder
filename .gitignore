@@ -1,0 +1,8 @@
+# Ignore swfs.
+*.swf
+
+# Ignore AIR.
+*.air
+
+# Ignore that pesky OS X file.
+*.DS_Store
