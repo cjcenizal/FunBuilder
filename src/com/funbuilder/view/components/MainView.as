@@ -1,5 +1,6 @@
 package com.funbuilder.view.components {
 	
+	import away3d.cameras.Camera3D;
 	import away3d.containers.View3D;
 	import away3d.controllers.HoverController;
 	import away3d.debug.AwayStats;
@@ -11,23 +12,36 @@ package com.funbuilder.view.components {
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	
 	public class MainView extends Component {
+		
+		private const KEYS:Object = {
+			W : 87,
+			A : 65,
+			S : 83,
+			D : 68,
+			Z : 90,
+			X : 88
+		}
+		private const KEY_ACTIONS:Object = {};
+		private var _currKey:int = -1;
 		
 		private var _view:View3D;
 		private var _isDebugging:Boolean = false;
 		private var _awayStats:AwayStats;
 		private var _bg:Panel;
 		private var _menuBar:MenuBarView;
-		private var cameraController:HoverController;
+		private var _cameraController:HoverController;
+		private var _target:Mesh;
 		
 		// Camera control.
 		private var _move:Boolean = false;
-		private var lastPanAngle:Number;
-		private var lastTiltAngle:Number;
-		private var lastMouseX:Number;
-		private var lastMouseY:Number;
+		private var _lastPanAngle:Number;
+		private var _lastTiltAngle:Number;
+		private var _lastMouseX:Number;
+		private var _lastMouseY:Number;
 		
 		public function MainView( parent:DisplayObjectContainer = null, x:Number = 0, y:Number = 0 ) {
 			super( parent, x, y );
@@ -77,14 +91,34 @@ package com.funbuilder.view.components {
 					_awayStats.registerView( _view );
 				}
 				
-				var target:Mesh = new Mesh();
-				target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
-				target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
-				_view.scene.addChild( target );
-				cameraController = new HoverController( _view.camera, target, 45, 10, 800 );
+				_target = new Mesh();
+				_target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
+				_target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
+				_view.scene.addChild( _target );
+				_view.camera.z = -1000;
+				_view.camera.y = 200;
+				_cameraController = new HoverController( _view.camera, _target, 45, 10, 800 );
+				_cameraController.steps = 1;
 				addEventListener( Event.ENTER_FRAME, onEnterFrame );
 				stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
 				stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
+				stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
+				stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
+				
+				var amount:Number = 10;
+				KEY_ACTIONS[ KEYS.W ] = getMoveCallback( 'z', amount );
+				KEY_ACTIONS[ KEYS.A ] = getMoveCallback( 'x', -amount );
+				KEY_ACTIONS[ KEYS.S ] = getMoveCallback( 'z', -amount );
+				KEY_ACTIONS[ KEYS.D ] = getMoveCallback( 'x', amount );
+			}
+		}
+		
+		private function getMoveCallback( property:String, amount:Number ):Function {
+			var cam:Camera3D = _view.camera;
+			return function():void {
+				trace("move : " + property + " from " + cam[ property ]);
+				cam[ property ] += amount;
+				trace("to: " + cam[ property ]);
 			}
 		}
 		
@@ -93,19 +127,27 @@ package com.funbuilder.view.components {
 		 */
 		private function onEnterFrame( event:Event ):void {
 			if ( _move ) {
-				cameraController.panAngle = 0.3 * ( stage.mouseX - lastMouseX ) + lastPanAngle;
-				cameraController.tiltAngle = 0.3 * ( stage.mouseY - lastMouseY ) + lastTiltAngle;
+				_cameraController.panAngle = ( stage.mouseX - _lastMouseX ) + _lastPanAngle;
+				_cameraController.tiltAngle = ( stage.mouseY - _lastMouseY ) + _lastTiltAngle;
 			}
+			if ( KEY_ACTIONS[ _currKey ] ) {
+				KEY_ACTIONS[ _currKey ].apply();
+			}
+			var divDegToRad:Number = 180 * Math.PI;
+			var rads:Number = _cameraController.panAngle / divDegToRad;
+			_view.camera.x = _target.x + Math.cos( rads ) * 1000;
+			_view.camera.z = _target.z + Math.sin( rads ) * 1000;
+			_view.camera.lookAt( _target.position );
 		}
 		
 		/**
 		 * Mouse down listener for navigation
 		 */
 		private function onMouseDown( event:MouseEvent ):void {
-			lastPanAngle = cameraController.panAngle;
-			lastTiltAngle = cameraController.tiltAngle;
-			lastMouseX = stage.mouseX;
-			lastMouseY = stage.mouseY;
+			_lastPanAngle = _cameraController.panAngle;
+			_lastTiltAngle = _cameraController.tiltAngle;
+			_lastMouseX = stage.mouseX;
+			_lastMouseY = stage.mouseY;
 			_move = true;
 			stage.addEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
 		}
@@ -124,6 +166,16 @@ package com.funbuilder.view.components {
 		private function onStageMouseLeave( event:Event ):void {
 			_move = false;
 			stage.removeEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
+		}
+		
+		private function onKeyDown( e:KeyboardEvent ):void {
+			if ( e.shiftKey ) {
+				_currKey = e.keyCode;
+			}
+		}
+		
+		private function onKeyUp( e:KeyboardEvent ):void {
+			_currKey = -1;
 		}
 		
 	}

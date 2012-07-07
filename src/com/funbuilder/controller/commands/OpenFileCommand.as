@@ -10,6 +10,7 @@ package com.funbuilder.controller.commands {
 	import com.funbuilder.model.FileModel;
 	
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.filesystem.File;
 	
 	import org.robotlegs.mvcs.Command;
@@ -58,6 +59,8 @@ package com.funbuilder.controller.commands {
 			// Add floor grid.
 			// Refine camera control.
 			// Add block selection.
+			// Add mouse selection
+			// Move blocks WASD, ZX
 			
 			// Parse the JSON data.
 			// Add blocks to the CurrentSegmentModel.
