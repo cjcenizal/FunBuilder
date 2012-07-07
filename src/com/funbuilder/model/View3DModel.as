@@ -51,7 +51,6 @@ package com.funbuilder.model {
 		 * Adding 3D objects to the scene.
 		 */
 		public function addToScene( object:ObjectContainer3D ):void {
-			trace("addToScene: " + object);
 			_scene.addChild( object );
 		}
 		

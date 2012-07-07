@@ -19,8 +19,6 @@ package com.funbuilder.controller.commands {
 		public var view3DModel:View3DModel;
 		
 		override public function execute():void {
-			trace("view3DModel: " + view3DModel);
-			trace("object: " + object);
 			view3DModel.addToScene( object );
 		}
 	}

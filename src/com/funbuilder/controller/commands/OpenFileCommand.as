@@ -48,7 +48,16 @@ package com.funbuilder.controller.commands {
 		}
 		
 		private function loadSegment( json:String ):void {
-			trace(json);
+			
+			// Add lights to scene and apply lightpicker to materials.
+			// Use correct blocks.
+			// Add floor grid.
+			// Refine camera control.
+			// Add block selection.
+			
+			// Parse the JSON data.
+			// Add blocks to the CurrentSegmentModel.
+			// Add them to the view.
 			var list:Array = com.adobe.serialization.json.JSON.decode( json );
 			var len:int = list.length;
 			var dataItem:Object;
@@ -61,10 +70,6 @@ package com.funbuilder.controller.commands {
 				mesh.z = dataItem.z * 100;
 				addObjectToSceneRequest.dispatch( mesh );
 			}
-			
-			// Parse the JSON data.
-			// Add blocks to the CurrentSegmentModel.
-			// Add them to the view.
 		}
 	}
 }

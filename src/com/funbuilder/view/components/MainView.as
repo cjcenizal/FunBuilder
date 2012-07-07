@@ -1,6 +1,7 @@
 package com.funbuilder.view.components {
 	
 	import away3d.containers.View3D;
+	import away3d.controllers.HoverController;
 	import away3d.debug.AwayStats;
 	
 	import com.bit101.components.Component;
@@ -8,6 +9,7 @@ package com.funbuilder.view.components {
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	public class MainView extends Component {
 		
@@ -16,6 +18,14 @@ package com.funbuilder.view.components {
 		private var _awayStats:AwayStats;
 		private var _bg:Panel;
 		private var _menuBar:MenuBarView;
+		private var cameraController:HoverController;
+		
+		// Camera control.
+		private var _move:Boolean = false;
+		private var lastPanAngle:Number;
+		private var lastTiltAngle:Number;
+		private var lastMouseX:Number;
+		private var lastMouseY:Number;
 		
 		public function MainView( parent:DisplayObjectContainer = null, x:Number = 0, y:Number = 0 ) {
 			super( parent, x, y );
@@ -53,20 +63,61 @@ package com.funbuilder.view.components {
 		}
 		
 		public function set view3D( view:View3D ):void {
-			trace("remove view");
 			if ( _view ) {
 				removeChild( _view );
 				_view = null;
 			}
 			if ( view ) {
-				trace("add view");
 				_view = view;
 				addChild( _view );
 				_view.y = 20;
 				if ( _awayStats ) {
 					_awayStats.registerView( _view );
 				}
+				
+				cameraController = new HoverController( _view.camera, null, 45, 10, 800 );
+				addEventListener( Event.ENTER_FRAME, onEnterFrame );
+				stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
+				stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
 			}
+		}
+		
+		/**
+		 * Navigation and render loop
+		 */
+		private function onEnterFrame( event:Event ):void {
+			if ( _move ) {
+				cameraController.panAngle = 0.3 * ( stage.mouseX - lastMouseX ) + lastPanAngle;
+				cameraController.tiltAngle = 0.3 * ( stage.mouseY - lastMouseY ) + lastTiltAngle;
+			}
+		}
+		
+		/**
+		 * Mouse down listener for navigation
+		 */
+		private function onMouseDown( event:MouseEvent ):void {
+			lastPanAngle = cameraController.panAngle;
+			lastTiltAngle = cameraController.tiltAngle;
+			lastMouseX = stage.mouseX;
+			lastMouseY = stage.mouseY;
+			_move = true;
+			stage.addEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
+		}
+		
+		/**
+		 * Mouse up listener for navigation
+		 */
+		private function onMouseUp( event:MouseEvent ):void {
+			_move = false;
+			stage.removeEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
+		}
+		
+		/**
+		 * Mouse stage leave listener for navigation
+		 */
+		private function onStageMouseLeave( event:Event ):void {
+			_move = false;
+			stage.removeEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
 		}
 	}
 }
