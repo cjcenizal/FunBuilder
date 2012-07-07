@@ -77,6 +77,16 @@ package com.funbuilder.controller.commands {
 				mesh.z = dataItem.z * 100;
 				addObjectToSceneRequest.dispatch( mesh );
 			}
+			
+			
+			// CurrentBlockModel
+			// Scrollwheel zooms
+			// Cycle through types for currently select block
+			// Space bar switches: 1) move block / camera mode, 2) block selection/addition mode
+			// Selection: 1) select block and choose new type (or switch to moving to move it around)
+			// 2) drag new blocks from library into scene
+			// Intersecting an existing block flashes red and doesn't allow you to leave it there
+			// (i.e. deselect it)
 		}
 	}
 }
