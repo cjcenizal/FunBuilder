@@ -1,6 +1,7 @@
 package com.funbuilder.controller.commands {
 
 	import away3d.entities.Mesh;
+	import away3d.events.MouseEvent3D;
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.CubeGeometry;
 	
@@ -72,21 +73,29 @@ package com.funbuilder.controller.commands {
 			for ( var i:int = 0; i < len; i++ ) {
 				dataItem = list[ i ];
 				mesh = blocksModel.getBlock( dataItem.id ).mesh.clone() as Mesh;
+				mesh.mouseEnabled = true;
+				mesh.addEventListener( MouseEvent3D.CLICK, onClick );
 				mesh.x = dataItem.x * 100;
 				mesh.y = dataItem.y * 100;
 				mesh.z = dataItem.z * 100;
 				addObjectToSceneRequest.dispatch( mesh );
 			}
 			
+			// Scrollwheel zooms
+			
+			
 			
 			// CurrentBlockModel
-			// Scrollwheel zooms
 			// Cycle through types for currently select block
-			// Space bar switches: 1) move block / camera mode, 2) block selection/addition mode
+			
 			// Selection: 1) select block and choose new type (or switch to moving to move it around)
 			// 2) drag new blocks from library into scene
 			// Intersecting an existing block flashes red and doesn't allow you to leave it there
 			// (i.e. deselect it)
+		}
+		
+		private function onClick( e:MouseEvent3D ):void {
+			trace("click " + e.object.position);
 		}
 	}
 }

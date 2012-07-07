@@ -15,7 +15,11 @@ package com.funbuilder.view.components {
 	import flash.events.MouseEvent;
 	import flash.geom.Vector3D;
 	
+	import org.osflash.signals.Signal;
+	
 	public class MainView extends Component {
+		
+		public var onKeyPressSignal:Signal;
 		
 		private const KEYS:Object = {
 			W : 87,
@@ -50,6 +54,7 @@ package com.funbuilder.view.components {
 		
 		override protected function init():void {
 			super.init();
+			onKeyPressSignal = new Signal();
 			_bg = new Panel( this );
 			_menuBar = new MenuBarView( this );
 			this.addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
@@ -58,11 +63,21 @@ package com.funbuilder.view.components {
 		private function onAddedToStage( e:Event ):void {
 			_bg.setSize( stage.stageWidth, 20 );
 			stage.addEventListener( Event.ENTER_FRAME, onEnterFrame );
-			stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
-			stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
-			stage.addEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightClick );
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
-			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
+		}
+		
+		public function enableCameraControl( enabled:Boolean ):void {
+			if ( enabled ) {
+				stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
+				stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
+				stage.addEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightClick );
+				stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
+			} else {
+				stage.removeEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
+				stage.removeEventListener( MouseEvent.MOUSE_UP, onMouseUp );
+				stage.removeEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightClick );
+				stage.removeEventListener( KeyboardEvent.KEY_UP, onKeyUp );
+			}
 		}
 		
 		/**
@@ -83,6 +98,10 @@ package com.funbuilder.view.components {
 					_awayStats.y = stage.stageHeight - _awayStats.height;
 				}
 			}
+		}
+		
+		public function pressKey( code:int ):void {
+			_keysDown[ code ] = true;
 		}
 		
 		public function set target( t:Mesh ):void {
@@ -222,7 +241,7 @@ package com.funbuilder.view.components {
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {
-			_keysDown[ e.keyCode ] = true;
+			onKeyPressSignal.dispatch( e.keyCode );
 		}
 		
 		private function onKeyUp( e:KeyboardEvent ):void {

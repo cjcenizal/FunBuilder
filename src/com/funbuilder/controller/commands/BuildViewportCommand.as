@@ -12,8 +12,10 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
+	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -35,7 +37,13 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var view3dModel:View3DModel;
 		
+		[Inject]
+		public var editingModeModel:EditingModeModel;
+		
 		// Commands.
+		
+		[Inject]
+		public var setEditingModeRequest:SetEditingModeRequest;
 		
 		[Inject]
 		public var addCameraTargetRequest:AddCameraTargetRequest;
@@ -77,7 +85,7 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( planeMesh );
 			
 			// Add camera target.
-			var target:Mesh = new Mesh( new CubeGeometry(), new ColorMaterial( 0x00ff00, .1 ) );
+			var target:Mesh = new Mesh( new CubeGeometry(), new ColorMaterial( 0x00ff00, .2 ) );
 			target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			cameraTargetModel.target = target;
@@ -85,6 +93,9 @@ package com.funbuilder.controller.commands
 			
 			// Show stats.
 			showStatsRequest.dispatch( true );
+			
+			// Start interaction.
+			setEditingModeRequest.dispatch( editingModeModel.mode );
 			
 			// Respond to time.
 			commandMap.mapEvent( TimeEvent.TICK, UpdateViewCommand, TimeEvent );
