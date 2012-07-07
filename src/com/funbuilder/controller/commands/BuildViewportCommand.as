@@ -13,6 +13,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
 	
 	import org.robotlegs.mvcs.Command;
@@ -58,10 +59,12 @@ package com.funbuilder.controller.commands
 			addView3DRequest.dispatch( view );
 			
 			// Add ground plane.
-			var planeGeometry:PlaneGeometry = new PlaneGeometry( 12 * 100, 26 * 100, 12, 26, true );
+			var planeGeometry:PlaneGeometry = new PlaneGeometry( SegmentConstants.SEGMENT_WIDTH, SegmentConstants.SEGMENT_DEEP, 12, 26, true );
 			var planeMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .1 );
 			planeMaterial.bothSides = true;
 			var planeMesh:Mesh = new Mesh( planeGeometry, planeMaterial );
+			planeMesh.x = SegmentConstants.SEGMENT_HALF_WIDTH;
+			planeMesh.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			addObjectToSceneRequest.dispatch( planeMesh );
 			
 			// Show stats.

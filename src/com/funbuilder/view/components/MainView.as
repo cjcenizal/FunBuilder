@@ -3,7 +3,9 @@ package com.funbuilder.view.components {
 	import away3d.containers.View3D;
 	import away3d.controllers.HoverController;
 	import away3d.debug.AwayStats;
+	import away3d.entities.Mesh;
 	
+	import com.funbuilder.model.constants.SegmentConstants;
 	import com.bit101.components.Component;
 	import com.bit101.components.Panel;
 	
@@ -75,7 +77,11 @@ package com.funbuilder.view.components {
 					_awayStats.registerView( _view );
 				}
 				
-				cameraController = new HoverController( _view.camera, null, 45, 10, 800 );
+				var target:Mesh = new Mesh();
+				target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
+				target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
+				_view.scene.addChild( target );
+				cameraController = new HoverController( _view.camera, target, 45, 10, 800 );
 				addEventListener( Event.ENTER_FRAME, onEnterFrame );
 				stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
 				stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
