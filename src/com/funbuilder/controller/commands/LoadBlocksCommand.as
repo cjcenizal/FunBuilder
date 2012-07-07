@@ -8,34 +8,41 @@ package com.funbuilder.controller.commands {
 	import away3d.loaders.misc.AssetLoaderToken;
 	import away3d.loaders.parsers.OBJParser;
 	
+	import com.funbuilder.model.BlocksModel;
 	import com.funrun.model.constants.TrackConstants;
 	import com.funrun.model.vo.BlockVO;
 	import com.funrun.services.JsonService;
 	import com.funrun.services.parsers.BlocksParser;
 	
+	import flash.events.Event;
+	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
 	import org.robotlegs.utilities.macrobot.AsyncCommand;
 	
 	public class LoadBlocksCommand extends AsyncCommand {
 		
-		[ Embed( source = "external/embed/data/blocks.json", mimeType = "application/octet-stream" ) ]
-		private const BlocksJsonData:Class;
-		
 		// Models.
 		
-	//	[Inject]
-	//	public var blocksModel:BlocksModel;
+		[Inject]
+		public var blocksModel:BlocksModel;
 		
 		// Private vars.
 		
+		private var _loader:URLLoader;
 		private var _filePath:String = "blocks/";
 		private var _countTotal:int;
 		private var _countLoaded:int = 0;
 		
 		override public function execute():void {
+			_loader = new URLLoader( new URLRequest( 'data/blocks.json' ) );
+			_loader.addEventListener( Event.COMPLETE, onLoadComplete );
+		}
+		
+		private function onLoadComplete( e:Event ):void {
+			var data:String = ( e.target as URLLoader ).data;
 			// Parse object to give it meaning.
-			var parsedBlocks:BlocksParser = new BlocksParser( new JsonService().read( BlocksJsonData ) );
+			var parsedBlocks:BlocksParser = new BlocksParser( new JsonService().readString( data ) );
 			
 			// Store a count so we know when we're done loading the block objs.
 			var len:int = parsedBlocks.length;
@@ -51,7 +58,7 @@ package com.funbuilder.controller.commands {
 				for ( var i:int = 0; i < len; i++ ) {
 					blockData = parsedBlocks.getAt( i );
 					// Store in model.
-				//	blocksModel.addBlock( blockData );
+					blocksModel.addBlock( blockData );
 					// Load it.
 					var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( _filePath + blockData.filename ), context, blockData.id, new OBJParser() );
 					token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( blockData ) );

@@ -9,6 +9,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.OpenFileRequest;
 	import com.funbuilder.controller.signals.SaveFileRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
+	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.view.components.MainView;
 	import com.funbuilder.view.components.MenuBarView;
 	import com.funbuilder.view.mediators.AppMediator;
@@ -29,7 +30,7 @@ package com.funbuilder
 		override public function startup():void {
 			
 			// Map models.
-			//injector.mapSingleton( BlocksModel );
+			injector.mapSingleton( BlocksModel );
 			
 			// Map services.
 			//injector.mapSingleton( MatchmakingService );
