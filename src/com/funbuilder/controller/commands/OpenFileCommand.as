@@ -6,6 +6,7 @@ package com.funbuilder.controller.commands {
 	
 	import com.adobe.serialization.json.JSON;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
+	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.FileModel;
 	
 	import flash.events.Event;
@@ -19,6 +20,9 @@ package com.funbuilder.controller.commands {
 		
 		[Inject]
 		public var fileModel:FileModel;
+		
+		[Inject]
+		public var blocksModel:BlocksModel;
 		
 		// Commands.
 		
@@ -61,10 +65,10 @@ package com.funbuilder.controller.commands {
 			var list:Array = com.adobe.serialization.json.JSON.decode( json );
 			var len:int = list.length;
 			var dataItem:Object;
+			var mesh:Mesh;
 			for ( var i:int = 0; i < len; i++ ) {
 				dataItem = list[ i ];
-				var block:CubeGeometry = new CubeGeometry();
-				var mesh:Mesh = new Mesh( block, new ColorMaterial( 0x00ff00 ) );
+				mesh = blocksModel.getBlock( dataItem.id ).mesh.clone() as Mesh;
 				mesh.x = dataItem.x * 100;
 				mesh.y = dataItem.y * 100;
 				mesh.z = dataItem.z * 100;
