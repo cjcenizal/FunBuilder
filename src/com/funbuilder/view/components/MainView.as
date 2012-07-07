@@ -139,8 +139,8 @@ package com.funbuilder.view.components {
 		private function onEnterFrame( event:Event ):void {
 			if ( _view && _target ) {
 				if ( _move ) {
-					_cameraController.panAngle = ( stage.mouseX - _lastMouseX ) + _lastPanAngle;
-					_cameraController.tiltAngle = ( stage.mouseY - _lastMouseY ) + _lastTiltAngle;
+					_cameraController.panAngle = .35 * ( stage.mouseX - _lastMouseX ) + _lastPanAngle;
+					_cameraController.tiltAngle = .35 * ( stage.mouseY - _lastMouseY ) + _lastTiltAngle;
 				}
 				var divDegToRad:Number = 180 * Math.PI;
 				var rads:Number = _cameraController.panAngle / divDegToRad;

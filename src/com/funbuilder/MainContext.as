@@ -7,6 +7,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.OpenFileCommand;
 	import com.funbuilder.controller.commands.PressKeyCommand;
 	import com.funbuilder.controller.commands.SaveFileCommand;
+	import com.funbuilder.controller.commands.SelectBlockCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
 	import com.funbuilder.controller.signals.AddBlockToSegmentRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
@@ -17,6 +18,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.PressKeyRequest;
 	import com.funbuilder.controller.signals.PressKeyToLookRequest;
 	import com.funbuilder.controller.signals.SaveFileRequest;
+	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
@@ -70,6 +72,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( OpenFileRequest,						OpenFileCommand );
 			signalCommandMap.mapSignalClass( PressKeyRequest,						PressKeyCommand );
 			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
+			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
 			
 			// Map views to mediators.

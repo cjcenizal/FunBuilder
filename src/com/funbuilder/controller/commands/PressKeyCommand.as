@@ -33,8 +33,6 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			
-			// Dispatch into system, to either echo back or change mode.
 			if ( code == SPACE ) {
 				// Toggle between Selection and Exploration mode.
 				if ( editingModeModel.mode == EditingModeModel.LOOK ) {
@@ -43,15 +41,8 @@ package com.funbuilder.controller.commands
 					editingModeModel.mode = EditingModeModel.LOOK;
 				}
 				setEditingModeRequest.dispatch( editingModeModel.mode );
-				
-				
-				// Space bar switches: 1) move block / camera mode, 2) block selection/addition mode
-				// Selection: 1) select block and choose new type (or switch to moving to move it around)
-				// 2) drag new blocks from library into scene
-				// Intersecting an existing block flashes red and doesn't allow you to leave it there
-				// (i.e. deselect it)
-				
 			} else if ( editingModeModel.mode == EditingModeModel.LOOK ) {
+				// Send key back into MainView to move the camera.
 				pressKeyToLookRequest.dispatch( code );
 			}
 		}

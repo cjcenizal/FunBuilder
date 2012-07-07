@@ -55,18 +55,6 @@ package com.funbuilder.controller.commands {
 		}
 		
 		private function loadSegment( json:String ):void {
-			
-			// Add lights to scene and apply lightpicker to materials.
-			// Use correct blocks.
-			// Add floor grid.
-			// Refine camera control.
-			// Add block selection.
-			// Add mouse selection
-			// Move blocks WASD, ZX
-			
-			// Parse the JSON data.
-			// Add blocks to the CurrentSegmentModel.
-			// Add them to the view.
 			var list:Array = com.adobe.serialization.json.JSON.decode( json );
 			var len:int = list.length;
 			var dataItem:Object;
@@ -79,18 +67,6 @@ package com.funbuilder.controller.commands {
 				mesh.z = dataItem.z * 100;
 				addBlockToSegmentRequest.dispatch( mesh );
 			}
-			
-			// Scrollwheel zooms
-			
-			
-			
-			// CurrentBlockModel
-			// Cycle through types for currently select block
-			
-			// Selection: 1) select block and choose new type (or switch to moving to move it around)
-			// 2) drag new blocks from library into scene
-			// Intersecting an existing block flashes red and doesn't allow you to leave it there
-			// (i.e. deselect it)
 		}
 	}
 }
