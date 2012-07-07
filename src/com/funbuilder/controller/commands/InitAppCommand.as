@@ -8,6 +8,7 @@ package com.funbuilder.controller.commands
 		public function InitAppCommand()
 		{
 			addCommand( LoadBlocksCommand );
+			addCommand( BuildViewportCommand );
 		}
 	}
 }

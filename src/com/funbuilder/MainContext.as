@@ -1,16 +1,22 @@
 package com.funbuilder
 {
+	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.NewFileCommand;
 	import com.funbuilder.controller.commands.OpenFileCommand;
 	import com.funbuilder.controller.commands.SaveFileCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
+	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
+	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.controller.signals.OpenFileRequest;
 	import com.funbuilder.controller.signals.SaveFileRequest;
+	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.FileModel;
+	import com.funbuilder.model.TimeModel;
+	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.view.components.MainView;
 	import com.funbuilder.view.components.MenuBarView;
 	import com.funbuilder.view.mediators.AppMediator;
@@ -33,16 +39,20 @@ package com.funbuilder
 			// Map models.
 			injector.mapSingleton( BlocksModel );
 			injector.mapSingleton( FileModel );
+			injector.mapSingleton( TimeModel );
+			injector.mapSingleton( View3DModel );
 			
 			// Map services.
 			//injector.mapSingleton( MatchmakingService );
 			
 			// Map signals.
-			//injector.mapSingleton( AddNametagRequest );
-			signalCommandMap.mapSignalClass( NewFileRequest,				NewFileCommand );
-			signalCommandMap.mapSignalClass( OpenFileRequest,				OpenFileCommand );
-			signalCommandMap.mapSignalClass( SaveFileRequest,				SaveFileCommand );
-			signalCommandMap.mapSignalClass( UndoEditRequest,				UndoEditCommand );
+			injector.mapSingleton( AddView3DRequest );
+			injector.mapSingleton( ShowStatsRequest );
+			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
+			signalCommandMap.mapSignalClass( NewFileRequest,						NewFileCommand );
+			signalCommandMap.mapSignalClass( OpenFileRequest,						OpenFileCommand );
+			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
+			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
 			
 			// Map views to mediators.
 			mediatorMap.mapView( MenuBarView,					MenuBarMediator );
