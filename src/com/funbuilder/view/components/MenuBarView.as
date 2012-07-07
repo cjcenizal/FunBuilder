@@ -5,6 +5,7 @@ package com.funbuilder.view.components {
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 
 	public class MenuBarView extends Component {
 
@@ -26,14 +27,19 @@ package com.funbuilder.view.components {
 			_menusObj = {};
 			addMenu( "File",
 				[
-					new MenuItemVO( "New", getDispatchEvent( EVENT_NEW ) ),
-					new MenuItemVO( "Open", getDispatchEvent( EVENT_OPEN ) ),
-					new MenuItemVO( "Save", getDispatchEvent( EVENT_SAVE ) )
+					new MenuItemVO( "New \t\tCmd-N", getDispatchEvent( EVENT_NEW ) ),
+					new MenuItemVO( "Open \tCmd-O", getDispatchEvent( EVENT_OPEN ) ),
+					new MenuItemVO( "Save \tCmd-S", getDispatchEvent( EVENT_SAVE ) )
 				] );
 			addMenu( "Edit",
 				[
-					new MenuItemVO( "Undo", getDispatchEvent( EVENT_UNDO ) )
+					new MenuItemVO( "Undo\t\tCmd-Z", getDispatchEvent( EVENT_UNDO ) )
 				] );
+			this.addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
+		}
+		
+		private function onAddedToStage( e:Event ):void {
+			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 		}
 		
 		private function addMenu( name:String, items:Array ):void {
@@ -58,6 +64,25 @@ package com.funbuilder.view.components {
 			var self:Component = this;
 			return function():void {
 				self.dispatchEvent( new Event( event ) );
+			}
+		}
+		
+		private function onKeyDown( e:KeyboardEvent ):void {
+			if ( e.commandKey ) {
+				switch ( e.keyCode ) {
+					case 78: // n
+						dispatchEvent( new Event( EVENT_NEW ) );
+						break;
+					case 83: // s
+						dispatchEvent( new Event( EVENT_SAVE ) );
+						break;
+					case 79: // o
+						dispatchEvent( new Event( EVENT_OPEN ) );
+						break;
+					case 90: // z
+						dispatchEvent( new Event( EVENT_UNDO ) );
+						break;
+				}
 			}
 		}
 	}

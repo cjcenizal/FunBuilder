@@ -5,9 +5,9 @@ package com.funbuilder.view.components {
 	import away3d.debug.AwayStats;
 	import away3d.entities.Mesh;
 	
-	import com.funbuilder.model.constants.SegmentConstants;
 	import com.bit101.components.Component;
 	import com.bit101.components.Panel;
+	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
@@ -125,5 +125,6 @@ package com.funbuilder.view.components {
 			_move = false;
 			stage.removeEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
 		}
+		
 	}
 }
