@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.PressKeyToLookRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
+	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
 	
 	import org.robotlegs.mvcs.Command;
@@ -18,6 +19,12 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var editingModeModel:EditingModeModel;
+		
+		[Inject]
+		public var cameraTargetModel:CameraTargetModel;
+		
+		[Inject]
+		public var currentBlockModel:CurrentBlockModel;
 
 		// Commands.
 		
@@ -44,6 +51,12 @@ package com.funbuilder.controller.commands
 			} else if ( editingModeModel.mode == EditingModeModel.LOOK ) {
 				// Send key back into MainView to move the camera.
 				pressKeyToLookRequest.dispatch( code );
+				// If we have a currently selected block, move the block to match the target.
+				if ( currentBlockModel.block ) {
+					currentBlockModel.block.x = cameraTargetModel.target.x;
+					currentBlockModel.block.y = cameraTargetModel.target.y;
+					currentBlockModel.block.z = cameraTargetModel.target.z;
+				}
 			}
 		}
 	}

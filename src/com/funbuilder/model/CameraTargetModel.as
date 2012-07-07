@@ -7,15 +7,11 @@ package com.funbuilder.model
 	public class CameraTargetModel extends Actor
 	{
 		
-		private var _target:Mesh;
+		public var target:Mesh;
 		
 		public function CameraTargetModel()
 		{
 			super();
-		}
-		
-		public function set target( t:Mesh ):void {
-			_target = t;
 		}
 	}
 }

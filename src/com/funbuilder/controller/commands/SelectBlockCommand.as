@@ -2,6 +2,9 @@ package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
 	
+	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funbuilder.model.CameraTargetModel;
+	
 	import org.robotlegs.mvcs.Command;
 	
 	public class SelectBlockCommand extends Command
@@ -12,17 +15,22 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var block:Mesh;
 		
+		// Models.
+		
+		[Inject]
+		public var currentBlockModel:CurrentBlockModel;
+		
+		[Inject]
+		public var cameraTargetModel:CameraTargetModel;
+		
 		override public function execute():void
 		{
-			
-			
-			
-			
 			// Scrollwheel zooms
 			
+			// Intersecting an existing block flashes red and doesn't allow you to leave it there
+			// (i.e. deselect it)
 			
-			// CurrentBlockModel
-			// Cycle through types for currently select block
+			
 			
 			// LOOK mode:
 			// 1) If block is selected, move it around
@@ -34,11 +42,12 @@ package com.funbuilder.controller.commands
 			// 2) drag new blocks from library into scene
 			
 			
-			
-			// Intersecting an existing block flashes red and doesn't allow you to leave it there
-			// (i.e. deselect it)
+			currentBlockModel.block = block;
 			if ( block ) {
-				// Set selection.
+				// Snap target to block.
+				cameraTargetModel.target.x = block.x;
+				cameraTargetModel.target.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
+				cameraTargetModel.target.z = block.z;
 			} else {
 				// De-select.
 			}

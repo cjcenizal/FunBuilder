@@ -2,6 +2,7 @@ package com.funbuilder
 {
 	import com.funbuilder.controller.commands.AddBlockToSegmentCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
+	import com.funbuilder.controller.commands.CurrentBlockModel;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.NewFileCommand;
 	import com.funbuilder.controller.commands.OpenFileCommand;
@@ -51,6 +52,7 @@ package com.funbuilder
 			// Map models.
 			injector.mapSingleton( BlocksModel );
 			injector.mapSingleton( CameraTargetModel );
+			injector.mapSingleton( CurrentBlockModel );
 			injector.mapSingleton( CurrentSegmentModel );
 			injector.mapSingleton( EditingModeModel );
 			injector.mapSingleton( FileModel );
