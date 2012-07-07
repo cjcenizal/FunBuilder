@@ -6,6 +6,7 @@ package com.funbuilder.controller.commands {
 	import away3d.primitives.CubeGeometry;
 	
 	import com.adobe.serialization.json.JSON;
+	import com.funbuilder.controller.signals.AddBlockToSegmentRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.FileModel;
@@ -29,7 +30,7 @@ package com.funbuilder.controller.commands {
 		// Commands.
 		
 		[Inject]
-		public var addObjectToSceneRequest:AddObjectToSceneRequest;
+		public var addBlockToSegmentRequest:AddBlockToSegmentRequest;
 		
 		// Private vars.
 		
@@ -73,12 +74,10 @@ package com.funbuilder.controller.commands {
 			for ( var i:int = 0; i < len; i++ ) {
 				dataItem = list[ i ];
 				mesh = blocksModel.getBlock( dataItem.id ).mesh.clone() as Mesh;
-				mesh.mouseEnabled = true;
-				mesh.addEventListener( MouseEvent3D.CLICK, onClick );
 				mesh.x = dataItem.x * 100;
 				mesh.y = dataItem.y * 100;
 				mesh.z = dataItem.z * 100;
-				addObjectToSceneRequest.dispatch( mesh );
+				addBlockToSegmentRequest.dispatch( mesh );
 			}
 			
 			// Scrollwheel zooms
@@ -92,10 +91,6 @@ package com.funbuilder.controller.commands {
 			// 2) drag new blocks from library into scene
 			// Intersecting an existing block flashes red and doesn't allow you to leave it there
 			// (i.e. deselect it)
-		}
-		
-		private function onClick( e:MouseEvent3D ):void {
-			trace("click " + e.object.position);
 		}
 	}
 }

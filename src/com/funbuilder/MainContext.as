@@ -1,5 +1,6 @@
 package com.funbuilder
 {
+	import com.funbuilder.controller.commands.AddBlockToSegmentCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.NewFileCommand;
@@ -7,6 +8,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.PressKeyCommand;
 	import com.funbuilder.controller.commands.SaveFileCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
+	import com.funbuilder.controller.signals.AddBlockToSegmentRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
@@ -20,6 +22,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.CurrentSegmentModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.FileModel;
 	import com.funbuilder.model.TimeModel;
@@ -46,6 +49,7 @@ package com.funbuilder
 			// Map models.
 			injector.mapSingleton( BlocksModel );
 			injector.mapSingleton( CameraTargetModel );
+			injector.mapSingleton( CurrentSegmentModel );
 			injector.mapSingleton( EditingModeModel );
 			injector.mapSingleton( FileModel );
 			injector.mapSingleton( TimeModel );
@@ -60,6 +64,7 @@ package com.funbuilder
 			injector.mapSingleton( PressKeyToLookRequest );
 			injector.mapSingleton( SetEditingModeRequest );
 			injector.mapSingleton( ShowStatsRequest );
+			signalCommandMap.mapSignalClass( AddBlockToSegmentRequest,				AddBlockToSegmentCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( NewFileRequest,						NewFileCommand );
 			signalCommandMap.mapSignalClass( OpenFileRequest,						OpenFileCommand );
