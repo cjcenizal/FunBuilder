@@ -10,6 +10,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.SaveFileRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.model.BlocksModel;
+	import com.funbuilder.model.FileModel;
 	import com.funbuilder.view.components.MainView;
 	import com.funbuilder.view.components.MenuBarView;
 	import com.funbuilder.view.mediators.AppMediator;
@@ -31,6 +32,7 @@ package com.funbuilder
 			
 			// Map models.
 			injector.mapSingleton( BlocksModel );
+			injector.mapSingleton( FileModel );
 			
 			// Map services.
 			//injector.mapSingleton( MatchmakingService );
