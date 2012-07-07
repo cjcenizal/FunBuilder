@@ -8,9 +8,11 @@ package com.funbuilder.controller.commands
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.PlaneGeometry;
 	
+	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
+	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -24,12 +26,18 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
+		public var cameraTargetModel:CameraTargetModel;
+		
+		[Inject]
 		public var timeModel:TimeModel;
 		
 		[Inject]
 		public var view3dModel:View3DModel;
 		
 		// Commands.
+		
+		[Inject]
+		public var addCameraTargetRequest:AddCameraTargetRequest;
 		
 		[Inject]
 		public var addView3DRequest:AddView3DRequest;
@@ -66,6 +74,13 @@ package com.funbuilder.controller.commands
 			planeMesh.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			planeMesh.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			addObjectToSceneRequest.dispatch( planeMesh );
+			
+			// Add camera target.
+			var target:Mesh = new Mesh();
+			target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
+			target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
+			cameraTargetModel.target = target;
+			addCameraTargetRequest.dispatch( target );
 			
 			// Show stats.
 			showStatsRequest.dispatch( true );

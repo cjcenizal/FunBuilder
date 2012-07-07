@@ -6,6 +6,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.OpenFileCommand;
 	import com.funbuilder.controller.commands.SaveFileCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
+	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
@@ -14,6 +15,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.model.BlocksModel;
+	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.FileModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
@@ -38,6 +40,7 @@ package com.funbuilder
 			
 			// Map models.
 			injector.mapSingleton( BlocksModel );
+			injector.mapSingleton( CameraTargetModel );
 			injector.mapSingleton( FileModel );
 			injector.mapSingleton( TimeModel );
 			injector.mapSingleton( View3DModel );
@@ -46,6 +49,7 @@ package com.funbuilder
 			//injector.mapSingleton( MatchmakingService );
 			
 			// Map signals.
+			injector.mapSingleton( AddCameraTargetRequest );
 			injector.mapSingleton( AddView3DRequest );
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );

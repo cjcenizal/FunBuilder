@@ -24,8 +24,7 @@ package com.funbuilder.view.components {
 			Z : 90,
 			X : 88
 		}
-		private const KEY_ACTIONS:Object = {};
-		private var _currKey:int = -1;
+		private var _keysDown:Object = {};
 		
 		private var _view:View3D;
 		private var _isDebugging:Boolean = false;
@@ -55,6 +54,11 @@ package com.funbuilder.view.components {
 		
 		private function onAddedToStage( e:Event ):void {
 			_bg.setSize( stage.stageWidth, 20 );
+			stage.addEventListener( Event.ENTER_FRAME, onEnterFrame );
+			stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
+			stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
+			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
+			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
 		}
 		
 		/**
@@ -77,6 +81,11 @@ package com.funbuilder.view.components {
 			}
 		}
 		
+		public function set target( t:Mesh ):void {
+			_target = t;
+			linkTargetToCamera();
+		}
+		
 		public function set view3D( view:View3D ):void {
 			if ( _view ) {
 				removeChild( _view );
@@ -89,33 +98,15 @@ package com.funbuilder.view.components {
 				if ( _awayStats ) {
 					_awayStats.registerView( _view );
 				}
-				
-				_target = new Mesh();
-				_target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
-				_target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
-				_view.scene.addChild( _target );
-				_view.camera.z = -1000;
-				_view.camera.y = 200;
-				_cameraController = new HoverController( _view.camera, _target, 45, 10, 800 );
-				_cameraController.steps = 1;
-				addEventListener( Event.ENTER_FRAME, onEnterFrame );
-				stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
-				stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
-				stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
-				stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
-				
-				var amount:Number = 10;
-				KEY_ACTIONS[ KEYS.W ] = getMoveCallback( 'z', amount );
-				KEY_ACTIONS[ KEYS.A ] = getMoveCallback( 'x', -amount );
-				KEY_ACTIONS[ KEYS.S ] = getMoveCallback( 'z', -amount );
-				KEY_ACTIONS[ KEYS.D ] = getMoveCallback( 'x', amount );
+				linkTargetToCamera();
 			}
 		}
 		
-		private function getMoveCallback( property:String, amount:Number ):Function {
-			var t:Mesh = _target;
-			return function():void {
-				_target[ property ] += amount;
+		private function linkTargetToCamera():void {
+			if ( _view && _target ) {
+				_view.scene.addChild( _target );
+				_cameraController = new HoverController( _view.camera, _target, 45, 10, 800 );
+				_cameraController.steps = 1;
 			}
 		}
 		
@@ -123,41 +114,49 @@ package com.funbuilder.view.components {
 		 * Navigation and render loop
 		 */
 		private function onEnterFrame( event:Event ):void {
-			if ( _move ) {
-				_cameraController.panAngle = ( stage.mouseX - _lastMouseX ) + _lastPanAngle;
-				_cameraController.tiltAngle = ( stage.mouseY - _lastMouseY ) + _lastTiltAngle;
+			if ( _view && _target ) {
+				if ( _move ) {
+					_cameraController.panAngle = ( stage.mouseX - _lastMouseX ) + _lastPanAngle;
+					_cameraController.tiltAngle = ( stage.mouseY - _lastMouseY ) + _lastTiltAngle;
+				}
+				var divDegToRad:Number = 180 * Math.PI;
+				var rads:Number = _cameraController.panAngle / divDegToRad;
+				
+				var camPos:Vector3D = _view.camera.position;
+				var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
+				var theta:Number = getTheta( camPos, _target.position );
+				var speed:Number = 20;
+				for ( var key:String in _keysDown ) {
+					var moveX:Number = 0;
+					var moveZ:Number = 0;
+					switch ( int( key ) ) {
+						case KEYS.W:
+							// Move towards target along ground plane.
+							moveX = Math.cos( theta ) * -speed;
+							moveZ = Math.sin( theta ) * -speed;
+							break;
+						case KEYS.S:
+							// Move away from target along ground plane.
+							moveX = Math.cos( theta ) * speed;
+							moveZ = Math.sin( theta ) * speed;
+							break;
+						case KEYS.A:
+							// Strafe left along ground plane.
+							moveX = Math.cos( theta + Math.PI * .5 ) * -speed;
+							moveZ = Math.sin( theta + Math.PI * .5 ) * -speed;
+							break;
+						case KEYS.D:
+							// Strafe right along ground plane.
+							moveX = Math.cos( theta + Math.PI * .5 ) * speed;
+							moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
+							break;
+					}
+					_view.camera.position.x += moveX;
+					_view.camera.position.z += moveZ;
+					_target.x += moveX;
+					_target.z += moveZ;
+				}
 			}
-			var divDegToRad:Number = 180 * Math.PI;
-			var rads:Number = _cameraController.panAngle / divDegToRad;
-			
-			var camPos:Vector3D = _view.camera.position;
-			var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
-			var theta:Number = getTheta( camPos, _target.position );
-			var speed:Number = 20;
-			var moveX:Number = 0;
-			var moveZ:Number = 0;
-			switch ( _currKey ) {
-				case KEYS.W:
-					// Move towards target along ground plane.
-					break;
-				case KEYS.S:
-					// Move away from target along ground plane.
-					break;
-				case KEYS.A:
-					// Strafe left along ground plane.
-					moveX = Math.cos( theta + Math.PI * .5 ) * -speed;
-					moveZ = Math.sin( theta + Math.PI * .5 ) * -speed;
-					break;
-				case KEYS.D:
-					// Strafe right along ground plane.
-					moveX = Math.cos( theta + Math.PI * .5 ) * speed;
-					moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
-					break;
-			}
-			_view.camera.position.x += moveX;
-			_view.camera.position.z += moveZ;
-			_target.x += moveX;
-			_target.z += moveZ;
 		}
 		
 		private function getTheta( posA:Vector3D, posB:Vector3D ):Number {
@@ -171,12 +170,14 @@ package com.funbuilder.view.components {
 		 * Mouse down listener for navigation
 		 */
 		private function onMouseDown( event:MouseEvent ):void {
-			_lastPanAngle = _cameraController.panAngle;
-			_lastTiltAngle = _cameraController.tiltAngle;
-			_lastMouseX = stage.mouseX;
-			_lastMouseY = stage.mouseY;
-			_move = true;
-			stage.addEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
+			if ( _view && _target ) {
+				_lastPanAngle = _cameraController.panAngle;
+				_lastTiltAngle = _cameraController.tiltAngle;
+				_lastMouseX = stage.mouseX;
+				_lastMouseY = stage.mouseY;
+				_move = true;
+				stage.addEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
+			}
 		}
 		
 		/**
@@ -196,13 +197,11 @@ package com.funbuilder.view.components {
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {
-			if ( e.shiftKey ) {
-				_currKey = e.keyCode;
-			}
+			_keysDown[ e.keyCode ] = true;
 		}
 		
 		private function onKeyUp( e:KeyboardEvent ):void {
-			_currKey = -1;
+			delete _keysDown[ e.keyCode ];
 		}
 		
 	}
