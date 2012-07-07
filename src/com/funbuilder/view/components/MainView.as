@@ -1,6 +1,5 @@
 package com.funbuilder.view.components {
 	
-	import away3d.cameras.Camera3D;
 	import away3d.containers.View3D;
 	import away3d.controllers.HoverController;
 	import away3d.debug.AwayStats;
@@ -17,7 +16,6 @@ package com.funbuilder.view.components {
 	import flash.geom.Vector3D;
 	
 	public class MainView extends Component {
-		
 		private const KEYS:Object = {
 			W : 87,
 			A : 65,
@@ -131,12 +129,42 @@ package com.funbuilder.view.components {
 			}
 			var divDegToRad:Number = 180 * Math.PI;
 			var rads:Number = _cameraController.panAngle / divDegToRad;
-			_view.camera.position.x = _target.x + Math.cos( rads ) * 1000;
-			_view.camera.position.z = _target.z + Math.sin( rads ) * 1000;
-			if ( KEY_ACTIONS[ _currKey ] ) {
-				KEY_ACTIONS[ _currKey ].apply();
+			
+			var camPos:Vector3D = _view.camera.position;
+			var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
+			var theta:Number = getTheta( camPos, _target.position );
+			var speed:Number = 20;
+			var moveX:Number = 0;
+			var moveZ:Number = 0;
+			switch ( _currKey ) {
+				case KEYS.W:
+					// Move towards target along ground plane.
+					break;
+				case KEYS.S:
+					// Move away from target along ground plane.
+					break;
+				case KEYS.A:
+					// Strafe left along ground plane.
+					moveX = Math.cos( theta + Math.PI * .5 ) * -speed;
+					moveZ = Math.sin( theta + Math.PI * .5 ) * -speed;
+					break;
+				case KEYS.D:
+					// Strafe right along ground plane.
+					moveX = Math.cos( theta + Math.PI * .5 ) * speed;
+					moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
+					break;
 			}
-			_view.camera.lookAt( new Vector3D( _target.x, _target.y, _target.z ) );
+			_view.camera.position.x += moveX;
+			_view.camera.position.z += moveZ;
+			_target.x += moveX;
+			_target.z += moveZ;
+		}
+		
+		private function getTheta( posA:Vector3D, posB:Vector3D ):Number {
+			var deltaZ:Number = posA.z - posB.z;
+			var deltaX:Number = posA.x - posB.x;
+			var angle:Number = Math.atan2(deltaZ, deltaX);
+			return angle;
 		}
 		
 		/**
