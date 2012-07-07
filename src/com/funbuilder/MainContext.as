@@ -1,5 +1,6 @@
 package com.funbuilder
 {
+	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.NewFileCommand;
 	import com.funbuilder.controller.commands.OpenFileCommand;
 	import com.funbuilder.controller.commands.SaveFileCommand;
@@ -55,7 +56,7 @@ package com.funbuilder
 		
 		private function onEnterFrame( e:Event ):void {
 			this.contextView.removeEventListener( Event.ENTER_FRAME, onEnterFrame );
-			//commandMap.execute( InitAppCommand );
+			commandMap.execute( InitAppCommand );
 		}
 	}
 }

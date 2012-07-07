@@ -1,8 +1,8 @@
 package {
 
+	import com.bit101.components.Style;
 	import com.funbuilder.MainContext;
 	import com.funbuilder.view.components.MainView;
-	import com.bit101.components.Style;
 	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
