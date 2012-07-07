@@ -14,6 +14,7 @@ package com.funbuilder.view.components {
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.geom.Vector3D;
 	
 	public class MainView extends Component {
 		
@@ -114,11 +115,9 @@ package com.funbuilder.view.components {
 		}
 		
 		private function getMoveCallback( property:String, amount:Number ):Function {
-			var cam:Camera3D = _view.camera;
+			var t:Mesh = _target;
 			return function():void {
-				trace("move : " + property + " from " + cam[ property ]);
-				cam[ property ] += amount;
-				trace("to: " + cam[ property ]);
+				_target[ property ] += amount;
 			}
 		}
 		
@@ -130,14 +129,14 @@ package com.funbuilder.view.components {
 				_cameraController.panAngle = ( stage.mouseX - _lastMouseX ) + _lastPanAngle;
 				_cameraController.tiltAngle = ( stage.mouseY - _lastMouseY ) + _lastTiltAngle;
 			}
+			var divDegToRad:Number = 180 * Math.PI;
+			var rads:Number = _cameraController.panAngle / divDegToRad;
+			_view.camera.position.x = _target.x + Math.cos( rads ) * 1000;
+			_view.camera.position.z = _target.z + Math.sin( rads ) * 1000;
 			if ( KEY_ACTIONS[ _currKey ] ) {
 				KEY_ACTIONS[ _currKey ].apply();
 			}
-			var divDegToRad:Number = 180 * Math.PI;
-			var rads:Number = _cameraController.panAngle / divDegToRad;
-			_view.camera.x = _target.x + Math.cos( rads ) * 1000;
-			_view.camera.z = _target.z + Math.sin( rads ) * 1000;
-			_view.camera.lookAt( _target.position );
+			_view.camera.lookAt( new Vector3D( _target.x, _target.y, _target.z ) );
 		}
 		
 		/**
