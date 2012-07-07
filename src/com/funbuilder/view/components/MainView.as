@@ -16,13 +16,16 @@ package com.funbuilder.view.components {
 	import flash.geom.Vector3D;
 	
 	public class MainView extends Component {
+		
 		private const KEYS:Object = {
 			W : 87,
 			A : 65,
 			S : 83,
 			D : 68,
 			Z : 90,
-			X : 88
+			X : 88,
+			Q : 81,
+			E : 69
 		}
 		private var _keysDown:Object = {};
 		
@@ -57,6 +60,7 @@ package com.funbuilder.view.components {
 			stage.addEventListener( Event.ENTER_FRAME, onEnterFrame );
 			stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
 			stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
+			stage.addEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightClick );
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
 		}
@@ -128,6 +132,7 @@ package com.funbuilder.view.components {
 				var speed:Number = 20;
 				for ( var key:String in _keysDown ) {
 					var moveX:Number = 0;
+					var moveY:Number = 0;
 					var moveZ:Number = 0;
 					switch ( int( key ) ) {
 						case KEYS.W:
@@ -150,10 +155,30 @@ package com.funbuilder.view.components {
 							moveX = Math.cos( theta + Math.PI * .5 ) * speed;
 							moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
 							break;
+						case KEYS.Z:
+							// Decrease elevation.
+							moveY = -speed;
+							break;
+						case KEYS.X:
+							// Increase elevation.
+							moveY = speed;
+							break;
+						case KEYS.Q:
+							// Zoom out.
+							_cameraController.distance += speed;
+							break;
+						case KEYS.E:
+							// Zoom in.
+							if ( _cameraController.distance > speed * 2 ) {
+								_cameraController.distance -= speed;
+							}
+							break;
 					}
 					_view.camera.position.x += moveX;
+					_view.camera.position.y += moveY;
 					_view.camera.position.z += moveZ;
 					_target.x += moveX;
+					_target.y += moveY;
 					_target.z += moveZ;
 				}
 			}
@@ -202,6 +227,12 @@ package com.funbuilder.view.components {
 		
 		private function onKeyUp( e:KeyboardEvent ):void {
 			delete _keysDown[ e.keyCode ];
+		}
+		
+		private function onMouseRightClick( e:MouseEvent ):void {
+			for ( var key:String in _keysDown ) {
+				delete _keysDown[ key ];
+			}
 		}
 		
 	}
