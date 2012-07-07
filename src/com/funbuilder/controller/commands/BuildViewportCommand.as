@@ -4,7 +4,11 @@ package com.funbuilder.controller.commands
 	import away3d.cameras.lenses.PerspectiveLens;
 	import away3d.containers.Scene3D;
 	import away3d.containers.View3D;
+	import away3d.entities.Mesh;
+	import away3d.materials.ColorMaterial;
+	import away3d.primitives.PlaneGeometry;
 	
+	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.model.TimeModel;
@@ -32,6 +36,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var showStatsRequest:ShowStatsRequest;
 		
+		[Inject]
+		public var addObjectToSceneRequest:AddObjectToSceneRequest;
+		
 		override public function execute():void
 		{
 			// Time.
@@ -49,6 +56,13 @@ package com.funbuilder.controller.commands
 			view.backgroundColor = 0;
 			view3dModel.setView( view );
 			addView3DRequest.dispatch( view );
+			
+			// Add ground plane.
+			var planeGeometry:PlaneGeometry = new PlaneGeometry( 12 * 100, 26 * 100, 12, 26, true );
+			var planeMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .1 );
+			planeMaterial.bothSides = true;
+			var planeMesh:Mesh = new Mesh( planeGeometry, planeMaterial );
+			addObjectToSceneRequest.dispatch( planeMesh );
 			
 			// Show stats.
 			showStatsRequest.dispatch( true );
