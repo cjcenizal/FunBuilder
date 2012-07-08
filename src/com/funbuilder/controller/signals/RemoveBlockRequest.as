@@ -4,11 +4,11 @@ package com.funbuilder.controller.signals
 	
 	import org.osflash.signals.Signal;
 	
-	public class AddBlockRequest extends Signal
+	public class RemoveBlockRequest extends Signal
 	{
-		public function AddBlockRequest()
+		public function RemoveBlockRequest()
 		{
-			super( Mesh, String );
+			super( Mesh );
 		}
 	}
 }

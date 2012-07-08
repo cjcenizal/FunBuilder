@@ -26,23 +26,20 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			// Scrollwheel zooms
 			
-			
-			// Hold space to temporarily enter BUILD mode
-			// - Click off to deselect
+			// BUILD mode:
 			// - Drag in blocks (and block is auto selected once placed)
 			
-			// LOOK mode:
-			// 1) If block is selected, move it around
-			// 2) If no block, just look around.
-			// Arrow keys change type of selected block
+			// BOTH:
+			// - Delete a selected block with the delete key
+			// - Arrow keys change type of selected block
 			
-			// New/open/close should all prompt a save if unsaved
-			
-			// Delete a selected block with the delete key
-			
+			// UX:
+			// New
+			// Save
+			// New/open/exit should all prompt a save if unsaved
 			// Trace a line to the ground plane to indicate y position for blocks
+			// Scrollwheel zooms
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			

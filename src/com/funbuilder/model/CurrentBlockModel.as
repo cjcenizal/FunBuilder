@@ -43,8 +43,16 @@ package com.funbuilder.model
 			_isMoved = true;
 		}
 		
+		public function isBlock( block:Mesh ):Boolean {
+			return block == _block;
+		}
+		
 		public function get isMoved():Boolean {
 			return _isMoved;
+		}
+		
+		public function getPositionClone():Vector3D {
+			return new Vector3D( _block.x, _block.y, _block.z );
 		}
 	}
 }

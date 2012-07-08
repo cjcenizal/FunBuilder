@@ -23,16 +23,6 @@ package com.funbuilder.view.components {
 		public var onKeyDownSignal:Signal;
 		public var onKeyUpSignal:Signal;
 		
-		/*private const KEYS:Object = {
-			W : 87,
-			A : 65,
-			S : 83,
-			D : 68,
-			Z : 90,
-			X : 88,
-			Q : 81,
-			E : 69
-		}*/
 		private var _keysDown:Object = {};
 		
 		private var _view:View3D;
@@ -242,12 +232,16 @@ package com.funbuilder.view.components {
 			if ( !_keysDown[ e.keyCode ] ) {
 				onKeyDownSignal.dispatch( e.keyCode );
 			}
-			_keysDown[ e.keyCode ] = true;
+			if ( !e.commandKey && !e.shiftKey ) {
+				_keysDown[ e.keyCode ] = true;
+			}
 		}
 		
 		private function onKeyUp( e:KeyboardEvent ):void {
 			onKeyUpSignal.dispatch( e.keyCode );
-			delete _keysDown[ e.keyCode ];
+			if ( !e.commandKey && !e.shiftKey ) {
+				delete _keysDown[ e.keyCode ];
+			}
 		}
 		
 		private function onMouseRightClick( e:MouseEvent ):void {

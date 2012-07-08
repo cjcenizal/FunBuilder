@@ -18,6 +18,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var block:Mesh;
 		
+		[Inject]
+		public var namespace:String;
+		
 		// Models.
 		
 		[Inject]
@@ -36,7 +39,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			currentSegmentModel.add( block );
+			currentSegmentModel.add( block, namespace );
 			block.mouseEnabled = true;
 			block.addEventListener( MouseEvent3D.CLICK, onClick );
 			addObjectToSceneRequest.dispatch( block );

@@ -16,22 +16,22 @@ package com.funbuilder.model
 			_history = [];
 		}
 		
-		public function add( action:HistoryVO ):void {
-			// If we're adding an action into the middle of our history,
+		public function add( history:HistoryVO ):void {
+			// If we're adding an history into the middle of our history,
 			// then we need to clear everything that follows.
 			if ( _index < _history.length - 1 ) {
 				_history.splice( _index );
 			}
-			_history.push( action );
+			_history.push( history );
 			_index++;
 		}
 		
 		public function undo():HistoryVO {
 			// Move backwards through history.
-			if ( _index > 0 ) {
-				var action:HistoryVO = _history[ _index ];
+			if ( _index >= 0 ) {
+				var history:HistoryVO = _history[ _index ];
 				_index--;
-				return action;
+				return history;
 			}
 			return null;
 		}
@@ -39,9 +39,9 @@ package com.funbuilder.model
 		public function redo():HistoryVO {
 			// Move forwards through history.
 			if ( _index < _history.length ) {
-				var action:HistoryVO = _history[ _index ];
+				var history:HistoryVO = _history[ _index ];
 				_index++;
-				return action;
+				return history;
 			}
 			return null;
 		}
