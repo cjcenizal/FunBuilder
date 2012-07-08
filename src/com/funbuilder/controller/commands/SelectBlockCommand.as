@@ -2,10 +2,8 @@ package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
 	
-	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.CurrentBlockModel;
-	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import org.robotlegs.mvcs.Command;
@@ -26,28 +24,19 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
 		
-		// Commands.
-		
-		[Inject]
-		public var setEditingModeRequest:SetEditingModeRequest;
-		
 		override public function execute():void
 		{
 			// Scrollwheel zooms
 			
 			
 			// Hold space to temporarily enter BUILD mode
-			// Click to select
-			// Click off to deselect
-			// Drag in blocks (and block is auto selected once placed)
-			// Tap space to deselect current block
+			// - Click off to deselect
+			// - Drag in blocks (and block is auto selected once placed)
 			
 			// LOOK mode:
 			// 1) If block is selected, move it around
 			// 2) If no block, just look around.
-			// Deselect block with esc.
 			// Arrow keys change type of selected block
-			// While block is selected, show: "Hit Esc to deselect block"
 			
 			// New/open/close should all prompt a save if unsaved
 			
@@ -57,14 +46,16 @@ package com.funbuilder.controller.commands
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
+			// Bug with y pos of current block in beam.json.
+			
+			
+			// Select block.
 			currentBlockModel.setBlock( block );
 			
 			// Snap target to block.
 			cameraTargetModel.target.x = block.x;
 			cameraTargetModel.target.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
 			cameraTargetModel.target.z = block.z;
-
-			setEditingModeRequest.dispatch( EditingModeModel.LOOK );
 		}
 	}
 }

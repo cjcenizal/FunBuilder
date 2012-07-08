@@ -14,14 +14,16 @@ package com.funbuilder.view.components {
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.geom.Vector3D;
+	import flash.ui.Keyboard;
 	
 	import org.osflash.signals.Signal;
 	
 	public class MainView extends Component {
 		
-		public var onKeyPressSignal:Signal;
+		public var onKeyDownSignal:Signal;
+		public var onKeyUpSignal:Signal;
 		
-		private const KEYS:Object = {
+		/*private const KEYS:Object = {
 			W : 87,
 			A : 65,
 			S : 83,
@@ -30,7 +32,7 @@ package com.funbuilder.view.components {
 			X : 88,
 			Q : 81,
 			E : 69
-		}
+		}*/
 		private var _keysDown:Object = {};
 		
 		private var _view:View3D;
@@ -54,7 +56,8 @@ package com.funbuilder.view.components {
 		
 		override protected function init():void {
 			super.init();
-			onKeyPressSignal = new Signal();
+			onKeyDownSignal = new Signal();
+			onKeyUpSignal = new Signal();
 			_bg = new Panel( this );
 			_menuBar = new MenuBarView( this );
 			this.addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
@@ -64,6 +67,7 @@ package com.funbuilder.view.components {
 			_bg.setSize( stage.stageWidth, 20 );
 			stage.addEventListener( Event.ENTER_FRAME, onEnterFrame );
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
+			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
 		}
 		
 		public function enableCameraControl( enabled:Boolean ):void {
@@ -71,12 +75,10 @@ package com.funbuilder.view.components {
 				stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
 				stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
 				stage.addEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightClick );
-				stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
 			} else {
 				stage.removeEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
 				stage.removeEventListener( MouseEvent.MOUSE_UP, onMouseUp );
 				stage.removeEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightClick );
-				stage.removeEventListener( KeyboardEvent.KEY_UP, onKeyUp );
 			}
 		}
 		
@@ -98,10 +100,6 @@ package com.funbuilder.view.components {
 					_awayStats.y = stage.stageHeight - _awayStats.height;
 				}
 			}
-		}
-		
-		public function pressKey( code:int ):void {
-			_keysDown[ code ] = true;
 		}
 		
 		public function set target( t:Mesh ):void {
@@ -154,39 +152,39 @@ package com.funbuilder.view.components {
 					var moveY:Number = 0;
 					var moveZ:Number = 0;
 					switch ( int( key ) ) {
-						case KEYS.W:
+						case Keyboard.W:
 							// Move towards target along ground plane.
 							moveX = Math.cos( theta ) * -speed;
 							moveZ = Math.sin( theta ) * -speed;
 							break;
-						case KEYS.S:
+						case Keyboard.S:
 							// Move away from target along ground plane.
 							moveX = Math.cos( theta ) * speed;
 							moveZ = Math.sin( theta ) * speed;
 							break;
-						case KEYS.A:
+						case Keyboard.A:
 							// Strafe left along ground plane.
 							moveX = Math.cos( theta + Math.PI * .5 ) * -speed;
 							moveZ = Math.sin( theta + Math.PI * .5 ) * -speed;
 							break;
-						case KEYS.D:
+						case Keyboard.D:
 							// Strafe right along ground plane.
 							moveX = Math.cos( theta + Math.PI * .5 ) * speed;
 							moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
 							break;
-						case KEYS.Z:
+						case Keyboard.Z:
 							// Decrease elevation.
 							moveY = -speed;
 							break;
-						case KEYS.X:
+						case Keyboard.X:
 							// Increase elevation.
 							moveY = speed;
 							break;
-						case KEYS.Q:
+						case Keyboard.Q:
 							// Zoom out.
 							_cameraController.distance += speed;
 							break;
-						case KEYS.E:
+						case Keyboard.E:
 							// Zoom in.
 							if ( _cameraController.distance > speed * 2 ) {
 								_cameraController.distance -= speed;
@@ -241,10 +239,14 @@ package com.funbuilder.view.components {
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {
-			onKeyPressSignal.dispatch( e.keyCode );
+			if ( !_keysDown[ e.keyCode ] ) {
+				onKeyDownSignal.dispatch( e.keyCode );
+			}
+			_keysDown[ e.keyCode ] = true;
 		}
 		
 		private function onKeyUp( e:KeyboardEvent ):void {
+			onKeyUpSignal.dispatch( e.keyCode );
 			delete _keysDown[ e.keyCode ];
 		}
 		

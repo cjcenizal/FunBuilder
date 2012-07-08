@@ -5,16 +5,12 @@ package com.funbuilder.view.mediators {
 	
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
-	import com.funbuilder.controller.signals.PressKeyRequest;
-	import com.funbuilder.controller.signals.PressKeyToLookRequest;
+	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.view.components.MainView;
 	
-	import flash.events.KeyboardEvent;
-	
-	import org.osflash.signals.Signal;
 	import org.robotlegs.core.IMediator;
 	import org.robotlegs.mvcs.Mediator;
 	
@@ -35,24 +31,25 @@ package com.funbuilder.view.mediators {
 		public var addCameraTargetRequest:AddCameraTargetRequest;
 		
 		[Inject]
-		public var pressKeyRequest:PressKeyRequest;
-		
-		[Inject]
-		public var pressKeyToLookRequest:PressKeyToLookRequest;
+		public var pressKeyRequest:KeyDownRequest;
 		
 		[Inject]
 		public var setEditingModeRequest:SetEditingModeRequest;
 		
 		override public function onRegister():void {
-			this.view.onKeyPressSignal.add( onKeyPress );
+			this.view.onKeyDownSignal.add( onKeyDown );
+			this.view.onKeyUpSignal.add( onKeyUp );
 			addCameraTargetRequest.add( onAddCameraTargetRequested );
 			addView3DRequest.add( onAddView3DRequested );
 			showStatsRequest.add( onShowStatsRequested );
 			setEditingModeRequest.add( onSetEditingModeRequested );
-			pressKeyToLookRequest.add( onPressKeyToLookRequested );
 		}
 		
-		private function onKeyPress( code:int ):void {
+		private function onKeyDown( code:int ):void {
+			pressKeyRequest.dispatch( code );
+		}
+		
+		private function onKeyUp( code:int ):void {
 			pressKeyRequest.dispatch( code );
 		}
 		
@@ -74,10 +71,6 @@ package com.funbuilder.view.mediators {
 			} else if ( mode == EditingModeModel.BUILD ) {
 				this.view.enableCameraControl( false );
 			}
-		}
-		
-		private function onPressKeyToLookRequested( keyCode:int ):void {
-			this.view.pressKey( keyCode );
 		}
 	}
 }

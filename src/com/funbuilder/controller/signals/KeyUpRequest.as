@@ -2,9 +2,9 @@ package com.funbuilder.controller.signals
 {
 	import org.osflash.signals.Signal;
 	
-	public class PressKeyToLookRequest extends Signal
+	public class KeyUpRequest extends Signal
 	{
-		public function PressKeyToLookRequest()
+		public function KeyUpRequest()
 		{
 			super( int );
 		}
