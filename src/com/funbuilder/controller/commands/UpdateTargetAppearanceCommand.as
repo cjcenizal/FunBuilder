@@ -26,13 +26,13 @@ package com.funbuilder.controller.commands
 		{
 			var material:ColorMaterial;
 			if ( editingModeModel.mode == EditingModeModel.BUILD ) {
-				if ( currentBlockModel.block ) {
+				if ( currentBlockModel.hasBlock() ) {
 					material = cameraTargetModel.buildSelectedMaterial;
 				} else {
 					material = cameraTargetModel.buildUnselectedMaterial;
 				}
 			} else if ( editingModeModel.mode == EditingModeModel.LOOK ) {
-				if ( currentBlockModel.block ) {
+				if ( currentBlockModel.hasBlock() ) {
 					material = cameraTargetModel.lookSelectedMaterial;
 				} else {
 					material = cameraTargetModel.lookUnselectedMaterial;

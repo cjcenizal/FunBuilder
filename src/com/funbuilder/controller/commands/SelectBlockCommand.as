@@ -56,7 +56,7 @@ package com.funbuilder.controller.commands
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
-			currentBlockModel.block = block;
+			currentBlockModel.setBlock( block );
 			
 			// Snap target to block.
 			cameraTargetModel.target.x = block.x;

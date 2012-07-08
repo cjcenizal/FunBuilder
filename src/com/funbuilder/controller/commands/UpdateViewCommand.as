@@ -1,13 +1,13 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.CurrentBlockModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
 	
 	import org.robotlegs.mvcs.Command;
-	import com.funbuilder.model.CurrentBlockModel;
 	
 	public class UpdateViewCommand extends Command
 	{
@@ -31,11 +31,12 @@ package com.funbuilder.controller.commands
 		override public function execute():void
 		{
 			// If we have a currently selected block, move the block to match the target.
-			if ( currentBlockModel.block ) {
+			if ( currentBlockModel.hasBlock() ) {
 				// Move block.
-				currentBlockModel.block.x = snapToGrid( cameraTargetModel.target.x - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
-				currentBlockModel.block.y = snapToGrid( cameraTargetModel.target.y ) - SegmentConstants.BLOCK_SIZE * .5;
-				currentBlockModel.block.z = snapToGrid( cameraTargetModel.target.z - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
+				var x:Number = snapToGrid( cameraTargetModel.target.x - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
+				var y:Number = snapToGrid( cameraTargetModel.target.y ) - SegmentConstants.BLOCK_SIZE * .5;
+				var z:Number = snapToGrid( cameraTargetModel.target.z - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
+				currentBlockModel.setPosition( x, y, z );
 			}
 			
 			view3DModel.render();

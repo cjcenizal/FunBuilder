@@ -31,7 +31,7 @@ package com.funbuilder.controller.commands
 			// (i.e. deselect it)
 			
 			
-			currentBlockModel.block = null;
+			currentBlockModel.clearBlock();
 			updateTargetAppearanceRequest.dispatch();
 		}
 	}
