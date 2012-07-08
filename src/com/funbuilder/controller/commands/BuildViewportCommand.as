@@ -85,7 +85,7 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( planeMesh );
 			
 			// Add camera target.
-			var target:Mesh = new Mesh( new CubeGeometry( 110, 110, 110 ), new ColorMaterial( 0x00ff00, .2 ) );
+			var target:Mesh = new Mesh( new CubeGeometry( 110, 110, 110 ), cameraTargetModel.unselectedMaterial );
 			target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			cameraTargetModel.target = target;

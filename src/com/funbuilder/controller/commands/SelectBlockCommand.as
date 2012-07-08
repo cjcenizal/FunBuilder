@@ -1,9 +1,10 @@
 package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
+	import away3d.materials.ColorMaterial;
 	
-	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -43,6 +44,7 @@ package com.funbuilder.controller.commands
 			currentBlockModel.block = block;
 			
 			// Snap target to block.
+			cameraTargetModel.target.material = cameraTargetModel.selectedMaterial;
 			cameraTargetModel.target.x = block.x;
 			cameraTargetModel.target.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
 			cameraTargetModel.target.z = block.z;

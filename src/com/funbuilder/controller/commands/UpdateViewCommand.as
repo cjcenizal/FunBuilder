@@ -32,9 +32,9 @@ package com.funbuilder.controller.commands
 			// If we have a currently selected block, move the block to match the target.
 			if ( currentBlockModel.block ) {
 				// Move block.
-				currentBlockModel.block.x = snapToGrid( cameraTargetModel.target.x ) - SegmentConstants.BLOCK_SIZE * .5;
+				currentBlockModel.block.x = snapToGrid( cameraTargetModel.target.x - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
 				currentBlockModel.block.y = snapToGrid( cameraTargetModel.target.y ) - SegmentConstants.BLOCK_SIZE * .5;
-				currentBlockModel.block.z = snapToGrid( cameraTargetModel.target.z ) - SegmentConstants.BLOCK_SIZE * .5;
+				currentBlockModel.block.z = snapToGrid( cameraTargetModel.target.z - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
 			}
 			
 			view3DModel.render();

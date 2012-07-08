@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.PressKeyToLookRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
+	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
 	
 	import org.robotlegs.mvcs.Command;
@@ -20,6 +21,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var editingModeModel:EditingModeModel;
 		
+		[Inject]
+		public var cameraTargetModel:CameraTargetModel;
+				
 		// Commands.
 		
 		[Inject]
@@ -45,8 +49,10 @@ package com.funbuilder.controller.commands
 				// Toggle between Selection and Exploration mode.
 				if ( editingModeModel.mode == EditingModeModel.LOOK ) {
 					editingModeModel.mode = EditingModeModel.SELECT;
+					cameraTargetModel.target.material = cameraTargetModel.selectingMaterial;
 				} else {
 					editingModeModel.mode = EditingModeModel.LOOK;
+					cameraTargetModel.target.material = cameraTargetModel.unselectedMaterial;
 				}
 				setEditingModeRequest.dispatch( editingModeModel.mode );
 			} else if ( editingModeModel.mode == EditingModeModel.LOOK ) {
