@@ -30,6 +30,7 @@ package com.funbuilder.view.components {
 		private var _awayStats:AwayStats;
 		private var _bg:Panel;
 		private var _menuBar:MenuBarView;
+		private var _library:LibraryView;
 		private var _cameraController:HoverController;
 		private var _target:Mesh;
 		
@@ -50,14 +51,23 @@ package com.funbuilder.view.components {
 			onKeyUpSignal = new Signal();
 			_bg = new Panel( this );
 			_menuBar = new MenuBarView( this );
+			_library = new LibraryView( this );
+			_library.visible = false;
 			this.addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
 		}
 		
 		private function onAddedToStage( e:Event ):void {
 			_bg.setSize( stage.stageWidth, 20 );
+			_library.setup();
+			_library.y = stage.stageHeight - _library.height;
 			stage.addEventListener( Event.ENTER_FRAME, onEnterFrame );
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
+			stage.addEventListener( Event.RESIZE, onStageResize );
+		}
+		
+		private function onStageResize( e:Event ):void {
+			_library.y = stage.stageHeight - _library.height;
 		}
 		
 		public function enableCameraControl( enabled:Boolean ):void {
@@ -70,6 +80,10 @@ package com.funbuilder.view.components {
 				stage.removeEventListener( MouseEvent.MOUSE_UP, onMouseUp );
 				stage.removeEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightClick );
 			}
+		}
+		
+		public function showLibrary( visible:Boolean ):void {
+			_library.visible = visible;
 		}
 		
 		/**

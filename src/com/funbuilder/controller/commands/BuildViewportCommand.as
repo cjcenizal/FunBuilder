@@ -99,8 +99,8 @@ package com.funbuilder.controller.commands
 			cameraTargetModel.target = target;
 			addCameraTargetRequest.dispatch( target );
 			
-			// Show stats.
-			showStatsRequest.dispatch( true );
+			// Show/hide stats.
+			showStatsRequest.dispatch( false );
 			
 			// Start interaction.
 			setEditingModeRequest.dispatch( EditingModeModel.LOOK );

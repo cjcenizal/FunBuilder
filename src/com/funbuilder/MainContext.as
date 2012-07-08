@@ -57,9 +57,11 @@ package com.funbuilder
 	import com.funbuilder.model.SelectedBlockModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.view.components.LibraryView;
 	import com.funbuilder.view.components.MainView;
 	import com.funbuilder.view.components.MenuBarView;
 	import com.funbuilder.view.mediators.AppMediator;
+	import com.funbuilder.view.mediators.LibraryMediator;
 	import com.funbuilder.view.mediators.MainMediator;
 	import com.funbuilder.view.mediators.MenuBarMediator;
 	
@@ -119,8 +121,9 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( UpdateTargetAppearanceRequest,			UpdateTargetAppearanceCommand );
 			
 			// Map views to mediators.
-			mediatorMap.mapView( MenuBarView,					MenuBarMediator );
+			mediatorMap.mapView( LibraryView, 					LibraryMediator );
 			mediatorMap.mapView( MainView, 						MainMediator );
+			mediatorMap.mapView( MenuBarView,					MenuBarMediator );
 			
 			// Do this last, since it causes our entire view system to be built.
 			mediatorMap.mapView( FunBuilder, 					AppMediator );
