@@ -22,9 +22,6 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var currentBlockModel:CurrentBlockModel;
 		
-		[Inject]
-		public var segmentModel:CurrentSegmentModel;
-		
 		// Commands.
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
@@ -33,9 +30,7 @@ package com.funbuilder.controller.commands
 		{
 			if ( !currentBlockModel.isMoved && currentBlockModel.willMove( position ) ) {
 				// Save history if we move the block and it's the first time it gets moved.
-				var snapshot:String = segmentModel.getJson();
-				var selectedBlockPos:Vector3D = ( currentBlockModel.hasBlock() ) ? currentBlockModel.getPositionClone() : null;
-				addHistoryRequest.dispatch( new HistoryVO( snapshot, selectedBlockPos ) );
+				addHistoryRequest.dispatch( false );
 			}
 			if ( currentBlockModel.willMove( position ) ) {
 				currentBlockModel.setPosition( position );

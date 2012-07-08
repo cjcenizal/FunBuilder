@@ -1,7 +1,11 @@
 package com.funbuilder.controller.commands
 {
+	import com.funbuilder.model.CurrentBlockModel;
+	import com.funbuilder.model.CurrentSegmentModel;
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.vo.HistoryVO;
+	
+	import flash.geom.Vector3D;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -11,13 +15,18 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var history:HistoryVO;
+		public var subtle:Boolean;
 		
 		// Models.
 		
-		
 		[Inject]
 		public var historyModel:HistoryModel;
+		
+		[Inject]
+		public var segmentModel:CurrentSegmentModel;
+		
+		[Inject]
+		public var currentBlockModel:CurrentBlockModel;
 		
 		override public function execute():void
 		{
@@ -27,12 +36,14 @@ package com.funbuilder.controller.commands
 			// - Add new block
 			// - Delete block
 			
+			var snapshot:String = segmentModel.getJson();
+			var selectedBlockPos:Vector3D = ( currentBlockModel.hasBlock() ) ? currentBlockModel.getPositionClone() : null;
+			var history:HistoryVO = new HistoryVO( snapshot, selectedBlockPos );
 			
 			// Save history snapshot if not identical to the current history snapshot.
 			var current:HistoryVO = historyModel.getCurrent();
 			if ( !current || current.snapshot != history.snapshot ) {
-				trace("add history");
-				historyModel.add( history );
+				historyModel.add( history, subtle );
 			}
 		}
 	}

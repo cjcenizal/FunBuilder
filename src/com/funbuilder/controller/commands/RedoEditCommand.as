@@ -27,7 +27,6 @@ package com.funbuilder.controller.commands {
 		public var selectBlockRequest:SelectBlockRequest;
 		
 		override public function execute():void {
-			trace("redo");
 			var history:HistoryVO = historyModel.redo();
 			if ( history ) {
 				loadSegmentRequest.dispatch( history.snapshot );

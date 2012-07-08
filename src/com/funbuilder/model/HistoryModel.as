@@ -8,7 +8,8 @@ package com.funbuilder.model
 	{
 		
 		private var _history:Array;
-		private var _index:int = -1;
+		private var _index:int = 0;
+		private var _canFlashSave:Boolean = true;
 		
 		public function HistoryModel()
 		{
@@ -16,22 +17,26 @@ package com.funbuilder.model
 			_history = [];
 		}
 		
-		public function add( history:HistoryVO ):void {
+		public function add( history:HistoryVO, flashSave:Boolean = false ):void {
 			// If we're adding an history into the middle of our history,
 			// then we need to clear everything that follows.
 			if ( _index < _history.length - 1 ) {
 				_history.splice( _index );
 			}
 			_history.push( history );
-			_index++;
+			if ( flashSave ) {
+				_canFlashSave = false;
+			} else {
+				_canFlashSave = true;
+				_index++;
+			}
 		}
 		
-		public function undo( offset:int = 0 ):HistoryVO {
-			_index += offset;
+		public function undo():HistoryVO {
 			// Move backwards through history.
-			if ( _index >= 0 ) {
+			if ( _index > 0 ) {
+				if ( _index > 0 ) _index--;
 				var history:HistoryVO = _history[ _index ];
-				_index--;
 				return history;
 			}
 			return null;
@@ -39,7 +44,7 @@ package com.funbuilder.model
 		
 		public function redo():HistoryVO {
 			// Move forwards through history.
-			if ( _index < _history.length ) {
+			if ( _index < _history.length - 1 ) {
 				_index++;
 				return _history[ _index ];
 			}
@@ -50,8 +55,8 @@ package com.funbuilder.model
 			return _history[ _index ];
 		}
 		
-		public function indexIsAtEnd():Boolean {
-			return _index == _history.length - 1;
+		public function canFlashSave():Boolean {
+			return _canFlashSave;
 		}
 	}
 }

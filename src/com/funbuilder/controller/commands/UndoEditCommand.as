@@ -37,16 +37,11 @@ package com.funbuilder.controller.commands {
 		public var addHistoryRequest:AddHistoryRequest;
 		
 		override public function execute():void {
-			trace("undo");
-			// If at the end of history, save it.
-			var offset:int = 0;
-			if ( historyModel.indexIsAtEnd() ) {
-				var snapshot:String = currentSegmentModel.getJson();
-				var selectedBlockPos:Vector3D = ( currentBlockModel.hasBlock() ) ? currentBlockModel.getPositionClone() : null;
-				addHistoryRequest.dispatch( new HistoryVO( snapshot, selectedBlockPos ) );
-				offset = -1;
+			// If at the end of history, save it, but only if it hasn't been flash saved.
+			if ( historyModel.canFlashSave() ) {
+				addHistoryRequest.dispatch( true );
 			}
-			var history:HistoryVO = historyModel.undo( offset );
+			var history:HistoryVO = historyModel.undo();
 			if ( history ) {
 				loadSegmentRequest.dispatch( history.snapshot );
 				selectBlockRequest.dispatch( currentSegmentModel.getAtPos( history.selectedBlock ) );

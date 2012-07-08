@@ -49,6 +49,9 @@ package com.funbuilder.controller.commands
 				mesh.z = dataItem.z * 100;
 				addBlockRequest.dispatch( new AddBlockVO( mesh, refMesh.assetNamespace ) );
 			}
+			
+			// TO-DO: Clear history.
+			
 		}
 	}
 }
