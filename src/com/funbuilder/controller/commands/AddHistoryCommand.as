@@ -33,9 +33,12 @@ package com.funbuilder.controller.commands
 			
 			var snapshot:String = currentSegmentModel.getJson();
 			var selectedBlockPos:Vector3D = ( currentBlockModel.hasBlock() ) ? currentBlockModel.getPositionClone() : null;
-			var history:HistoryVO = new HistoryVO( snapshot, selectedBlockPos );
-			trace("add: " + snapshot + ", " + selectedBlockPos );
-			historyModel.add( history );
+			// Save history snapshot if not identical to the current history snapshot.
+			var current:HistoryVO = historyModel.getCurrent();
+			if ( !current || current.snapshot != snapshot ) {
+				var history:HistoryVO = new HistoryVO( snapshot, selectedBlockPos );
+				historyModel.add( history );
+			}
 		}
 	}
 }

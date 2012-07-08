@@ -45,5 +45,9 @@ package com.funbuilder.model
 			}
 			return null;
 		}
+		
+		public function getCurrent():HistoryVO {
+			return _history[ _index ];
+		}
 	}
 }
