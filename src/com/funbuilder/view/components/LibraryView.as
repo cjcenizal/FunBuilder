@@ -7,12 +7,16 @@ package com.funbuilder.view.components
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	public class LibraryView extends Component
 	{
 		
+		public const EVENT_SELECT:String = "EVENT_SELECT";
+		
 		private var _bg:Panel;
 		private var _items:Array;
+		public var selectedId:String;
 		
 		public function LibraryView( parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number = 0 )
 		{
@@ -22,7 +26,7 @@ package com.funbuilder.view.components
 		
 		override protected function init():void {
 			super.init();
-			_bg = new Panel( this, 0, 0 );
+			_bg = new Panel( this );
 		}
 		
 		public function setup():void {
@@ -33,9 +37,20 @@ package com.funbuilder.view.components
 		
 		public function addItem( id:String, bitmap:Bitmap ):void {
 			var xpos:Number = ( _items.length > 0 ) ? _items[ _items.length - 1 ].x + _items[ _items.length - 1 ].width : 0
-			addChild( bitmap );
-			bitmap.x = xpos;
-			_items.push( bitmap );
+			var sprite:Sprite = new Sprite();
+			sprite.addChild( bitmap );
+			addChild( sprite );
+			sprite.x = xpos;
+			_items.push( sprite );
+			sprite.addEventListener( MouseEvent.CLICK, getOnMouseDown( id ) );
+		}
+		
+		private function getOnMouseDown( id:String ):Function {
+			var self:LibraryView = this;
+			return function( e:MouseEvent ):void {
+				self.selectedId = id;
+				self.dispatchEvent( new Event( self.EVENT_SELECT ) );
+			}
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.funbuilder
 {
 	import com.funbuilder.controller.commands.AddBlockCommand;
+	import com.funbuilder.controller.commands.AddBlockFromLibraryCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.controller.commands.ChangeBlockTypeCommand;
@@ -22,6 +23,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.SetEditingModeCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
 	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
+	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
@@ -101,6 +103,7 @@ package com.funbuilder
 			injector.mapSingleton( ShowSelectionIndicatorRequest );
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
+			signalCommandMap.mapSignalClass( AddBlockFromLibraryRequest,			AddBlockFromLibraryCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );

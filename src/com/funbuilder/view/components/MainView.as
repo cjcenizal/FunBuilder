@@ -7,7 +7,6 @@ package com.funbuilder.view.components {
 	
 	import com.bit101.components.Component;
 	import com.bit101.components.Panel;
-	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
@@ -118,8 +117,7 @@ package com.funbuilder.view.components {
 			}
 			if ( view ) {
 				_view = view;
-				addChild( _view );
-				_view.y = 20;
+				addChildAt( _view, 0 );
 				if ( _awayStats ) {
 					_awayStats.registerView( _view );
 				}
