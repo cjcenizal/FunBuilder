@@ -10,7 +10,6 @@ package com.funbuilder.controller.commands
 			// Save history for:
 			// - First type change
 			// - Add new block
-			// - Save segment
 			// - Delete block
 		}
 	}
