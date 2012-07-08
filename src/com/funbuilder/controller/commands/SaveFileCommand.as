@@ -1,5 +1,6 @@
 package com.funbuilder.controller.commands {
 
+	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.model.FileModel;
 	import com.funbuilder.model.SegmentModel;
 	
@@ -20,6 +21,11 @@ package com.funbuilder.controller.commands {
 		[Inject]
 		public var fileModel:FileModel;
 		
+		// Commands.
+		
+		[Inject]
+		public var showFileNameRequest:ShowFileNameRequest;
+		
 		// Private vars.
 		
 		private var _file:File;
@@ -32,6 +38,7 @@ package com.funbuilder.controller.commands {
 		}
 		
 		private function onSelectFileToSave( e:Event ):void {
+			showFileNameRequest.dispatch( _file.nativePath );
 			var stream:FileStream = new FileStream();
 			stream.open( _file, FileMode.WRITE );
 			stream.writeUTFBytes( segmentModel.getJson() );

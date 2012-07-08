@@ -2,6 +2,7 @@ package com.funbuilder.view.components {
 
 	import com.bit101.components.ComboBox;
 	import com.bit101.components.Component;
+	import com.bit101.components.Label;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
@@ -17,6 +18,7 @@ package com.funbuilder.view.components {
 		
 		private var _menus:Array;
 		private var _menusObj:Object;
+		private var _fileLabel:Label;
 		
 		public function MenuBarView( parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number = 0 ) {
 			super( parent, xpos, ypos );
@@ -37,7 +39,14 @@ package com.funbuilder.view.components {
 					new MenuItemVO( "Undo (Cmd-Z)", getDispatchEvent( EVENT_UNDO ) ),
 					new MenuItemVO( "Redo (ShftCmd-Z)", getDispatchEvent( EVENT_REDO ) )
 				] );
+			_fileLabel = new Label( this,  _menus[ _menus.length - 1 ].x + _menus[ _menus.length - 1 ].width + 20, 1 );
 			this.addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
+		}
+		
+		public function showFileName( name:String ):void {
+			_fileLabel.text = name;
+			_fileLabel.draw();
+			_fileLabel.x = ( stage.stageWidth - _fileLabel.width ) * .5;
 		}
 		
 		private function onAddedToStage( e:Event ):void {

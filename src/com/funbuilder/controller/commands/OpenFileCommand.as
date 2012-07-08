@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands {
 
 	import com.funbuilder.controller.signals.ClearHistoryRequest;
 	import com.funbuilder.controller.signals.LoadSegmentRequest;
+	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.model.FileModel;
 	
 	import flash.events.Event;
@@ -23,6 +24,9 @@ package com.funbuilder.controller.commands {
 		
 		[Inject]
 		public var clearHistoryRequest:ClearHistoryRequest;
+		
+		[Inject]
+		public var showFileNameRequest:ShowFileNameRequest;
 		
 		// Private vars.
 		
@@ -46,6 +50,7 @@ package com.funbuilder.controller.commands {
 			fileModel.file.removeEventListener( Event.COMPLETE, onLoadComplete );
 			clearHistoryRequest.dispatch();
 			loadSegmentRequest.dispatch( String( fileModel.file.data ) );
+			showFileNameRequest.dispatch( fileModel.file.nativePath );
 		}
 	}
 }
