@@ -4,9 +4,9 @@ package com.funbuilder.controller.signals
 	
 	import org.osflash.signals.Signal;
 	
-	public class AddBlockToSegmentRequest extends Signal
+	public class AddBlockRequest extends Signal
 	{
-		public function AddBlockToSegmentRequest()
+		public function AddBlockRequest()
 		{
 			super( Mesh );
 		}

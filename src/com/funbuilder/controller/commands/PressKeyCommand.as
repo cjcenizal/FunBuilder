@@ -46,18 +46,14 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			if ( code == ESC ) {
-				// Deselect current block.
-				deselectBlockRequest.dispatch();
-			} else if ( code == SPACE ) {
+			if ( code == SPACE ) {
 				// Toggle between Selection and Exploration mode.
 				if ( editingModeModel.mode == EditingModeModel.LOOK ) {
-					editingModeModel.mode = EditingModeModel.BUILD;
+					setEditingModeRequest.dispatch( EditingModeModel.BUILD );
 				} else {
-					editingModeModel.mode = EditingModeModel.LOOK;
+					
+					setEditingModeRequest.dispatch( EditingModeModel.LOOK );
 				}
-				setEditingModeRequest.dispatch( editingModeModel.mode );
-				updateTargetAppearanceRequest.dispatch();
 			} else if ( editingModeModel.mode == EditingModeModel.LOOK ) {
 				// Send key back into MainView to move the camera.
 				pressKeyToLookRequest.dispatch( code );

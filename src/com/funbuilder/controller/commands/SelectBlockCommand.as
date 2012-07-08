@@ -1,14 +1,14 @@
 package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
-	import away3d.materials.ColorMaterial;
 	
-	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
+	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.CurrentBlockModel;
+	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import org.robotlegs.mvcs.Command;
-	import com.funbuilder.model.CurrentBlockModel;
 	
 	public class SelectBlockCommand extends Command
 	{
@@ -29,7 +29,7 @@ package com.funbuilder.controller.commands
 		// Commands.
 		
 		[Inject]
-		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
+		public var setEditingModeRequest:SetEditingModeRequest;
 		
 		override public function execute():void
 		{
@@ -64,7 +64,7 @@ package com.funbuilder.controller.commands
 			cameraTargetModel.target.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
 			cameraTargetModel.target.z = block.z;
 
-			updateTargetAppearanceRequest.dispatch();
+			setEditingModeRequest.dispatch( EditingModeModel.LOOK );
 		}
 	}
 }

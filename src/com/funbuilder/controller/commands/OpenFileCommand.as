@@ -6,7 +6,7 @@ package com.funbuilder.controller.commands {
 	import away3d.primitives.CubeGeometry;
 	
 	import com.adobe.serialization.json.JSON;
-	import com.funbuilder.controller.signals.AddBlockToSegmentRequest;
+	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.FileModel;
@@ -30,7 +30,7 @@ package com.funbuilder.controller.commands {
 		// Commands.
 		
 		[Inject]
-		public var addBlockToSegmentRequest:AddBlockToSegmentRequest;
+		public var addBlockToSegmentRequest:AddBlockRequest;
 		
 		// Private vars.
 		

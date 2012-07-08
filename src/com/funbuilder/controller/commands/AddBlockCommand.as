@@ -10,7 +10,7 @@ package com.funbuilder.controller.commands
 	
 	import org.robotlegs.mvcs.Command;
 	
-	public class AddBlockToSegmentCommand extends Command
+	public class AddBlockCommand extends Command
 	{
 		
 		// Arguments.

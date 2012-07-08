@@ -99,8 +99,7 @@ package com.funbuilder.controller.commands
 			showStatsRequest.dispatch( true );
 			
 			// Start interaction.
-			setEditingModeRequest.dispatch( editingModeModel.mode );
-			updateTargetAppearanceRequest.dispatch();
+			setEditingModeRequest.dispatch( EditingModeModel.LOOK );
 			
 			// Respond to time.
 			commandMap.mapEvent( TimeEvent.TICK, UpdateViewCommand, TimeEvent );

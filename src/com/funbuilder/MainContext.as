@@ -1,6 +1,6 @@
 package com.funbuilder
 {
-	import com.funbuilder.controller.commands.AddBlockToSegmentCommand;
+	import com.funbuilder.controller.commands.AddBlockCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
@@ -12,9 +12,10 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.RedoEditCommand;
 	import com.funbuilder.controller.commands.SaveFileCommand;
 	import com.funbuilder.controller.commands.SelectBlockCommand;
+	import com.funbuilder.controller.commands.SetEditingModeCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
 	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
-	import com.funbuilder.controller.signals.AddBlockToSegmentRequest;
+	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
@@ -80,7 +81,7 @@ package com.funbuilder
 			injector.mapSingleton( PressKeyToLookRequest );
 			injector.mapSingleton( SetEditingModeRequest );
 			injector.mapSingleton( ShowStatsRequest );
-			signalCommandMap.mapSignalClass( AddBlockToSegmentRequest,				AddBlockToSegmentCommand );
+			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
@@ -91,6 +92,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( RedoEditRequest,						RedoEditCommand );
 			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
 			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );
+			signalCommandMap.mapSignalClass( SetEditingModeRequest,					SetEditingModeCommand );
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
 			signalCommandMap.mapSignalClass( UpdateTargetAppearanceRequest,			UpdateTargetAppearanceCommand );
 			
