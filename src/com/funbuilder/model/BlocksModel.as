@@ -2,17 +2,21 @@ package com.funbuilder.model {
 	
 	import com.funrun.model.vo.BlockVO;
 	
+	import flash.display.Bitmap;
+	
 	import org.robotlegs.mvcs.Actor;
 	
 	public class BlocksModel extends Actor {
 		
 		private var _blocks:Object;
 		private var _blocksArr:Array;
+		private var _bitmaps:Object;
 		
 		public function BlocksModel() {
 			super();
 			_blocks = {};
 			_blocksArr = [];
+			_bitmaps = {};
 		}
 		
 		public function addBlock( block:BlockVO ):void {
@@ -20,8 +24,16 @@ package com.funbuilder.model {
 			_blocksArr.push( block );
 		}
 		
+		public function addBitmap( bitmap:Bitmap, id:String ):void {
+			_bitmaps[ id ] = bitmap;
+		}
+		
 		public function getBlock( id:String ):BlockVO {
 			return _blocks[ id ];
+		}
+		
+		public function getBitmap( id:String ):Bitmap {
+			return _bitmaps[ id ];
 		}
 		
 		public function getBlockIndex( id:String ):int {

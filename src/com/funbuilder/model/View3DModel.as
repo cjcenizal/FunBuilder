@@ -69,6 +69,10 @@ package com.funbuilder.model {
 			_camera.lookAt( target );
 		}
 		
+		public function get view():View3D {
+			return _view;
+		}
+		
 		public function get cameraX():Number {
 			return _cameraPosition.x;
 		}

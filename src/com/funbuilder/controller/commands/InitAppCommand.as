@@ -9,6 +9,7 @@ package com.funbuilder.controller.commands
 		{
 			addCommand( LoadBlocksCommand );
 			addCommand( BuildViewportCommand );
+			addCommand( BuildLibraryCommand );
 		}
 	}
 }

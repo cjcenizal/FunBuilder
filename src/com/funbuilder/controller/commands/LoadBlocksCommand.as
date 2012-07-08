@@ -84,6 +84,7 @@ package com.funbuilder.controller.commands {
 					if ( _countLoaded == _countTotal ) {
 						completeCallback.call( null, true );
 					}
+					
 				}
 			}
 		}

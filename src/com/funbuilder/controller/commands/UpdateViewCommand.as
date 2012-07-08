@@ -4,7 +4,6 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.MoveBlockRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.SelectedBlockModel;
-	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
@@ -24,7 +23,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var view3DModel:View3DModel;
+		public var view3dModel:View3DModel;
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
@@ -52,7 +51,7 @@ package com.funbuilder.controller.commands
 			}
 			
 			// Render scene.
-			view3DModel.render();
+			view3dModel.render();
 		}
 		
 		private function snapToGrid( val:Number ):int {

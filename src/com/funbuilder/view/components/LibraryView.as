@@ -27,5 +27,9 @@ package com.funbuilder.view.components
 			_bg.draw();
 			setSize( _bg.width, _bg.height );
 		}
+		
+		public function addItem():void {
+			// Bitmap, with ID to dispatch on key down.
+		}
 	}
 }
