@@ -31,7 +31,6 @@ package com.funbuilder.controller.commands
 		override public function execute():void
 		{
 			// Save history for:
-			// - First reposition
 			// - First type change
 			// - Add new block
 			// - Delete block

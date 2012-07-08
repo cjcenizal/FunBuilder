@@ -54,5 +54,9 @@ package com.funbuilder.model
 		public function getPositionClone():Vector3D {
 			return new Vector3D( _block.x, _block.y, _block.z );
 		}
+		
+		public function getBlock():Mesh {
+			return _block;
+		}
 	}
 }

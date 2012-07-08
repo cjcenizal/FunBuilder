@@ -22,16 +22,11 @@ package com.funbuilder.model
 		}
 		
 		public function add( history:HistoryVO, flashSave:Boolean = false ):void {
-			// If we're adding an history into the middle of our history,
+			// If we're adding a snapshot into our history,
 			// then we need to clear everything that follows.
-			if ( _index < _history.length - 1 ) {
-				_history.splice( _index );
-			}
+			_history.splice( _index );
 			_history.push( history );
-			if ( flashSave ) {
-				_canFlashSave = false;
-			} else {
-				_canFlashSave = true;
+			if ( !flashSave ) {
 				_index++;
 			}
 		}
@@ -60,7 +55,7 @@ package com.funbuilder.model
 		}
 		
 		public function canFlashSave():Boolean {
-			return _canFlashSave;
+			return _index == _history.length;
 		}
 	}
 }
