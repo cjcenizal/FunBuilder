@@ -1,11 +1,8 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
-	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
-	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
-	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.SelectedBlockModel;
 	

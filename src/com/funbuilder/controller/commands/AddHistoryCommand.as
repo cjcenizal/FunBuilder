@@ -33,7 +33,6 @@ package com.funbuilder.controller.commands
 			// Save history for:
 			// - First type change
 			// - Add new block
-			// - Delete block
 			
 			var snapshot:String = segmentModel.getJson();
 			var selectedBlockPos:Vector3D = ( currentBlockModel.hasBlock() ) ? currentBlockModel.getPositionClone() : null;

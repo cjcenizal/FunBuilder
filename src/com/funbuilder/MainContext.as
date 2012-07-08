@@ -3,6 +3,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.AddBlockCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
+	import com.funbuilder.controller.commands.ClearHistoryCommand;
 	import com.funbuilder.controller.commands.ClearSegmentCommand;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
@@ -25,6 +26,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
+	import com.funbuilder.controller.signals.ClearHistoryRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
@@ -44,11 +46,11 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
-	import com.funbuilder.model.SelectedBlockModel;
-	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.FileModel;
 	import com.funbuilder.model.HistoryModel;
+	import com.funbuilder.model.SegmentModel;
+	import com.funbuilder.model.SelectedBlockModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.view.components.MainView;
@@ -91,6 +93,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
+			signalCommandMap.mapSignalClass( ClearHistoryRequest,					ClearHistoryCommand );
 			signalCommandMap.mapSignalClass( ClearSegmentRequest,					ClearSegmentCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
 			signalCommandMap.mapSignalClass( KeyDownRequest,						KeyDownCommand );

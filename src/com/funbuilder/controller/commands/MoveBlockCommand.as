@@ -2,8 +2,6 @@ package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.model.SelectedBlockModel;
-	import com.funbuilder.model.SegmentModel;
-	import com.funbuilder.model.vo.HistoryVO;
 	
 	import flash.geom.Vector3D;
 	

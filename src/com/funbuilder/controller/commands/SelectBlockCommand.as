@@ -37,11 +37,13 @@ package com.funbuilder.controller.commands
 			// - Arrow keys change type of selected block
 			
 			// UX:
-			// New
 			// Save
 			// New/open/exit should all prompt a save if unsaved
 			// Trace a line to the ground plane to indicate y position for blocks
 			// Scrollwheel zooms
+			
+			// - First type change
+			// - Add new block
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			

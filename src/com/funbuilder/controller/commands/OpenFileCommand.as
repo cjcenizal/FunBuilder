@@ -1,8 +1,8 @@
 package com.funbuilder.controller.commands {
 
+	import com.funbuilder.controller.signals.ClearHistoryRequest;
 	import com.funbuilder.controller.signals.LoadSegmentRequest;
 	import com.funbuilder.model.FileModel;
-	import com.funbuilder.model.HistoryModel;
 	
 	import flash.events.Event;
 	import flash.filesystem.File;
@@ -16,13 +16,13 @@ package com.funbuilder.controller.commands {
 		[Inject]
 		public var fileModel:FileModel;
 		
-		[Inject]
-		public var historyModel:HistoryModel;
-		
 		// Commands.
 		
 		[Inject]
 		public var loadSegmentRequest:LoadSegmentRequest;
+		
+		[Inject]
+		public var clearHistoryRequest:ClearHistoryRequest;
 		
 		// Private vars.
 		
@@ -36,6 +36,7 @@ package com.funbuilder.controller.commands {
 		
 		private function onSelectFileToOpen( e:Event ):void {
 			_file.removeEventListener( Event.SELECT, onSelectFileToOpen );
+			_file = null;
 			fileModel.file = File( e.currentTarget );
 			fileModel.file.addEventListener( Event.COMPLETE, onLoadComplete );
 			fileModel.file.load();
@@ -43,7 +44,7 @@ package com.funbuilder.controller.commands {
 		
 		private function onLoadComplete( e:Event ):void {
 			fileModel.file.removeEventListener( Event.COMPLETE, onLoadComplete );
-			historyModel.clear();
+			clearHistoryRequest.dispatch();
 			loadSegmentRequest.dispatch( String( fileModel.file.data ) );
 		}
 	}
