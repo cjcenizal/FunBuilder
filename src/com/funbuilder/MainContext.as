@@ -87,7 +87,6 @@ package com.funbuilder
 			// Map signals.
 			injector.mapSingleton( AddCameraTargetRequest );
 			injector.mapSingleton( AddView3DRequest );
-			injector.mapSingleton( SetEditingModeRequest );
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );

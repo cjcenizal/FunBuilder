@@ -26,7 +26,8 @@ package com.funbuilder.model
 			_index++;
 		}
 		
-		public function undo():HistoryVO {
+		public function undo( offset:int = 0 ):HistoryVO {
+			_index += offset;
 			// Move backwards through history.
 			if ( _index >= 0 ) {
 				var history:HistoryVO = _history[ _index ];
@@ -39,15 +40,18 @@ package com.funbuilder.model
 		public function redo():HistoryVO {
 			// Move forwards through history.
 			if ( _index < _history.length ) {
-				var history:HistoryVO = _history[ _index ];
 				_index++;
-				return history;
+				return _history[ _index ];
 			}
 			return null;
 		}
 		
 		public function getCurrent():HistoryVO {
 			return _history[ _index ];
+		}
+		
+		public function indexIsAtEnd():Boolean {
+			return _index == _history.length - 1;
 		}
 	}
 }

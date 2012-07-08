@@ -7,6 +7,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.model.CurrentSegmentModel;
 	import com.funbuilder.model.EditingModeModel;
+	import com.funbuilder.model.vo.AddBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -16,10 +17,7 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var block:Mesh;
-		
-		[Inject]
-		public var namespace:String;
+		public var addBlockData:AddBlockVO;
 		
 		// Models.
 		
@@ -39,10 +37,11 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			currentSegmentModel.add( block, namespace );
-			block.mouseEnabled = true;
-			block.addEventListener( MouseEvent3D.CLICK, onClick );
-			addObjectToSceneRequest.dispatch( block );
+			currentSegmentModel.add( addBlockData.mesh, addBlockData.id );
+			// TO-DO: Should this be done here, or in initial set up?
+			addBlockData.mesh.mouseEnabled = true;
+			addBlockData.mesh.addEventListener( MouseEvent3D.CLICK, onClick );
+			addObjectToSceneRequest.dispatch( addBlockData.mesh );
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {

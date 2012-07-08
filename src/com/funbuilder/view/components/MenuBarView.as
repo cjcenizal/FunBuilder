@@ -71,24 +71,25 @@ package com.funbuilder.view.components {
 		
 		private function onKeyDown( e:KeyboardEvent ):void {
 			if ( e.commandKey ) {
-				switch ( e.keyCode ) {
-					case 78: // n
-						dispatchEvent( new Event( EVENT_NEW ) );
-						break;
-					case 83: // s
-						dispatchEvent( new Event( EVENT_SAVE ) );
-						break;
-					case 79: // o
-						dispatchEvent( new Event( EVENT_OPEN ) );
-						break;
-					case 90: // z
-						dispatchEvent( new Event( EVENT_UNDO ) );
-						break;
-				}
 				if ( e.shiftKey ) {
 					switch ( e.keyCode ) {
 						case 90: // z
 							dispatchEvent( new Event( EVENT_REDO ) );
+							break;
+					}
+				} else {
+					switch ( e.keyCode ) {
+						case 78: // n
+							dispatchEvent( new Event( EVENT_NEW ) );
+							break;
+						case 83: // s
+							dispatchEvent( new Event( EVENT_SAVE ) );
+							break;
+						case 79: // o
+							dispatchEvent( new Event( EVENT_OPEN ) );
+							break;
+						case 90: // z
+							dispatchEvent( new Event( EVENT_UNDO ) );
 							break;
 					}
 				}

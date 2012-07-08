@@ -2,6 +2,8 @@ package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.model.CurrentBlockModel;
+	import com.funbuilder.model.CurrentSegmentModel;
+	import com.funbuilder.model.vo.HistoryVO;
 	
 	import flash.geom.Vector3D;
 	
@@ -20,6 +22,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var currentBlockModel:CurrentBlockModel;
 		
+		[Inject]
+		public var segmentModel:CurrentSegmentModel;
+		
 		// Commands.
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
@@ -28,7 +33,9 @@ package com.funbuilder.controller.commands
 		{
 			if ( !currentBlockModel.isMoved && currentBlockModel.willMove( position ) ) {
 				// Save history if we move the block and it's the first time it gets moved.
-				addHistoryRequest.dispatch();
+				var snapshot:String = segmentModel.getJson();
+				var selectedBlockPos:Vector3D = ( currentBlockModel.hasBlock() ) ? currentBlockModel.getPositionClone() : null;
+				addHistoryRequest.dispatch( new HistoryVO( snapshot, selectedBlockPos ) );
 			}
 			if ( currentBlockModel.willMove( position ) ) {
 				currentBlockModel.setPosition( position );
