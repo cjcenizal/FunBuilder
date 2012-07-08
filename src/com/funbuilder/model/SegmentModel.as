@@ -59,6 +59,10 @@ package com.funbuilder.model
 			return pos.x.toString() + "," + pos.y.toString() + "," + pos.z.toString();
 		}
 		
+		public function getIdFor( block:Mesh ):String {
+			return _namespaces[ block ];
+		}
+		
 		public function getJson():String {
 			var list:Array = [];
 			var mesh:Mesh;
