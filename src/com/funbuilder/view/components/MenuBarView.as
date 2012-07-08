@@ -5,6 +5,8 @@ package com.funbuilder.view.components {
 	import com.bit101.components.Label;
 	
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Shape;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 
@@ -19,6 +21,7 @@ package com.funbuilder.view.components {
 		private var _menus:Array;
 		private var _menusObj:Object;
 		private var _fileLabel:Label;
+		private var _selectionIndicator:Shape;
 		
 		public function MenuBarView( parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number = 0 ) {
 			super( parent, xpos, ypos );
@@ -43,14 +46,25 @@ package com.funbuilder.view.components {
 			this.addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
 		}
 		
+		private function onAddedToStage( e:Event ):void {
+			_selectionIndicator = new Shape();
+			_selectionIndicator.y = _fileLabel.height + 2;
+			addChild( _selectionIndicator );
+			_selectionIndicator.graphics.beginFill( 0x1eb1a8 );
+			_selectionIndicator.graphics.drawRect( 0, 0, stage.stageWidth, 4 );
+			_selectionIndicator.graphics.endFill();
+			_selectionIndicator.visible = false;
+			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
+		}
+		
 		public function showFileName( name:String ):void {
 			_fileLabel.text = name;
 			_fileLabel.draw();
 			_fileLabel.x = ( stage.stageWidth - _fileLabel.width ) * .5;
 		}
 		
-		private function onAddedToStage( e:Event ):void {
-			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
+		public function showSelectionIndicator( visible:Boolean ):void {
+			_selectionIndicator.visible = visible;
 		}
 		
 		private function addMenu( name:String, items:Array ):void {

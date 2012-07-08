@@ -5,6 +5,7 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.controller.signals.RedoEditRequest;
 	import com.funbuilder.controller.signals.SaveFileRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
+	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.view.components.MenuBarView;
 	
@@ -40,6 +41,9 @@ package com.funbuilder.view.mediators {
 		[Inject]
 		public var showFileNameRequest:ShowFileNameRequest;
 		
+		[Inject]
+		public var showSelectionIndicatorRequest:ShowSelectionIndicatorRequest;
+		
 		override public function onRegister():void {
 			view.addEventListener( MenuBarView.EVENT_NEW, onSelectNew );
 			view.addEventListener( MenuBarView.EVENT_OPEN, onSelectOpen );
@@ -47,6 +51,7 @@ package com.funbuilder.view.mediators {
 			view.addEventListener( MenuBarView.EVENT_UNDO, onSelectUndo );
 			view.addEventListener( MenuBarView.EVENT_REDO, onSelectRedo );
 			showFileNameRequest.add( onShowFileNameRequested );
+			showSelectionIndicatorRequest.add( onShowSelectionIndicatorRequested );
 		}
 		
 		private function onSelectNew( e:Event ):void {
@@ -71,6 +76,10 @@ package com.funbuilder.view.mediators {
 		
 		private function onShowFileNameRequested( fileName:String ):void {
 			view.showFileName( fileName );
+		}
+		
+		private function onShowSelectionIndicatorRequested( visible:Boolean ):void {
+			view.showSelectionIndicator( visible );
 		}
 	}
 }

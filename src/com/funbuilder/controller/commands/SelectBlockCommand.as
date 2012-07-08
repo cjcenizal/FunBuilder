@@ -34,7 +34,6 @@ package com.funbuilder.controller.commands
 			
 			// BOTH:
 			// - Delete a selected block with the delete key
-			// - Arrow keys change type of selected block
 			
 			// UX:
 			// New/open/exit should all prompt a save if unsaved

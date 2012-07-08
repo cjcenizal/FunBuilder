@@ -2,11 +2,12 @@ package com.funbuilder.controller.commands
 {
 	import away3d.materials.ColorMaterial;
 	
+	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
+	import com.funbuilder.model.SelectedBlockModel;
 	
 	import org.robotlegs.mvcs.Command;
-	import com.funbuilder.model.SelectedBlockModel;
 	
 	public class UpdateTargetAppearanceCommand extends Command
 	{
@@ -21,6 +22,11 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var currentBlockModel:SelectedBlockModel;
+		
+		// Commands.
+		
+		[Inject]
+		public var showSelectionIndicatorRequest:ShowSelectionIndicatorRequest;
 		
 		override public function execute():void
 		{
@@ -39,6 +45,7 @@ package com.funbuilder.controller.commands
 				}
 			}
 			cameraTargetModel.target.material = material;
+			showSelectionIndicatorRequest.dispatch( currentBlockModel.hasBlock() );
 		}
 	}
 }

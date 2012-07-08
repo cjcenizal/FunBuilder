@@ -44,6 +44,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
+	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
@@ -93,6 +94,7 @@ package com.funbuilder
 			injector.mapSingleton( AddCameraTargetRequest );
 			injector.mapSingleton( AddView3DRequest );
 			injector.mapSingleton( ShowFileNameRequest );
+			injector.mapSingleton( ShowSelectionIndicatorRequest );
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
