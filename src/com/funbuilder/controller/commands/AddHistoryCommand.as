@@ -30,9 +30,6 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			// Save history for:
-			// - First type change
-			// - Add new block
 			
 			var snapshot:String = segmentModel.getJson();
 			var selectedBlockPos:Vector3D = ( currentBlockModel.hasBlock() ) ? currentBlockModel.getPositionClone() : null;

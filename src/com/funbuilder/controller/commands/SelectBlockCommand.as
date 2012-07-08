@@ -31,21 +31,19 @@ package com.funbuilder.controller.commands
 			
 			// BUILD mode:
 			// - Drag in blocks (and block is auto selected once placed)
+			// - Fix bug with y pos of current block in beam.json.
 			
-			// BOTH:
-			// - Delete a selected block with the delete key
 			
 			// UX:
 			// New/open/exit should all prompt a save if unsaved
 			// Trace a line to the ground plane to indicate y position for blocks
 			// Scrollwheel zooms
 			
-			// - First type change
+			// Undo:
 			// - Add new block
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
-			// Bug with y pos of current block in beam.json.
 			
 			
 			// Select block.

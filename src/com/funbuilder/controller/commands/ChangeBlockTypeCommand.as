@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.AddBlockRequest;
+	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.model.BlocksModel;
@@ -44,9 +45,14 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var selectBlockRequest:SelectBlockRequest;
 		
+		[Inject]
+		public var addHistoryRequest:AddHistoryRequest;
+		
 		override public function execute():void
 		{
 			if ( selectedBlockModel.hasBlock() ) {
+				addHistoryRequest.dispatch( false );
+				
 				var oldBlock:Mesh = selectedBlockModel.getBlock();
 				var oldId:String = segmentModel.getIdFor( oldBlock );
 				// Get block position and namespace.
