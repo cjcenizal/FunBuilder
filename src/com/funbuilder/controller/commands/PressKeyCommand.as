@@ -1,8 +1,8 @@
 package com.funbuilder.controller.commands
 {
+	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.PressKeyToLookRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
-	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
 	
 	import org.robotlegs.mvcs.Command;
@@ -20,12 +20,6 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var editingModeModel:EditingModeModel;
 		
-		[Inject]
-		public var cameraTargetModel:CameraTargetModel;
-		
-		[Inject]
-		public var currentBlockModel:CurrentBlockModel;
-
 		// Commands.
 		
 		[Inject]
@@ -34,13 +28,20 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var setEditingModeRequest:SetEditingModeRequest;
 		
+		[Inject]
+		public var deselectBlockRequest:DeselectBlockRequest;
+		
 		// Private vars.
 		
+		private const ESC:int = 27;
 		private const SPACE:int = 32;
 		
 		override public function execute():void
 		{
-			if ( code == SPACE ) {
+			if ( code == ESC ) {
+				// Deselect current block.
+				deselectBlockRequest.dispatch();
+			} else if ( code == SPACE ) {
 				// Toggle between Selection and Exploration mode.
 				if ( editingModeModel.mode == EditingModeModel.LOOK ) {
 					editingModeModel.mode = EditingModeModel.SELECT;
@@ -51,12 +52,6 @@ package com.funbuilder.controller.commands
 			} else if ( editingModeModel.mode == EditingModeModel.LOOK ) {
 				// Send key back into MainView to move the camera.
 				pressKeyToLookRequest.dispatch( code );
-				// If we have a currently selected block, move the block to match the target.
-				if ( currentBlockModel.block ) {
-					currentBlockModel.block.x = cameraTargetModel.target.x;
-					currentBlockModel.block.y = cameraTargetModel.target.y;
-					currentBlockModel.block.z = cameraTargetModel.target.z;
-				}
 			}
 		}
 	}

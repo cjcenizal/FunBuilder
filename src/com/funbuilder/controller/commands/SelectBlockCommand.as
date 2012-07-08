@@ -27,8 +27,6 @@ package com.funbuilder.controller.commands
 		{
 			// Scrollwheel zooms
 			
-			// Intersecting an existing block flashes red and doesn't allow you to leave it there
-			// (i.e. deselect it)
 			
 			
 			
@@ -43,14 +41,12 @@ package com.funbuilder.controller.commands
 			
 			
 			currentBlockModel.block = block;
-			if ( block ) {
-				// Snap target to block.
-				cameraTargetModel.target.x = block.x;
-				cameraTargetModel.target.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
-				cameraTargetModel.target.z = block.z;
-			} else {
-				// De-select.
-			}
+			
+			// Snap target to block.
+			cameraTargetModel.target.x = block.x;
+			cameraTargetModel.target.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
+			cameraTargetModel.target.z = block.z;
+
 		}
 	}
 }

@@ -3,6 +3,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.AddBlockToSegmentCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.controller.commands.CurrentBlockModel;
+	import com.funbuilder.controller.commands.DeselectBlockCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.NewFileCommand;
 	import com.funbuilder.controller.commands.OpenFileCommand;
@@ -14,6 +15,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
+	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.controller.signals.OpenFileRequest;
 	import com.funbuilder.controller.signals.PressKeyRequest;
@@ -70,6 +72,7 @@ package com.funbuilder
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockToSegmentRequest,				AddBlockToSegmentCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
+			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
 			signalCommandMap.mapSignalClass( NewFileRequest,						NewFileCommand );
 			signalCommandMap.mapSignalClass( OpenFileRequest,						OpenFileCommand );
 			signalCommandMap.mapSignalClass( PressKeyRequest,						PressKeyCommand );
