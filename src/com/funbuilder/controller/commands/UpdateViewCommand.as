@@ -3,7 +3,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.MoveBlockRequest;
 	import com.funbuilder.model.CameraTargetModel;
-	import com.funbuilder.model.CurrentBlockModel;
+	import com.funbuilder.model.SelectedBlockModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -30,7 +30,7 @@ package com.funbuilder.controller.commands
 		public var cameraTargetModel:CameraTargetModel;
 		
 		[Inject]
-		public var currentBlockModel:CurrentBlockModel;
+		public var currentBlockModel:SelectedBlockModel;
 		
 		// Commands.
 		

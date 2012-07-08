@@ -6,13 +6,13 @@ package com.funbuilder.model
 	
 	import org.robotlegs.mvcs.Actor;
 	
-	public class CurrentBlockModel extends Actor
+	public class SelectedBlockModel extends Actor
 	{
 		
 		private var _block:Mesh;
 		private var _isMoved:Boolean = false;
 		
-		public function CurrentBlockModel()
+		public function SelectedBlockModel()
 		{
 			super();
 		}

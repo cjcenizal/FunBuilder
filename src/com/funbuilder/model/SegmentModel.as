@@ -13,13 +13,13 @@ package com.funbuilder.model
 	 * CurrentSegmentModel contains the current segment
 	 * the user is editing.
 	 */
-	public class CurrentSegmentModel extends Actor
+	public class SegmentModel extends Actor
 	{
 		
 		private var _blocks:Object;
 		private var _namespaces:Dictionary;
 		
-		public function CurrentSegmentModel()
+		public function SegmentModel()
 		{
 			super();
 			_blocks = {};

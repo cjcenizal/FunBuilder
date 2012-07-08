@@ -4,8 +4,8 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
-	import com.funbuilder.model.CurrentBlockModel;
-	import com.funbuilder.model.CurrentSegmentModel;
+	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SegmentModel;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -20,10 +20,10 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var selectedBlockModel:CurrentBlockModel;
+		public var selectedBlockModel:SelectedBlockModel;
 		
 		[Inject]
-		public var segmentModel:CurrentSegmentModel;
+		public var segmentModel:SegmentModel;
 		
 		// Commands.
 		

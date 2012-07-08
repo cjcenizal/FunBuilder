@@ -3,7 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
-	import com.funbuilder.model.CurrentSegmentModel;
+	import com.funbuilder.model.SegmentModel;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -13,7 +13,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var segmentModel:CurrentSegmentModel;
+		public var segmentModel:SegmentModel;
 		
 		// Commands.
 		

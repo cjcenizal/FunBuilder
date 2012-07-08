@@ -3,7 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.model.CameraTargetModel;
-	import com.funbuilder.model.CurrentBlockModel;
+	import com.funbuilder.model.SelectedBlockModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import org.robotlegs.mvcs.Command;
@@ -19,13 +19,15 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var currentBlockModel:CurrentBlockModel;
+		public var currentBlockModel:SelectedBlockModel;
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
 		
 		override public function execute():void
 		{
+			
+			// TO-DO:
 			
 			// BUILD mode:
 			// - Drag in blocks (and block is auto selected once placed)

@@ -6,7 +6,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.EditingModeModel;
 	
 	import org.robotlegs.mvcs.Command;
-	import com.funbuilder.model.CurrentBlockModel;
+	import com.funbuilder.model.SelectedBlockModel;
 	
 	public class UpdateTargetAppearanceCommand extends Command
 	{
@@ -20,7 +20,7 @@ package com.funbuilder.controller.commands
 		public var editingModeModel:EditingModeModel;
 		
 		[Inject]
-		public var currentBlockModel:CurrentBlockModel;
+		public var currentBlockModel:SelectedBlockModel;
 		
 		override public function execute():void
 		{

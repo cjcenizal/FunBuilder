@@ -6,7 +6,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	
 	import org.robotlegs.mvcs.Command;
-	import com.funbuilder.model.CurrentBlockModel;
+	import com.funbuilder.model.SelectedBlockModel;
 	
 	public class DeselectBlockCommand extends Command
 	{
@@ -14,7 +14,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var currentBlockModel:CurrentBlockModel;
+		public var currentBlockModel:SelectedBlockModel;
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;

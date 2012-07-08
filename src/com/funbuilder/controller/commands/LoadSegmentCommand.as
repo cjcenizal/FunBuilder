@@ -34,7 +34,6 @@ package com.funbuilder.controller.commands
 		override public function execute():void
 		{
 			clearSegmentRequest.dispatch();
-			
 			var list:Array = com.adobe.serialization.json.JSON.decode( json );
 			var len:int = list.length;
 			var dataItem:Object;
@@ -49,9 +48,6 @@ package com.funbuilder.controller.commands
 				mesh.z = dataItem.z * 100;
 				addBlockRequest.dispatch( new AddBlockVO( mesh, refMesh.assetNamespace ) );
 			}
-			
-			// TO-DO: Clear history.
-			
 		}
 	}
 }

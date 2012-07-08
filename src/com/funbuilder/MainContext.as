@@ -44,8 +44,8 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
-	import com.funbuilder.model.CurrentBlockModel;
-	import com.funbuilder.model.CurrentSegmentModel;
+	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.FileModel;
 	import com.funbuilder.model.HistoryModel;
@@ -73,12 +73,12 @@ package com.funbuilder
 			// Map models.
 			injector.mapSingleton( BlocksModel );
 			injector.mapSingleton( CameraTargetModel );
-			injector.mapSingleton( CurrentBlockModel );
-			injector.mapSingleton( CurrentSegmentModel );
 			injector.mapSingleton( EditingModeModel );
 			injector.mapSingleton( FileModel );
 			injector.mapSingleton( HistoryModel );
 			injector.mapSingleton( TimeModel );
+			injector.mapSingleton( SegmentModel );
+			injector.mapSingleton( SelectedBlockModel );
 			injector.mapSingleton( View3DModel );
 			
 			// Map services.

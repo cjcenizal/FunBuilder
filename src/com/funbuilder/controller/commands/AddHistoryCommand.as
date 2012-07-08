@@ -1,7 +1,7 @@
 package com.funbuilder.controller.commands
 {
-	import com.funbuilder.model.CurrentBlockModel;
-	import com.funbuilder.model.CurrentSegmentModel;
+	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.vo.HistoryVO;
 	
@@ -23,10 +23,10 @@ package com.funbuilder.controller.commands
 		public var historyModel:HistoryModel;
 		
 		[Inject]
-		public var segmentModel:CurrentSegmentModel;
+		public var segmentModel:SegmentModel;
 		
 		[Inject]
-		public var currentBlockModel:CurrentBlockModel;
+		public var currentBlockModel:SelectedBlockModel;
 		
 		override public function execute():void
 		{

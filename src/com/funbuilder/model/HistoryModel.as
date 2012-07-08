@@ -17,6 +17,10 @@ package com.funbuilder.model
 			_history = [];
 		}
 		
+		public function clear():void {
+			_history = [];
+		}
+		
 		public function add( history:HistoryVO, flashSave:Boolean = false ):void {
 			// If we're adding an history into the middle of our history,
 			// then we need to clear everything that follows.

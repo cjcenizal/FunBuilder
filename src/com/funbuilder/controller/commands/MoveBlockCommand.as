@@ -1,8 +1,8 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
-	import com.funbuilder.model.CurrentBlockModel;
-	import com.funbuilder.model.CurrentSegmentModel;
+	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.vo.HistoryVO;
 	
 	import flash.geom.Vector3D;
@@ -20,7 +20,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var currentBlockModel:CurrentBlockModel;
+		public var currentBlockModel:SelectedBlockModel;
 		
 		// Commands.
 		[Inject]
