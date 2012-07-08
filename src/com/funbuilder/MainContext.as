@@ -1,7 +1,7 @@
 package com.funbuilder
 {
 	import com.funbuilder.controller.commands.AddBlockToSegmentCommand;
-	import com.funbuilder.controller.commands.AddHistorySnapshotCommand;
+	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.model.CurrentBlockModel;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
@@ -16,7 +16,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
 	import com.funbuilder.controller.signals.AddBlockToSegmentRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
-	import com.funbuilder.controller.signals.AddHistorySnapshotRequest;
+	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
@@ -79,7 +79,7 @@ package com.funbuilder
 			injector.mapSingleton( SetEditingModeRequest );
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockToSegmentRequest,				AddBlockToSegmentCommand );
-			signalCommandMap.mapSignalClass( AddHistorySnapshotRequest,				AddHistorySnapshotCommand );
+			signalCommandMap.mapSignalClass( AddHistoryRequest,				AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
 			signalCommandMap.mapSignalClass( NewFileRequest,						NewFileCommand );

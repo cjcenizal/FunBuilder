@@ -8,6 +8,7 @@ package com.funbuilder.model
 	{
 		
 		private var _block:Mesh;
+		private var _hasBeenMoved:Boolean = false;
 		
 		public function CurrentBlockModel()
 		{
@@ -16,6 +17,7 @@ package com.funbuilder.model
 		
 		public function setBlock( block:Mesh ):void {
 			_block = block;
+			_hasBeenMoved = false;
 		}
 		
 		public function clearBlock():void {
@@ -26,10 +28,21 @@ package com.funbuilder.model
 			return _block;
 		}
 		
-		public function setPosition( x:Number, y:Number, z:Number ):void {
-			_block.x = x;
-			_block.y = y;
-			_block.z = z;
+		public function setPosition( x:Number, y:Number, z:Number ):Boolean {
+			if ( _block.x != x
+				|| _block.y != y
+				|| _block.z != z ) {
+				_block.x = x;
+				_block.y = y;
+				_block.z = z;
+				_hasBeenMoved = true;
+				return true;
+			}
+			return false;
+		}
+		
+		public function get hasBeenMoved():Boolean {
+			return _hasBeenMoved;
 		}
 	}
 }
