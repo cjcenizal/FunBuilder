@@ -44,9 +44,9 @@ package com.funbuilder.controller.commands
 			// If we have a currently selected block, move the block to match the target.
 			if ( currentBlockModel.hasBlock() ) {
 				// Move block.
-				var x:Number = snapToGrid( cameraTargetModel.target.x - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
-				var y:Number = snapToGrid( cameraTargetModel.target.y ) - SegmentConstants.BLOCK_SIZE * .5;
-				var z:Number = snapToGrid( cameraTargetModel.target.z - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
+				var x:Number = SegmentConstants.snapToGrid( cameraTargetModel.target.x - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
+				var y:Number = SegmentConstants.snapToGrid( cameraTargetModel.target.y - SegmentConstants.BLOCK_SIZE * .5 );
+				var z:Number = SegmentConstants.snapToGrid( cameraTargetModel.target.z - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
 				moveBlockRequest.dispatch( new Vector3D( x, y, z ) );
 			}
 			
@@ -54,8 +54,5 @@ package com.funbuilder.controller.commands
 			view3dModel.render();
 		}
 		
-		private function snapToGrid( val:Number ):int {
-			return Math.round( val / SegmentConstants.BLOCK_SIZE ) * SegmentConstants.BLOCK_SIZE;
-		}
 	}
 }

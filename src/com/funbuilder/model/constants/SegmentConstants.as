@@ -9,5 +9,9 @@ package com.funbuilder.model.constants
 		public static const SEGMENT_DEEP:int = NUM_BLOCKS_DEPTH * BLOCK_SIZE;
 		public static const SEGMENT_HALF_WIDTH:Number = SEGMENT_WIDTH * .5;
 		public static const SEGMENT_HALF_DEPTH:Number = SEGMENT_DEEP * .5;
+		
+		public static function snapToGrid( val:Number ):int {
+			return Math.round( val / BLOCK_SIZE ) * BLOCK_SIZE;
+		}
 	}
 }

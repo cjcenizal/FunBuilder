@@ -8,6 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.SelectedBlockModel;
 	import com.funbuilder.model.vo.AddBlockVO;
+	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -39,9 +40,9 @@ package com.funbuilder.controller.commands
 		{
 			// Add block.
 			var mesh:Mesh = blocksModel.getBlock( id ).mesh.clone() as Mesh;
-			mesh.x = cameraTargetModel.target.x;
-			mesh.y = cameraTargetModel.target.y;
-			mesh.z = cameraTargetModel.target.z;
+			mesh.x = SegmentConstants.snapToGrid( cameraTargetModel.target.x - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
+			mesh.y = SegmentConstants.snapToGrid( cameraTargetModel.target.y - SegmentConstants.BLOCK_SIZE * .5 );
+			mesh.z = SegmentConstants.snapToGrid( cameraTargetModel.target.z - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
 			addBlockReuqest.dispatch( new AddBlockVO( mesh, id ) );
 			// Select it.
 			selectBlockRequest.dispatch( mesh );

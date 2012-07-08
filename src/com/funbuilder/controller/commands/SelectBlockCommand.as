@@ -35,9 +35,6 @@ package com.funbuilder.controller.commands
 			
 			// TO-DO:
 			
-			// BUILD mode:
-			// - Drag in blocks (and block is auto selected once placed)
-			// - Fix bug with y pos of current block in beam.json.
 			
 			
 			// UX:
