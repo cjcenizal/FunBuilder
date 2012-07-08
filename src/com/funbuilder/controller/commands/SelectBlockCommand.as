@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
 	
+	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.SelectedBlockModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -24,6 +25,11 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
 		
+		// Commands.
+		
+		[Inject]
+		public var deselectBlockRequest:DeselectBlockRequest;
+		
 		override public function execute():void
 		{
 			
@@ -44,7 +50,10 @@ package com.funbuilder.controller.commands
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
-			
+			// Deselect current block.
+			if ( currentBlockModel.hasBlock() ) {
+				deselectBlockRequest.dispatch();
+			}
 			
 			// Select block.
 			currentBlockModel.setBlock( block );
