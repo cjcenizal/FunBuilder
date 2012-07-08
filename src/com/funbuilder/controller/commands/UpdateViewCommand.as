@@ -7,6 +7,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.events.TimeEvent;
 	
 	import org.robotlegs.mvcs.Command;
+	import com.funbuilder.model.CurrentBlockModel;
 	
 	public class UpdateViewCommand extends Command
 	{

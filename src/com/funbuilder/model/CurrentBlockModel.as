@@ -1,4 +1,4 @@
-package com.funbuilder.controller.commands
+package com.funbuilder.model
 {
 	import away3d.entities.Mesh;
 	

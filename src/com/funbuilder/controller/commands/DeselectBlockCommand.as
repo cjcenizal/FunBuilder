@@ -6,6 +6,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	
 	import org.robotlegs.mvcs.Command;
+	import com.funbuilder.model.CurrentBlockModel;
 	
 	public class DeselectBlockCommand extends Command
 	{

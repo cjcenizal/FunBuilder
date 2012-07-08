@@ -1,8 +1,9 @@
 package com.funbuilder
 {
 	import com.funbuilder.controller.commands.AddBlockToSegmentCommand;
+	import com.funbuilder.controller.commands.AddHistorySnapshotCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
-	import com.funbuilder.controller.commands.CurrentBlockModel;
+	import com.funbuilder.model.CurrentBlockModel;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.NewFileCommand;
@@ -15,6 +16,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
 	import com.funbuilder.controller.signals.AddBlockToSegmentRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
+	import com.funbuilder.controller.signals.AddHistorySnapshotRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
@@ -34,6 +36,7 @@ package com.funbuilder
 	import com.funbuilder.model.CurrentSegmentModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.FileModel;
+	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.view.components.MainView;
@@ -62,6 +65,7 @@ package com.funbuilder
 			injector.mapSingleton( CurrentSegmentModel );
 			injector.mapSingleton( EditingModeModel );
 			injector.mapSingleton( FileModel );
+			injector.mapSingleton( HistoryModel );
 			injector.mapSingleton( TimeModel );
 			injector.mapSingleton( View3DModel );
 			
@@ -75,6 +79,7 @@ package com.funbuilder
 			injector.mapSingleton( SetEditingModeRequest );
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockToSegmentRequest,				AddBlockToSegmentCommand );
+			signalCommandMap.mapSignalClass( AddHistorySnapshotRequest,				AddHistorySnapshotCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
 			signalCommandMap.mapSignalClass( NewFileRequest,						NewFileCommand );

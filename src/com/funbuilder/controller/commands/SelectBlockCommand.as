@@ -8,6 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import org.robotlegs.mvcs.Command;
+	import com.funbuilder.model.CurrentBlockModel;
 	
 	public class SelectBlockCommand extends Command
 	{
@@ -35,17 +36,25 @@ package com.funbuilder.controller.commands
 			// Scrollwheel zooms
 			
 			
-			
+			// Hold space to temporarily enter BUILD mode
+			// Click to select
+			// Click off to deselect
+			// Drag in blocks (and block is auto selected once placed)
 			
 			// LOOK mode:
 			// 1) If block is selected, move it around
 			// 2) If no block, just look around.
 			// Deselect block with esc.
+			// Arrow keys change type of selected block
+			// While block is selected, show: "Hit Esc to deselect block"
 			
-			// SELECT mode:
-			// 1) select block and choose new type (or switch to moving to move it around)
-			// 2) drag new blocks from library into scene
+			// New/open/close should all prompt a save if unsaved
 			
+			// Delete a selected block with the delete key
+			
+			// Trace a line to the ground plane to indicate y position for blocks
+			
+			// "Thank you! Just for playing, you get 50 credits for free!"
 			
 			currentBlockModel.block = block;
 			
