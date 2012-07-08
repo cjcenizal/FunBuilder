@@ -51,12 +51,7 @@ package com.funbuilder.controller.commands
 		{
 			switch ( code ) {
 				case Keyboard.SPACE:
-					// Toggle between Selection and Exploration mode.
-					if ( editingModeModel.mode == EditingModeModel.LOOK ) {
-						setEditingModeRequest.dispatch( EditingModeModel.BUILD );
-					} else {
-						setEditingModeRequest.dispatch( EditingModeModel.LOOK );
-					}
+					setEditingModeRequest.dispatch( EditingModeModel.BUILD );
 					break;
 				case Keyboard.BACKSPACE:
 					if ( selectedBlockModel.hasBlock() ) {
