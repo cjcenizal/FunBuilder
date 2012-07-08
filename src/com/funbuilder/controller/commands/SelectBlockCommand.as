@@ -37,7 +37,6 @@ package com.funbuilder.controller.commands
 			// - Arrow keys change type of selected block
 			
 			// UX:
-			// Display name of current segment somewhere
 			// New/open/exit should all prompt a save if unsaved
 			// Trace a line to the ground plane to indicate y position for blocks
 			// Scrollwheel zooms

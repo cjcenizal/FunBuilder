@@ -3,6 +3,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.AddBlockCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
+	import com.funbuilder.controller.commands.ChangeBlockTypeCommand;
 	import com.funbuilder.controller.commands.ClearHistoryCommand;
 	import com.funbuilder.controller.commands.ClearSegmentCommand;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
@@ -26,6 +27,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
+	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
 	import com.funbuilder.controller.signals.ClearHistoryRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
@@ -95,6 +97,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
+			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );
 			signalCommandMap.mapSignalClass( ClearHistoryRequest,					ClearHistoryCommand );
 			signalCommandMap.mapSignalClass( ClearSegmentRequest,					ClearSegmentCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );

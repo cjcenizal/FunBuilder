@@ -6,6 +6,7 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
+	import com.funbuilder.controller.signals.KeyUpRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.model.EditingModeModel;
@@ -31,7 +32,10 @@ package com.funbuilder.view.mediators {
 		public var addCameraTargetRequest:AddCameraTargetRequest;
 		
 		[Inject]
-		public var pressKeyRequest:KeyDownRequest;
+		public var keyDownRequest:KeyDownRequest;
+		
+		[Inject]
+		public var keyUpRequest:KeyUpRequest;
 		
 		[Inject]
 		public var setEditingModeRequest:SetEditingModeRequest;
@@ -46,11 +50,11 @@ package com.funbuilder.view.mediators {
 		}
 		
 		private function onKeyDown( code:int ):void {
-			pressKeyRequest.dispatch( code );
+			keyDownRequest.dispatch( code );
 		}
 		
 		private function onKeyUp( code:int ):void {
-			pressKeyRequest.dispatch( code );
+			keyUpRequest.dispatch( code );
 		}
 		
 		private function onAddCameraTargetRequested( target:Mesh ):void {

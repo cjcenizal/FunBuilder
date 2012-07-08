@@ -12,6 +12,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
+	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
@@ -61,6 +62,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
+		[Inject]
+		public var newFileRequest:NewFileRequest;
+		
 		override public function execute():void
 		{
 			// Time.
@@ -104,6 +108,8 @@ package com.funbuilder.controller.commands
 			// Respond to time.
 			commandMap.mapEvent( TimeEvent.TICK, UpdateViewCommand, TimeEvent );
 			
+			// Create a new file.
+			newFileRequest.dispatch();
 		}
 	}
 }

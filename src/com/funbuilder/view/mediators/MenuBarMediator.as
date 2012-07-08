@@ -4,8 +4,8 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.controller.signals.OpenFileRequest;
 	import com.funbuilder.controller.signals.RedoEditRequest;
 	import com.funbuilder.controller.signals.SaveFileRequest;
-	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
+	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.view.components.MenuBarView;
 	
 	import flash.events.Event;
