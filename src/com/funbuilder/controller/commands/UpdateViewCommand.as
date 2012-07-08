@@ -1,12 +1,15 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.MoveBlockRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.CurrentBlockModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
+	
+	import flash.geom.Vector3D;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -34,6 +37,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
 		
+		[Inject]
+		public var moveBlockRequest:MoveBlockRequest;
+		
 		override public function execute():void
 		{
 			// If we have a currently selected block, move the block to match the target.
@@ -42,12 +48,7 @@ package com.funbuilder.controller.commands
 				var x:Number = snapToGrid( cameraTargetModel.target.x - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
 				var y:Number = snapToGrid( cameraTargetModel.target.y ) - SegmentConstants.BLOCK_SIZE * .5;
 				var z:Number = snapToGrid( cameraTargetModel.target.z - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
-				var wasMoved:Boolean = currentBlockModel.hasBeenMoved;
-				var isMoved:Boolean = currentBlockModel.setPosition( x, y, z );
-				if ( !wasMoved && isMoved  ) {
-					// Save history if we move the block and it's the first time it gets moved.
-					addHistoryRequest.dispatch();
-				}
+				moveBlockRequest.dispatch( new Vector3D( x, y, z ) );
 			}
 			
 			// Render scene.

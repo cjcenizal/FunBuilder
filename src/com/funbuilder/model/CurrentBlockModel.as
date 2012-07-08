@@ -2,13 +2,15 @@ package com.funbuilder.model
 {
 	import away3d.entities.Mesh;
 	
+	import flash.geom.Vector3D;
+	
 	import org.robotlegs.mvcs.Actor;
 	
 	public class CurrentBlockModel extends Actor
 	{
 		
 		private var _block:Mesh;
-		private var _hasBeenMoved:Boolean = false;
+		private var _isMoved:Boolean = false;
 		
 		public function CurrentBlockModel()
 		{
@@ -17,7 +19,7 @@ package com.funbuilder.model
 		
 		public function setBlock( block:Mesh ):void {
 			_block = block;
-			_hasBeenMoved = false;
+			_isMoved = false;
 		}
 		
 		public function clearBlock():void {
@@ -28,21 +30,21 @@ package com.funbuilder.model
 			return _block;
 		}
 		
-		public function setPosition( x:Number, y:Number, z:Number ):Boolean {
-			if ( _block.x != x
-				|| _block.y != y
-				|| _block.z != z ) {
-				_block.x = x;
-				_block.y = y;
-				_block.z = z;
-				_hasBeenMoved = true;
-				return true;
-			}
-			return false;
+		public function willMove( position:Vector3D ):Boolean {
+			return ( _block.x != position.x
+				|| _block.y != position.y
+				|| _block.z != position.z );
 		}
 		
-		public function get hasBeenMoved():Boolean {
-			return _hasBeenMoved;
+		public function setPosition( position:Vector3D ):void {
+			_block.x = position.x;
+			_block.y = position.y;
+			_block.z = position.z;
+			_isMoved = true;
+		}
+		
+		public function get isMoved():Boolean {
+			return _isMoved;
 		}
 	}
 }

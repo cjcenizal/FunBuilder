@@ -3,9 +3,9 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.AddBlockToSegmentCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
-	import com.funbuilder.model.CurrentBlockModel;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
+	import com.funbuilder.controller.commands.MoveBlockCommand;
 	import com.funbuilder.controller.commands.NewFileCommand;
 	import com.funbuilder.controller.commands.OpenFileCommand;
 	import com.funbuilder.controller.commands.PressKeyCommand;
@@ -20,6 +20,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.MoveBlockRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.controller.signals.OpenFileRequest;
 	import com.funbuilder.controller.signals.PressKeyRequest;
@@ -33,6 +34,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.CurrentBlockModel;
 	import com.funbuilder.model.CurrentSegmentModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.FileModel;
@@ -79,9 +81,10 @@ package com.funbuilder
 			injector.mapSingleton( SetEditingModeRequest );
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockToSegmentRequest,				AddBlockToSegmentCommand );
-			signalCommandMap.mapSignalClass( AddHistoryRequest,				AddHistoryCommand );
+			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
+			signalCommandMap.mapSignalClass( MoveBlockRequest,						MoveBlockCommand );
 			signalCommandMap.mapSignalClass( NewFileRequest,						NewFileCommand );
 			signalCommandMap.mapSignalClass( OpenFileRequest,						OpenFileCommand );
 			signalCommandMap.mapSignalClass( PressKeyRequest,						PressKeyCommand );

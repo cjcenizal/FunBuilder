@@ -40,6 +40,7 @@ package com.funbuilder.controller.commands
 			// Click to select
 			// Click off to deselect
 			// Drag in blocks (and block is auto selected once placed)
+			// Tap space to deselect current block
 			
 			// LOOK mode:
 			// 1) If block is selected, move it around
