@@ -1,5 +1,6 @@
 package com.funbuilder.controller.commands {
 
+	import com.funbuilder.model.FileModel;
 	import com.funbuilder.model.SegmentModel;
 	
 	import flash.events.Event;
@@ -16,12 +17,16 @@ package com.funbuilder.controller.commands {
 		[Inject]
 		public var segmentModel:SegmentModel;
 		
+		[Inject]
+		public var fileModel:FileModel;
+		
 		// Private vars.
 		
 		private var _file:File;
 		
 		override public function execute():void {
-			_file = new File();
+			var path:String = ( fileModel.file ) ? fileModel.file.nativePath : File.applicationDirectory.nativePath;
+			_file = new File( path );
 			_file.addEventListener( Event.SELECT, onSelectFileToSave );
 			_file.browseForSave( "Save your JSON segment." );
 		}
