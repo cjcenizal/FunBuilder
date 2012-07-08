@@ -2,6 +2,7 @@ package com.funbuilder.view.mediators {
 
 	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.controller.signals.OpenFileRequest;
+	import com.funbuilder.controller.signals.RedoEditRequest;
 	import com.funbuilder.controller.signals.SaveFileRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.view.components.MenuBarView;
@@ -32,11 +33,15 @@ package com.funbuilder.view.mediators {
 		[Inject]
 		public var undoEditRequest:UndoEditRequest;
 		
+		[Inject]
+		public var redoEditRequest:RedoEditRequest;
+		
 		override public function onRegister():void {
 			view.addEventListener( MenuBarView.EVENT_NEW, onSelectNew );
 			view.addEventListener( MenuBarView.EVENT_OPEN, onSelectOpen );
 			view.addEventListener( MenuBarView.EVENT_SAVE, onSelectSave );
 			view.addEventListener( MenuBarView.EVENT_UNDO, onSelectUndo );
+			view.addEventListener( MenuBarView.EVENT_REDO, onSelectRedo );
 		}
 		
 		private function onSelectNew( e:Event ):void {
@@ -53,6 +58,10 @@ package com.funbuilder.view.mediators {
 		
 		private function onSelectUndo( e:Event ):void {
 			undoEditRequest.dispatch();
+		}
+		
+		private function onSelectRedo( e:Event ):void {
+			redoEditRequest.dispatch();
 		}
 	}
 }

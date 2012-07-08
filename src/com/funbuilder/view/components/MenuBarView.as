@@ -13,6 +13,7 @@ package com.funbuilder.view.components {
 		public static const EVENT_OPEN:String = "open";
 		public static const EVENT_SAVE:String = "save";
 		public static const EVENT_UNDO:String = "undo";
+		public static const EVENT_REDO:String = "redo";
 		
 		private var _menus:Array;
 		private var _menusObj:Object;
@@ -27,13 +28,14 @@ package com.funbuilder.view.components {
 			_menusObj = {};
 			addMenu( "File",
 				[
-					new MenuItemVO( "New \t\tCmd-N", getDispatchEvent( EVENT_NEW ) ),
-					new MenuItemVO( "Open \tCmd-O", getDispatchEvent( EVENT_OPEN ) ),
-					new MenuItemVO( "Save \tCmd-S", getDispatchEvent( EVENT_SAVE ) )
+					new MenuItemVO( "New (Cmd-N)", getDispatchEvent( EVENT_NEW ) ),
+					new MenuItemVO( "Open (Cmd-O)", getDispatchEvent( EVENT_OPEN ) ),
+					new MenuItemVO( "Save (Cmd-S)", getDispatchEvent( EVENT_SAVE ) )
 				] );
 			addMenu( "Edit",
 				[
-					new MenuItemVO( "Undo\t\tCmd-Z", getDispatchEvent( EVENT_UNDO ) )
+					new MenuItemVO( "Undo (Cmd-Z)", getDispatchEvent( EVENT_UNDO ) ),
+					new MenuItemVO( "Redo (ShftCmd-Z)", getDispatchEvent( EVENT_REDO ) )
 				] );
 			this.addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
 		}
@@ -82,6 +84,13 @@ package com.funbuilder.view.components {
 					case 90: // z
 						dispatchEvent( new Event( EVENT_UNDO ) );
 						break;
+				}
+				if ( e.shiftKey ) {
+					switch ( e.keyCode ) {
+						case 90: // z
+							dispatchEvent( new Event( EVENT_REDO ) );
+							break;
+					}
 				}
 			}
 		}

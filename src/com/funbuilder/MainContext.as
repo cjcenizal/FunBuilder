@@ -8,6 +8,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.NewFileCommand;
 	import com.funbuilder.controller.commands.OpenFileCommand;
 	import com.funbuilder.controller.commands.PressKeyCommand;
+	import com.funbuilder.controller.commands.RedoEditCommand;
 	import com.funbuilder.controller.commands.SaveFileCommand;
 	import com.funbuilder.controller.commands.SelectBlockCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
@@ -21,6 +22,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.OpenFileRequest;
 	import com.funbuilder.controller.signals.PressKeyRequest;
 	import com.funbuilder.controller.signals.PressKeyToLookRequest;
+	import com.funbuilder.controller.signals.RedoEditRequest;
 	import com.funbuilder.controller.signals.SaveFileRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
@@ -78,6 +80,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( NewFileRequest,						NewFileCommand );
 			signalCommandMap.mapSignalClass( OpenFileRequest,						OpenFileCommand );
 			signalCommandMap.mapSignalClass( PressKeyRequest,						PressKeyCommand );
+			signalCommandMap.mapSignalClass( RedoEditRequest,						RedoEditCommand );
 			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
 			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
