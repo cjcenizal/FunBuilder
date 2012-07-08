@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import away3d.materials.ColorMaterial;
 	
+	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	
 	import org.robotlegs.mvcs.Command;
@@ -17,6 +18,11 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
 		
+		// Commands.
+		
+		[Inject]
+		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
+		
 		override public function execute():void
 		{
 			// TO-DO:
@@ -25,7 +31,7 @@ package com.funbuilder.controller.commands
 			
 			
 			currentBlockModel.block = null;
-			cameraTargetModel.target.material = cameraTargetModel.unselectedMaterial;
+			updateTargetAppearanceRequest.dispatch();
 		}
 	}
 }

@@ -5,7 +5,7 @@ package com.funbuilder.model
 	public class EditingModeModel extends Actor
 	{
 		
-		public static const SELECT:String = "SELECT";
+		public static const BUILD:String = "BUILD";
 		public static const LOOK:String = "LOOK";
 		
 		public var mode:String = LOOK;

@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;
 	
+	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	
@@ -24,6 +25,11 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
 		
+		// Commands.
+		
+		[Inject]
+		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
+		
 		override public function execute():void
 		{
 			// Scrollwheel zooms
@@ -44,11 +50,11 @@ package com.funbuilder.controller.commands
 			currentBlockModel.block = block;
 			
 			// Snap target to block.
-			cameraTargetModel.target.material = cameraTargetModel.selectedMaterial;
 			cameraTargetModel.target.x = block.x;
 			cameraTargetModel.target.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
 			cameraTargetModel.target.z = block.z;
 
+			updateTargetAppearanceRequest.dispatch();
 		}
 	}
 }

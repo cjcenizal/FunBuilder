@@ -71,7 +71,7 @@ package com.funbuilder.view.mediators {
 		private function onSetEditingModeRequested( mode:String ):void {
 			if ( mode == EditingModeModel.LOOK ) {
 				this.view.enableCameraControl( true );
-			} else if ( mode == EditingModeModel.SELECT ) {
+			} else if ( mode == EditingModeModel.BUILD ) {
 				this.view.enableCameraControl( false );
 			}
 		}

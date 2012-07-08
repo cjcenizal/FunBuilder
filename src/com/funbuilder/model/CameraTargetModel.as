@@ -9,9 +9,10 @@ package com.funbuilder.model
 	{
 		
 		public var target:Mesh;
-		public var selectingMaterial:ColorMaterial = new ColorMaterial( 0x00FF00, .2 );
-		public var selectedMaterial:ColorMaterial = new ColorMaterial( 0x00FF00, .4 );
-		public var unselectedMaterial:ColorMaterial = new ColorMaterial( 0x0044FF, .2 );
+		public var lookUnselectedMaterial:ColorMaterial = new ColorMaterial( 0x00ccff, .1 );
+		public var lookSelectedMaterial:ColorMaterial = new ColorMaterial( 0x00ff78, .2 );
+		public var buildUnselectedMaterial:ColorMaterial = new ColorMaterial( 0xffa200, .1 );
+		public var buildSelectedMaterial:ColorMaterial = new ColorMaterial( 0xfff000, .2 );
 		
 		public function CameraTargetModel()
 		{

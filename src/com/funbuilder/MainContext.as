@@ -11,6 +11,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.SaveFileCommand;
 	import com.funbuilder.controller.commands.SelectBlockCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
+	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
 	import com.funbuilder.controller.signals.AddBlockToSegmentRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
@@ -25,6 +26,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
+	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.CurrentSegmentModel;
@@ -79,6 +81,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
 			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
+			signalCommandMap.mapSignalClass( UpdateTargetAppearanceRequest,			UpdateTargetAppearanceCommand );
 			
 			// Map views to mediators.
 			mediatorMap.mapView( MenuBarView,					MenuBarMediator );

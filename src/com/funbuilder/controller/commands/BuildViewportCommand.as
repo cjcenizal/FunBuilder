@@ -14,6 +14,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
+	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.TimeModel;
@@ -57,6 +58,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addObjectToSceneRequest:AddObjectToSceneRequest;
 		
+		[Inject]
+		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
+		
 		override public function execute():void
 		{
 			// Time.
@@ -85,7 +89,7 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( planeMesh );
 			
 			// Add camera target.
-			var target:Mesh = new Mesh( new CubeGeometry( 110, 110, 110 ), cameraTargetModel.unselectedMaterial );
+			var target:Mesh = new Mesh( new CubeGeometry( 110, 110, 110 ), null );
 			target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			cameraTargetModel.target = target;
@@ -96,6 +100,7 @@ package com.funbuilder.controller.commands
 			
 			// Start interaction.
 			setEditingModeRequest.dispatch( editingModeModel.mode );
+			updateTargetAppearanceRequest.dispatch();
 			
 			// Respond to time.
 			commandMap.mapEvent( TimeEvent.TICK, UpdateViewCommand, TimeEvent );
