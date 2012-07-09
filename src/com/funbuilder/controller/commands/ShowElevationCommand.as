@@ -29,9 +29,13 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			var mesh:Mesh = elevationModel.getAtPos( position );
-			if ( mesh ) {
-				addObjectToSceneRequest.dispatch( mesh );
+			var posMesh:Mesh = elevationModel.getAtPos( position, true );
+			if ( posMesh ) {
+				addObjectToSceneRequest.dispatch( posMesh );
+			}
+			var negMesh:Mesh = elevationModel.getAtPos( position, false );
+			if ( negMesh ) {
+				addObjectToSceneRequest.dispatch( negMesh );
 			}
 		}
 	}

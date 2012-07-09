@@ -36,9 +36,9 @@ package com.funbuilder.model
 			return pos.x.toString() + "," + pos.z.toString();
 		}
 		
-		public function getAtPos( pos:Vector3D ):Mesh {
+		public function getAtPos( pos:Vector3D, isPositive:Boolean ):Mesh {
 			var key:String = makeHash( pos );
-			if ( pos.y >= 0 ) {
+			if ( isPositive ) {
 				return _positiveIndicators[ key ];
 			}
 			return _negativeIndicators[ key ];
