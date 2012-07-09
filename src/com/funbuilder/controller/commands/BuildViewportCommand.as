@@ -4,12 +4,14 @@ package com.funbuilder.controller.commands
 	import away3d.cameras.lenses.PerspectiveLens;
 	import away3d.containers.Scene3D;
 	import away3d.containers.View3D;
+	import away3d.core.base.Geometry;
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.CubeGeometry;
 	import away3d.primitives.PlaneGeometry;
 	
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
+	import com.funbuilder.controller.signals.AddElevationIndicatorRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
@@ -22,6 +24,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
+	import com.funbuilder.model.vo.AddElevationIndicatorVO;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -65,6 +68,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var newFileRequest:NewFileRequest;
 		
+		[Inject]
+		public var addElevationIndicatorRequest:AddElevationIndicatorRequest;
+		
 		override public function execute():void
 		{
 			// Time.
@@ -74,7 +80,7 @@ package com.funbuilder.controller.commands
 			// Add view.
 			var scene:Scene3D = new Scene3D();
 			var camera:Camera3D = new Camera3D( new PerspectiveLens( 90 ) );
-			camera.lens.far = 10000;
+			camera.lens.far = 100000;
 			var view:View3D = new View3D( scene, camera );
 			view.antiAlias = 2; // 2, 4, or 16
 			view.width = contextView.stage.stageWidth;
@@ -84,8 +90,8 @@ package com.funbuilder.controller.commands
 			addView3DRequest.dispatch( view );
 			
 			// Add ground plane.
-			var planeGeometry:PlaneGeometry = new PlaneGeometry( SegmentConstants.SEGMENT_WIDTH, SegmentConstants.SEGMENT_DEEP, 12, 26, true );
-			var planeMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .1 );
+			var planeGeometry:PlaneGeometry = new PlaneGeometry( SegmentConstants.SEGMENT_WIDTH, SegmentConstants.SEGMENT_DEPTH, 12, 26, true );
+			var planeMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .2 );
 			planeMaterial.bothSides = true;
 			var planeMesh:Mesh = new Mesh( planeGeometry, planeMaterial );
 			planeMesh.x = SegmentConstants.SEGMENT_HALF_WIDTH;
@@ -99,8 +105,32 @@ package com.funbuilder.controller.commands
 			cameraTargetModel.target = target;
 			addCameraTargetRequest.dispatch( target );
 			
+			// Add elevation indicators.
+			var positiveIndicator:Mesh;
+			var negativeIndicator:Mesh;
+			var side:Number = SegmentConstants.BLOCK_SIZE - 3;
+			var indicatorGeo:Geometry = new PlaneGeometry( side, side );
+			var positiveIndicatorMaterial:ColorMaterial = new ColorMaterial( 0, 1 );
+			var negativeIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .3 );
+			for ( var x:int = SegmentConstants.BLOCK_SIZE * .5; x < SegmentConstants.SEGMENT_WIDTH; x += SegmentConstants.BLOCK_SIZE ) {
+				for ( var z:int = SegmentConstants.BLOCK_SIZE * .5; z < SegmentConstants.SEGMENT_DEPTH; z += SegmentConstants.BLOCK_SIZE ) {
+					positiveIndicator = new Mesh( indicatorGeo, positiveIndicatorMaterial );
+					positiveIndicator.x = x;
+					positiveIndicator.y = 1;
+					positiveIndicator.z = z;
+					addElevationIndicatorRequest.dispatch( new AddElevationIndicatorVO( positiveIndicator, true ) );
+					
+					negativeIndicator = new Mesh( indicatorGeo, negativeIndicatorMaterial );
+					negativeIndicator.rotationX = 180;
+					negativeIndicator.x = x;
+					negativeIndicator.y = -1;
+					negativeIndicator.z = z;
+					addElevationIndicatorRequest.dispatch( new AddElevationIndicatorVO( negativeIndicator, true ) );
+				}
+			}
+			
 			// Show/hide stats.
-			showStatsRequest.dispatch( false );
+			showStatsRequest.dispatch( true );
 			
 			// Start interaction.
 			setEditingModeRequest.dispatch( EditingModeModel.LOOK );

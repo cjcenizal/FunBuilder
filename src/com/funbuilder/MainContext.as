@@ -2,6 +2,7 @@ package com.funbuilder
 {
 	import com.funbuilder.controller.commands.AddBlockCommand;
 	import com.funbuilder.controller.commands.AddBlockFromLibraryCommand;
+	import com.funbuilder.controller.commands.AddElevationIndicatorCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.controller.commands.ChangeBlockTypeCommand;
@@ -28,6 +29,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
+	import com.funbuilder.controller.signals.AddElevationIndicatorRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
@@ -58,6 +60,7 @@ package com.funbuilder
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
+	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.FileModel;
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.SegmentModel;
@@ -89,6 +92,7 @@ package com.funbuilder
 			injector.mapSingleton( BlocksModel );
 			injector.mapSingleton( CameraTargetModel );
 			injector.mapSingleton( EditingModeModel );
+			injector.mapSingleton( ElevationModel );
 			injector.mapSingleton( FileModel );
 			injector.mapSingleton( HistoryModel );
 			injector.mapSingleton( TimeModel );
@@ -108,6 +112,7 @@ package com.funbuilder
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddBlockFromLibraryRequest,			AddBlockFromLibraryCommand );
+			signalCommandMap.mapSignalClass( AddElevationIndicatorRequest,			AddElevationIndicatorCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );
