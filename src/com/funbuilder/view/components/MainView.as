@@ -21,6 +21,7 @@ package com.funbuilder.view.components {
 		
 		public var onKeyDownSignal:Signal;
 		public var onKeyUpSignal:Signal;
+		public var onScrollWheelSignal:Signal;
 		
 		private var _keysDown:Object = {};
 		
@@ -48,6 +49,7 @@ package com.funbuilder.view.components {
 			super.init();
 			onKeyDownSignal = new Signal();
 			onKeyUpSignal = new Signal();
+			onScrollWheelSignal = new Signal();
 			_bg = new Panel( this );
 			_menuBar = new MenuBarView( this );
 			_library = new LibraryView( this );
@@ -60,9 +62,10 @@ package com.funbuilder.view.components {
 			_library.setup();
 			_library.y = stage.stageHeight - _library.height;
 			stage.addEventListener( Event.ENTER_FRAME, onEnterFrame );
+			stage.addEventListener( Event.RESIZE, onStageResize );
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
-			stage.addEventListener( Event.RESIZE, onStageResize );
+			stage.addEventListener( MouseEvent.MOUSE_WHEEL, onMouseWheel );
 		}
 		
 		private function onStageResize( e:Event ):void {
@@ -174,11 +177,11 @@ package com.funbuilder.view.components {
 							moveX = Math.cos( theta + Math.PI * .5 ) * speed;
 							moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
 							break;
-						case Keyboard.Z:
+						case Keyboard.F:
 							// Decrease elevation.
 							moveY = -speed;
 							break;
-						case Keyboard.X:
+						case Keyboard.R:
 							// Increase elevation.
 							moveY = speed;
 							break;
@@ -262,5 +265,12 @@ package com.funbuilder.view.components {
 			}
 		}
 		
+		private function onMouseWheel( e:MouseEvent ):void {
+			var amount:Number = e.delta * 8;
+			if ( _cameraController.distance > amount ) {
+				_cameraController.distance -= amount;
+			}
+			onScrollWheelSignal.dispatch( e.delta );
+		}
 	}
 }

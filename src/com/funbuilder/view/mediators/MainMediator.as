@@ -43,6 +43,7 @@ package com.funbuilder.view.mediators {
 		override public function onRegister():void {
 			this.view.onKeyDownSignal.add( onKeyDown );
 			this.view.onKeyUpSignal.add( onKeyUp );
+			this.view.onScrollWheelSignal.add( onScrollWheel );
 			addCameraTargetRequest.add( onAddCameraTargetRequested );
 			addView3DRequest.add( onAddView3DRequested );
 			showStatsRequest.add( onShowStatsRequested );
@@ -55,6 +56,10 @@ package com.funbuilder.view.mediators {
 		
 		private function onKeyUp( code:int ):void {
 			keyUpRequest.dispatch( code );
+		}
+		
+		private function onScrollWheel( delta:int ):void {
+			
 		}
 		
 		private function onAddCameraTargetRequested( target:Mesh ):void {
