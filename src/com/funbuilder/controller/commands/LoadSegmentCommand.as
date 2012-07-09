@@ -5,6 +5,8 @@ package com.funbuilder.controller.commands
 	import com.adobe.serialization.json.JSON;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
+	import com.funbuilder.controller.signals.HideAllElevationRequest;
+	import com.funbuilder.controller.signals.ShowElevationRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
@@ -32,11 +34,22 @@ package com.funbuilder.controller.commands
 		public var clearSegmentRequest:ClearSegmentRequest;
 		
 		[Inject]
+		public var hideAllElevationIndicatorsRequest:HideAllElevationRequest;
+		
+		[Inject]
 		public var addBlockRequest:AddBlockRequest;
+		
+		[Inject]
+		public var showElevationRequest:ShowElevationRequest;
 		
 		override public function execute():void
 		{
+			
+			// Clear old stuff.
 			clearSegmentRequest.dispatch();
+			hideAllElevationIndicatorsRequest.dispatch();
+			
+			// Add new stuff.
 			var list:Array = com.adobe.serialization.json.JSON.decode( json );
 			var len:int = list.length;
 			var dataItem:Object;
@@ -51,6 +64,7 @@ package com.funbuilder.controller.commands
 				mesh.y = snappedPos.y;
 				mesh.z = snappedPos.z;
 				addBlockRequest.dispatch( new AddBlockVO( mesh, refMesh.assetNamespace, dataItem.key ) );
+				showElevationRequest.dispatch( mesh.position );
 			}
 		}
 	}

@@ -51,14 +51,18 @@ package com.funbuilder.model {
 		 * Adding 3D objects to the scene.
 		 */
 		public function addToScene( object:ObjectContainer3D ):void {
-			_scene.addChild( object );
+			if ( !_scene.contains( object ) ) {
+				_scene.addChild( object );
+			}
 		}
 		
 		/**
 		 * Removing 3D objects from the scene.
 		 */
 		public function removeFromScene( object:ObjectContainer3D ):void {
-			_scene.removeChild( object );
+			if ( _scene.contains( object ) ) {
+				_scene.removeChild( object );
+			}
 		}
 		
 		public function get2DFrom3D( position:Vector3D ):Point {

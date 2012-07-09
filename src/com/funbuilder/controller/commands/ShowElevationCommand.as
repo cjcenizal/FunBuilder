@@ -4,17 +4,18 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.model.ElevationModel;
-	import com.funbuilder.model.vo.AddElevationIndicatorVO;
+	
+	import flash.geom.Vector3D;
 	
 	import org.robotlegs.mvcs.Command;
 	
-	public class AddElevationIndicatorCommand extends Command
+	public class ShowElevationCommand extends Command
 	{
 		
 		// Arguments.
 		
 		[Inject]
-		public var data:AddElevationIndicatorVO;
+		public var position:Vector3D;
 		
 		// Models.
 		
@@ -28,13 +29,10 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			
-			// Add to model.
-			elevationModel.add( data.indicator, data.isPositive );
-			
-			
-			// Add to scene.
-			addObjectToSceneRequest.dispatch( data.indicator );
+			var mesh:Mesh = elevationModel.getAtPos( position );
+			if ( mesh ) {
+				addObjectToSceneRequest.dispatch( mesh );
+			}
 		}
 	}
 }

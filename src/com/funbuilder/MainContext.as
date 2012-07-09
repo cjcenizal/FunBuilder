@@ -2,7 +2,7 @@ package com.funbuilder
 {
 	import com.funbuilder.controller.commands.AddBlockCommand;
 	import com.funbuilder.controller.commands.AddBlockFromLibraryCommand;
-	import com.funbuilder.controller.commands.AddElevationIndicatorCommand;
+	import com.funbuilder.controller.commands.ShowElevationCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.controller.commands.ChangeBlockTypeCommand;
@@ -10,6 +10,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.ClearSegmentCommand;
 	import com.funbuilder.controller.commands.DeleteBlockCommand;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
+	import com.funbuilder.controller.commands.HideAllElevationCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.InvalidateSavedFileCommand;
 	import com.funbuilder.controller.commands.KeyDownCommand;
@@ -29,7 +30,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
-	import com.funbuilder.controller.signals.AddElevationIndicatorRequest;
+	import com.funbuilder.controller.signals.ShowElevationRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
@@ -39,6 +40,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.HideAllElevationRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
@@ -112,7 +114,7 @@ package com.funbuilder
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddBlockFromLibraryRequest,			AddBlockFromLibraryCommand );
-			signalCommandMap.mapSignalClass( AddElevationIndicatorRequest,			AddElevationIndicatorCommand );
+			signalCommandMap.mapSignalClass( ShowElevationRequest,			ShowElevationCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );
@@ -120,6 +122,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( ClearSegmentRequest,					ClearSegmentCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
 			signalCommandMap.mapSignalClass( DeleteBlockRequest,					DeleteBlockCommand );
+			signalCommandMap.mapSignalClass( HideAllElevationRequest,		HideAllElevationCommand );
 			signalCommandMap.mapSignalClass( InvalidateSavedFileRequest,			InvalidateSavedFileCommand );
 			signalCommandMap.mapSignalClass( KeyDownRequest,						KeyDownCommand );
 			signalCommandMap.mapSignalClass( KeyUpRequest,							KeyUpCommand );

@@ -37,8 +37,6 @@ package com.funbuilder.controller.commands
 			
 			
 			// UX:
-			// Trace a line to the ground plane to indicate y position for blocks (diff colors for above and below)
-			// Or just draw or cut out a dark square on the plane
 			// New/open/exit should all prompt a save if unsaved
 			// Snap target to grid when a block is selected
 			

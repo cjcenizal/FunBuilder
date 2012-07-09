@@ -177,11 +177,11 @@ package com.funbuilder.view.components {
 							moveX = Math.cos( theta + Math.PI * .5 ) * speed;
 							moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
 							break;
-						case Keyboard.F:
+						case Keyboard.V:
 							// Decrease elevation.
 							moveY = -speed;
 							break;
-						case Keyboard.R:
+						case Keyboard.F:
 							// Increase elevation.
 							moveY = speed;
 							break;

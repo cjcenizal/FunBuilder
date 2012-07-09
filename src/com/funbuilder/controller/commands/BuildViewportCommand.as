@@ -11,7 +11,6 @@ package com.funbuilder.controller.commands
 	import away3d.primitives.PlaneGeometry;
 	
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
-	import com.funbuilder.controller.signals.AddElevationIndicatorRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
@@ -20,11 +19,11 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
+	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
-	import com.funbuilder.model.vo.AddElevationIndicatorVO;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -44,6 +43,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var editingModeModel:EditingModeModel;
+		
+		[Inject]
+		public var elevationModel:ElevationModel;
 		
 		// Commands.
 		
@@ -67,9 +69,6 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var newFileRequest:NewFileRequest;
-		
-		[Inject]
-		public var addElevationIndicatorRequest:AddElevationIndicatorRequest;
 		
 		override public function execute():void
 		{
@@ -118,14 +117,14 @@ package com.funbuilder.controller.commands
 					positiveIndicator.x = x;
 					positiveIndicator.y = 1;
 					positiveIndicator.z = z;
-					addElevationIndicatorRequest.dispatch( new AddElevationIndicatorVO( positiveIndicator, true ) );
+					elevationModel.add( positiveIndicator, true );
 					
 					negativeIndicator = new Mesh( indicatorGeo, negativeIndicatorMaterial );
 					negativeIndicator.rotationX = 180;
 					negativeIndicator.x = x;
 					negativeIndicator.y = -1;
 					negativeIndicator.z = z;
-					addElevationIndicatorRequest.dispatch( new AddElevationIndicatorVO( negativeIndicator, true ) );
+					elevationModel.add( negativeIndicator, false );
 				}
 			}
 			
