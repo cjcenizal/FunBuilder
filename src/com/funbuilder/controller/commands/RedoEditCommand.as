@@ -9,8 +9,6 @@ package com.funbuilder.controller.commands {
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.vo.HistoryVO;
 	
-	import flash.geom.Vector3D;
-	
 	import org.robotlegs.mvcs.Command;
 	
 	public class RedoEditCommand extends Command {
@@ -38,10 +36,8 @@ package com.funbuilder.controller.commands {
 			var history:HistoryVO = historyModel.redo();
 			if ( history ) {
 				loadSegmentRequest.dispatch( history.snapshot );
-				trace("redo: " + history.selectedBlockKey);
 				if ( history.selectedBlockKey ) {
 					var block:Mesh = currentSegmentModel.getWithKey( history.selectedBlockKey );
-					trace("  " + block);
 					selectBlockRequest.dispatch( block );
 				}
 			}

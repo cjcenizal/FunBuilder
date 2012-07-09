@@ -40,8 +40,6 @@ package com.funbuilder.controller.commands
 			// New/open/exit should all prompt a save if unsaved
 			// Scrollwheel zooms
 			
-			// Undo:
-			// - Bug: open obstacle, move a block, add a block, then try undoing to the beginning
 			
 			// Snap point to grid in SegmentConstants, and do this to incoming blocks, added blocks, and snap to cam target
 			

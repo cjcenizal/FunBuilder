@@ -66,6 +66,7 @@ package com.funbuilder.model
 		}
 		
 		private function debug( action:String ):void {
+			/*
 			trace(action + " -------");
 			for ( var i:int = 0; i < _history.length; i++ ) {
 				if ( i == _index ) {
@@ -74,7 +75,7 @@ package com.funbuilder.model
 					trace(i);
 				}
 				trace("   " + getAt( i ).snapshot );
-			}
+			}*/
 		}
 	}
 }
