@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands {
 	
 	import away3d.entities.Mesh;
 	
+	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.LoadSegmentRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
@@ -32,6 +33,9 @@ package com.funbuilder.controller.commands {
 		[Inject]
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
+		[Inject]
+		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
+		
 		override public function execute():void {
 			var history:HistoryVO = historyModel.redo();
 			if ( history ) {
@@ -42,6 +46,7 @@ package com.funbuilder.controller.commands {
 				}
 			}
 			updateTargetAppearanceRequest.dispatch();
+			invalidateSavedFileRequest.dispatch();
 		}
 	}
 }

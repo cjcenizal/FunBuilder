@@ -12,6 +12,7 @@ package com.funbuilder.model
 	{
 		
 		public var file:File;
+		public var isSaved:Boolean = true;
 		
 		public function FileModel()
 		{

@@ -1,8 +1,7 @@
 package com.funbuilder.controller.commands
 {
-	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
-	import com.funbuilder.controller.signals.RemoveBlockRequest;
+	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.SelectedBlockModel;
@@ -34,10 +33,7 @@ package com.funbuilder.controller.commands
 		public var setEditingModeRequest:SetEditingModeRequest;
 		
 		[Inject]
-		public var addHistoryRequest:AddHistoryRequest;
-		
-		[Inject]
-		public var removeBlockRequest:RemoveBlockRequest;
+		public var deleteBlockRequest:DeleteBlockRequest;
 		
 		[Inject]
 		public var changeBlockTypeRequest:ChangeBlockTypeRequest;
@@ -54,10 +50,7 @@ package com.funbuilder.controller.commands
 					setEditingModeRequest.dispatch( EditingModeModel.BUILD );
 					break;
 				case Keyboard.BACKSPACE:
-					if ( selectedBlockModel.hasBlock() ) {
-						addHistoryRequest.dispatch( false );
-						removeBlockRequest.dispatch( selectedBlockModel.getBlock() );
-					}
+					deleteBlockRequest.dispatch();
 					break;
 				case LEFT_ARROW:
 					changeBlockTypeRequest.dispatch( new ChangeBlockTypeVO( -1 ) );

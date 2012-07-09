@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.model.BlocksModel;
@@ -48,6 +49,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
 		
+		[Inject]
+		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
+		
 		override public function execute():void
 		{
 			if ( selectedBlockModel.hasBlock() ) {
@@ -55,7 +59,6 @@ package com.funbuilder.controller.commands
 				
 				var oldBlock:Mesh = selectedBlockModel.getBlock();
 				var oldId:String = segmentModel.getIdFor( oldBlock );
-				// Get block position and namespace.
 				
 				// Create new block with position.
 				var index:int = blocksModel.getBlockIndex( oldId ) + changeBlockTypeData.dir;
@@ -79,6 +82,8 @@ package com.funbuilder.controller.commands
 				
 				// Select the new one.
 				selectBlockRequest.dispatch( newBlock );
+				
+				invalidateSavedFileRequest.dispatch();
 			}
 		}
 	}

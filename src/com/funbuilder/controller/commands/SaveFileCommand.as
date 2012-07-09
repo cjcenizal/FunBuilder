@@ -45,6 +45,7 @@ package com.funbuilder.controller.commands {
 			stream.close();
 			_file.removeEventListener( Event.SELECT, onSelectFileToSave );
 			_file = null;
+			fileModel.isSaved = true;
 		}
 	}
 }

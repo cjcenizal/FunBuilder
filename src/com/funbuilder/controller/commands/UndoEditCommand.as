@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands {
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.LoadSegmentRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
@@ -40,6 +41,9 @@ package com.funbuilder.controller.commands {
 		[Inject]
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
+		[Inject]
+		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
+		
 		override public function execute():void {
 			// If at the end of history, save it, but only if it hasn't been flash saved.
 			if ( historyModel.canFlashSave() ) {
@@ -54,6 +58,7 @@ package com.funbuilder.controller.commands {
 				}
 			}
 			updateTargetAppearanceRequest.dispatch();
+			invalidateSavedFileRequest.dispatch();
 		}
 	}
 }

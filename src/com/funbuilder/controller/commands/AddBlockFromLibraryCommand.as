@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
@@ -40,6 +41,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
 		
+		[Inject]
+		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
+		
 		override public function execute():void
 		{
 			addHistoryRequest.dispatch( false );
@@ -51,6 +55,7 @@ package com.funbuilder.controller.commands
 			addBlockReuqest.dispatch( new AddBlockVO( mesh, id ) );
 			// Select it.
 			selectBlockRequest.dispatch( mesh );
+			invalidateSavedFileRequest.dispatch();
 		}
 	}
 }

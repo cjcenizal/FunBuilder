@@ -1,6 +1,7 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.model.SelectedBlockModel;
 	
 	import flash.geom.Vector3D;
@@ -21,8 +22,12 @@ package com.funbuilder.controller.commands
 		public var currentBlockModel:SelectedBlockModel;
 		
 		// Commands.
+		
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
+		
+		[Inject]
+		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
 		
 		override public function execute():void
 		{
@@ -33,6 +38,7 @@ package com.funbuilder.controller.commands
 			if ( currentBlockModel.willMove( position ) ) {
 				currentBlockModel.setPosition( position );
 			}
+			invalidateSavedFileRequest.dispatch();
 		}
 	}
 }
