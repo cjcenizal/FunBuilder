@@ -6,7 +6,10 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
 	import com.funbuilder.model.BlocksModel;
+	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
+	
+	import flash.geom.Vector3D;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -43,9 +46,10 @@ package com.funbuilder.controller.commands
 				dataItem = list[ i ];
 				refMesh = blocksModel.getBlock( dataItem.id ).mesh
 				mesh = refMesh.clone() as Mesh;
-				mesh.x = dataItem.x * 100;
-				mesh.y = dataItem.y * 100;
-				mesh.z = dataItem.z * 100;
+				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( dataItem.x * 100, dataItem.y * 100, dataItem.z * 100 )
+				mesh.x = snappedPos.x;
+				mesh.y = snappedPos.y;
+				mesh.z = snappedPos.z;
 				addBlockRequest.dispatch( new AddBlockVO( mesh, refMesh.assetNamespace, dataItem.key ) );
 			}
 		}

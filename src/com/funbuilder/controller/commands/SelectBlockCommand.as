@@ -35,14 +35,18 @@ package com.funbuilder.controller.commands
 			
 			// TO-DO:
 			
+			// Scrollwheel zooms
+			
+			
 			// UX:
 			// Trace a line to the ground plane to indicate y position for blocks (diff colors for above and below)
 			// Or just draw or cut out a dark square on the plane
 			// New/open/exit should all prompt a save if unsaved
-			// Scrollwheel zooms
 			
+			// Bugs:
+			// - Fix Library panel size and position
+			// - Fix Library panel snapshot
 			
-			// Snap point to grid in SegmentConstants, and do this to incoming blocks, added blocks, and snap to cam target
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			

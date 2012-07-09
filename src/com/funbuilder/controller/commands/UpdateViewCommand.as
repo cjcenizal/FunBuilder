@@ -44,10 +44,8 @@ package com.funbuilder.controller.commands
 			// If we have a currently selected block, move the block to match the target.
 			if ( currentBlockModel.hasBlock() ) {
 				// Move block.
-				var x:Number = SegmentConstants.snapToGrid( cameraTargetModel.target.x - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
-				var y:Number = SegmentConstants.snapToGrid( cameraTargetModel.target.y - SegmentConstants.BLOCK_SIZE * .5 );
-				var z:Number = SegmentConstants.snapToGrid( cameraTargetModel.target.z - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
-				moveBlockRequest.dispatch( new Vector3D( x, y, z ) );
+				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.target.x, cameraTargetModel.target.y, cameraTargetModel.target.z );
+				moveBlockRequest.dispatch( snappedPos );
 			}
 			
 			// Render scene.

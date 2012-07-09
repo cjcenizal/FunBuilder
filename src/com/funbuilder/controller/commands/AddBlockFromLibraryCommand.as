@@ -12,6 +12,8 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
 	
+	import flash.geom.Vector3D;
+	
 	import org.robotlegs.mvcs.Command;
 	
 	public class AddBlockFromLibraryCommand extends Command
@@ -49,9 +51,10 @@ package com.funbuilder.controller.commands
 			addHistoryRequest.dispatch( false );
 			// Add block.
 			var mesh:Mesh = blocksModel.getBlock( id ).mesh.clone() as Mesh;
-			mesh.x = SegmentConstants.snapToGrid( cameraTargetModel.target.x - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
-			mesh.y = SegmentConstants.snapToGrid( cameraTargetModel.target.y - SegmentConstants.BLOCK_SIZE * .5 );
-			mesh.z = SegmentConstants.snapToGrid( cameraTargetModel.target.z - SegmentConstants.BLOCK_SIZE * .5 ) + SegmentConstants.BLOCK_SIZE * .5;
+			var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.target.x, cameraTargetModel.target.y, cameraTargetModel.target.z );
+			mesh.x = snappedPos.x;
+			mesh.y = snappedPos.y;
+			mesh.z = snappedPos.z;
 			addBlockReuqest.dispatch( new AddBlockVO( mesh, id ) );
 			// Select it.
 			selectBlockRequest.dispatch( mesh );
