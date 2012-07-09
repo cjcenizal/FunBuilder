@@ -29,6 +29,7 @@ package com.funbuilder.model
 			if ( !flashSave ) {
 				_index++;
 			}
+			//debug("add");
 		}
 		
 		public function undo():HistoryVO {
@@ -36,6 +37,7 @@ package com.funbuilder.model
 			if ( _index > 0 ) {
 				if ( _index > 0 ) _index--;
 				var history:HistoryVO = _history[ _index ];
+				//debug("undo");
 				return history;
 			}
 			return null;
@@ -45,6 +47,7 @@ package com.funbuilder.model
 			// Move forwards through history.
 			if ( _index < _history.length - 1 ) {
 				_index++;
+				//debug("redo");
 				return _history[ _index ];
 			}
 			return null;
@@ -54,8 +57,24 @@ package com.funbuilder.model
 			return _history[ _index ];
 		}
 		
+		public function getAt( index:int ):HistoryVO {
+			return _history[ index ];
+		}
+		
 		public function canFlashSave():Boolean {
 			return _index == _history.length;
+		}
+		
+		private function debug( action:String ):void {
+			trace(action + " -------");
+			for ( var i:int = 0; i < _history.length; i++ ) {
+				if ( i == _index ) {
+					trace(i + " is current");
+				} else {
+					trace(i);
+				}
+				trace("   " + getAt( i ).snapshot );
+			}
 		}
 	}
 }

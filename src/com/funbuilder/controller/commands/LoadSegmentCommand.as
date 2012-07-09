@@ -46,7 +46,7 @@ package com.funbuilder.controller.commands
 				mesh.x = dataItem.x * 100;
 				mesh.y = dataItem.y * 100;
 				mesh.z = dataItem.z * 100;
-				addBlockRequest.dispatch( new AddBlockVO( mesh, refMesh.assetNamespace ) );
+				addBlockRequest.dispatch( new AddBlockVO( mesh, refMesh.assetNamespace, dataItem.key ) );
 			}
 		}
 	}

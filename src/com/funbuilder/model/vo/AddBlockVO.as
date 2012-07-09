@@ -7,11 +7,13 @@ package com.funbuilder.model.vo
 		
 		public var mesh:Mesh;
 		public var id:String;
+		public var key:String;
 		
-		public function AddBlockVO( mesh:Mesh, id:String )
+		public function AddBlockVO( mesh:Mesh, id:String, key:String = null )
 		{
 			this.mesh = mesh;
 			this.id = id;
+			this.key = key;
 		}
 	}
 }

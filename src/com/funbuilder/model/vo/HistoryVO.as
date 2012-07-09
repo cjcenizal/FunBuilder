@@ -6,12 +6,12 @@ package com.funbuilder.model.vo
 	{
 		
 		public var snapshot:String;
-		public var selectedBlock:Vector3D;
+		public var selectedBlockKey:String;
 		
-		public function HistoryVO( snapshot:String, selectedBlock:Vector3D )
+		public function HistoryVO( snapshot:String, selectedBlockKey:String )
 		{
 			this.snapshot = snapshot;
-			this.selectedBlock = selectedBlock;
+			this.selectedBlockKey = selectedBlockKey;
 		}
 	}
 }

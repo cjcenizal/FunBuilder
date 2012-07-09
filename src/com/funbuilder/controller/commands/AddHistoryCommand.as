@@ -26,14 +26,14 @@ package com.funbuilder.controller.commands
 		public var segmentModel:SegmentModel;
 		
 		[Inject]
-		public var currentBlockModel:SelectedBlockModel;
+		public var selectedBlockModel:SelectedBlockModel;
 		
 		override public function execute():void
 		{
 			
 			var snapshot:String = segmentModel.getJson();
-			var selectedBlockPos:Vector3D = ( currentBlockModel.hasBlock() ) ? currentBlockModel.getPositionClone() : null;
-			var history:HistoryVO = new HistoryVO( snapshot, selectedBlockPos );
+			var selectedBlockKey:String = ( selectedBlockModel.hasBlock() ) ? segmentModel.getKeyFor( selectedBlockModel.getBlock() ) : null;
+			var history:HistoryVO = new HistoryVO( snapshot, selectedBlockKey );
 			
 			// Save history snapshot if not identical to the current history snapshot.
 			var current:HistoryVO = historyModel.getCurrent();

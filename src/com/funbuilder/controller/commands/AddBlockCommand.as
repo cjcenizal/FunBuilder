@@ -37,7 +37,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			currentSegmentModel.add( addBlockData.mesh, addBlockData.id );
+			currentSegmentModel.add( addBlockData.mesh, addBlockData.id, addBlockData.key );
 			// TO-DO: Should this be done here, or in initial set up?
 			addBlockData.mesh.mouseEnabled = true;
 			addBlockData.mesh.addEventListener( MouseEvent3D.CLICK, onClick );

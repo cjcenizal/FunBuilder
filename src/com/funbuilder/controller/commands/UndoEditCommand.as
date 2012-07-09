@@ -1,5 +1,7 @@
 package com.funbuilder.controller.commands {
 
+	import away3d.entities.Mesh;
+	
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.LoadSegmentRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
@@ -48,7 +50,12 @@ package com.funbuilder.controller.commands {
 			var history:HistoryVO = historyModel.undo();
 			if ( history ) {
 				loadSegmentRequest.dispatch( history.snapshot );
-				selectBlockRequest.dispatch( currentSegmentModel.getAtPos( history.selectedBlock ) );
+				trace("redo: " + history.selectedBlockKey );
+				if ( history.selectedBlockKey ) {
+					var block:Mesh = currentSegmentModel.getWithKey( history.selectedBlockKey );
+					trace("   " + block);
+					selectBlockRequest.dispatch( block );
+				}
 			}
 			updateTargetAppearanceRequest.dispatch();
 		}
