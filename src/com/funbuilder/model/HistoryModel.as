@@ -29,7 +29,7 @@ package com.funbuilder.model
 			if ( !flashSave ) {
 				_index++;
 			}
-			//debug("add");
+			debug("add");
 		}
 		
 		public function undo():HistoryVO {
@@ -37,7 +37,7 @@ package com.funbuilder.model
 			if ( _index > 0 ) {
 				if ( _index > 0 ) _index--;
 				var history:HistoryVO = _history[ _index ];
-				//debug("undo");
+				debug("undo");
 				return history;
 			}
 			return null;
@@ -47,7 +47,7 @@ package com.funbuilder.model
 			// Move forwards through history.
 			if ( _index < _history.length - 1 ) {
 				_index++;
-				//debug("redo");
+				debug("redo");
 				return _history[ _index ];
 			}
 			return null;

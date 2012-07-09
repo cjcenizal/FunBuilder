@@ -16,20 +16,20 @@ package com.funbuilder.model
 	public class SegmentModel extends Actor
 	{
 		
-		private var _blocks:Object;
+		private var _blocks:Dictionary;
 		private var _id:int = 0;
 		private var _namespaces:Dictionary;
 		
 		public function SegmentModel()
 		{
 			super();
-			_blocks = {};
+			_blocks = new Dictionary();
 			_namespaces = new Dictionary(); 
 		}
 		
 		public function clear():void {
 			_id = 0;
-			_blocks = {};
+			_blocks = new Dictionary();
 			_namespaces = new Dictionary(); 
 		}
 		
@@ -44,9 +44,7 @@ package com.funbuilder.model
 			if ( id && int( id ) > _id ) {
 				_id = int( id ) + 1;
 			}
-			trace("store block at: " + id);
 			_blocks[ id ] = block;
-			trace(getWithKey(id));
 			_namespaces[ block ] = namespace;
 			return id;
 		}
@@ -55,14 +53,17 @@ package com.funbuilder.model
 			for ( var key:String in _blocks ) {
 				if ( _blocks[ key ] == block ) {
 					delete _blocks[ key ];
-					break;
 				}
 			}
 			delete _namespaces[ block ]; 
 		}
 		
-		public function getObject():Object {
-			return _blocks;
+		public function getKeys():Array {
+			var keys:Array = [];
+			for ( var key:String in _blocks ) {
+				keys.push( key );
+			}
+			return keys;
 		}
 		
 		public function getWithKey( key:String ):Mesh {

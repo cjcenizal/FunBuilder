@@ -21,10 +21,10 @@ package com.funbuilder.controller.commands
 		public var removeBlockRequest:RemoveBlockRequest;
 		
 		override public function execute():void {
-			var blocks:Object = segmentModel.getObject();
+			var keys:Array = segmentModel.getKeys();
 			var block:Mesh;
-			for ( var key:String in blocks ) {
-				block = segmentModel.getWithKey( key );
+			for ( var i:int = 0; i < keys.length; i++ ) {
+				block = segmentModel.getWithKey( keys[ i ] );
 				removeBlockRequest.dispatch( block );
 			}
 			segmentModel.clear();

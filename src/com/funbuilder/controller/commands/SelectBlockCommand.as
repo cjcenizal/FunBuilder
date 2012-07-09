@@ -20,7 +20,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var currentBlockModel:SelectedBlockModel;
+		public var selectedBlockModel:SelectedBlockModel;
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
@@ -41,18 +41,19 @@ package com.funbuilder.controller.commands
 			// Scrollwheel zooms
 			
 			// Undo:
-			// - Add new block
-			// Buggy
+			// - Bug: open obstacle, move a block, add a block, then try undoing to the beginning
+			
+			// Snap point to grid in SegmentConstants, and do this to incoming blocks, added blocks, and snap to cam target
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
 			// Deselect current block.
-			if ( currentBlockModel.hasBlock() ) {
+			if ( selectedBlockModel.hasBlock() ) {
 				deselectBlockRequest.dispatch();
 			}
 			
 			// Select block.
-			currentBlockModel.setBlock( block );
+			selectedBlockModel.setBlock( block );
 			
 			// Snap target to block.
 			cameraTargetModel.target.x = block.x;
