@@ -19,6 +19,7 @@ package com.funbuilder.view.components {
 		public var onKeyDownSignal:Signal;
 		public var onKeyUpSignal:Signal;
 		public var onScrollWheelSignal:Signal;
+		public var onStageClickSignal:Signal;
 		
 		private var _view:View3D;
 		private var _isDebugging:Boolean = false;
@@ -27,6 +28,8 @@ package com.funbuilder.view.components {
 		private var _menuBar:MenuBarView;
 		private var _library:LibraryView;
 		private var _cameraController:HoverController;
+		
+		private var _mouseDownTimestamp:int = 0;
 		
 		// Camera control.
 		private var _move:Boolean = false;
@@ -44,6 +47,7 @@ package com.funbuilder.view.components {
 			onKeyDownSignal = new Signal();
 			onKeyUpSignal = new Signal();
 			onScrollWheelSignal = new Signal();
+			onStageClickSignal = new Signal();
 			_bg = new Panel( this );
 			_menuBar = new MenuBarView( this );
 			_library = new LibraryView( this );
@@ -134,6 +138,7 @@ package com.funbuilder.view.components {
 		 * Mouse down listener for navigation
 		 */
 		private function onMouseDown( event:MouseEvent ):void {
+			_mouseDownTimestamp = new Date().time;
 			if ( _cameraController ) {
 				_lastPanAngle = _cameraController.panAngle;
 				_lastTiltAngle = _cameraController.tiltAngle;
@@ -148,6 +153,10 @@ package com.funbuilder.view.components {
 		 * Mouse up listener for navigation
 		 */
 		private function onMouseUp( event:MouseEvent ):void {
+			var clickTime:int = new Date().time - _mouseDownTimestamp;
+			if ( clickTime < 200 ) {
+				onStageClickSignal.dispatch();
+			}
 			_move = false;
 			stage.removeEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
 		}

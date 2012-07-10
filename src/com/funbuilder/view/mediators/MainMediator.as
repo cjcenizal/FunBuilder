@@ -9,6 +9,7 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.controller.signals.KeyUpRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
+	import com.funbuilder.controller.signals.StageClickRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.view.components.MainView;
 	
@@ -40,10 +41,14 @@ package com.funbuilder.view.mediators {
 		[Inject]
 		public var setEditingModeRequest:SetEditingModeRequest;
 		
+		[Inject]
+		public var stageClickRequest:StageClickRequest;
+		
 		override public function onRegister():void {
 			this.view.onKeyDownSignal.add( onKeyDown );
 			this.view.onKeyUpSignal.add( onKeyUp );
 			this.view.onScrollWheelSignal.add( onScrollWheel );
+			this.view.onStageClickSignal.add( onStageClick );
 			addView3DRequest.add( onAddView3DRequested );
 			addCameraControllerRequest.add( onAddCameraControllerRequested );
 			showStatsRequest.add( onShowStatsRequested );
@@ -60,6 +65,10 @@ package com.funbuilder.view.mediators {
 		
 		private function onScrollWheel( delta:int ):void {
 			
+		}
+		
+		private function onStageClick():void {
+			stageClickRequest.dispatch();
 		}
 		
 		private function onAddView3DRequested( view3D:View3D ):void {

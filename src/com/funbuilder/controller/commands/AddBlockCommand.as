@@ -50,9 +50,8 @@ package com.funbuilder.controller.commands
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {
-			if ( editingModeModel.mode == EditingModeModel.BUILD ) {
-				selectBlockRequest.dispatch( e.object as Mesh );
-			}
+			trace("block click");
+			selectBlockRequest.dispatch( e.object as Mesh );
 		}
 	}
 }

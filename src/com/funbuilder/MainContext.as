@@ -23,6 +23,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.SaveFileCommand;
 	import com.funbuilder.controller.commands.SelectBlockCommand;
 	import com.funbuilder.controller.commands.SetEditingModeCommand;
+	import com.funbuilder.controller.commands.StageClickCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
 	import com.funbuilder.controller.commands.UpdateElevationCommand;
 	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
@@ -54,6 +55,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
+	import com.funbuilder.controller.signals.StageClickRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
@@ -134,6 +136,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
 			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );
 			signalCommandMap.mapSignalClass( SetEditingModeRequest,					SetEditingModeCommand );
+			signalCommandMap.mapSignalClass( StageClickRequest,						StageClickCommand );
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
 			signalCommandMap.mapSignalClass( UpdateElevationRequest,				UpdateElevationCommand );
 			signalCommandMap.mapSignalClass( UpdateTargetAppearanceRequest,			UpdateTargetAppearanceCommand );
