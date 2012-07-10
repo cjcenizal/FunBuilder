@@ -47,6 +47,7 @@ package com.funbuilder.controller.commands
 			// Bugs:
 			// - Fix Library panel size and position
 			// - Fix Library panel snapshot
+			// - Fix undo/redo history bugs
 			
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"

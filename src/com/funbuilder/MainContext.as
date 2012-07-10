@@ -21,6 +21,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.RemoveBlockCommand;
 	import com.funbuilder.controller.commands.RemoveObjectFromSceneCommand;
 	import com.funbuilder.controller.commands.SaveFileCommand;
+	import com.funbuilder.controller.commands.ScrollWheelCommand;
 	import com.funbuilder.controller.commands.SelectBlockCommand;
 	import com.funbuilder.controller.commands.SetEditingModeCommand;
 	import com.funbuilder.controller.commands.StageClickCommand;
@@ -50,6 +51,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
 	import com.funbuilder.controller.signals.SaveFileRequest;
+	import com.funbuilder.controller.signals.ScrollWheelRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
@@ -134,6 +136,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( RemoveBlockRequest,					RemoveBlockCommand );
 			signalCommandMap.mapSignalClass( RemoveObjectFromSceneRequest,			RemoveObjectFromSceneCommand );
 			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
+			signalCommandMap.mapSignalClass( ScrollWheelRequest,					ScrollWheelCommand );
 			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );
 			signalCommandMap.mapSignalClass( SetEditingModeRequest,					SetEditingModeCommand );
 			signalCommandMap.mapSignalClass( StageClickRequest,						StageClickCommand );

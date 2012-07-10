@@ -63,21 +63,13 @@ package com.funbuilder.view.components {
 			stage.addEventListener( Event.RESIZE, onStageResize );
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
+			stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
+			stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
 			stage.addEventListener( MouseEvent.MOUSE_WHEEL, onMouseWheel );
 		}
 		
 		private function onStageResize( e:Event ):void {
 			_library.y = stage.stageHeight - _library.height;
-		}
-		
-		public function enableCameraControl( enabled:Boolean ):void {
-			if ( enabled ) {
-				stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
-				stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
-			} else {
-				stage.removeEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
-				stage.removeEventListener( MouseEvent.MOUSE_UP, onMouseUp );
-			}
 		}
 		
 		public function showLibrary( visible:Boolean ):void {
@@ -98,7 +90,7 @@ package com.funbuilder.view.components {
 			} else {
 				if ( !_awayStats ) {
 					_awayStats = new AwayStats( _view );
-					addChild( _awayStats );
+					addChildAt( _awayStats, 1 );
 					_awayStats.y = stage.stageHeight - _awayStats.height;
 				}
 			}
@@ -178,10 +170,6 @@ package com.funbuilder.view.components {
 		}
 		
 		private function onMouseWheel( e:MouseEvent ):void {
-			var amount:Number = e.delta * 8;
-			if ( _cameraController.distance > amount ) {
-				_cameraController.distance -= amount;
-			}
 			onScrollWheelSignal.dispatch( e.delta );
 		}
 	}

@@ -7,6 +7,7 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
+	import com.funbuilder.controller.signals.ScrollWheelRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.StageClickRequest;
@@ -44,6 +45,9 @@ package com.funbuilder.view.mediators {
 		[Inject]
 		public var stageClickRequest:StageClickRequest;
 		
+		[Inject]
+		public var scrollWheelRequest:ScrollWheelRequest;
+		
 		override public function onRegister():void {
 			this.view.onKeyDownSignal.add( onKeyDown );
 			this.view.onKeyUpSignal.add( onKeyUp );
@@ -64,7 +68,7 @@ package com.funbuilder.view.mediators {
 		}
 		
 		private function onScrollWheel( delta:int ):void {
-			
+			scrollWheelRequest.dispatch( delta );
 		}
 		
 		private function onStageClick():void {
@@ -85,10 +89,8 @@ package com.funbuilder.view.mediators {
 		
 		private function onSetEditingModeRequested( mode:String ):void {
 			if ( mode == EditingModeModel.LOOK ) {
-				this.view.enableCameraControl( true );
 				this.view.showLibrary( false );
 			} else if ( mode == EditingModeModel.BUILD ) {
-				this.view.enableCameraControl( false );
 				this.view.showLibrary( true );
 			}
 		}
