@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
+	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.SelectedBlockModel;
 	
 	import org.robotlegs.mvcs.Command;
@@ -25,12 +26,16 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
 		
+		[Inject]
+		public var updateElevationRequest:UpdateElevationRequest;
+		
 		override public function execute():void
 		{
 			if ( selectedBlockModel.hasBlock() ) {
 				addHistoryRequest.dispatch( false );
 				removeBlockRequest.dispatch( selectedBlockModel.getBlock() );
 				invalidateSavedFileRequest.dispatch();
+				updateElevationRequest.dispatch();
 			}
 		}
 	}

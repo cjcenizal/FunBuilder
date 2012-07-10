@@ -2,6 +2,8 @@ package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
+	import com.funbuilder.controller.signals.UpdateElevationRequest;
+	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlockModel;
 	
 	import flash.geom.Vector3D;
@@ -19,7 +21,10 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var currentBlockModel:SelectedBlockModel;
+		public var selectedBlockModel:SelectedBlockModel;
+		
+		[Inject]
+		public var segmentModel:SegmentModel;
 		
 		// Commands.
 		
@@ -29,16 +34,21 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
 		
+		[Inject]
+		public var updateElevationRequest:UpdateElevationRequest;
+		
 		override public function execute():void
 		{
-			if ( !currentBlockModel.isMoved && currentBlockModel.willMove( position ) ) {
+			if ( !selectedBlockModel.isMoved && selectedBlockModel.willMoveTo( position ) ) {
 				// Save history if we move the block and it's the first time it gets moved.
 				addHistoryRequest.dispatch( false );
 			}
-			if ( currentBlockModel.willMove( position ) ) {
-				currentBlockModel.setPosition( position );
+			if ( selectedBlockModel.willMoveTo( position ) ) {
+				segmentModel.move( selectedBlockModel.getBlock().position, position );
+				selectedBlockModel.setPosition( position );
+				invalidateSavedFileRequest.dispatch();
+				updateElevationRequest.dispatch();
 			}
-			invalidateSavedFileRequest.dispatch();
 		}
 	}
 }

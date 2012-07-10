@@ -30,10 +30,8 @@ package com.funbuilder.model
 			return _block;
 		}
 		
-		public function willMove( position:Vector3D ):Boolean {
-			return ( _block.x != position.x
-				|| _block.y != position.y
-				|| _block.z != position.z );
+		public function willMoveTo( position:Vector3D ):Boolean {
+			return ( !_block.position.equals( position ) );
 		}
 		
 		public function setPosition( position:Vector3D ):void {

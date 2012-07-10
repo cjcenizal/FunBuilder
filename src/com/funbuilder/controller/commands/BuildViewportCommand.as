@@ -109,15 +109,16 @@ package com.funbuilder.controller.commands
 			var negativeIndicator:Mesh;
 			var side:Number = SegmentConstants.BLOCK_SIZE - 3;
 			var indicatorGeo:Geometry = new PlaneGeometry( side, side );
-			var positiveIndicatorMaterial:ColorMaterial = new ColorMaterial( 0, 1 );
-			var negativeIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .3 );
 			for ( var x:int = SegmentConstants.BLOCK_SIZE * .5; x < SegmentConstants.SEGMENT_WIDTH; x += SegmentConstants.BLOCK_SIZE ) {
 				for ( var z:int = SegmentConstants.BLOCK_SIZE * .5; z < SegmentConstants.SEGMENT_DEPTH; z += SegmentConstants.BLOCK_SIZE ) {
+					var positiveIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xddffdd, 0 );
+					var negativeIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xddddff, 0 );
 					positiveIndicator = new Mesh( indicatorGeo, positiveIndicatorMaterial );
 					positiveIndicator.x = x;
 					positiveIndicator.y = 1;
 					positiveIndicator.z = z;
 					elevationModel.add( positiveIndicator, true );
+					addObjectToSceneRequest.dispatch( positiveIndicator );
 					
 					negativeIndicator = new Mesh( indicatorGeo, negativeIndicatorMaterial );
 					negativeIndicator.rotationX = 180;
@@ -125,6 +126,7 @@ package com.funbuilder.controller.commands
 					negativeIndicator.y = -1;
 					negativeIndicator.z = z;
 					elevationModel.add( negativeIndicator, false );
+					addObjectToSceneRequest.dispatch( negativeIndicator );
 				}
 			}
 			

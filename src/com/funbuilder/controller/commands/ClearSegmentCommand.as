@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
+	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.SegmentModel;
 	
 	import org.robotlegs.mvcs.Command;

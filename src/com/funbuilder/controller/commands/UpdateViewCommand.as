@@ -45,7 +45,9 @@ package com.funbuilder.controller.commands
 			if ( currentBlockModel.hasBlock() ) {
 				// Move block.
 				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.target.x, cameraTargetModel.target.y, cameraTargetModel.target.z );
-				moveBlockRequest.dispatch( snappedPos );
+				if ( !snappedPos.equals( currentBlockModel.getBlock().position ) ) {
+					moveBlockRequest.dispatch( snappedPos );
+				}
 			}
 			
 			// Render scene.

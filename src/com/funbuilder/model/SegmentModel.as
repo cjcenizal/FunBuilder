@@ -19,18 +19,24 @@ package com.funbuilder.model
 		private var _blocks:Dictionary;
 		private var _id:int = 0;
 		private var _namespaces:Dictionary;
+		private var _elevationMap:Dictionary;
+		private var _elevationKeys:Object;
 		
 		public function SegmentModel()
 		{
 			super();
 			_blocks = new Dictionary();
 			_namespaces = new Dictionary(); 
+			_elevationMap = new Dictionary();
+			_elevationKeys = {};
 		}
 		
 		public function clear():void {
 			_id = 0;
 			_blocks = new Dictionary();
-			_namespaces = new Dictionary(); 
+			_namespaces = new Dictionary();
+			_elevationMap = new Dictionary();
+			_elevationKeys = {};
 		}
 		
 		public function add( block:Mesh, namespace:String, id:String ):String {
@@ -46,7 +52,35 @@ package com.funbuilder.model
 			}
 			_blocks[ id ] = block;
 			_namespaces[ block ] = namespace;
+			addElevation( block.position );
 			return id;
+		}
+		
+		public function move( from:Vector3D, to:Vector3D ):void {
+			removeElevation( from );
+			addElevation( to );
+		}
+		
+		private function removeElevation( pos:Vector3D ):void {
+			var key:Vector3D = getKey( pos );
+			_elevationMap[ key ] --;
+		}
+		
+		private function addElevation( pos:Vector3D ):void {
+			var key:Vector3D = getKey( pos );
+			if ( !_elevationMap[ key ] ) {
+				_elevationMap[ key ] = 1;
+			} else {
+				_elevationMap[ key ] ++;
+			}
+		}
+		
+		private function getKey( pos:Vector3D ):Vector3D {
+			var key:String = pos.x + "," + pos.z;
+			if ( !_elevationKeys[ key ] ) {
+				_elevationKeys[ key ] = pos.clone();
+			}
+			return _elevationKeys[ key ];
 		}
 		
 		public function remove( block:Mesh ):void {
@@ -100,6 +134,10 @@ package com.funbuilder.model
 				list.push( item );
 			}
 			return com.adobe.serialization.json.JSON.encode( list );
+		}
+		
+		public function getElevationMap():Dictionary {
+			return _elevationMap;
 		}
 	}
 }

@@ -2,7 +2,6 @@ package com.funbuilder.controller.commands {
 
 	import com.funbuilder.controller.signals.ClearHistoryRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
-	import com.funbuilder.controller.signals.HideAllElevationRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.model.FileModel;
 	
@@ -13,6 +12,7 @@ package com.funbuilder.controller.commands {
 	public class NewFileCommand extends Command {
 
 		// Models.
+		
 		[Inject]
 		public var fileModel:FileModel;
 		
@@ -27,15 +27,11 @@ package com.funbuilder.controller.commands {
 		[Inject]
 		public var showFileNameRequest:ShowFileNameRequest;
 		
-		[Inject]
-		public var hideAllElevationIndicatorsRequest:HideAllElevationRequest;
-		
 		override public function execute():void {
 			var path:String = ( fileModel.file ) ? fileModel.file.parent.nativePath : File.applicationDirectory.nativePath;
 			fileModel.file = new File( path );
 			clearSegmentRequest.dispatch();
 			clearHistoryRequest.dispatch();
-			hideAllElevationIndicatorsRequest.dispatch();
 			showFileNameRequest.dispatch( "New file" );
 		}
 	}

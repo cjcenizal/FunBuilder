@@ -2,7 +2,6 @@ package com.funbuilder
 {
 	import com.funbuilder.controller.commands.AddBlockCommand;
 	import com.funbuilder.controller.commands.AddBlockFromLibraryCommand;
-	import com.funbuilder.controller.commands.ShowElevationCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.controller.commands.ChangeBlockTypeCommand;
@@ -10,7 +9,6 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.ClearSegmentCommand;
 	import com.funbuilder.controller.commands.DeleteBlockCommand;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
-	import com.funbuilder.controller.commands.HideAllElevationCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.InvalidateSavedFileCommand;
 	import com.funbuilder.controller.commands.KeyDownCommand;
@@ -26,11 +24,11 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.SelectBlockCommand;
 	import com.funbuilder.controller.commands.SetEditingModeCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
+	import com.funbuilder.controller.commands.UpdateElevationCommand;
 	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
 	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
-	import com.funbuilder.controller.signals.ShowElevationRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
@@ -40,7 +38,6 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
-	import com.funbuilder.controller.signals.HideAllElevationRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
@@ -58,6 +55,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
+	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
@@ -114,7 +112,6 @@ package com.funbuilder
 			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddBlockFromLibraryRequest,			AddBlockFromLibraryCommand );
-			signalCommandMap.mapSignalClass( ShowElevationRequest,			ShowElevationCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );
@@ -122,7 +119,6 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( ClearSegmentRequest,					ClearSegmentCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
 			signalCommandMap.mapSignalClass( DeleteBlockRequest,					DeleteBlockCommand );
-			signalCommandMap.mapSignalClass( HideAllElevationRequest,		HideAllElevationCommand );
 			signalCommandMap.mapSignalClass( InvalidateSavedFileRequest,			InvalidateSavedFileCommand );
 			signalCommandMap.mapSignalClass( KeyDownRequest,						KeyDownCommand );
 			signalCommandMap.mapSignalClass( KeyUpRequest,							KeyUpCommand );
@@ -137,6 +133,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );
 			signalCommandMap.mapSignalClass( SetEditingModeRequest,					SetEditingModeCommand );
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
+			signalCommandMap.mapSignalClass( UpdateElevationRequest,				UpdateElevationCommand );
 			signalCommandMap.mapSignalClass( UpdateTargetAppearanceRequest,			UpdateTargetAppearanceCommand );
 			
 			// Map views to mediators.

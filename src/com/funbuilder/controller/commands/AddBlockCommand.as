@@ -5,6 +5,7 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
+	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.vo.AddBlockVO;
@@ -35,6 +36,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var selectBlockRequest:SelectBlockRequest;
 		
+		[Inject]
+		public var updateElevationRequest:UpdateElevationRequest;
+		
 		override public function execute():void
 		{
 			currentSegmentModel.add( addBlockData.mesh, addBlockData.id, addBlockData.key );
@@ -42,6 +46,7 @@ package com.funbuilder.controller.commands
 			addBlockData.mesh.mouseEnabled = true;
 			addBlockData.mesh.addEventListener( MouseEvent3D.CLICK, onClick );
 			addObjectToSceneRequest.dispatch( addBlockData.mesh );
+			updateElevationRequest.dispatch();
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {
