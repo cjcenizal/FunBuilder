@@ -19,7 +19,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			// Crane the current block.
+			// Crane the camera.
 			cameraTargetModel.setPos( cameraTargetModel.targetX, cameraTargetModel.targetY + delta * 20, cameraTargetModel.targetZ );
 		}
 	}

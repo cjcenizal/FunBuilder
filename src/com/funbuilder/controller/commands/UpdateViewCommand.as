@@ -11,8 +11,8 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
 	
-	import flash.ui.Keyboard;
 	import flash.geom.Vector3D;
+	import flash.ui.Keyboard;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -116,6 +116,10 @@ package com.funbuilder.controller.commands
 					moveBlockRequest.dispatch( snappedPos );
 				}
 			}
+			
+			// Update target.
+			var snap:Boolean = currentBlockModel.hasBlock();
+			cameraTargetModel.update( snap );
 			
 			// Render scene.
 			view3dModel.render();
