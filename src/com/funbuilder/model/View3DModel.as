@@ -4,6 +4,7 @@ package com.funbuilder.model {
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.Scene3D;
 	import away3d.containers.View3D;
+	import away3d.controllers.HoverController;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -18,6 +19,7 @@ package com.funbuilder.model {
 		private var _cameraPosition:Vector3D;
 		private var _cameraRotation:Vector3D;
 		private var _cameraOffsetY:Number = 0;
+		public var cameraController:HoverController;
 		
 		public function View3DModel() {
 			super();
@@ -127,6 +129,10 @@ package com.funbuilder.model {
 		
 		public function set cameraRotationZ( val:Number ):void {
 			_cameraRotation.z = val;
+		}
+		
+		public function get camera():Camera3D {
+			return _camera;
 		}
 	}
 }

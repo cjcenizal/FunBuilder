@@ -4,12 +4,14 @@ package com.funbuilder.controller.commands
 	import away3d.cameras.lenses.PerspectiveLens;
 	import away3d.containers.Scene3D;
 	import away3d.containers.View3D;
+	import away3d.controllers.HoverController;
 	import away3d.core.base.Geometry;
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.CubeGeometry;
 	import away3d.primitives.PlaneGeometry;
 	
+	import com.funbuilder.controller.signals.AddCameraControllerRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
@@ -68,6 +70,9 @@ package com.funbuilder.controller.commands
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
 		[Inject]
+		public var addCameraControllerRequest:AddCameraControllerRequest;
+		
+		[Inject]
 		public var newFileRequest:NewFileRequest;
 		
 		override public function execute():void
@@ -88,6 +93,20 @@ package com.funbuilder.controller.commands
 			view3dModel.setView( view );
 			addView3DRequest.dispatch( view );
 			
+			// Add camera target.
+			var target:Mesh = new Mesh( new CubeGeometry( 110, 110, 110 ), null );
+			target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
+			target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
+			cameraTargetModel.target = target;
+			addCameraTargetRequest.dispatch( target );
+			addObjectToSceneRequest.dispatch( target );
+			
+			// Add camera controller.
+			var cameraController:HoverController = new HoverController( camera, target, 45, 10, 800 );
+			cameraController.steps = 1;
+			view3dModel.cameraController = cameraController;
+			addCameraControllerRequest.dispatch( cameraController );
+			
 			// Add ground plane.
 			var planeGeometry:PlaneGeometry = new PlaneGeometry( SegmentConstants.SEGMENT_WIDTH, SegmentConstants.SEGMENT_DEPTH, 12, 26, true );
 			var planeMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .2 );
@@ -96,13 +115,6 @@ package com.funbuilder.controller.commands
 			planeMesh.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			planeMesh.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			addObjectToSceneRequest.dispatch( planeMesh );
-			
-			// Add camera target.
-			var target:Mesh = new Mesh( new CubeGeometry( 110, 110, 110 ), null );
-			target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
-			target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
-			cameraTargetModel.target = target;
-			addCameraTargetRequest.dispatch( target );
 			
 			// Add elevation indicators.
 			var positiveIndicator:Mesh;

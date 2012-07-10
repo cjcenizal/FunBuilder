@@ -1,8 +1,10 @@
 package com.funbuilder.view.mediators {
 	
 	import away3d.containers.View3D;
+	import away3d.controllers.HoverController;
 	import away3d.entities.Mesh;
 	
+	import com.funbuilder.controller.signals.AddCameraControllerRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
@@ -32,6 +34,9 @@ package com.funbuilder.view.mediators {
 		public var addCameraTargetRequest:AddCameraTargetRequest;
 		
 		[Inject]
+		public var addCameraControllerRequest:AddCameraControllerRequest;
+		
+		[Inject]
 		public var keyDownRequest:KeyDownRequest;
 		
 		[Inject]
@@ -46,6 +51,7 @@ package com.funbuilder.view.mediators {
 			this.view.onScrollWheelSignal.add( onScrollWheel );
 			addCameraTargetRequest.add( onAddCameraTargetRequested );
 			addView3DRequest.add( onAddView3DRequested );
+			addCameraControllerRequest.add( onAddCameraControllerRequested );
 			showStatsRequest.add( onShowStatsRequested );
 			setEditingModeRequest.add( onSetEditingModeRequested );
 		}
@@ -68,6 +74,10 @@ package com.funbuilder.view.mediators {
 		
 		private function onAddView3DRequested( view3D:View3D ):void {
 			this.view.view3D = view3D;
+		}
+		
+		private function onAddCameraControllerRequested( controller:HoverController ):void {
+			this.view.cameraController = controller;
 		}
 		
 		private function onShowStatsRequested( showStats:Boolean ):void {

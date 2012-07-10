@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.model.EditingModeModel;
+	import com.funbuilder.model.KeysModel;
 	
 	import flash.ui.Keyboard;
 	
@@ -13,6 +14,11 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var code:int;
+		
+		// Models.
+		
+		[Inject]
+		public var keysModel:KeysModel;
 		
 		// Commands.
 		
@@ -26,6 +32,7 @@ package com.funbuilder.controller.commands
 					setEditingModeRequest.dispatch( EditingModeModel.LOOK );
 					break;
 			}
+			delete keysModel.keysDown[ code ];
 		}
 	}
 }

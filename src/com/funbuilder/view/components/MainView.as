@@ -12,8 +12,6 @@ package com.funbuilder.view.components {
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.geom.Vector3D;
-	import flash.ui.Keyboard;
 	
 	import org.osflash.signals.Signal;
 	
@@ -110,7 +108,6 @@ package com.funbuilder.view.components {
 		
 		public function set target( t:Mesh ):void {
 			_target = t;
-			linkTargetToCamera();
 		}
 		
 		public function set view3D( view:View3D ):void {
@@ -124,101 +121,30 @@ package com.funbuilder.view.components {
 				if ( _awayStats ) {
 					_awayStats.registerView( _view );
 				}
-				linkTargetToCamera();
 			}
 		}
 		
-		private function linkTargetToCamera():void {
-			if ( _view && _target ) {
-				_view.scene.addChild( _target );
-				_cameraController = new HoverController( _view.camera, _target, 45, 10, 800 );
-				_cameraController.steps = 1;
-			}
+		public function set cameraController( controller:HoverController ):void {
+			_cameraController = controller;
 		}
 		
 		/**
 		 * Navigation and render loop
 		 */
 		private function onEnterFrame( event:Event ):void {
-			if ( _view && _target ) {
+			if ( _cameraController ) {
 				if ( _move ) {
 					_cameraController.panAngle = .35 * ( stage.mouseX - _lastMouseX ) + _lastPanAngle;
 					_cameraController.tiltAngle = .35 * ( stage.mouseY - _lastMouseY ) + _lastTiltAngle;
 				}
-				var divDegToRad:Number = 180 * Math.PI;
-				var rads:Number = _cameraController.panAngle / divDegToRad;
-				
-				var camPos:Vector3D = _view.camera.position;
-				var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
-				var theta:Number = getTheta( camPos, _target.position );
-				var speed:Number = 20;
-				
-				for ( var key:String in _keysDown ) {
-					var moveX:Number = 0;
-					var moveY:Number = 0;
-					var moveZ:Number = 0;
-					switch ( int( key ) ) {
-						case Keyboard.W:
-							// Move towards target along ground plane.
-							moveX = Math.cos( theta ) * -speed;
-							moveZ = Math.sin( theta ) * -speed;
-							break;
-						case Keyboard.S:
-							// Move away from target along ground plane.
-							moveX = Math.cos( theta ) * speed;
-							moveZ = Math.sin( theta ) * speed;
-							break;
-						case Keyboard.A:
-							// Strafe left along ground plane.
-							moveX = Math.cos( theta + Math.PI * .5 ) * -speed;
-							moveZ = Math.sin( theta + Math.PI * .5 ) * -speed;
-							break;
-						case Keyboard.D:
-							// Strafe right along ground plane.
-							moveX = Math.cos( theta + Math.PI * .5 ) * speed;
-							moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
-							break;
-						case 189: // Minus
-							// Decrease elevation.
-							moveY = -speed;
-							break;
-						case 187: // Plus
-							// Increase elevation.
-							moveY = speed;
-							break;
-						case 219: // Left brace
-							// Zoom out.
-							_cameraController.distance += speed;
-							break;
-						case 221: // Right brace
-							// Zoom in.
-							if ( _cameraController.distance > speed * 2 ) {
-								_cameraController.distance -= speed;
-							}
-							break;
-					}
-					_view.camera.position.x += moveX;
-					_view.camera.position.y += moveY;
-					_view.camera.position.z += moveZ;
-					_target.x += moveX;
-					_target.y += moveY;
-					_target.z += moveZ;
-				}
 			}
-		}
-		
-		private function getTheta( posA:Vector3D, posB:Vector3D ):Number {
-			var deltaZ:Number = posA.z - posB.z;
-			var deltaX:Number = posA.x - posB.x;
-			var angle:Number = Math.atan2(deltaZ, deltaX);
-			return angle;
 		}
 		
 		/**
 		 * Mouse down listener for navigation
 		 */
 		private function onMouseDown( event:MouseEvent ):void {
-			if ( _view && _target ) {
+			if ( _cameraController ) {
 				_lastPanAngle = _cameraController.panAngle;
 				_lastTiltAngle = _cameraController.tiltAngle;
 				_lastMouseX = stage.mouseX;

@@ -28,6 +28,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
 	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
 	import com.funbuilder.controller.signals.AddBlockRequest;
+	import com.funbuilder.controller.signals.AddCameraControllerRequest;
 	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
@@ -63,6 +64,7 @@ package com.funbuilder
 	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.FileModel;
 	import com.funbuilder.model.HistoryModel;
+	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlockModel;
 	import com.funbuilder.model.TimeModel;
@@ -95,6 +97,7 @@ package com.funbuilder
 			injector.mapSingleton( ElevationModel );
 			injector.mapSingleton( FileModel );
 			injector.mapSingleton( HistoryModel );
+			injector.mapSingleton( KeysModel );
 			injector.mapSingleton( TimeModel );
 			injector.mapSingleton( SegmentModel );
 			injector.mapSingleton( SelectedBlockModel );
@@ -104,6 +107,7 @@ package com.funbuilder
 			//injector.mapSingleton( MatchmakingService );
 			
 			// Map signals.
+			injector.mapSingleton( AddCameraControllerRequest );
 			injector.mapSingleton( AddCameraTargetRequest );
 			injector.mapSingleton( AddItemToLibraryRequest );
 			injector.mapSingleton( AddView3DRequest );
