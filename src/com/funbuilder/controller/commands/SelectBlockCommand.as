@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.SelectedBlockModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -29,6 +30,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var deselectBlockRequest:DeselectBlockRequest;
+		
+		[Inject]
+		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
 		override public function execute():void
 		{
@@ -57,6 +61,8 @@ package com.funbuilder.controller.commands
 			
 			// Snap target to block.
 			cameraTargetModel.setPos(  block.x, block.y + SegmentConstants.BLOCK_SIZE * .5, block.z );
+			
+			updateTargetAppearanceRequest.dispatch();
 		}
 	}
 }

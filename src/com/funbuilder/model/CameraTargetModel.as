@@ -11,9 +11,9 @@ package com.funbuilder.model
 	{
 		
 		public var lookUnselectedMaterial:ColorMaterial = new ColorMaterial( 0x00ccff, .1 );
-		public var lookSelectedMaterial:ColorMaterial = new ColorMaterial( 0x00ff78, .2 );
-		public var buildUnselectedMaterial:ColorMaterial = new ColorMaterial( 0xffa200, .6 );
-		public var buildSelectedMaterial:ColorMaterial = new ColorMaterial( 0xfff000, .6 );
+		public var buildSelectedMaterial:ColorMaterial = new ColorMaterial( 0x00ff78, .2 );
+		public var lookSelectedMaterial:ColorMaterial = new ColorMaterial( 0xffa200, .6 );
+		public var buildUnselectedMaterial:ColorMaterial = new ColorMaterial( 0xfff000, .6 );
 		
 		private var _target:Mesh;
 		

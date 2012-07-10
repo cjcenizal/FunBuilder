@@ -30,6 +30,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
+			trace("update");
 			var material:ColorMaterial;
 			if ( editingModeModel.mode == EditingModeModel.BUILD ) {
 				if ( currentBlockModel.hasBlock() ) {
