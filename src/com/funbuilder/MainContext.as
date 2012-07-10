@@ -29,7 +29,6 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddCameraControllerRequest;
-	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
@@ -108,7 +107,6 @@ package com.funbuilder
 			
 			// Map signals.
 			injector.mapSingleton( AddCameraControllerRequest );
-			injector.mapSingleton( AddCameraTargetRequest );
 			injector.mapSingleton( AddItemToLibraryRequest );
 			injector.mapSingleton( AddView3DRequest );
 			injector.mapSingleton( ShowFileNameRequest );

@@ -12,7 +12,6 @@ package com.funbuilder.controller.commands
 	import away3d.primitives.PlaneGeometry;
 	
 	import com.funbuilder.controller.signals.AddCameraControllerRequest;
-	import com.funbuilder.controller.signals.AddCameraTargetRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
@@ -55,9 +54,6 @@ package com.funbuilder.controller.commands
 		public var setEditingModeRequest:SetEditingModeRequest;
 		
 		[Inject]
-		public var addCameraTargetRequest:AddCameraTargetRequest;
-		
-		[Inject]
 		public var addView3DRequest:AddView3DRequest;
 		
 		[Inject]
@@ -98,7 +94,6 @@ package com.funbuilder.controller.commands
 			target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			cameraTargetModel.target = target;
-			addCameraTargetRequest.dispatch( target );
 			addObjectToSceneRequest.dispatch( target );
 			
 			// Add camera controller.

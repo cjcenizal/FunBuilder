@@ -3,7 +3,6 @@ package com.funbuilder.view.components {
 	import away3d.containers.View3D;
 	import away3d.controllers.HoverController;
 	import away3d.debug.AwayStats;
-	import away3d.entities.Mesh;
 	
 	import com.bit101.components.Component;
 	import com.bit101.components.Panel;
@@ -21,8 +20,6 @@ package com.funbuilder.view.components {
 		public var onKeyUpSignal:Signal;
 		public var onScrollWheelSignal:Signal;
 		
-		private var _keysDown:Object = {};
-		
 		private var _view:View3D;
 		private var _isDebugging:Boolean = false;
 		private var _awayStats:AwayStats;
@@ -30,7 +27,6 @@ package com.funbuilder.view.components {
 		private var _menuBar:MenuBarView;
 		private var _library:LibraryView;
 		private var _cameraController:HoverController;
-		private var _target:Mesh;
 		
 		// Camera control.
 		private var _move:Boolean = false;
@@ -74,11 +70,9 @@ package com.funbuilder.view.components {
 			if ( enabled ) {
 				stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
 				stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
-				stage.addEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightClick );
 			} else {
 				stage.removeEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
 				stage.removeEventListener( MouseEvent.MOUSE_UP, onMouseUp );
-				stage.removeEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightClick );
 			}
 		}
 		
@@ -104,10 +98,6 @@ package com.funbuilder.view.components {
 					_awayStats.y = stage.stageHeight - _awayStats.height;
 				}
 			}
-		}
-		
-		public function set target( t:Mesh ):void {
-			_target = t;
 		}
 		
 		public function set view3D( view:View3D ):void {
@@ -171,25 +161,11 @@ package com.funbuilder.view.components {
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {
-			if ( !_keysDown[ e.keyCode ] ) {
-				onKeyDownSignal.dispatch( e.keyCode );
-			}
-			if ( !e.commandKey && !e.shiftKey ) {
-				_keysDown[ e.keyCode ] = true;
-			}
+			onKeyDownSignal.dispatch( e.keyCode );
 		}
 		
 		private function onKeyUp( e:KeyboardEvent ):void {
 			onKeyUpSignal.dispatch( e.keyCode );
-			if ( !e.commandKey && !e.shiftKey ) {
-				delete _keysDown[ e.keyCode ];
-			}
-		}
-		
-		private function onMouseRightClick( e:MouseEvent ):void {
-			for ( var key:String in _keysDown ) {
-				delete _keysDown[ key ];
-			}
 		}
 		
 		private function onMouseWheel( e:MouseEvent ):void {
