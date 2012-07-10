@@ -51,7 +51,7 @@ package com.funbuilder.controller.commands
 			addHistoryRequest.dispatch( false );
 			// Add block.
 			var mesh:Mesh = blocksModel.getBlock( id ).mesh.clone() as Mesh;
-			var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.target.x, cameraTargetModel.target.y, cameraTargetModel.target.z );
+			var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.targetX, cameraTargetModel.targetY, cameraTargetModel.targetZ );
 			mesh.x = snappedPos.x;
 			mesh.y = snappedPos.y;
 			mesh.z = snappedPos.z;

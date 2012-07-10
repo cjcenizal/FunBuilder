@@ -37,8 +37,8 @@ package com.funbuilder.controller.commands
 			
 			
 			// UX:
-			// New/open/exit should all prompt a save if unsaved
 			// Snap target to grid when a block is selected
+			// New/open/exit should all prompt a save if unsaved
 			
 			// Bugs:
 			// - Fix Library panel size and position
@@ -56,9 +56,7 @@ package com.funbuilder.controller.commands
 			selectedBlockModel.setBlock( block );
 			
 			// Snap target to block.
-			cameraTargetModel.target.x = block.x;
-			cameraTargetModel.target.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
-			cameraTargetModel.target.z = block.z;
+			cameraTargetModel.setPos(  block.x, block.y + SegmentConstants.BLOCK_SIZE * .5, block.z );
 		}
 	}
 }

@@ -55,11 +55,10 @@ package com.funbuilder.controller.commands
 			
 			var camPos:Vector3D = camera.position;
 			var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
-			var theta:Number = getTheta( camPos, cameraTargetModel.target.position );
+			var theta:Number = getTheta( camPos, cameraTargetModel.getPosition() );
 			var speed:Number = 20;
 			
 			for ( var key:String in keysModel.keysDown ) {
-				trace( key );
 				var moveX:Number = 0;
 				var moveY:Number = 0;
 				var moveZ:Number = 0;
@@ -106,15 +105,13 @@ package com.funbuilder.controller.commands
 				camera.position.x += moveX;
 				camera.position.y += moveY;
 				camera.position.z += moveZ;
-				cameraTargetModel.target.x += moveX;
-				cameraTargetModel.target.y += moveY;
-				cameraTargetModel.target.z += moveZ;
+				cameraTargetModel.move( moveX, moveY, moveZ );
 			}
 			
 			// If we have a currently selected block, move the block to match the target.
 			if ( currentBlockModel.hasBlock() ) {
 				// Move block.
-				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.target.x, cameraTargetModel.target.y, cameraTargetModel.target.z );
+				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.targetX, cameraTargetModel.targetY, cameraTargetModel.targetZ );
 				if ( !snappedPos.equals( currentBlockModel.getBlock().position ) ) {
 					moveBlockRequest.dispatch( snappedPos );
 				}

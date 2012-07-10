@@ -44,7 +44,7 @@ package com.funbuilder.controller.commands
 					material = cameraTargetModel.lookUnselectedMaterial;
 				}
 			}
-			cameraTargetModel.target.material = material;
+			cameraTargetModel.setMaterial( material );
 			showSelectionIndicatorRequest.dispatch( currentBlockModel.hasBlock() );
 		}
 	}

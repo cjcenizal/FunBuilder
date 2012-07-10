@@ -93,7 +93,7 @@ package com.funbuilder.controller.commands
 			var target:Mesh = new Mesh( new CubeGeometry( 110, 110, 110 ), null );
 			target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
-			cameraTargetModel.target = target;
+			cameraTargetModel.setMesh( target );
 			addObjectToSceneRequest.dispatch( target );
 			
 			// Add camera controller.
