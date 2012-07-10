@@ -152,6 +152,7 @@ package com.funbuilder.view.components {
 				var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
 				var theta:Number = getTheta( camPos, _target.position );
 				var speed:Number = 20;
+				
 				for ( var key:String in _keysDown ) {
 					var moveX:Number = 0;
 					var moveY:Number = 0;
@@ -177,19 +178,19 @@ package com.funbuilder.view.components {
 							moveX = Math.cos( theta + Math.PI * .5 ) * speed;
 							moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
 							break;
-						case Keyboard.V:
+						case 189: // Minus
 							// Decrease elevation.
 							moveY = -speed;
 							break;
-						case Keyboard.F:
+						case 187: // Plus
 							// Increase elevation.
 							moveY = speed;
 							break;
-						case Keyboard.Q:
+						case 219: // Left brace
 							// Zoom out.
 							_cameraController.distance += speed;
 							break;
-						case Keyboard.E:
+						case 221: // Right brace
 							// Zoom in.
 							if ( _cameraController.distance > speed * 2 ) {
 								_cameraController.distance -= speed;
