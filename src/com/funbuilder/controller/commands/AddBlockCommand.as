@@ -9,6 +9,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.vo.AddBlockVO;
+	import com.funbuilder.model.vo.SelectBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -50,7 +51,7 @@ package com.funbuilder.controller.commands
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {
-			selectBlockRequest.dispatch( e.object as Mesh );
+			selectBlockRequest.dispatch( new SelectBlockVO( e.object as Mesh ) );
 		}
 	}
 }

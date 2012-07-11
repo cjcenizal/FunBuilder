@@ -6,7 +6,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.MoveBlockRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
-	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
@@ -33,7 +33,7 @@ package com.funbuilder.controller.commands
 		public var cameraTargetModel:CameraTargetModel;
 		
 		[Inject]
-		public var currentBlockModel:SelectedBlockModel;
+		public var currentBlockModel:SelectedBlocksModel;
 		
 		[Inject]
 		public var keysModel:KeysModel;
@@ -109,10 +109,10 @@ package com.funbuilder.controller.commands
 			}
 			
 			// If we have a currently selected block, move the block to match the target.
-			if ( currentBlockModel.hasBlock() ) {
+			if ( currentBlockModel.hasAnySelected() ) {
 				// Move block.
 				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.targetX, cameraTargetModel.targetY, cameraTargetModel.targetZ );
-				if ( !snappedPos.equals( currentBlockModel.getBlock().position ) ) {
+				if ( !snappedPos.equals( currentBlockModel.getFocalPosition() ) ) {
 					moveBlockRequest.dispatch( snappedPos );
 				}
 			}

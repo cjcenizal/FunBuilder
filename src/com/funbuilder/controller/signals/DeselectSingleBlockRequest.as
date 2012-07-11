@@ -6,9 +6,9 @@ package com.funbuilder.controller.signals
 	
 	import org.osflash.signals.Signal;
 	
-	public class SelectBlockRequest extends Signal
+	public class DeselectSingleBlockRequest extends Signal
 	{
-		public function SelectBlockRequest()
+		public function DeselectSingleBlockRequest()
 		{
 			super( SelectBlockVO );
 		}

@@ -56,7 +56,7 @@ package com.funbuilder.model
 			return id;
 		}
 		
-		public function move( from:Vector3D, to:Vector3D ):void {
+		public function moveElevationPosition( from:Vector3D, to:Vector3D ):void {
 			removeElevation( from );
 			addElevation( to );
 		}

@@ -8,7 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
-	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
 	

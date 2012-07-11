@@ -1,6 +1,6 @@
 package com.funbuilder.controller.commands
 {
-	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -11,11 +11,11 @@ package com.funbuilder.controller.commands
 		// Commands.
 		
 		[Inject]
-		public var deselectBlockRequest:DeselectBlockRequest;
+		public var deselectAllBlocksRequest:DeselectAllBlocksRequest;
 		
 		override public function execute():void
 		{
-			deselectBlockRequest.dispatch();
+		//	deselectAllBlocksRequest.dispatch();
 		}
 	}
 }

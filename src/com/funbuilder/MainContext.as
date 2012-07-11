@@ -8,7 +8,8 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.ClearHistoryCommand;
 	import com.funbuilder.controller.commands.ClearSegmentCommand;
 	import com.funbuilder.controller.commands.DeleteBlockCommand;
-	import com.funbuilder.controller.commands.DeselectBlockCommand;
+	import com.funbuilder.controller.commands.DeselectAllBlocksCommand;
+	import com.funbuilder.controller.commands.DeselectSingleBlockCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.InvalidateSavedFileCommand;
 	import com.funbuilder.controller.commands.KeyDownCommand;
@@ -39,7 +40,8 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.ClearHistoryRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
-	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
+	import com.funbuilder.controller.signals.DeselectSingleBlockRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
@@ -69,7 +71,7 @@ package com.funbuilder
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
-	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.view.components.LibraryView;
@@ -103,7 +105,7 @@ package com.funbuilder
 			injector.mapSingleton( KeysModel );
 			injector.mapSingleton( TimeModel );
 			injector.mapSingleton( SegmentModel );
-			injector.mapSingleton( SelectedBlockModel );
+			injector.mapSingleton( SelectedBlocksModel );
 			injector.mapSingleton( View3DModel );
 			
 			// Map services.
@@ -123,8 +125,9 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );
 			signalCommandMap.mapSignalClass( ClearHistoryRequest,					ClearHistoryCommand );
 			signalCommandMap.mapSignalClass( ClearSegmentRequest,					ClearSegmentCommand );
-			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
 			signalCommandMap.mapSignalClass( DeleteBlockRequest,					DeleteBlockCommand );
+			signalCommandMap.mapSignalClass( DeselectAllBlocksRequest,				DeselectAllBlocksCommand );
+			signalCommandMap.mapSignalClass( DeselectSingleBlockRequest,			DeselectSingleBlockCommand );
 			signalCommandMap.mapSignalClass( InvalidateSavedFileRequest,			InvalidateSavedFileCommand );
 			signalCommandMap.mapSignalClass( KeyDownRequest,						KeyDownCommand );
 			signalCommandMap.mapSignalClass( KeyUpRequest,							KeyUpCommand );

@@ -5,7 +5,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
-	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -21,7 +21,7 @@ package com.funbuilder.controller.commands
 		public var editingModeModel:EditingModeModel;
 		
 		[Inject]
-		public var currentBlockModel:SelectedBlockModel;
+		public var selectedBlocksModel:SelectedBlocksModel;
 		
 		// Commands.
 		
@@ -32,20 +32,20 @@ package com.funbuilder.controller.commands
 		{
 			var material:ColorMaterial;
 			if ( editingModeModel.mode == EditingModeModel.BUILD ) {
-				if ( currentBlockModel.hasBlock() ) {
+				if ( selectedBlocksModel.hasAnySelected() ) {
 					material = cameraTargetModel.buildSelectedMaterial;
 				} else {
 					material = cameraTargetModel.buildUnselectedMaterial;
 				}
 			} else if ( editingModeModel.mode == EditingModeModel.LOOK ) {
-				if ( currentBlockModel.hasBlock() ) {
+				if ( selectedBlocksModel.hasAnySelected() ) {
 					material = cameraTargetModel.lookSelectedMaterial;
 				} else {
 					material = cameraTargetModel.lookUnselectedMaterial;
 				}
 			}
 			cameraTargetModel.setMaterial( material );
-			showSelectionIndicatorRequest.dispatch( currentBlockModel.hasBlock() );
+			showSelectionIndicatorRequest.dispatch( selectedBlocksModel.hasAnySelected() );
 		}
 	}
 }

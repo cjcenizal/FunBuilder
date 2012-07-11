@@ -9,7 +9,7 @@ package com.funbuilder.controller.commands {
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.SegmentModel;
-	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.HistoryVO;
 	
 	import org.robotlegs.mvcs.Command;
@@ -22,13 +22,13 @@ package com.funbuilder.controller.commands {
 		public var historyModel:HistoryModel;
 		
 		[Inject]
-		public var currentBlockModel:SelectedBlockModel;
+		public var currentBlockModel:SelectedBlocksModel;
 		
 		[Inject]
 		public var segmentModel:SegmentModel;
 		
 		[Inject]
-		public var selectedBlockModel:SelectedBlockModel;
+		public var selectedBlockModel:SelectedBlocksModel;
 		
 		// Commands.
 		
@@ -51,14 +51,18 @@ package com.funbuilder.controller.commands {
 			var newHistory:HistoryVO;
 			if ( historyModel.indexIsAtLatest() ) {
 				var snapshot:String = segmentModel.getJson();
-				var selectedBlockKey:String = ( selectedBlockModel.hasBlock() ) ? segmentModel.getKeyFor( selectedBlockModel.getBlock() ) : null;
-				newHistory = new HistoryVO( snapshot, selectedBlockKey );
+				var selectedBlockKeys:Array = [];
+				for ( var i:int = 0; i < selectedBlockModel.numBlocks; i++ ) {
+					selectedBlockKeys.push( segmentModel.getKeyFor( selectedBlockModel.getBlockAt( i ) ) );
+				}
+				newHistory = new HistoryVO( snapshot, selectedBlockKeys );
 			}
 			var history:HistoryVO = historyModel.undo( newHistory );
 			if ( history ) {
 				loadSegmentRequest.dispatch( history.snapshot );
-				if ( history.selectedBlockKey ) {
-					var block:Mesh = segmentModel.getWithKey( history.selectedBlockKey );
+				var block:Mesh
+				for ( var i:int = 0; i < history.selectedBlockKeys.length; i++ ) {
+					block = segmentModel.getWithKey( history.selectedBlockKeys[ i ] );
 					selectBlockRequest.dispatch( block );
 				}
 			}

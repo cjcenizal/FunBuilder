@@ -1,6 +1,5 @@
 package com.funbuilder.controller.commands
 {
-	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.EditingModeModel;
@@ -28,14 +27,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
-		[Inject]
-		public var deselectBlockRequest:DeselectBlockRequest;
 		
 		override public function execute():void
 		{
-			if ( mode == EditingModeModel.BUILD ) {
-				deselectBlockRequest.dispatch();
-			}
 			editingModeModel.mode = mode;
 			updateTargetAppearanceRequest.dispatch();
 		}

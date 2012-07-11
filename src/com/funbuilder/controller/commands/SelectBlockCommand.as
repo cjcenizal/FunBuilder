@@ -2,11 +2,14 @@ package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
 	
-	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
+	import com.funbuilder.controller.signals.DeselectSingleBlockRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
-	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funbuilder.model.vo.SelectBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -16,20 +19,26 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var block:Mesh;
+		public var selectData:SelectBlockVO;
 		
 		// Models.
 		
 		[Inject]
-		public var selectedBlockModel:SelectedBlockModel;
+		public var selectedBlocksModel:SelectedBlocksModel;
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
 		
+		[Inject]
+		public var keysModel:KeysModel;
+		
 		// Commands.
 		
 		[Inject]
-		public var deselectBlockRequest:DeselectBlockRequest;
+		public var deselectBlockRequest:DeselectSingleBlockRequest;
+		
+		[Inject]
+		public var deselectAllBlocksRequest:DeselectAllBlocksRequest;
 		
 		[Inject]
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
@@ -41,7 +50,6 @@ package com.funbuilder.controller.commands
 			
 			
 			// UX:
-			// Multiple block select
 			// Duplicate selection
 			// Warning when a block intersects other blocks
 			// New/open/exit should all prompt a save if unsaved
@@ -50,19 +58,36 @@ package com.funbuilder.controller.commands
 			// A block was leftover when I made a new file
 			
 			
+			// Need selection indicators for selected blocks (these can be used for error indicators too)
+			// Either make it more difficult to select/deselect blocks (double-click to select, right-click to deselect for example)
+			// or add selection state to undo/redo history.
+			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
-			// Deselect current block.
-			if ( selectedBlockModel.hasBlock() ) {
-				deselectBlockRequest.dispatch();
+			// If shift is pressed, enable multiple select.
+			// Else, deselect the current block.
+			if ( keysModel.isShiftDown ) {
+				// Select additional block or deselect an already-selected block.
+				if ( selectedBlocksModel.contains( selectData.block ) ) {
+					// Deselect block.
+					deselectBlockRequest.dispatch( selectData );
+				} else {
+					doSelectBlock();
+				}
+			} else {
+				// Deselect all.
+				if ( selectedBlocksModel.hasAnySelected() ) {
+					deselectAllBlocksRequest.dispatch();
+				}
+				doSelectBlock();
 			}
-			
+		}
+		
+		private function doSelectBlock():void {
 			// Select block.
-			selectedBlockModel.setBlock( block );
-			
+			selectedBlocksModel.select( selectData.block );
 			// Snap target to block.
-			cameraTargetModel.setPos(  block.x, block.y + SegmentConstants.BLOCK_SIZE * .5, block.z );
-			
+			cameraTargetModel.setPos( selectData.block.x, selectData.block.y + SegmentConstants.BLOCK_SIZE * .5, selectData.block.z );	
 			updateTargetAppearanceRequest.dispatch();
 		}
 	}

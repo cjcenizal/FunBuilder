@@ -1,23 +1,17 @@
 package com.funbuilder.controller.commands
 {
-	import away3d.materials.ColorMaterial;
-	
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
-	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	
 	import org.robotlegs.mvcs.Command;
-	import com.funbuilder.model.SelectedBlockModel;
 	
-	public class DeselectBlockCommand extends Command
+	public class DeselectAllBlocksCommand extends Command
 	{
 		
 		// Models.
 		
 		[Inject]
-		public var currentBlockModel:SelectedBlockModel;
-		
-		[Inject]
-		public var cameraTargetModel:CameraTargetModel;
+		public var selectedBlocksModel:SelectedBlocksModel;
 		
 		// Commands.
 		
@@ -30,8 +24,7 @@ package com.funbuilder.controller.commands
 			// Intersecting an existing block flashes red and doesn't allow you to leave it there
 			// (i.e. deselect it)
 			
-			
-			currentBlockModel.clearBlock();
+			selectedBlocksModel.deselectAll();
 			updateTargetAppearanceRequest.dispatch();
 		}
 	}

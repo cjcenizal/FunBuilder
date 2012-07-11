@@ -2,10 +2,11 @@ package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
 	
-	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.DeselectSingleBlockRequest;
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
 	import com.funbuilder.model.SegmentModel;
-	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SelectedBlocksModel;
+	import com.funbuilder.model.vo.SelectBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -20,7 +21,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var selectedBlockModel:SelectedBlockModel;
+		public var selectedBlockModel:SelectedBlocksModel;
 		
 		[Inject]
 		public var segmentModel:SegmentModel;
@@ -28,7 +29,7 @@ package com.funbuilder.controller.commands
 		// Commands.
 		
 		[Inject]
-		public var deselectBlockRequest:DeselectBlockRequest;
+		public var deselectBlockRequest:DeselectSingleBlockRequest;
 		
 		[Inject]
 		public var removeObjectFromSceneRequest:RemoveObjectFromSceneRequest;
@@ -36,8 +37,8 @@ package com.funbuilder.controller.commands
 		override public function execute():void
 		{
 			// Deselect block if necessary.
-			if ( selectedBlockModel.isBlock( block ) ) {
-				deselectBlockRequest.dispatch();
+			if ( selectedBlockModel.contains( block ) ) {
+				deselectBlockRequest.dispatch( new SelectBlockVO( block ) );
 			}
 			
 			// Remove from model.

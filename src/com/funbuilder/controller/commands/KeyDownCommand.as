@@ -5,7 +5,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
-	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.ChangeBlockTypeVO;
 	
 	import flash.events.KeyboardEvent;
@@ -27,7 +27,7 @@ package com.funbuilder.controller.commands
 		public var editingModeModel:EditingModeModel;
 		
 		[Inject]
-		public var selectedBlockModel:SelectedBlockModel;
+		public var selectedBlockModel:SelectedBlocksModel;
 		
 		[Inject]
 		public var keysModel:KeysModel;
@@ -50,7 +50,10 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			
+			keysModel.isCommandDown = event.commandKey;
+			keysModel.isShiftDown = event.shiftKey;
+			keysModel.isAltDown = event.altKey;
+			keysModel.isControlDown = event.controlKey;
 			if ( !keysModel.keysDown[ event.keyCode ] ) {
 				switch ( event.keyCode ) {
 					case Keyboard.SPACE:

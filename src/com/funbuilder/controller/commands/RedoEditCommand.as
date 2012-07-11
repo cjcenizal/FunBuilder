@@ -40,8 +40,9 @@ package com.funbuilder.controller.commands {
 			var history:HistoryVO = historyModel.redo();
 			if ( history ) {
 				loadSegmentRequest.dispatch( history.snapshot );
-				if ( history.selectedBlockKey ) {
-					var block:Mesh = currentSegmentModel.getWithKey( history.selectedBlockKey );
+				var block:Mesh;
+				for ( var i:int = 0; i < history.selectedBlockKeys.length; i++ ) {
+					block = currentSegmentModel.getWithKey( history.selectedBlockKeys[ i ] );
 					selectBlockRequest.dispatch( block );
 				}
 			}

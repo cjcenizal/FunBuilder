@@ -9,7 +9,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.SegmentModel;
-	import com.funbuilder.model.SelectedBlockModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.AddBlockVO;
 	import com.funbuilder.model.vo.ChangeBlockTypeVO;
 	import com.funrun.model.vo.BlockVO;
@@ -27,7 +27,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var selectedBlockModel:SelectedBlockModel;
+		public var selectedBlocksModel:SelectedBlocksModel;
 		
 		[Inject]
 		public var segmentModel:SegmentModel;
@@ -54,34 +54,37 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			if ( selectedBlockModel.hasBlock() ) {
-				addHistoryRequest.dispatch( false );
+			if ( selectedBlocksModel.hasAnySelected() ) {
+				addHistoryRequest.dispatch();
 				
-				var oldBlock:Mesh = selectedBlockModel.getBlock();
-				var oldId:String = segmentModel.getIdFor( oldBlock );
-				
-				// Create new block with position.
-				var index:int = blocksModel.getBlockIndex( oldId ) + changeBlockTypeData.dir;
-				if ( index >= blocksModel.numBlocks ) {
-					index = 0;
-				} else if ( index < 0 ) {
-					index = blocksModel.numBlocks - 1;
+				for ( var i:int = selectedBlocksModel.numBlocks - 1; i >= 0; i-- ) {
+					
+					var oldBlock:Mesh = selectedBlocksModel.getBlockAt( i );
+					var oldId:String = segmentModel.getIdFor( oldBlock );
+					
+					// Create new block with position.
+					var index:int = blocksModel.getBlockIndex( oldId ) + changeBlockTypeData.dir;
+					if ( index >= blocksModel.numBlocks ) {
+						index = 0;
+					} else if ( index < 0 ) {
+						index = blocksModel.numBlocks - 1;
+					}
+					
+					var newBlockData:BlockVO = blocksModel.getBlockAt( index );
+					var newBlock:Mesh = blocksModel.getBlock( newBlockData.id ).mesh.clone() as Mesh;
+					newBlock.x = oldBlock.x;
+					newBlock.y = oldBlock.y;
+					newBlock.z = oldBlock.z;
+					
+					// Remove old block.
+					removeBlockRequest.dispatch( oldBlock );
+					
+					// Add new block.
+					addBlockRequest.dispatch( new AddBlockVO( newBlock, newBlockData.id ) );
+					
+					// Select the new one.
+					selectBlockRequest.dispatch( newBlock );
 				}
-				
-				var newBlockData:BlockVO = blocksModel.getBlockAt( index );
-				var newBlock:Mesh = blocksModel.getBlock( newBlockData.id ).mesh.clone() as Mesh;
-				newBlock.x = oldBlock.x;
-				newBlock.y = oldBlock.y;
-				newBlock.z = oldBlock.z;
-				
-				// Remove old block.
-				removeBlockRequest.dispatch( oldBlock );
-				
-				// Add new block.
-				addBlockRequest.dispatch( new AddBlockVO( newBlock, newBlockData.id ) );
-				
-				// Select the new one.
-				selectBlockRequest.dispatch( newBlock );
 				
 				invalidateSavedFileRequest.dispatch();
 			}
