@@ -11,6 +11,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
+	import com.funbuilder.model.vo.SelectBlockVO;
 	
 	import flash.geom.Vector3D;
 	
@@ -57,7 +58,7 @@ package com.funbuilder.controller.commands
 			mesh.z = snappedPos.z;
 			addBlockReuqest.dispatch( new AddBlockVO( mesh, id ) );
 			// Select it.
-			selectBlockRequest.dispatch( mesh );
+			selectBlockRequest.dispatch( new SelectBlockVO( mesh ) );
 			invalidateSavedFileRequest.dispatch();
 		}
 	}
