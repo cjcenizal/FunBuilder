@@ -17,7 +17,7 @@ package com.funbuilder.model
 	{
 		
 		private var _blocks:Dictionary;
-		private var _id:int = 0;
+		private var _nextKey:int = 0;
 		private var _namespaces:Dictionary;
 		private var _elevationMap:Dictionary;
 		private var _elevationKeys:Object;
@@ -32,28 +32,28 @@ package com.funbuilder.model
 		}
 		
 		public function clear():void {
-			_id = 0;
+			_nextKey = 0;
 			_blocks = new Dictionary();
 			_namespaces = new Dictionary();
 			_elevationMap = new Dictionary();
 			_elevationKeys = {};
 		}
 		
-		public function add( block:Mesh, namespace:String, id:String ):String {
+		public function add( block:Mesh, namespace:String, key:String ):String {
 			// Assign new id if needed.
-			if ( !id || int( id ) < _id ) {
-				id = _id.toString();
-				_id++;
+			if ( !key || int( key ) < _nextKey ) {
+				key = _nextKey.toString();
+				_nextKey++;
 			}
 			// If incoming IDs are higher than existing ones,
 			// we need to get with the program.
-			if ( id && int( id ) > _id ) {
-				_id = int( id ) + 1;
+			if ( key && int( key ) >= _nextKey ) {
+				_nextKey = int( key ) + 1;
 			}
-			_blocks[ id ] = block;
+			_blocks[ key ] = block;
 			_namespaces[ block ] = namespace;
 			addElevation( block.position );
-			return id;
+			return key;
 		}
 		
 		public function moveElevationPosition( from:Vector3D, to:Vector3D ):void {
