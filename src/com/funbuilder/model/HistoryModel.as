@@ -21,22 +21,25 @@ package com.funbuilder.model
 			_history = [];
 		}
 		
-		public function add( history:HistoryVO, flashSave:Boolean = false ):void {
+		public function add( history:HistoryVO ):void {
 			// If we're adding a snapshot into our history,
 			// then we need to clear everything that follows.
 			_history.splice( _index );
 			_history.push( history );
-			if ( !flashSave ) {
+			//if ( !flashSave ) {
 				_index++;
-			}
+			//}
 			debug("add");
 		}
 		
-		public function undo():HistoryVO {
+		public function undo( newHistory:HistoryVO = null ):HistoryVO {
 			// Move backwards through history.
 			if ( _index > 0 ) {
 				if ( _index > 0 ) _index--;
 				var history:HistoryVO = _history[ _index ];
+				if ( newHistory ) {
+					_history.push( newHistory );
+				}
 				debug("undo");
 				return history;
 			}
@@ -53,15 +56,15 @@ package com.funbuilder.model
 			return null;
 		}
 		
-		public function getCurrent():HistoryVO {
-			return _history[ _index ];
+		public function doesNotMatchCurrent( snapshot:String ):Boolean {
+			return !_history[ _index ] || !indexIsAtLatest() || getAt( _index ).snapshot != snapshot;
 		}
 		
 		public function getAt( index:int ):HistoryVO {
 			return _history[ index ];
 		}
 		
-		public function canFlashSave():Boolean {
+		public function indexIsAtLatest():Boolean {
 			return _index == _history.length;
 		}
 		

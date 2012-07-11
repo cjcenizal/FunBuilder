@@ -6,7 +6,7 @@ package com.funbuilder.controller.signals
 	{
 		public function AddHistoryRequest()
 		{
-			super( Boolean );
+			super();
 		}
 	}
 }

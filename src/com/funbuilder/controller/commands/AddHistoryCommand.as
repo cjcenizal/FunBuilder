@@ -10,11 +10,6 @@ package com.funbuilder.controller.commands
 	public class AddHistoryCommand extends Command
 	{
 		
-		// Arguments.
-		
-		[Inject]
-		public var subtle:Boolean;
-		
 		// Models.
 		
 		[Inject]
@@ -34,9 +29,8 @@ package com.funbuilder.controller.commands
 			var history:HistoryVO = new HistoryVO( snapshot, selectedBlockKey );
 			
 			// Save history snapshot if not identical to the current history snapshot.
-			var current:HistoryVO = historyModel.getCurrent();
-			if ( !current || current.snapshot != history.snapshot ) {
-				historyModel.add( history, subtle );
+			if ( historyModel.doesNotMatchCurrent( snapshot ) ) {
+				historyModel.add( history );
 			}
 		}
 	}

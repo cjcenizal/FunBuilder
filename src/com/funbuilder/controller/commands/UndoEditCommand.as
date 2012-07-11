@@ -22,10 +22,13 @@ package com.funbuilder.controller.commands {
 		public var historyModel:HistoryModel;
 		
 		[Inject]
-		public var currentSegmentModel:SegmentModel;
+		public var currentBlockModel:SelectedBlockModel;
 		
 		[Inject]
-		public var currentBlockModel:SelectedBlockModel;
+		public var segmentModel:SegmentModel;
+		
+		[Inject]
+		public var selectedBlockModel:SelectedBlockModel;
 		
 		// Commands.
 		
@@ -45,15 +48,17 @@ package com.funbuilder.controller.commands {
 		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
 		
 		override public function execute():void {
-			// If at the end of history, save it, but only if it hasn't been flash saved.
-			if ( historyModel.canFlashSave() ) {
-				addHistoryRequest.dispatch( true );
+			var newHistory:HistoryVO;
+			if ( historyModel.indexIsAtLatest() ) {
+				var snapshot:String = segmentModel.getJson();
+				var selectedBlockKey:String = ( selectedBlockModel.hasBlock() ) ? segmentModel.getKeyFor( selectedBlockModel.getBlock() ) : null;
+				newHistory = new HistoryVO( snapshot, selectedBlockKey );
 			}
-			var history:HistoryVO = historyModel.undo();
+			var history:HistoryVO = historyModel.undo( newHistory );
 			if ( history ) {
 				loadSegmentRequest.dispatch( history.snapshot );
 				if ( history.selectedBlockKey ) {
-					var block:Mesh = currentSegmentModel.getWithKey( history.selectedBlockKey );
+					var block:Mesh = segmentModel.getWithKey( history.selectedBlockKey );
 					selectBlockRequest.dispatch( block );
 				}
 			}

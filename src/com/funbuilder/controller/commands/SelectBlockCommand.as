@@ -43,9 +43,6 @@ package com.funbuilder.controller.commands
 			// UX:
 			// New/open/exit should all prompt a save if unsaved
 			
-			// Bugs:
-			// - Fix undo/redo history bugs
-			
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
