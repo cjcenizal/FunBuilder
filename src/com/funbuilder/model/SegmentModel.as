@@ -1,6 +1,8 @@
 package com.funbuilder.model
 {
 	import away3d.entities.Mesh;
+	import away3d.materials.ColorMaterial;
+	import away3d.primitives.CubeGeometry;
 	
 	import com.adobe.serialization.json.JSON;
 	
@@ -17,15 +19,20 @@ package com.funbuilder.model
 	{
 		
 		private var _blocks:Dictionary;
+		private var _indicators:Dictionary;
 		private var _nextKey:int = 0;
 		private var _namespaces:Dictionary;
 		private var _elevationMap:Dictionary;
 		private var _elevationKeys:Object;
 		
+		public var indicatorGeometry:CubeGeometry = new CubeGeometry( 105, 105, 105 );
+		public var indicatorMaterial:ColorMaterial = new ColorMaterial( 0xFFFF00, .5 );
+		
 		public function SegmentModel()
 		{
 			super();
 			_blocks = new Dictionary();
+			_indicators = new Dictionary();
 			_namespaces = new Dictionary(); 
 			_elevationMap = new Dictionary();
 			_elevationKeys = {};
@@ -34,12 +41,13 @@ package com.funbuilder.model
 		public function clear():void {
 			_nextKey = 0;
 			_blocks = new Dictionary();
+			_indicators = new Dictionary();
 			_namespaces = new Dictionary();
 			_elevationMap = new Dictionary();
 			_elevationKeys = {};
 		}
 		
-		public function add( block:Mesh, namespace:String, key:String ):String {
+		public function add( block:Mesh, indicator:Mesh, namespace:String, key:String ):String {
 			// Assign new id if needed.
 			if ( !key || int( key ) < _nextKey ) {
 				key = _nextKey.toString();
@@ -51,6 +59,7 @@ package com.funbuilder.model
 				_nextKey = int( key ) + 1;
 			}
 			_blocks[ key ] = block;
+			_indicators[ block ] = indicator;
 			_namespaces[ block ] = namespace;
 			addElevation( block.position );
 			return key;
@@ -89,6 +98,7 @@ package com.funbuilder.model
 					delete _blocks[ key ];
 				}
 			}
+			delete _indicators[ block ];
 			delete _namespaces[ block ]; 
 		}
 		
@@ -115,6 +125,10 @@ package com.funbuilder.model
 		
 		public function getIdFor( block:Mesh ):String {
 			return _namespaces[ block ];
+		}
+		
+		public function getIndicatorFor( block:Mesh ):Mesh {
+			return _indicators[ block ];
 		}
 		
 		public function getJson():String {

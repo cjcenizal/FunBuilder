@@ -58,9 +58,6 @@ package com.funbuilder.controller.commands
 			// Warning when a block intersects other blocks
 			// New/open/exit should all prompt a save if unsaved
 			
-			// New file doesn't clear elevation indicators
-			// A block was leftover when I made a new file
-			
 			
 			// Need selection indicators for selected blocks (these can be used for error indicators too)
 			// Either make it more difficult to select/deselect blocks (double-click to select, right-click to deselect for example)

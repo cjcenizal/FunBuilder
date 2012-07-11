@@ -8,6 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.SegmentModel;
+	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
 	import com.funbuilder.model.vo.SelectBlockVO;
 	
@@ -24,7 +25,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var currentSegmentModel:SegmentModel;
+		public var segmentModel:SegmentModel;
 		
 		[Inject]
 		public var editingModeModel:EditingModeModel;
@@ -42,11 +43,16 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			currentSegmentModel.add( addBlockData.mesh, addBlockData.id, addBlockData.key );
+			var indicator:Mesh = new Mesh( segmentModel.indicatorGeometry, segmentModel.indicatorMaterial );
+			indicator.x = addBlockData.mesh.x;
+			indicator.y = addBlockData.mesh.y + SegmentConstants.BLOCK_SIZE * .5;
+			indicator.z = addBlockData.mesh.z;
+			segmentModel.add( addBlockData.mesh, indicator, addBlockData.id, addBlockData.key );
 			// TO-DO: Should this be done here, or in initial set up?
 			addBlockData.mesh.mouseEnabled = true;
 			addBlockData.mesh.addEventListener( MouseEvent3D.CLICK, onClick );
 			addObjectToSceneRequest.dispatch( addBlockData.mesh );
+			addObjectToSceneRequest.dispatch( indicator );
 			updateElevationRequest.dispatch();
 		}
 		
