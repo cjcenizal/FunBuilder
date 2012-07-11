@@ -14,6 +14,8 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.view.components.MainView;
 	
+	import flash.events.KeyboardEvent;
+	
 	import org.robotlegs.core.IMediator;
 	import org.robotlegs.mvcs.Mediator;
 	
@@ -59,12 +61,12 @@ package com.funbuilder.view.mediators {
 			setEditingModeRequest.add( onSetEditingModeRequested );
 		}
 		
-		private function onKeyDown( code:int ):void {
-			keyDownRequest.dispatch( code );
+		private function onKeyDown( e:KeyboardEvent ):void {
+			keyDownRequest.dispatch( e );
 		}
 		
-		private function onKeyUp( code:int ):void {
-			keyUpRequest.dispatch( code );
+		private function onKeyUp( e:KeyboardEvent ):void {
+			keyUpRequest.dispatch( e );
 		}
 		
 		private function onScrollWheel( delta:int ):void {

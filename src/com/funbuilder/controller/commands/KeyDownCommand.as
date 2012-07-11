@@ -8,6 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.SelectedBlockModel;
 	import com.funbuilder.model.vo.ChangeBlockTypeVO;
 	
+	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	
 	import org.robotlegs.mvcs.Command;
@@ -18,7 +19,7 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var code:int;
+		public var event:KeyboardEvent;
 		
 		// Models.
 		
@@ -50,8 +51,8 @@ package com.funbuilder.controller.commands
 		override public function execute():void
 		{
 			
-			if ( !keysModel.keysDown[ code ] ) {
-				switch ( code ) {
+			if ( !keysModel.keysDown[ event.keyCode ] ) {
+				switch ( event.keyCode ) {
 					case Keyboard.SPACE:
 						setEditingModeRequest.dispatch( EditingModeModel.BUILD );
 						break;
@@ -65,7 +66,9 @@ package com.funbuilder.controller.commands
 						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVO( 1 ) );
 						break;
 				}
-				keysModel.keysDown[ code ] = true;
+				if ( !event.commandKey ) {
+					keysModel.keysDown[ event.keyCode ] = true;
+				}
 			}
 		}
 	}

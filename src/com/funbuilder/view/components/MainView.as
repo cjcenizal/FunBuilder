@@ -162,11 +162,11 @@ package com.funbuilder.view.components {
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {
-			onKeyDownSignal.dispatch( e.keyCode );
+			onKeyDownSignal.dispatch( e );
 		}
 		
 		private function onKeyUp( e:KeyboardEvent ):void {
-			onKeyUpSignal.dispatch( e.keyCode );
+			onKeyUpSignal.dispatch( e );
 		}
 		
 		private function onMouseWheel( e:MouseEvent ):void {

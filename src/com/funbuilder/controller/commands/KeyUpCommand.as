@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
 	
+	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	
 	import org.robotlegs.mvcs.Command;
@@ -13,7 +14,7 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var code:int;
+		public var event:KeyboardEvent;
 		
 		// Models.
 		
@@ -27,12 +28,12 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			switch ( code ) {
+			switch ( event.keyCode ) {
 				case Keyboard.SPACE:
 					setEditingModeRequest.dispatch( EditingModeModel.LOOK );
 					break;
 			}
-			delete keysModel.keysDown[ code ];
+			delete keysModel.keysDown[ event.keyCode ];
 		}
 	}
 }

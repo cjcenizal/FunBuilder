@@ -42,6 +42,9 @@ package com.funbuilder.controller.commands
 			
 			// UX:
 			// New/open/exit should all prompt a save if unsaved
+			// Multiple block select
+			// Duplicate selection
+			// Warning when a block intersects other blocks
 			
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
