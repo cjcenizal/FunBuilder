@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
 	
+	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.DeselectSingleBlockRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
@@ -43,6 +44,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
+		[Inject]
+		public var addHistoryRequest:AddHistoryRequest;
+		
 		override public function execute():void
 		{
 			
@@ -66,7 +70,12 @@ package com.funbuilder.controller.commands
 			
 			// If shift is pressed, enable multiple select.
 			// Else, deselect the current block.
-			if ( keysModel.isShiftDown ) {
+			
+			if ( selectData.saveHistory ) {
+				addHistoryRequest.dispatch();
+			}
+			
+			if ( keysModel.isShiftDown || selectData.multipleSelect ) {
 				// Select additional block or deselect an already-selected block.
 				if ( selectedBlocksModel.contains( selectData.block ) ) {
 					// Deselect block.

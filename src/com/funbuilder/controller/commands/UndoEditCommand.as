@@ -11,6 +11,7 @@ package com.funbuilder.controller.commands {
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.HistoryVO;
+	import com.funbuilder.model.vo.SelectBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
 
@@ -63,7 +64,7 @@ package com.funbuilder.controller.commands {
 				var block:Mesh
 				for ( var i:int = 0; i < history.selectedBlockKeys.length; i++ ) {
 					block = segmentModel.getWithKey( history.selectedBlockKeys[ i ] );
-					selectBlockRequest.dispatch( block );
+					selectBlockRequest.dispatch( new SelectBlockVO( block, true, false ) );
 				}
 			}
 			updateTargetAppearanceRequest.dispatch();
