@@ -21,7 +21,6 @@ package com.funbuilder.model
 		
 		public function select( block:Mesh ):void {
 			_blocks.push( block );
-			trace("now have selected " + _blocks.length);
 			_focalBlock = block;
 			_isMoved = false;
 		}
@@ -32,7 +31,6 @@ package com.funbuilder.model
 		}
 		
 		public function deselect( block:Mesh ):Mesh {
-			trace("deselect");
 			if ( _focalBlock == block ) {
 				_focalBlock = null;
 			}
@@ -95,12 +93,6 @@ package com.funbuilder.model
 			return null;
 		}
 		
-		/*
-		public function isBlock( block:Mesh ):Boolean {
-			return block == _block;
-		}
-		*/
-		
 		public function getPositionAt( index:int ):Vector3D {
 			return getBlockAt( index ).position;
 		}
@@ -117,13 +109,5 @@ package com.funbuilder.model
 			return _blocks.length;
 		}
 		
-		/*
-		public function getPositionClone():Vector3D {
-			return new Vector3D( _block.x, _block.y, _block.z );
-		}
-		
-		public function getBlock():Mesh {
-			return _block;
-		}*/
 	}
 }

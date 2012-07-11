@@ -1,7 +1,9 @@
 package com.funbuilder.controller.commands
 {
+	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
+	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
@@ -43,6 +45,12 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var changeBlockTypeRequest:ChangeBlockTypeRequest;
 		
+		[Inject]
+		public var deselectAllBlocksRequest:DeselectAllBlocksRequest;
+		
+		[Inject]
+		public var addHistoryRequest:AddHistoryRequest;
+		
 		// Private vars.
 		
 		private const LEFT_ARROW:int = 37;
@@ -67,6 +75,10 @@ package com.funbuilder.controller.commands
 						break;
 					case RIGHT_ARROW:
 						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVO( 1 ) );
+						break;
+					case Keyboard.ESCAPE:
+						addHistoryRequest.dispatch();
+						deselectAllBlocksRequest.dispatch();
 						break;
 				}
 				if ( !event.commandKey ) {
