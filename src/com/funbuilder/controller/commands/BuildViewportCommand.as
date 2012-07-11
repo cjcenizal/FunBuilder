@@ -91,9 +91,8 @@ package com.funbuilder.controller.commands
 			
 			// Add camera target.
 			var target:Mesh = new Mesh( new CubeGeometry( 110, 110, 110 ), null );
-			target.x = SegmentConstants.SEGMENT_HALF_WIDTH;
-			target.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			cameraTargetModel.setMesh( target );
+			cameraTargetModel.setPos( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
 			addObjectToSceneRequest.dispatch( target );
 			
 			// Add camera controller.
@@ -110,6 +109,7 @@ package com.funbuilder.controller.commands
 			planeMesh.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			planeMesh.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			addObjectToSceneRequest.dispatch( planeMesh );
+			view3dModel.groundPlane = planeMesh;
 			
 			// Add elevation indicators.
 			var positiveIndicator:Mesh;

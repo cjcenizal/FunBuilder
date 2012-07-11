@@ -118,8 +118,7 @@ package com.funbuilder.controller.commands
 			}
 			
 			// Update target.
-			var snap:Boolean = currentBlockModel.hasBlock();
-			cameraTargetModel.update( snap );
+			cameraTargetModel.update();
 			
 			// Render scene.
 			view3dModel.render();

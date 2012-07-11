@@ -41,12 +41,9 @@ package com.funbuilder.controller.commands
 			
 			
 			// UX:
-			// Snap target to grid when a block is selected
 			// New/open/exit should all prompt a save if unsaved
 			
 			// Bugs:
-			// - Fix Library panel size and position
-			// - Fix Library panel snapshot
 			// - Fix undo/redo history bugs
 			
 			

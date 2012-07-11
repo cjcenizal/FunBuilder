@@ -50,7 +50,7 @@ package com.funbuilder.view.components {
 			_selectionIndicator = new Shape();
 			_selectionIndicator.y = _fileLabel.height + 2;
 			addChild( _selectionIndicator );
-			_selectionIndicator.graphics.beginFill( 0x1eb1a8 );
+			_selectionIndicator.graphics.beginFill( 0xffff00 );
 			_selectionIndicator.graphics.drawRect( 0, 0, stage.stageWidth, 4 );
 			_selectionIndicator.graphics.endFill();
 			_selectionIndicator.visible = false;

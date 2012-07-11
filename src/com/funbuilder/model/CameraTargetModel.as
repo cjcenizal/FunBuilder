@@ -14,10 +14,10 @@ package com.funbuilder.model
 		
 		public var lookUnselectedMaterial:ColorMaterial = new ColorMaterial( 0x00ccff, .1 );
 		public var buildSelectedMaterial:ColorMaterial = new ColorMaterial( 0x00ff78, .2 );
-		public var lookSelectedMaterial:ColorMaterial = new ColorMaterial( 0xffa200, .6 );
-		public var buildUnselectedMaterial:ColorMaterial = new ColorMaterial( 0xfff000, .6 );
+		public var lookSelectedMaterial:ColorMaterial = new ColorMaterial( 0xffa200, .3 );
+		public var buildUnselectedMaterial:ColorMaterial = new ColorMaterial( 0xfff000, .3 );
 		
-		private var _target:Mesh;
+		public var target:Mesh;
 		private var _position:Vector3D;
 		
 		public function CameraTargetModel()
@@ -27,7 +27,7 @@ package com.funbuilder.model
 		}
 		
 		public function setMesh( target:Mesh ):void {
-			_target = target;
+			this.target = target;
 		}
 		
 		public function move( x:Number, y:Number, z:Number ):void {
@@ -43,14 +43,14 @@ package com.funbuilder.model
 		}
 		
 		public function setMaterial( material:ColorMaterial ):void {
-			_target.material = material;
+			target.material = material;
 		}
 		
 		public function update( snap:Boolean = false ):void {
 			var pos:Vector3D = ( snap ) ? SegmentConstants.snapPointGrid( _position.x, _position.y, _position.z ) : _position;
-			_target.x = pos.x;
-			_target.y = pos.y;
-			_target.z = pos.z;
+			target.x = pos.x;
+			target.y = pos.y;
+			target.z = pos.z;
 		}
 		
 		public function getPosition():Vector3D {

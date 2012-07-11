@@ -5,6 +5,7 @@ package com.funbuilder.model {
 	import away3d.containers.Scene3D;
 	import away3d.containers.View3D;
 	import away3d.controllers.HoverController;
+	import away3d.entities.Mesh;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -20,6 +21,7 @@ package com.funbuilder.model {
 		private var _cameraRotation:Vector3D;
 		private var _cameraOffsetY:Number = 0;
 		public var cameraController:HoverController;
+		public var groundPlane:Mesh;
 		
 		public function View3DModel() {
 			super();

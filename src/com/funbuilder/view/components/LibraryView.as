@@ -1,6 +1,7 @@
 package com.funbuilder.view.components
 {
 	import com.bit101.components.Component;
+	import com.bit101.components.Label;
 	import com.bit101.components.Panel;
 	
 	import flash.display.Bitmap;
@@ -30,17 +31,22 @@ package com.funbuilder.view.components
 		}
 		
 		public function setup():void {
-			_bg.setSize( stage.stageWidth, 100 );
+			_bg.setSize( stage.stageWidth, 103 );
 			_bg.draw();
 			setSize( _bg.width, _bg.height );
 		}
 		
-		public function addItem( id:String, bitmap:Bitmap ):void {
-			var xpos:Number = ( _items.length > 0 ) ? _items[ _items.length - 1 ].x + _items[ _items.length - 1 ].width : 0
+		public function addItem( id:String, name:String, bitmap:Bitmap ):void {
+			var xpos:Number = ( _items.length > 0 ) ? _items[ _items.length - 1 ].x + _items[ _items.length - 1 ].width + 3 : 3;
 			var sprite:Sprite = new Sprite();
 			sprite.addChild( bitmap );
+			var label:Label = new Label( sprite, 0, 0, name );
+			label.draw();
+			label.x = ( bitmap.width - label.width ) * .5;
+			label.y = bitmap.height - label.height;
 			addChild( sprite );
 			sprite.x = xpos;
+			sprite.y = 3
 			_items.push( sprite );
 			sprite.addEventListener( MouseEvent.CLICK, getOnMouseDown( id ) );
 		}
