@@ -25,11 +25,6 @@ package com.funbuilder.model
 			_isMoved = false;
 		}
 		
-		public function deselectAll():void {
-			_blocks = [];
-			_focalBlock = null;
-		}
-		
 		public function deselect( block:Mesh ):Mesh {
 			if ( _focalBlock == block ) {
 				_focalBlock = null;
@@ -57,9 +52,9 @@ package com.funbuilder.model
 			return _blocks.length > 0;
 		}
 		
-		public function willMoveTo( position:Vector3D ):Boolean {
-			return ( _focalBlock && !_focalBlock.position.equals( position ) );
-		}
+//		public function willMoveTo( position:Vector3D ):Boolean {
+	//		return ( _focalBlock && !_focalBlock.position.equals( position ) );
+		//}
 		
 		public function setIsMoved( isMoved:Boolean ):void {
 			_isMoved = isMoved;
@@ -74,9 +69,9 @@ package com.funbuilder.model
 			return false;
 		}
 		
-		public function getDiff( position:Vector3D ):Vector3D {
-			return new Vector3D( position.x - _focalBlock.x, position.y - _focalBlock.y, position.z - _focalBlock.z );
-		}
+//		public function getDiff( position:Vector3D ):Vector3D {
+	//		return new Vector3D( position.x - _focalBlock.x, position.y - _focalBlock.y, position.z - _focalBlock.z );
+		//}
 		
 		public function getFocalPosition():Vector3D {
 			if ( _focalBlock ) {

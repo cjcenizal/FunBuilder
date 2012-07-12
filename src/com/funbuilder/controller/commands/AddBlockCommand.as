@@ -4,13 +4,12 @@ package com.funbuilder.controller.commands
 	import away3d.events.MouseEvent3D;
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
-	import com.funbuilder.controller.signals.SelectBlockRequest;
+	import com.funbuilder.controller.signals.ClickBlockRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
-	import com.funbuilder.model.vo.SelectBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -36,7 +35,7 @@ package com.funbuilder.controller.commands
 		public var addObjectToSceneRequest:AddObjectToSceneRequest;
 		
 		[Inject]
-		public var selectBlockRequest:SelectBlockRequest;
+		public var clickBlockRequest:ClickBlockRequest;
 		
 		[Inject]
 		public var updateElevationRequest:UpdateElevationRequest;
@@ -57,7 +56,7 @@ package com.funbuilder.controller.commands
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {
-			selectBlockRequest.dispatch( new SelectBlockVO( e.object as Mesh ) );
+			clickBlockRequest.dispatch( e.object as Mesh );
 		}
 	}
 }

@@ -56,20 +56,22 @@ package com.funbuilder.controller.commands
 			var camPos:Vector3D = camera.position;
 			var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
 			var theta:Number = getTheta( camPos, cameraTargetModel.getPosition() );
-			var speed:Number = 20;
 			
+			var moveBlocks:Boolean = keysModel.isShiftDown;
+			
+			var moveX:Number = 0;
+			var moveY:Number = 0;
+			var moveZ:Number = 0;
+			var speed:Number = moveBlocks ? 1 : 20;
 			for ( var key:String in keysModel.keysDown ) {
-				var moveX:Number = 0;
-				var moveY:Number = 0;
-				var moveZ:Number = 0;
 				switch ( int( key ) ) {
 					case Keyboard.W:
-						// Move towards target along ground plane.
+						// Move along ground plane.
 						moveX = Math.cos( theta ) * -speed;
 						moveZ = Math.sin( theta ) * -speed;
 						break;
 					case Keyboard.S:
-						// Move away from target along ground plane.
+						// Move along ground plane.
 						moveX = Math.cos( theta ) * speed;
 						moveZ = Math.sin( theta ) * speed;
 						break;
@@ -102,20 +104,27 @@ package com.funbuilder.controller.commands
 						}
 						break;
 				}
-				camera.position.x += moveX;
-				camera.position.y += moveY;
-				camera.position.z += moveZ;
-				cameraTargetModel.move( moveX, moveY, moveZ );
+				if ( moveBlocks ) {
+					moveX = Math.round( moveX ) * SegmentConstants.BLOCK_SIZE;
+					moveY = Math.round( moveY ) * SegmentConstants.BLOCK_SIZE;
+					moveZ = Math.round( moveZ ) * SegmentConstants.BLOCK_SIZE;
+					moveBlockRequest.dispatch( new Vector3D( moveX, moveY, moveZ ) );
+				} else {
+					camera.position.x += moveX;
+					camera.position.y += moveY;
+					camera.position.z += moveZ;
+					cameraTargetModel.move( moveX, moveY, moveZ );
+				}
 			}
 			
 			// If we have a currently selected block, move the block to match the target.
-			if ( currentBlockModel.hasAnySelected() ) {
+			//if ( currentBlockModel.hasAnySelected() ) {
 				// Move block.
-				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.targetX, cameraTargetModel.targetY, cameraTargetModel.targetZ );
-				if ( !snappedPos.equals( currentBlockModel.getFocalPosition() ) ) {
-					moveBlockRequest.dispatch( snappedPos );
-				}
-			}
+				//var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.targetX, cameraTargetModel.targetY, cameraTargetModel.targetZ );
+				//if ( !snappedPos.equals( currentBlockModel.getFocalPosition() ) ) {
+				//	moveBlockRequest.dispatch( snappedPos );
+				//}
+			//}
 			
 			// Update target.
 			cameraTargetModel.update();

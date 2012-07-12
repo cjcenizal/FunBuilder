@@ -2,7 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
 	
-	import com.funbuilder.controller.signals.DeselectSingleBlockRequest;
+	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
@@ -29,7 +29,7 @@ package com.funbuilder.controller.commands
 		// Commands.
 		
 		[Inject]
-		public var deselectBlockRequest:DeselectSingleBlockRequest;
+		public var deselectBlockRequest:DeselectBlockRequest;
 		
 		[Inject]
 		public var removeObjectFromSceneRequest:RemoveObjectFromSceneRequest;
@@ -41,11 +41,12 @@ package com.funbuilder.controller.commands
 				deselectBlockRequest.dispatch( new SelectBlockVO( block ) );
 			}
 			
-			// Remove from model.
-			segmentModel.remove( block );
-			
 			// Remove from scene.
 			removeObjectFromSceneRequest.dispatch( block );
+			removeObjectFromSceneRequest.dispatch( segmentModel.getIndicatorFor( block ) );
+			
+			// Remove from model.
+			segmentModel.remove( block );
 		}
 	}
 }

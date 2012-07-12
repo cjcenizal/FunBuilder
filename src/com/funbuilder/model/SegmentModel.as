@@ -25,7 +25,7 @@ package com.funbuilder.model
 		private var _elevationMap:Dictionary;
 		private var _elevationKeys:Object;
 		
-		private var _indicatorGeometry:CubeGeometry = new CubeGeometry( 105, 105, 105 );
+		private var _indicatorGeometry:CubeGeometry = new CubeGeometry( 110, 110, 110 );
 		
 		public function SegmentModel()
 		{

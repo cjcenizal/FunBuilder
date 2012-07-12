@@ -15,5 +15,9 @@ package com.funbuilder.model
 		{
 			super();
 		}
+		
+		public function contains( keyCode:int ):Boolean {
+			return keysDown[ keyCode ];
+		}
 	}
 }

@@ -7,9 +7,10 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.ChangeBlockTypeCommand;
 	import com.funbuilder.controller.commands.ClearHistoryCommand;
 	import com.funbuilder.controller.commands.ClearSegmentCommand;
+	import com.funbuilder.controller.commands.ClickBlockCommand;
 	import com.funbuilder.controller.commands.DeleteBlockCommand;
 	import com.funbuilder.controller.commands.DeselectAllBlocksCommand;
-	import com.funbuilder.controller.commands.DeselectSingleBlockCommand;
+	import com.funbuilder.controller.commands.DeselectBlockCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.InvalidateSavedFileCommand;
 	import com.funbuilder.controller.commands.KeyDownCommand;
@@ -39,9 +40,10 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
 	import com.funbuilder.controller.signals.ClearHistoryRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
+	import com.funbuilder.controller.signals.ClickBlockRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
-	import com.funbuilder.controller.signals.DeselectSingleBlockRequest;
+	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
@@ -125,9 +127,10 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );
 			signalCommandMap.mapSignalClass( ClearHistoryRequest,					ClearHistoryCommand );
 			signalCommandMap.mapSignalClass( ClearSegmentRequest,					ClearSegmentCommand );
+			signalCommandMap.mapSignalClass( ClickBlockRequest,						ClickBlockCommand );
 			signalCommandMap.mapSignalClass( DeleteBlockRequest,					DeleteBlockCommand );
 			signalCommandMap.mapSignalClass( DeselectAllBlocksRequest,				DeselectAllBlocksCommand );
-			signalCommandMap.mapSignalClass( DeselectSingleBlockRequest,			DeselectSingleBlockCommand );
+			signalCommandMap.mapSignalClass( DeselectBlockRequest,			DeselectBlockCommand );
 			signalCommandMap.mapSignalClass( InvalidateSavedFileRequest,			InvalidateSavedFileCommand );
 			signalCommandMap.mapSignalClass( KeyDownRequest,						KeyDownCommand );
 			signalCommandMap.mapSignalClass( KeyUpRequest,							KeyUpCommand );

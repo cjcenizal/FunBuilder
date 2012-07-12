@@ -1,10 +1,8 @@
 package com.funbuilder.controller.commands
 {
-	import away3d.entities.Mesh;
-	
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
-	import com.funbuilder.controller.signals.DeselectSingleBlockRequest;
+	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
@@ -40,7 +38,7 @@ package com.funbuilder.controller.commands
 		// Commands.
 		
 		[Inject]
-		public var deselectBlockRequest:DeselectSingleBlockRequest;
+		public var deselectBlockRequest:DeselectBlockRequest;
 		
 		[Inject]
 		public var deselectAllBlocksRequest:DeselectAllBlocksRequest;
@@ -75,29 +73,11 @@ package com.funbuilder.controller.commands
 				addHistoryRequest.dispatch();
 			}
 			
-			if ( keysModel.isShiftDown || selectData.multipleSelect ) {
-				// Select additional block or deselect an already-selected block.
-				if ( selectedBlocksModel.contains( selectData.block ) ) {
-					// Deselect block.
-					deselectBlockRequest.dispatch( selectData );
-				} else {
-					doSelectBlock();
-				}
-			} else {
-				// Deselect all.
-				if ( selectedBlocksModel.hasAnySelected() ) {
-					deselectAllBlocksRequest.dispatch();
-				}
-				doSelectBlock();
-			}
-		}
-		
-		private function doSelectBlock():void {
 			// Select block.
 			selectedBlocksModel.select( selectData.block );
 			segmentModel.enableIndicatorFor( selectData.block, true );
 			// Snap target to block.
-			cameraTargetModel.setPos( selectData.block.x, selectData.block.y + SegmentConstants.BLOCK_SIZE * .5, selectData.block.z );	
+			//cameraTargetModel.setPos( selectData.block.x, selectData.block.y + SegmentConstants.BLOCK_SIZE * .5, selectData.block.z );	
 			updateTargetAppearanceRequest.dispatch();
 		}
 	}

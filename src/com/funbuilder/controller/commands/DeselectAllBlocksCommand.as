@@ -1,7 +1,9 @@
 package com.funbuilder.controller.commands
 {
+	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.SelectedBlocksModel;
+	import com.funbuilder.model.vo.DeselectBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -16,6 +18,9 @@ package com.funbuilder.controller.commands
 		// Commands.
 		
 		[Inject]
+		public var deselectBlockRequest:DeselectBlockRequest;
+		
+		[Inject]
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
 		override public function execute():void
@@ -24,7 +29,10 @@ package com.funbuilder.controller.commands
 			// Intersecting an existing block flashes red and doesn't allow you to leave it there
 			// (i.e. deselect it)
 			
-			selectedBlocksModel.deselectAll();
+			while ( selectedBlocksModel.numBlocks > 0 ) {
+				deselectBlockRequest.dispatch( new DeselectBlockVO( selectedBlocksModel.getBlockAt( selectedBlocksModel.numBlocks - 1 ) ) );
+			}
+			//selectedBlocksModel.deselectAll();
 			updateTargetAppearanceRequest.dispatch();
 		}
 	}

@@ -19,7 +19,7 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var position:Vector3D;
+		public var diff:Vector3D;
 		
 		// Models.
 		
@@ -42,21 +42,19 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			if ( !selectedBlocksModel.isMoved && selectedBlocksModel.willMoveTo( position ) ) {
+			if ( !selectedBlocksModel.isMoved && diff.length > 0 ) {
 				// Save history if we move the block and it's the first time it gets moved.
 				addHistoryRequest.dispatch( false );
 			}
-			if ( selectedBlocksModel.willMoveTo( position ) ) {
+			if ( diff.length > 0 ) {
 				var src:Vector3D;
 				var dest:Vector3D;
-				var diff:Vector3D = selectedBlocksModel.getDiff( position );
 				for ( var i:int = 0; i < selectedBlocksModel.numBlocks; i++ ) {
 					src = selectedBlocksModel.getPositionAt( i );
 					dest = src.add( diff );
 					segmentModel.moveElevationPosition( src, dest );
 				}
-				//selectedBlocksModel.setPosition( position );
-				var diff:Vector3D = selectedBlocksModel.getDiff( position );
+				// Set position of blocks and indicators.
 				var block:Mesh;
 				var indicator:Mesh;
 				for ( var i:int = 0; i < selectedBlocksModel.numBlocks; i++ ) {
