@@ -43,7 +43,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			var indicator:Mesh = new Mesh( segmentModel.indicatorGeometry, segmentModel.indicatorMaterial );
+			var indicator:Mesh = segmentModel.getNewIndicatorMesh();
 			indicator.x = addBlockData.mesh.x;
 			indicator.y = addBlockData.mesh.y + SegmentConstants.BLOCK_SIZE * .5;
 			indicator.z = addBlockData.mesh.z;

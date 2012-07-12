@@ -8,6 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.SelectBlockVO;
@@ -32,6 +33,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var keysModel:KeysModel;
+		
+		[Inject]
+		public var segmentModel:SegmentModel;
 		
 		// Commands.
 		
@@ -60,8 +64,7 @@ package com.funbuilder.controller.commands
 			
 			
 			// Need selection indicators for selected blocks (these can be used for error indicators too)
-			// Either make it more difficult to select/deselect blocks (double-click to select, right-click to deselect for example)
-			// or add selection state to undo/redo history.
+			// Once indicators are in place, test selection states w/ undo/redo history.
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
@@ -92,6 +95,7 @@ package com.funbuilder.controller.commands
 		private function doSelectBlock():void {
 			// Select block.
 			selectedBlocksModel.select( selectData.block );
+			segmentModel.enableIndicatorFor( selectData.block, true );
 			// Snap target to block.
 			cameraTargetModel.setPos( selectData.block.x, selectData.block.y + SegmentConstants.BLOCK_SIZE * .5, selectData.block.z );	
 			updateTargetAppearanceRequest.dispatch();

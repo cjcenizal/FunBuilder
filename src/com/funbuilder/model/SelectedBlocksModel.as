@@ -61,16 +61,8 @@ package com.funbuilder.model
 			return ( _focalBlock && !_focalBlock.position.equals( position ) );
 		}
 		
-		public function setPosition( position:Vector3D ):void {
-			var diff:Vector3D = getDiff( position );
-			var block:Mesh;
-			for ( var i:int = 0; i < _blocks.length; i++ ) {
-				block = _blocks[ i ];
-				block.x += diff.x;
-				block.y += diff.y;
-				block.z += diff.z;
-			}
-			_isMoved = true;
+		public function setIsMoved( isMoved:Boolean ):void {
+			_isMoved = isMoved;
 		}
 		
 		public function contains( block:Mesh ):Boolean {

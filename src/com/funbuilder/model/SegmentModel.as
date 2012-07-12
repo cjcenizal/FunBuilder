@@ -25,8 +25,7 @@ package com.funbuilder.model
 		private var _elevationMap:Dictionary;
 		private var _elevationKeys:Object;
 		
-		public var indicatorGeometry:CubeGeometry = new CubeGeometry( 105, 105, 105 );
-		public var indicatorMaterial:ColorMaterial = new ColorMaterial( 0xFFFF00, .5 );
+		private var _indicatorGeometry:CubeGeometry = new CubeGeometry( 105, 105, 105 );
 		
 		public function SegmentModel()
 		{
@@ -131,6 +130,11 @@ package com.funbuilder.model
 			return _indicators[ block ];
 		}
 		
+		public function enableIndicatorFor( block:Mesh, enabled:Boolean ):void {
+			var indicator:Mesh = getIndicatorFor( block );
+			( indicator.material as ColorMaterial ).alpha = ( enabled ) ? .5 : 0;
+		}
+		
 		public function getJson():String {
 			var list:Array = [];
 			var mesh:Mesh;
@@ -152,6 +156,10 @@ package com.funbuilder.model
 		
 		public function getElevationMap():Dictionary {
 			return _elevationMap;
+		}
+		
+		public function getNewIndicatorMesh():Mesh {
+			return new Mesh( _indicatorGeometry, new ColorMaterial( 0xFFFF00, 0 ) );
 		}
 	}
 }

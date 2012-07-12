@@ -1,10 +1,13 @@
 package com.funbuilder.controller.commands
 {
+	import away3d.entities.Mesh;
+	
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
+	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import flash.geom.Vector3D;
 	
@@ -52,7 +55,22 @@ package com.funbuilder.controller.commands
 					dest = src.add( diff );
 					segmentModel.moveElevationPosition( src, dest );
 				}
-				selectedBlocksModel.setPosition( position );
+				//selectedBlocksModel.setPosition( position );
+				var diff:Vector3D = selectedBlocksModel.getDiff( position );
+				var block:Mesh;
+				var indicator:Mesh;
+				for ( var i:int = 0; i < selectedBlocksModel.numBlocks; i++ ) {
+					block = selectedBlocksModel.getBlockAt( i );
+					block.x += diff.x;
+					block.y += diff.y;
+					block.z += diff.z;
+					indicator = segmentModel.getIndicatorFor( block );
+					indicator.x = block.x;
+					indicator.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
+					indicator.z = block.z;
+				}
+				selectedBlocksModel.setIsMoved( true );
+				
 				invalidateSavedFileRequest.dispatch();
 				updateElevationRequest.dispatch();
 			}
