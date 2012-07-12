@@ -34,12 +34,9 @@ package com.funbuilder.controller.commands
 			// Intersecting an existing block flashes red and doesn't allow you to leave it there
 			// (i.e. deselect it)
 			
-			//addHistoryRequest.dispatch();
-			
 			while ( selectedBlocksModel.numBlocks > 0 ) {
 				deselectBlockRequest.dispatch( new DeselectBlockVO( selectedBlocksModel.getBlockAt( selectedBlocksModel.numBlocks - 1 ), false ) );
 			}
-			//selectedBlocksModel.deselectAll();
 			updateTargetAppearanceRequest.dispatch();
 		}
 	}

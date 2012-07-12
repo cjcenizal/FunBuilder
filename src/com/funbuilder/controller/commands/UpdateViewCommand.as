@@ -48,74 +48,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			var camera:Camera3D = view3dModel.camera;
 			
-			var divDegToRad:Number = 180 * Math.PI;
-			var rads:Number = view3dModel.cameraController.panAngle / divDegToRad;
-			
-			var camPos:Vector3D = camera.position;
-			var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
-			var theta:Number = getTheta( camPos, cameraTargetModel.getPosition() );
-			
-			var moveBlocks:Boolean = keysModel.isShiftDown;
-			
-			var moveX:Number = 0;
-			var moveY:Number = 0;
-			var moveZ:Number = 0;
-			var speed:Number = moveBlocks ? 1 : 20;
-			for ( var key:String in keysModel.keysDown ) {
-				switch ( int( key ) ) {
-					case Keyboard.W:
-						// Move along ground plane.
-						moveX = Math.cos( theta ) * -speed;
-						moveZ = Math.sin( theta ) * -speed;
-						break;
-					case Keyboard.S:
-						// Move along ground plane.
-						moveX = Math.cos( theta ) * speed;
-						moveZ = Math.sin( theta ) * speed;
-						break;
-					case Keyboard.A:
-						// Strafe left along ground plane.
-						moveX = Math.cos( theta + Math.PI * .5 ) * -speed;
-						moveZ = Math.sin( theta + Math.PI * .5 ) * -speed;
-						break;
-					case Keyboard.D:
-						// Strafe right along ground plane.
-						moveX = Math.cos( theta + Math.PI * .5 ) * speed;
-						moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
-						break;
-					case 189: // Minus
-						// Decrease elevation.
-						moveY = -speed;
-						break;
-					case 187: // Plus
-						// Increase elevation.
-						moveY = speed;
-						break;
-					case 219: // Left brace
-						// Zoom out.
-						view3dModel.cameraController.distance += speed;
-						break;
-					case 221: // Right brace
-						// Zoom in.
-						if ( view3dModel.cameraController.distance > speed * 2 ) {
-							view3dModel.cameraController.distance -= speed;
-						}
-						break;
-				}
-				if ( moveBlocks ) {
-					moveX = Math.round( moveX ) * SegmentConstants.BLOCK_SIZE;
-					moveY = Math.round( moveY ) * SegmentConstants.BLOCK_SIZE;
-					moveZ = Math.round( moveZ ) * SegmentConstants.BLOCK_SIZE;
-					moveBlockRequest.dispatch( new Vector3D( moveX, moveY, moveZ ) );
-				} else {
-					camera.position.x += moveX;
-					camera.position.y += moveY;
-					camera.position.z += moveZ;
-					cameraTargetModel.move( moveX, moveY, moveZ );
-				}
-			}
 			
 			// If we have a currently selected block, move the block to match the target.
 			//if ( currentBlockModel.hasAnySelected() ) {
@@ -133,13 +66,6 @@ package com.funbuilder.controller.commands
 			view3dModel.render();
 		}
 		
-		
-		private function getTheta( posA:Vector3D, posB:Vector3D ):Number {
-			var deltaZ:Number = posA.z - posB.z;
-			var deltaX:Number = posA.x - posB.x;
-			var angle:Number = Math.atan2(deltaZ, deltaX);
-			return angle;
-		}
 		
 	}
 }

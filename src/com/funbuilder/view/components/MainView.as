@@ -162,6 +162,7 @@ package com.funbuilder.view.components {
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {
+			stage.focus = stage;
 			onKeyDownSignal.dispatch( e );
 		}
 		
