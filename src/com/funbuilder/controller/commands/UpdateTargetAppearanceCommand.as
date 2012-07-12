@@ -32,20 +32,20 @@ package com.funbuilder.controller.commands
 		{
 			var material:ColorMaterial;
 			if ( editingModeModel.mode == EditingModeModel.BUILD ) {
-				if ( selectedBlocksModel.hasAnySelected() ) {
+				if ( selectedBlocksModel.numBlocks > 0 ) {
 					material = cameraTargetModel.buildSelectedMaterial;
 				} else {
 					material = cameraTargetModel.buildUnselectedMaterial;
 				}
 			} else if ( editingModeModel.mode == EditingModeModel.LOOK ) {
-				if ( selectedBlocksModel.hasAnySelected() ) {
+				if ( selectedBlocksModel.numBlocks > 0 ) {
 					material = cameraTargetModel.lookSelectedMaterial;
 				} else {
 					material = cameraTargetModel.lookUnselectedMaterial;
 				}
 			}
 			cameraTargetModel.setMaterial( material );
-			showSelectionIndicatorRequest.dispatch( selectedBlocksModel.hasAnySelected() );
+			showSelectionIndicatorRequest.dispatch( selectedBlocksModel.numBlocks > 0 );
 		}
 	}
 }

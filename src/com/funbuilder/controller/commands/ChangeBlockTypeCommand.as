@@ -54,7 +54,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			if ( selectedBlocksModel.hasAnySelected() ) {
+			if ( selectedBlocksModel.numBlocks > 0 ) {
 				addHistoryRequest.dispatch();
 				
 				for ( var i:int = selectedBlocksModel.numBlocks - 1; i >= 0; i-- ) {

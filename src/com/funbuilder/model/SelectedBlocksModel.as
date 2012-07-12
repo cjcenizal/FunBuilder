@@ -10,7 +10,6 @@ package com.funbuilder.model
 	{
 		
 		private var _blocks:Array;
-		private var _focalBlock:Mesh;
 		private var _isMoved:Boolean = false;
 		
 		public function SelectedBlocksModel()
@@ -21,14 +20,10 @@ package com.funbuilder.model
 		
 		public function select( block:Mesh ):void {
 			_blocks.push( block );
-			_focalBlock = block;
 			_isMoved = false;
 		}
 		
-		public function deselect( block:Mesh ):Mesh {
-			if ( _focalBlock == block ) {
-				_focalBlock = null;
-			}
+		public function deselect( block:Mesh ):void {
 			var picked:Mesh = null;
 			var index:int = -1;
 			for ( var i:int = 0; i < _blocks.length; i++ ) {
@@ -38,23 +33,7 @@ package com.funbuilder.model
 					index = i;
 				}
 			}
-			if ( _blocks.length == 0 ) {
-				_focalBlock = null;
-			} else if ( index - 1 < 0 ) {
-				_focalBlock = _blocks[ index ];
-			} else {
-				_focalBlock = _blocks[ index - 1 ];
-			}
-			return _focalBlock;
 		}
-		
-		public function hasAnySelected():Boolean {
-			return _blocks.length > 0;
-		}
-		
-//		public function willMoveTo( position:Vector3D ):Boolean {
-	//		return ( _focalBlock && !_focalBlock.position.equals( position ) );
-		//}
 		
 		public function setIsMoved( isMoved:Boolean ):void {
 			_isMoved = isMoved;
@@ -67,17 +46,6 @@ package com.funbuilder.model
 				}
 			}
 			return false;
-		}
-		
-//		public function getDiff( position:Vector3D ):Vector3D {
-	//		return new Vector3D( position.x - _focalBlock.x, position.y - _focalBlock.y, position.z - _focalBlock.z );
-		//}
-		
-		public function getFocalPosition():Vector3D {
-			if ( _focalBlock ) {
-				return _focalBlock.position;
-			}
-			return null;
 		}
 		
 		public function getPositionAt( index:int ):Vector3D {

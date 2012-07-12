@@ -56,23 +56,25 @@ package com.funbuilder.controller.commands
 			
 			
 			// UX:
-			// Duplicate selection
+			// Fix block movement
+			// Make scroll crane blocks
+			// Add history to deselect all blocks command
 			// Warning when a block intersects other blocks
+			// Duplicate selection
 			// New/open/exit should all prompt a save if unsaved
 			
-			
-			// Need selection indicators for selected blocks (these can be used for error indicators too)
-			// Once indicators are in place, test selection states w/ undo/redo history.
+
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
-			// If shift is pressed, enable multiple select.
-			// Else, deselect the current block.
+			
+			
+			
+			
 			
 			if ( selectData.saveHistory ) {
 				addHistoryRequest.dispatch();
 			}
-			
 			// Select block.
 			selectedBlocksModel.select( selectData.block );
 			segmentModel.enableIndicatorFor( selectData.block, true );

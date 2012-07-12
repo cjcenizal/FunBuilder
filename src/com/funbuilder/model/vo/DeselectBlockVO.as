@@ -6,10 +6,12 @@ package com.funbuilder.model.vo
 	{
 		
 		public var block:Mesh;
+		public var saveHistory:Boolean;
 		
-		public function DeselectBlockVO( block:Mesh )
+		public function DeselectBlockVO( block:Mesh, saveHistory:Boolean = true )
 		{
 			this.block = block;
+			this.saveHistory = saveHistory;
 		}
 	}
 }

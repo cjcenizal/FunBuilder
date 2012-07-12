@@ -31,7 +31,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			if ( selectedBlockModel.hasAnySelected() ) {
+			if ( selectedBlockModel.numBlocks > 0 ) {
 				addHistoryRequest.dispatch();
 				for ( var i:int = selectedBlockModel.numBlocks - 1; i >= 0; i-- ) {
 					removeBlockRequest.dispatch( selectedBlockModel.getBlockAt( i ) );
