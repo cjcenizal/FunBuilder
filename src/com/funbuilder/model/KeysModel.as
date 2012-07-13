@@ -1,5 +1,7 @@
 package com.funbuilder.model
 {
+	import flash.ui.Keyboard;
+	
 	import org.robotlegs.mvcs.Actor;
 	
 	public class KeysModel extends Actor
@@ -18,6 +20,10 @@ package com.funbuilder.model
 		
 		public function contains( keyCode:int ):Boolean {
 			return keysDown[ keyCode ];
+		}
+		
+		public function get isSpaceDown():Boolean {
+			return keysDown[ Keyboard.SPACE ];
 		}
 	}
 }

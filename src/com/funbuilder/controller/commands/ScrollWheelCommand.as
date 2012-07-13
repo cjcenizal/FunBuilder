@@ -1,6 +1,12 @@
 package com.funbuilder.controller.commands
 {
+	import com.funbuilder.controller.signals.MoveBlockRequest;
 	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.SelectedBlocksModel;
+	import com.funbuilder.model.constants.SegmentConstants;
+	
+	import flash.geom.Vector3D;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -16,6 +22,14 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
+		
+		[Inject]
+		public var keysModel:KeysModel;
+		
+		// Commands.
+		
+		[Inject]
+		public var moveBlockRequest:MoveBlockRequest;
 		
 		override public function execute():void
 		{

@@ -6,6 +6,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
+	import com.funbuilder.model.vo.DeselectBlockVO;
 	import com.funbuilder.model.vo.SelectBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
@@ -38,7 +39,7 @@ package com.funbuilder.controller.commands
 		{
 			// Deselect block if necessary.
 			if ( selectedBlockModel.contains( block ) ) {
-				deselectBlockRequest.dispatch( new SelectBlockVO( block ) );
+				deselectBlockRequest.dispatch( new DeselectBlockVO( block ) );
 			}
 			
 			// Remove from scene.

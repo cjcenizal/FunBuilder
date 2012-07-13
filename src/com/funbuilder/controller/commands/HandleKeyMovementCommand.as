@@ -38,6 +38,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var moveBlockRequest:MoveBlockRequest;
 		
+		private const UP_ARROW:int = 38;
+		private const DOWN_ARROW:int = 40;
+		
 		override public function execute():void
 		{
 			var camera:Camera3D = view3dModel.camera;
@@ -50,7 +53,6 @@ package com.funbuilder.controller.commands
 			var theta:Number = view3dModel.getTheta( camPos, cameraTargetModel.getPosition() );
 			
 			var moveBlocks:Boolean = keysModel.isShiftDown;
-			
 			if ( !keysModel.isCommandDown ) {
 				for ( var key:String in keysModel.keysDown ) {
 					var moveX:Number = 0;
@@ -78,14 +80,20 @@ package com.funbuilder.controller.commands
 							moveX = Math.cos( theta + Math.PI * .5 ) * speed;
 							moveZ = Math.sin( theta + Math.PI * .5 ) * speed;
 							break;
-						case 189: // Minus
+						case UP_ARROW: // Crane up.
+							moveY = speed;
+							break;
+						case DOWN_ARROW: // Crane dowm.
+							moveY = -speed;
+							break;
+						/*case 189: // Minus
 							// Decrease elevation.
 							moveY = -speed;
 							break;
 						case 187: // Plus
 							// Increase elevation.
 							moveY = speed;
-							break;
+							break;*/
 						case 219: // Left brace
 							// Zoom out.
 							view3dModel.cameraController.distance += speed;
@@ -101,7 +109,10 @@ package com.funbuilder.controller.commands
 						moveX = Math.round( moveX ) * SegmentConstants.BLOCK_SIZE;
 						moveY = Math.round( moveY ) * SegmentConstants.BLOCK_SIZE;
 						moveZ = Math.round( moveZ ) * SegmentConstants.BLOCK_SIZE;
-						moveBlockRequest.dispatch( new Vector3D( moveX, moveY, moveZ ) );
+						var diff:Vector3D = new Vector3D( moveX, moveY, moveZ );
+						if ( diff.length > 0 ) {
+							moveBlockRequest.dispatch( diff );
+						}
 					} else {
 						camera.position.x += moveX;
 						camera.position.y += moveY;

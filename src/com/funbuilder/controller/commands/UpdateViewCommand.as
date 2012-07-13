@@ -50,10 +50,14 @@ package com.funbuilder.controller.commands
 		override public function execute():void
 		{
 			
-			if ( selectedBlocksModel.timeUntilMovement <= 0 ) {
-				if ( event.ticks % 2 == 0 ) {
-					handleKeyMovementRequest.dispatch();
+			if ( keysModel.isShiftDown ) {
+				if ( selectedBlocksModel.timeUntilMovement <= 0 ) {
+					if ( event.ticks % 2 == 0 ) {
+						handleKeyMovementRequest.dispatch();
+					}
 				}
+			} else {
+				handleKeyMovementRequest.dispatch();
 			}
 			
 			// Update target.

@@ -12,6 +12,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.AddBlockVO;
 	import com.funbuilder.model.vo.ChangeBlockTypeVO;
+	import com.funbuilder.model.vo.SelectBlockVO;
 	import com.funrun.model.vo.BlockVO;
 	
 	import org.robotlegs.mvcs.Command;
@@ -83,7 +84,7 @@ package com.funbuilder.controller.commands
 					addBlockRequest.dispatch( new AddBlockVO( newBlock, newBlockData.id ) );
 					
 					// Select the new one.
-					selectBlockRequest.dispatch( newBlock );
+					selectBlockRequest.dispatch( new SelectBlockVO( newBlock ) );
 				}
 				
 				invalidateSavedFileRequest.dispatch();
