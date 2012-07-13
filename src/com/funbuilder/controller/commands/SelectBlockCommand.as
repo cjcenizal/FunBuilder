@@ -56,7 +56,6 @@ package com.funbuilder.controller.commands
 			
 			
 			// UX:
-			// Fix block movement
 			// Make scroll crane blocks
 			// Add history to deselect all blocks command
 			// Warning when a block intersects other blocks

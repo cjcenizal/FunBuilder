@@ -12,6 +12,8 @@ package com.funbuilder.model
 		private var _blocks:Array;
 		private var _isMoved:Boolean = false;
 		
+		private var _timeUntilMovement:int = 0;
+		
 		public function SelectedBlocksModel()
 		{
 			super();
@@ -62,6 +64,15 @@ package com.funbuilder.model
 		
 		public function get numBlocks():int {
 			return _blocks.length;
+		}
+		
+		public function resetTimeUntilMovement():void {
+			_timeUntilMovement = 10;
+		}
+		
+		public function get timeUntilMovement():int {
+			if ( _timeUntilMovement > 0 ) _timeUntilMovement--;
+			return _timeUntilMovement; 
 		}
 		
 	}

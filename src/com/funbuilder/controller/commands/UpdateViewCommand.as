@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.cameras.Camera3D;
 	
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.HandleKeyMovementRequest;
 	import com.funbuilder.controller.signals.MoveBlockRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
@@ -33,7 +34,7 @@ package com.funbuilder.controller.commands
 		public var cameraTargetModel:CameraTargetModel;
 		
 		[Inject]
-		public var currentBlockModel:SelectedBlocksModel;
+		public var selectedBlocksModel:SelectedBlocksModel;
 		
 		[Inject]
 		public var keysModel:KeysModel;
@@ -44,20 +45,16 @@ package com.funbuilder.controller.commands
 		public var addHistoryRequest:AddHistoryRequest;
 		
 		[Inject]
-		public var moveBlockRequest:MoveBlockRequest;
+		public var handleKeyMovementRequest:HandleKeyMovementRequest;
 		
 		override public function execute():void
 		{
 			
-			
-			// If we have a currently selected block, move the block to match the target.
-			//if ( currentBlockModel.hasAnySelected() ) {
-				// Move block.
-				//var snappedPos:Vector3D = SegmentConstants.snapPointGrid( cameraTargetModel.targetX, cameraTargetModel.targetY, cameraTargetModel.targetZ );
-				//if ( !snappedPos.equals( currentBlockModel.getFocalPosition() ) ) {
-				//	moveBlockRequest.dispatch( snappedPos );
-				//}
-			//}
+			if ( selectedBlocksModel.timeUntilMovement <= 0 ) {
+				if ( event.ticks % 2 == 0 ) {
+					handleKeyMovementRequest.dispatch();
+				}
+			}
 			
 			// Update target.
 			cameraTargetModel.update();

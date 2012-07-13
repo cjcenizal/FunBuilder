@@ -8,6 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.ChangeBlockTypeVO;
 	
 	import flash.events.KeyboardEvent;
@@ -27,6 +28,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var keysModel:KeysModel;
+		
+		[Inject]
+		public var selectedBlocksModel:SelectedBlocksModel;
 		
 		// Commands.
 		
@@ -80,6 +84,7 @@ package com.funbuilder.controller.commands
 				}
 				keysModel.keysDown[ event.keyCode ] = true;
 				
+				selectedBlocksModel.resetTimeUntilMovement();
 				handleKeyMovementRequest.dispatch();
 			}
 		}

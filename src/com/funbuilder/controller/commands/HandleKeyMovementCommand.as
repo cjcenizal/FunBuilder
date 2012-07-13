@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import away3d.cameras.Camera3D;
 	
+	import com.funbuilder.controller.signals.HandleKeyMovementRequest;
 	import com.funbuilder.controller.signals.MoveBlockRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
