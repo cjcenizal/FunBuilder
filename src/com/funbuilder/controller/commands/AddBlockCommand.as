@@ -49,7 +49,10 @@ package com.funbuilder.controller.commands
 			segmentModel.add( addBlockData.mesh, indicator, addBlockData.id, addBlockData.key );
 			// TO-DO: Should this be done here, or in initial set up?
 			addBlockData.mesh.mouseEnabled = true;
+			// Add listeners for click, right-click, and mouse-over.
 			addBlockData.mesh.addEventListener( MouseEvent3D.CLICK, onClick );
+			
+			// Add to scene.
 			addObjectToSceneRequest.dispatch( addBlockData.mesh );
 			addObjectToSceneRequest.dispatch( indicator );
 			updateElevationRequest.dispatch();

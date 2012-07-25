@@ -70,7 +70,7 @@ package com.funbuilder.model {
 			}
 		}
 		
-		public function get2DFrom3D( position:Vector3D ):Point {
+		public function get2DFrom3D( position:Vector3D ):Vector3D {
 			return _view.project( position );
 		}
 		
