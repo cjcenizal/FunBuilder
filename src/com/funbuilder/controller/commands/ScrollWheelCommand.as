@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SelectedBlocksModel;
+	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import flash.geom.Vector3D;
@@ -24,6 +25,9 @@ package com.funbuilder.controller.commands
 		public var cameraTargetModel:CameraTargetModel;
 		
 		[Inject]
+		public var view3dModel:View3DModel;
+		
+		[Inject]
 		public var keysModel:KeysModel;
 		
 		// Commands.
@@ -33,8 +37,11 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
+			// Zoom.
+			view3dModel.cameraController.distance -= delta * 20;
+			
 			// Crane the camera.
-			cameraTargetModel.setPos( cameraTargetModel.targetX, cameraTargetModel.targetY + delta * 20, cameraTargetModel.targetZ );
+			//cameraTargetModel.setPos( cameraTargetModel.targetX, cameraTargetModel.targetY + delta * 20, cameraTargetModel.targetZ );
 		}
 	}
 }

@@ -8,10 +8,10 @@ package com.funbuilder.model
 	{
 		
 		public var keysDown:Object = {};
-		public var isShiftDown:Boolean = false;
-		public var isCommandDown:Boolean = false;
-		public var isAltDown:Boolean = false;
-		public var isControlDown:Boolean = false;
+		public var shift:Boolean = false;
+		public var command:Boolean = false;
+		public var alt:Boolean = false;
+		public var control:Boolean = false;
 		
 		public function KeysModel()
 		{

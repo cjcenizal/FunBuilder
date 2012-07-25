@@ -46,7 +46,7 @@ package com.funbuilder.controller.commands
 				// Deselect block.
 				deselectBlockRequest.dispatch( new DeselectBlockVO( block ) );
 			} else {
-				if ( keysModel.isShiftDown ) {
+				if ( keysModel.shift ) {
 					selectBlockRequest.dispatch( new SelectBlockVO( block, true, true ) );
 				} else {
 					deselectAllBlocksRequest.dispatch();

@@ -59,11 +59,16 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			keysModel.isCommandDown = event.commandKey;
-			keysModel.isShiftDown = event.shiftKey;
-			keysModel.isAltDown = event.altKey;
-			keysModel.isControlDown = event.controlKey;
+			keysModel.command = event.commandKey;
+			keysModel.shift = event.shiftKey;
+			keysModel.alt = event.altKey;
+			keysModel.control = event.controlKey;
+			
+			
 			if ( !keysModel.keysDown[ event.keyCode ] ) {
+				keysModel.keysDown[ event.keyCode ] = true;
+				
+				/*
 				switch ( event.keyCode ) {
 					case Keyboard.SPACE:
 						setEditingModeRequest.dispatch( EditingModeModel.BUILD );
@@ -81,10 +86,9 @@ package com.funbuilder.controller.commands
 						addHistoryRequest.dispatch();
 						deselectAllBlocksRequest.dispatch();
 						break;
-				}
-				keysModel.keysDown[ event.keyCode ] = true;
+				}*/
 				
-				selectedBlocksModel.resetTimeUntilMovement();
+				//selectedBlocksModel.resetTimeUntilMovement();
 				handleKeyMovementRequest.dispatch();
 			}
 		}

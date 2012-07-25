@@ -28,16 +28,19 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			keysModel.isCommandDown = event.commandKey;
-			keysModel.isShiftDown = event.shiftKey;
-			keysModel.isAltDown = event.altKey;
-			keysModel.isControlDown = event.controlKey;
+			keysModel.command = event.commandKey;
+			keysModel.shift = event.shiftKey;
+			keysModel.alt = event.altKey;
+			keysModel.control = event.controlKey;
+			
+			delete keysModel.keysDown[ event.keyCode ];
+			/*
 			switch ( event.keyCode ) {
 				case Keyboard.SPACE:
 					setEditingModeRequest.dispatch( EditingModeModel.LOOK );
 					break;
-			}
-			delete keysModel.keysDown[ event.keyCode ];
+			}*/
+			
 		}
 	}
 }

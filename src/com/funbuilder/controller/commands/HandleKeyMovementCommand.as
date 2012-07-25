@@ -52,13 +52,13 @@ package com.funbuilder.controller.commands
 			var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
 			var theta:Number = view3dModel.getTheta( camPos, cameraTargetModel.getPosition() );
 			
-			var moveBlocks:Boolean = keysModel.isShiftDown;
-			if ( !keysModel.isCommandDown ) {
+			//var moveBlocks:Boolean = keysModel.shift;
+			//if ( !keysModel.command ) {
 				for ( var key:String in keysModel.keysDown ) {
 					var moveX:Number = 0;
 					var moveY:Number = 0;
 					var moveZ:Number = 0;
-					var speed:Number = moveBlocks ? 1 : 20;
+					var speed:Number = 20;//moveBlocks ? 1 : 20;
 					switch ( int( key ) ) {
 						case Keyboard.W:
 							// Move along ground plane.
@@ -105,7 +105,7 @@ package com.funbuilder.controller.commands
 							}
 							break;
 					}
-					if ( moveBlocks ) {
+					/*if ( moveBlocks ) {
 						moveX = Math.round( moveX ) * SegmentConstants.BLOCK_SIZE;
 						moveY = Math.round( moveY ) * SegmentConstants.BLOCK_SIZE;
 						moveZ = Math.round( moveZ ) * SegmentConstants.BLOCK_SIZE;
@@ -113,14 +113,14 @@ package com.funbuilder.controller.commands
 						if ( diff.length > 0 ) {
 							moveBlockRequest.dispatch( diff );
 						}
-					} else {
+					} else {*/
 						camera.position.x += moveX;
 						camera.position.y += moveY;
 						camera.position.z += moveZ;
 						cameraTargetModel.move( moveX, moveY, moveZ );
-					}
+					//}
 				}
-			}
+			//}
 		}
 	}
 }

@@ -49,8 +49,8 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			
-			if ( keysModel.isShiftDown ) {
+			/*
+			if ( keysModel.shift ) {
 				if ( selectedBlocksModel.timeUntilMovement <= 0 ) {
 					if ( event.ticks % 2 == 0 ) {
 						handleKeyMovementRequest.dispatch();
@@ -59,6 +59,8 @@ package com.funbuilder.controller.commands
 			} else {
 				handleKeyMovementRequest.dispatch();
 			}
+			*/
+			handleKeyMovementRequest.dispatch();
 			
 			// Update target.
 			cameraTargetModel.update();
