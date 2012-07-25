@@ -31,6 +31,7 @@ package com.funbuilder.model {
 		
 		public function setView( view:View3D ):void {
 			_view = view;
+			_view.rightClickMenuEnabled = false;
 			_scene = _view.scene;
 			_camera = _view.camera;
 		}
