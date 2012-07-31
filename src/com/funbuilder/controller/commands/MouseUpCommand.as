@@ -11,6 +11,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void {
 			mouseModel.mouseDown = false;
+			mouseModel.prev = null;
 		}
 	}
 }

@@ -50,7 +50,7 @@ package com.funbuilder.controller.commands
 			
 			var camPos:Vector3D = camera.position;
 			var adjCamPos:Vector3D = new Vector3D( camPos.x, 0, camPos.z );
-			var theta:Number = view3dModel.getTheta( camPos, cameraTargetModel.getPosition() );
+			var theta:Number = 0;//view3dModel.getTheta( camPos, cameraTargetModel.getPosition() );
 			
 			//var moveBlocks:Boolean = keysModel.shift;
 			//if ( !keysModel.command ) {

@@ -57,42 +57,52 @@ package com.funbuilder.controller.commands
 		{
 			
 			// While mouse is down.
-			if ( mouseModel.mouseDown ) {
+			/* else */if ( mouseModel.rightMouseDown || keysModel.command ) {
+				// If shift key isn't down, then we're panning.
+				if ( mouseModel.prev ) {
+					var camera:Camera3D = view3dModel.camera;
+					var mousePos:Point = new Point( contextView.mouseX, contextView.mouseY );
+					var userTheta:Number = Trig.thetaFrom( mousePos, mouseModel.prev );
+					var groundTheta:Number = Trig.thetaFrom3( camera.position, cameraTargetModel.getPosition() );
+					var len:Number = Math.abs( mouseModel.prev.subtract( mousePos ).length );
+					if ( len > 0 ) {
+						var speed = -len;
+						var moveX:Number = Math.cos( userTheta + groundTheta ) * speed;
+						var moveZ:Number = Math.sin( userTheta + groundTheta ) * speed;
+						camera.position.x += moveX;
+						camera.position.z += moveZ;
+						cameraTargetModel.move( moveX, 0, moveZ );
+					}
+				}
+				/*
+				if ( angle > 0 ) {
+					if ( angle < Trig.QUARTER_PI ) {
+						trace("up");
+					} else if ( angle < Trig.THREE_QUARTER_PI ) {
+						trace("left");
+					} else {
+						trace("down");
+					}
+				} else {
+					if ( angle > -Trig.QUARTER_PI ) {
+						trace("up");
+					} else if ( angle > -Trig.THREE_QUARTER_PI ) {
+						trace("right");
+					} else {
+						trace("down");
+					}
+				}*/
+			} else if ( mouseModel.mouseDown ) {
 				if ( keysModel.shift ) {
-					// If shift key is down, then we're drag-adding to selection.
+					// If shift key is down, then we're drag-adding/-removing to/from selection.
 				} else {
 					// If shift key isn't down, then we're controlling the camera.
 					view3dModel.cameraController.panAngle = .35 * ( contextView.stage.mouseX - view3dModel.lastMouseX ) + view3dModel.lastPanAngle;
 					view3dModel.cameraController.tiltAngle = .35 * ( contextView.stage.mouseY - view3dModel.lastMouseY ) + view3dModel.lastTiltAngle;
 				}
-			} else if ( mouseModel.rightMouseDown ) {
-				// While right-mouse is down.
-				if ( keysModel.shift ) {
-					// If shift key is down, then we're drag-removing from selection.
-				} else {
-					// If shift key isn't down, then we're panning.
-					var angle:Number = Trig.thetaFrom( new Point( contextView.mouseX, contextView.mouseY ), mouseModel.prev );
-					if ( angle > 0 ) {
-						if ( angle < Trig.QUARTER_PI ) {
-							trace("up");
-						} else if ( angle < Trig.THREE_QUARTER_PI ) {
-							trace("left");
-						} else {
-							trace("down");
-						}
-					} else {
-						if ( angle > -Trig.QUARTER_PI ) {
-							trace("up");
-						} else if ( angle > -Trig.THREE_QUARTER_PI ) {
-							trace("right");
-						} else {
-							trace("down");
-						}
-					}
-				}
 			}
 			
-			handleKeyMovementRequest.dispatch();
+			//handleKeyMovementRequest.dispatch();
 			
 			// Update target.
 			cameraTargetModel.update();
@@ -101,8 +111,10 @@ package com.funbuilder.controller.commands
 			view3dModel.render();
 			
 			// Store mouse pos.
-			mouseModel.prev.x = contextView.stage.mouseX;
-			mouseModel.prev.y = contextView.stage.mouseY;
+			if ( mouseModel.prev ) {
+				mouseModel.prev.x = contextView.stage.mouseX;
+				mouseModel.prev.y = contextView.stage.mouseY;
+			}
 		}
 		
 		

@@ -144,11 +144,5 @@ package com.funbuilder.model {
 			return _camera;
 		}
 		
-		public function getTheta( posA:Vector3D, posB:Vector3D ):Number {
-			var deltaZ:Number = posA.z - posB.z;
-			var deltaX:Number = posA.x - posB.x;
-			var angle:Number = Math.atan2(deltaZ, deltaX);
-			return angle;
-		}
 	}
 }
