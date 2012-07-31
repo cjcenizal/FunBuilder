@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import away3d.cameras.Camera3D;
 	
+	import com.cenizal.utils.Trig;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.HandleKeyMovementRequest;
 	import com.funbuilder.controller.signals.MoveBlockRequest;
@@ -13,6 +14,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
 	
+	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.ui.Keyboard;
 	
@@ -69,6 +71,24 @@ package com.funbuilder.controller.commands
 					// If shift key is down, then we're drag-removing from selection.
 				} else {
 					// If shift key isn't down, then we're panning.
+					var angle:Number = Trig.thetaFrom( new Point( contextView.mouseX, contextView.mouseY ), mouseModel.prev );
+					if ( angle > 0 ) {
+						if ( angle < Trig.QUARTER_PI ) {
+							trace("up");
+						} else if ( angle < Trig.THREE_QUARTER_PI ) {
+							trace("left");
+						} else {
+							trace("down");
+						}
+					} else {
+						if ( angle > -Trig.QUARTER_PI ) {
+							trace("up");
+						} else if ( angle > -Trig.THREE_QUARTER_PI ) {
+							trace("right");
+						} else {
+							trace("down");
+						}
+					}
 				}
 			}
 			
@@ -79,6 +99,10 @@ package com.funbuilder.controller.commands
 			
 			// Render scene.
 			view3dModel.render();
+			
+			// Store mouse pos.
+			mouseModel.prev.x = contextView.stage.mouseX;
+			mouseModel.prev.y = contextView.stage.mouseY;
 		}
 		
 		
