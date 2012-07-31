@@ -270,10 +270,9 @@ package away3d.materials.passes
 
 			prevUsed = _previousUsedTexs[contextIndex];
 
-			for (i = _numUsedTextures; i < prevUsed; ++i) {
+			for (i = _numUsedTextures; i < prevUsed; ++i)
 				stage3DProxy.setTextureAt(i, null);
-			}
-			
+
 			if (_animationSet && !_animationSet.usesCPU)
 				_animationSet.activate(stage3DProxy, this);
 			
@@ -294,8 +293,6 @@ package away3d.materials.passes
 				_rttData[1] = textureRatioY;
 				stage3DProxy._context3D.setProgramConstantsFromVector(Context3DProgramType.VERTEX, 4, _rttData, 1);
 			}
-
-			context.setDepthTest( true, _depthCompareMode );
 		}
 
 		/**

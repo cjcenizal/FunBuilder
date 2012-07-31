@@ -470,11 +470,11 @@ package away3d.materials.passes
 		/**
 		 * @inheritDoc
 		 */
-		arcane override function getVertexCode(code : String) : String
+		arcane override function getVertexCode(animatorCode : String) : String
 		{
 			var normal : String = _animationTargetRegisters.length > 1? _animationTargetRegisters[1] : null;
 			var projectionVertexCode : String = getProjectionCode(_animationTargetRegisters[0], _projectedTargetRegister, normal);
-			_vertexCode = code + projectionVertexCode + _vertexCode;
+			_vertexCode = animatorCode + projectionVertexCode + _vertexCode;
 			return _vertexCode;
 		}
 
@@ -762,7 +762,7 @@ package away3d.materials.passes
 		{
 			_fragmentConstantData[_commonsDataIndex] = .5;
 			_fragmentConstantData[_commonsDataIndex + 1] = 0;
-			_fragmentConstantData[_commonsDataIndex + 2] = .00001;
+			_fragmentConstantData[_commonsDataIndex + 2] = 1/255;
 			_fragmentConstantData[_commonsDataIndex + 3] = 1;
 		}
 
@@ -1232,7 +1232,9 @@ package away3d.materials.passes
 
 			if (_alphaPremultiplied) {
 				_fragmentCode += "add " + _shadedTargetReg + ".w, " + _shadedTargetReg + ".w, " + _commonsReg + ".z\n" +
-								 "div " + _shadedTargetReg + ".xyz, " + _shadedTargetReg + ".xyz, " + _shadedTargetReg + ".w\n";
+								 "div " + _shadedTargetReg + ".xyz, " + _shadedTargetReg + ".xyz, " + _shadedTargetReg + ".w\n" +
+								 "sub " + _shadedTargetReg + ".w, " + _shadedTargetReg + ".w, " + _commonsReg + ".z\n"
+								 "sat " + _shadedTargetReg + ".xyz, " + _shadedTargetReg + ".xyz\n";
 			}
 
 			// resolve other dependencies as well?
