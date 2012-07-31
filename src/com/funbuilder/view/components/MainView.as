@@ -1,7 +1,6 @@
 package com.funbuilder.view.components {
 	
 	import away3d.containers.View3D;
-	import away3d.controllers.HoverController;
 	import away3d.debug.AwayStats;
 	
 	import com.bit101.components.Component;
@@ -20,6 +19,10 @@ package com.funbuilder.view.components {
 		public var onKeyUpSignal:Signal;
 		public var onScrollWheelSignal:Signal;
 		public var onStageClickSignal:Signal;
+		public var onMouseDownSignal:Signal;
+		public var onMouseUpSignal:Signal;
+		public var onRightMouseDownSignal:Signal;
+		public var onRightMouseUpSignal:Signal;
 		
 		private var _view:View3D;
 		private var _isDebugging:Boolean = false;
@@ -27,16 +30,8 @@ package com.funbuilder.view.components {
 		private var _bg:Panel;
 		private var _menuBar:MenuBarView;
 		private var _library:LibraryView;
-		private var _cameraController:HoverController;
 		
 		private var _mouseDownTimestamp:int = 0;
-		
-		// Camera control.
-		private var _move:Boolean = false;
-		private var _lastPanAngle:Number;
-		private var _lastTiltAngle:Number;
-		private var _lastMouseX:Number;
-		private var _lastMouseY:Number;
 		
 		public function MainView( parent:DisplayObjectContainer = null, x:Number = 0, y:Number = 0 ) {
 			super( parent, x, y );
@@ -48,6 +43,11 @@ package com.funbuilder.view.components {
 			onKeyUpSignal = new Signal();
 			onScrollWheelSignal = new Signal();
 			onStageClickSignal = new Signal();
+			onMouseDownSignal = new Signal();
+			onMouseUpSignal = new Signal();
+			onRightMouseDownSignal = new Signal();
+			onRightMouseUpSignal = new Signal();
+			
 			_bg = new Panel( this );
 			_menuBar = new MenuBarView( this );
 			_library = new LibraryView( this );
@@ -59,12 +59,13 @@ package com.funbuilder.view.components {
 			_bg.setSize( stage.stageWidth, 20 );
 			_library.setup();
 			_library.y = stage.stageHeight - _library.height;
-			stage.addEventListener( Event.ENTER_FRAME, onEnterFrame );
 			stage.addEventListener( Event.RESIZE, onStageResize );
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
 			stage.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown );
 			stage.addEventListener( MouseEvent.MOUSE_UP, onMouseUp );
+			stage.addEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onRightMouseDown );
+			stage.addEventListener( MouseEvent.RIGHT_MOUSE_UP, onRightMouseUp );
 			stage.addEventListener( MouseEvent.MOUSE_WHEEL, onMouseWheel );
 		}
 		
@@ -110,20 +111,12 @@ package com.funbuilder.view.components {
 			}
 		}
 		
-		public function set cameraController( controller:HoverController ):void {
-			_cameraController = controller;
+		private function onRightMouseDown( event:MouseEvent ):void {
+			onRightMouseDownSignal.dispatch();
 		}
 		
-		/**
-		 * Navigation and render loop
-		 */
-		private function onEnterFrame( event:Event ):void {
-			if ( _cameraController ) {
-				if ( _move ) {
-					_cameraController.panAngle = .35 * ( stage.mouseX - _lastMouseX ) + _lastPanAngle;
-					_cameraController.tiltAngle = .35 * ( stage.mouseY - _lastMouseY ) + _lastTiltAngle;
-				}
-			}
+		private function onRightMouseUp( event:MouseEvent ):void {
+			onRightMouseUpSignal.dispatch();
 		}
 		
 		/**
@@ -131,14 +124,7 @@ package com.funbuilder.view.components {
 		 */
 		private function onMouseDown( event:MouseEvent ):void {
 			_mouseDownTimestamp = new Date().time;
-			if ( _cameraController ) {
-				_lastPanAngle = _cameraController.panAngle;
-				_lastTiltAngle = _cameraController.tiltAngle;
-				_lastMouseX = stage.mouseX;
-				_lastMouseY = stage.mouseY;
-				_move = true;
-				stage.addEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
-			}
+			onMouseDownSignal.dispatch();
 		}
 		
 		/**
@@ -149,16 +135,7 @@ package com.funbuilder.view.components {
 			if ( clickTime < 200 ) {
 				onStageClickSignal.dispatch();
 			}
-			_move = false;
-			stage.removeEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
-		}
-		
-		/**
-		 * Mouse stage leave listener for navigation
-		 */
-		private function onStageMouseLeave( event:Event ):void {
-			_move = false;
-			stage.removeEventListener( Event.MOUSE_LEAVE, onStageMouseLeave );
+			onMouseUpSignal.dispatch();
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {

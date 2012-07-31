@@ -37,6 +37,8 @@ package away3d.core.managers
 		private static var _mouseOver : MouseEvent3D = new MouseEvent3D(MouseEvent3D.MOUSE_OVER);
 		private static var _mouseWheel : MouseEvent3D = new MouseEvent3D(MouseEvent3D.MOUSE_WHEEL);
 		private static var _mouseDoubleClick : MouseEvent3D = new MouseEvent3D(MouseEvent3D.DOUBLE_CLICK);
+		private static var _mouseRightClick:MouseEvent3D = new MouseEvent3D( MouseEvent3D.RIGHT_CLICK);
+		
 		private var _forceMouseMove : Boolean;
 		private var _mousePicker : IPicker = PickingType.RAYCAST_FIRST_ENCOUNTERED;
 
@@ -189,7 +191,13 @@ package away3d.core.managers
 			if (_collidingObject) queueDispatch(_mouseWheel, event);
 			_updateDirty = true;
 		}
-
+    
+		private function onMouseRightClick( event:MouseEvent ):void
+		{
+			if (_collidingObject) queueDispatch(_mouseRightClick, event);
+			_updateDirty = true;
+		}
+		
 		public function enableMouseListeners(view : View3D) : void
 		{
 			view.addEventListener(MouseEvent.CLICK, onClick);
@@ -200,6 +208,7 @@ package away3d.core.managers
 			view.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 			view.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			view.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			view.addEventListener(MouseEvent.RIGHT_CLICK, onMouseRightClick);
 		}
 
 		public function disableMouseListeners(view : View3D) : void
@@ -212,6 +221,7 @@ package away3d.core.managers
 			view.removeEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 			view.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			view.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			view.removeEventListener(MouseEvent.RIGHT_CLICK, onMouseRightClick);
 		}
 
 		public function get forceMouseMove() : Boolean

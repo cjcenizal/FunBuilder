@@ -11,7 +11,6 @@ package com.funbuilder.controller.commands
 	import away3d.primitives.CubeGeometry;
 	import away3d.primitives.PlaneGeometry;
 	
-	import com.funbuilder.controller.signals.AddCameraControllerRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
@@ -66,9 +65,6 @@ package com.funbuilder.controller.commands
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
 		[Inject]
-		public var addCameraControllerRequest:AddCameraControllerRequest;
-		
-		[Inject]
 		public var newFileRequest:NewFileRequest;
 		
 		override public function execute():void
@@ -99,7 +95,6 @@ package com.funbuilder.controller.commands
 			var cameraController:HoverController = new HoverController( camera, target, 45, 10, 800 );
 			cameraController.steps = 1;
 			view3dModel.cameraController = cameraController;
-			addCameraControllerRequest.dispatch( cameraController );
 			
 			// Add ground plane.
 			var planeGeometry:PlaneGeometry = new PlaneGeometry( SegmentConstants.SEGMENT_WIDTH, SegmentConstants.SEGMENT_DEPTH, 12, 26, true );

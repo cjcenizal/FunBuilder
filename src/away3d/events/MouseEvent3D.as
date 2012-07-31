@@ -21,6 +21,11 @@ package away3d.events
 		private var _propagataionStopped : Boolean;
 		
 		/**
+		 * Defines the value of the type property of a mouseMove3d event object.
+		 */
+		public static const RIGHT_CLICK : String = "mouseRightClick3d";
+		
+		/**
 		 * Defines the value of the type property of a mouseOver3d event object.
 		 */
 		public static const MOUSE_OVER : String = "mouseOver3d";

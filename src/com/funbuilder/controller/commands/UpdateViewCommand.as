@@ -7,6 +7,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.MoveBlockRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -39,6 +40,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var keysModel:KeysModel;
 		
+		[Inject]
+		public var mouseModel:MouseModel;
+		
 		// Commands.
 		
 		[Inject]
@@ -49,17 +53,25 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			/*
-			if ( keysModel.shift ) {
-				if ( selectedBlocksModel.timeUntilMovement <= 0 ) {
-					if ( event.ticks % 2 == 0 ) {
-						handleKeyMovementRequest.dispatch();
-					}
+			
+			// While mouse is down.
+			if ( mouseModel.mouseDown ) {
+				if ( keysModel.shift ) {
+					// If shift key is down, then we're drag-adding to selection.
+				} else {
+					// If shift key isn't down, then we're controlling the camera.
+					view3dModel.cameraController.panAngle = .35 * ( contextView.stage.mouseX - view3dModel.lastMouseX ) + view3dModel.lastPanAngle;
+					view3dModel.cameraController.tiltAngle = .35 * ( contextView.stage.mouseY - view3dModel.lastMouseY ) + view3dModel.lastTiltAngle;
 				}
-			} else {
-				handleKeyMovementRequest.dispatch();
+			} else if ( mouseModel.rightMouseDown ) {
+				// While right-mouse is down.
+				if ( keysModel.shift ) {
+					// If shift key is down, then we're drag-removing from selection.
+				} else {
+					// If shift key isn't down, then we're panning.
+				}
 			}
-			*/
+			
 			handleKeyMovementRequest.dispatch();
 			
 			// Update target.

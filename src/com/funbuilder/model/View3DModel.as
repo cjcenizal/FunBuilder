@@ -23,6 +23,12 @@ package com.funbuilder.model {
 		public var cameraController:HoverController;
 		public var groundPlane:Mesh;
 		
+		// Camera control.
+		public var lastPanAngle:Number;
+		public var lastTiltAngle:Number;
+		public var lastMouseX:Number;
+		public var lastMouseY:Number;
+		
 		public function View3DModel() {
 			super();
 			_cameraPosition = new Vector3D();

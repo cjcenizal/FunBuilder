@@ -51,6 +51,7 @@ package com.funbuilder.controller.commands
 			addBlockData.mesh.mouseEnabled = true;
 			// Add listeners for click, right-click, and mouse-over.
 			addBlockData.mesh.addEventListener( MouseEvent3D.CLICK, onClick );
+			addBlockData.mesh.addEventListener( MouseEvent3D.RIGHT_CLICK, onRightClick );
 			
 			// Add to scene.
 			addObjectToSceneRequest.dispatch( addBlockData.mesh );
@@ -59,7 +60,12 @@ package com.funbuilder.controller.commands
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {
+			trace("click " + ( e.object as Mesh ) );
 			clickBlockRequest.dispatch( e.object as Mesh );
+		}
+		
+		private function onRightClick( e:MouseEvent3D ):void {
+			trace("right click " + ( e.object as Mesh ));
 		}
 	}
 }

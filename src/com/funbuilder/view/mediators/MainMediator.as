@@ -1,12 +1,14 @@
 package com.funbuilder.view.mediators {
 	
 	import away3d.containers.View3D;
-	import away3d.controllers.HoverController;
 	
-	import com.funbuilder.controller.signals.AddCameraControllerRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
+	import com.funbuilder.controller.signals.MouseDownRequest;
+	import com.funbuilder.controller.signals.MouseUpRequest;
+	import com.funbuilder.controller.signals.RightMouseDownRequest;
+	import com.funbuilder.controller.signals.RightMouseUpRequest;
 	import com.funbuilder.controller.signals.ScrollWheelRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
@@ -33,9 +35,6 @@ package com.funbuilder.view.mediators {
 		public var showStatsRequest:ShowStatsRequest;
 		
 		[Inject]
-		public var addCameraControllerRequest:AddCameraControllerRequest;
-		
-		[Inject]
 		public var keyDownRequest:KeyDownRequest;
 		
 		[Inject]
@@ -50,13 +49,29 @@ package com.funbuilder.view.mediators {
 		[Inject]
 		public var scrollWheelRequest:ScrollWheelRequest;
 		
+		[Inject]
+		public var mouseDownRequest:MouseDownRequest;
+		
+		[Inject]
+		public var mouseUpRequest:MouseUpRequest;
+		
+		[Inject]
+		public var rightMouseDownRequest:RightMouseDownRequest;
+		
+		[Inject]
+		public var rightMouseUpRequest:RightMouseUpRequest;
+		
 		override public function onRegister():void {
-			this.view.onKeyDownSignal.add( onKeyDown );
-			this.view.onKeyUpSignal.add( onKeyUp );
-			this.view.onScrollWheelSignal.add( onScrollWheel );
-			this.view.onStageClickSignal.add( onStageClick );
+			// Add view listeners.
+			view.onKeyDownSignal.add( onKeyDown );
+			view.onKeyUpSignal.add( onKeyUp );
+			view.onScrollWheelSignal.add( onScrollWheel );
+			view.onStageClickSignal.add( onStageClick );
+			view.onMouseDownSignal.add( onMouseDown );
+			view.onMouseUpSignal.add( onMouseUp );
+			view.onRightMouseDownSignal.add( onRightMouseDown );
+			view.onRightMouseUpSignal.add( onRightMouseUp );
 			addView3DRequest.add( onAddView3DRequested );
-			addCameraControllerRequest.add( onAddCameraControllerRequested );
 			showStatsRequest.add( onShowStatsRequested );
 			setEditingModeRequest.add( onSetEditingModeRequested );
 		}
@@ -77,12 +92,24 @@ package com.funbuilder.view.mediators {
 			stageClickRequest.dispatch();
 		}
 		
-		private function onAddView3DRequested( view3D:View3D ):void {
-			this.view.view3D = view3D;
+		private function onMouseDown():void {
+			mouseDownRequest.dispatch();
 		}
 		
-		private function onAddCameraControllerRequested( controller:HoverController ):void {
-			this.view.cameraController = controller;
+		private function onMouseUp():void {
+			mouseUpRequest.dispatch();
+		}
+		
+		private function onRightMouseDown():void {
+			rightMouseDownRequest.dispatch();
+		}
+		
+		private function onRightMouseUp():void {
+			rightMouseUpRequest.dispatch();
+		}
+		
+		private function onAddView3DRequested( view3D:View3D ):void {
+			this.view.view3D = view3D;
 		}
 		
 		private function onShowStatsRequested( showStats:Boolean ):void {
