@@ -7,6 +7,7 @@ package com.funbuilder.controller.commands
 	import away3d.controllers.HoverController;
 	import away3d.core.base.Geometry;
 	import away3d.entities.Mesh;
+	import away3d.events.MouseEvent3D;
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.CubeGeometry;
 	import away3d.primitives.PlaneGeometry;
@@ -21,6 +22,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.ElevationModel;
+	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -47,6 +49,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var elevationModel:ElevationModel;
+		
+		[Inject]
+		public var handlesModel:HandlesModel;
 		
 		// Commands.
 		
@@ -133,6 +138,15 @@ package com.funbuilder.controller.commands
 				}
 			}
 			
+			// Add handles.
+			addObjectToSceneRequest.dispatch( handlesModel.xHandle );
+			addObjectToSceneRequest.dispatch( handlesModel.yHandle );
+			addObjectToSceneRequest.dispatch( handlesModel.zHandle );
+			handlesModel.xHandle.addEventListener( MouseEvent3D.MOUSE_DOWN, onXHandleMouseDown );
+			handlesModel.yHandle.addEventListener( MouseEvent3D.MOUSE_DOWN, onYHandleMouseDown );
+			handlesModel.zHandle.addEventListener( MouseEvent3D.MOUSE_DOWN, onZHandleMouseDown );
+			handlesModel.moveTo( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
+			
 			// Show/hide stats.
 			showStatsRequest.dispatch( true );
 			
@@ -144,6 +158,18 @@ package com.funbuilder.controller.commands
 			
 			// Create a new file.
 			newFileRequest.dispatch();
+		}
+		
+		private function onXHandleMouseDown( e:MouseEvent3D ):void {
+			
+		}
+		
+		private function onYHandleMouseDown( e:MouseEvent3D ):void {
+			
+		}
+		
+		private function onZHandleMouseDown( e:MouseEvent3D ):void {
+			
 		}
 	}
 }

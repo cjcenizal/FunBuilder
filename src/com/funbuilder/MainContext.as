@@ -83,6 +83,7 @@ package com.funbuilder
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.FileModel;
+	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.MouseModel;
@@ -117,6 +118,7 @@ package com.funbuilder
 			injector.mapSingleton( EditingModeModel );
 			injector.mapSingleton( ElevationModel );
 			injector.mapSingleton( FileModel );
+			injector.mapSingleton( HandlesModel );
 			injector.mapSingleton( HistoryModel );
 			injector.mapSingleton( KeysModel );
 			injector.mapSingleton( MouseModel );
