@@ -5,6 +5,7 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.ClickBlockRequest;
+	import com.funbuilder.controller.signals.MouseOverBlockRequest;
 	import com.funbuilder.controller.signals.RightClickBlockRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.EditingModeModel;
@@ -42,6 +43,9 @@ package com.funbuilder.controller.commands
 		public var rightClickBlockRequest:RightClickBlockRequest;
 		
 		[Inject]
+		public var mouseOverBlockRequest:MouseOverBlockRequest;
+		
+		[Inject]
 		public var updateElevationRequest:UpdateElevationRequest;
 		
 		override public function execute():void
@@ -56,6 +60,7 @@ package com.funbuilder.controller.commands
 			// Add listeners for click, right-click, and mouse-over.
 			addBlockData.mesh.addEventListener( MouseEvent3D.CLICK, onClick );
 			addBlockData.mesh.addEventListener( MouseEvent3D.RIGHT_CLICK, onRightClick );
+			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_OVER, onMouseOver );
 			
 			// Add to scene.
 			addObjectToSceneRequest.dispatch( addBlockData.mesh );
@@ -69,6 +74,10 @@ package com.funbuilder.controller.commands
 		
 		private function onRightClick( e:MouseEvent3D ):void {
 			rightClickBlockRequest.dispatch( e.object as Mesh );
+		}
+		
+		private function onMouseOver( e:MouseEvent3D ):void {
+			mouseOverBlockRequest.dispatch( e.object as Mesh );
 		}
 	}
 }
