@@ -4,15 +4,11 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
-	import com.funbuilder.controller.signals.HandleKeyMovementRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
-	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.ChangeBlockTypeVO;
 	
 	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -48,9 +44,6 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
-		
-		[Inject]
-		public var handleKeyMovementRequest:HandleKeyMovementRequest;
 		
 		// Private vars.
 		
@@ -89,7 +82,6 @@ package com.funbuilder.controller.commands
 				}*/
 				
 				//selectedBlocksModel.resetTimeUntilMovement();
-				handleKeyMovementRequest.dispatch();
 			}
 		}
 	}

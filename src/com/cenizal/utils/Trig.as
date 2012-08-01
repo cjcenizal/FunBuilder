@@ -15,9 +15,5 @@ package com.cenizal.utils
 		public static function thetaFrom( p1:Point, p2:Point ):Number {
 			return Math.atan2( p2.x - p1.x, p2.y - p1.y );
 		}
-		
-		public static function thetaFrom3( p1:Vector3D, p2:Vector3D ):Number {
-			return Math.atan2( p2.x - p1.x, p2.y - p1.y );
-		}
 	}
 }

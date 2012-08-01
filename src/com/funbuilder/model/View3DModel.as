@@ -143,6 +143,5 @@ package com.funbuilder.model {
 		public function get camera():Camera3D {
 			return _camera;
 		}
-		
 	}
 }
