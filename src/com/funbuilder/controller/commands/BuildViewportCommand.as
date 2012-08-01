@@ -15,6 +15,7 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
+	import com.funbuilder.controller.signals.GrabHandleRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowStatsRequest;
@@ -72,6 +73,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var newFileRequest:NewFileRequest;
+		
+		[Inject]
+		public var grabHandleRequest:GrabHandleRequest;
 		
 		override public function execute():void
 		{
@@ -161,15 +165,15 @@ package com.funbuilder.controller.commands
 		}
 		
 		private function onXHandleMouseDown( e:MouseEvent3D ):void {
-			
+			grabHandleRequest.dispatch( "x" );
 		}
 		
 		private function onYHandleMouseDown( e:MouseEvent3D ):void {
-			
+			grabHandleRequest.dispatch( "y" );
 		}
 		
 		private function onZHandleMouseDown( e:MouseEvent3D ):void {
-			
+			grabHandleRequest.dispatch( "z" );
 		}
 	}
 }

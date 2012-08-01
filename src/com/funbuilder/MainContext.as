@@ -11,6 +11,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.DeleteBlockCommand;
 	import com.funbuilder.controller.commands.DeselectAllBlocksCommand;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
+	import com.funbuilder.controller.commands.GrabHandleCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.InvalidateSavedFileCommand;
 	import com.funbuilder.controller.commands.KeyDownCommand;
@@ -50,6 +51,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.GrabHandleRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
@@ -147,6 +149,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( DeleteBlockRequest,					DeleteBlockCommand );
 			signalCommandMap.mapSignalClass( DeselectAllBlocksRequest,				DeselectAllBlocksCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
+			signalCommandMap.mapSignalClass( GrabHandleRequest,						GrabHandleCommand );
 			signalCommandMap.mapSignalClass( InvalidateSavedFileRequest,			InvalidateSavedFileCommand );
 			signalCommandMap.mapSignalClass( KeyDownRequest,						KeyDownCommand );
 			signalCommandMap.mapSignalClass( KeyUpRequest,							KeyUpCommand );
