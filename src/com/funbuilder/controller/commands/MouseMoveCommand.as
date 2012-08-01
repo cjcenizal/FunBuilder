@@ -4,13 +4,16 @@ package com.funbuilder.controller.commands
 	
 	import org.robotlegs.mvcs.Command;
 	
-	public class MouseUpCommand extends Command
+	public class MouseMoveCommand extends Command
 	{
+		
+		// Models.
+		
 		[Inject]
 		public var mouseModel:MouseModel;
 		
 		override public function execute():void {
-			mouseModel.setMouseUp();
+			mouseModel.moveMouse( contextView.stage.mouseX, contextView.stage.mouseY );
 		}
 	}
 }

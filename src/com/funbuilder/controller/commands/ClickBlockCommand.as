@@ -3,11 +3,10 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
-	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.DeselectBlockVO;
 	import com.funbuilder.model.vo.SelectBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
@@ -28,10 +27,10 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var selectedBlocksModel:SelectedBlocksModel;
 		
-		// Commands.
-		
 		[Inject]
-		public var deselectBlockRequest:DeselectBlockRequest;
+		public var mouseModel:MouseModel;
+		
+		// Commands.
 		
 		[Inject]
 		public var deselectAllBlocksRequest:DeselectAllBlocksRequest;
@@ -41,16 +40,17 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-		
-			if ( selectedBlocksModel.contains( block ) ) {
-				// Deselect block.
-				deselectBlockRequest.dispatch( new DeselectBlockVO( block ) );
-			} else {
-				if ( keysModel.shift ) {
-					selectBlockRequest.dispatch( new SelectBlockVO( block, true, true ) );
-				} else {
-					deselectAllBlocksRequest.dispatch();
-					selectBlockRequest.dispatch( new SelectBlockVO( block, false, true ) );
+			if ( mouseModel.canClick ) {
+				// If it's not already selected.
+				if ( !selectedBlocksModel.contains( block ) ) {
+					if ( keysModel.shift ) {
+						// If shift is down, add it to selection.
+						selectBlockRequest.dispatch( new SelectBlockVO( block, true, true ) );
+					} else {
+						// Else, select it and deselect all others.
+						deselectAllBlocksRequest.dispatch();
+						selectBlockRequest.dispatch( new SelectBlockVO( block, false, true ) );
+					}
 				}
 			}
 		}

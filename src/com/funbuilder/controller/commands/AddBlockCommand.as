@@ -5,6 +5,7 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.ClickBlockRequest;
+	import com.funbuilder.controller.signals.RightClickBlockRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.SegmentModel;
@@ -38,6 +39,9 @@ package com.funbuilder.controller.commands
 		public var clickBlockRequest:ClickBlockRequest;
 		
 		[Inject]
+		public var rightClickBlockRequest:RightClickBlockRequest;
+		
+		[Inject]
 		public var updateElevationRequest:UpdateElevationRequest;
 		
 		override public function execute():void
@@ -60,12 +64,11 @@ package com.funbuilder.controller.commands
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {
-			trace("click " + ( e.object as Mesh ) );
 			clickBlockRequest.dispatch( e.object as Mesh );
 		}
 		
 		private function onRightClick( e:MouseEvent3D ):void {
-			trace("right click " + ( e.object as Mesh ));
+			rightClickBlockRequest.dispatch( e.object as Mesh );
 		}
 	}
 }

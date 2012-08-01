@@ -10,8 +10,7 @@ package com.funbuilder.controller.commands
 		public var mouseModel:MouseModel;
 		
 		override public function execute():void {
-			mouseModel.rightMouseDown = false;
-			mouseModel.prev = null;
+			mouseModel.setMouseUp();
 		}
 	}
 }

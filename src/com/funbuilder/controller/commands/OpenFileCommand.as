@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands {
 	import com.funbuilder.controller.signals.LoadSegmentRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.model.FileModel;
+	import com.funbuilder.model.KeysModel;
 	
 	import flash.events.Event;
 	import flash.filesystem.File;
@@ -16,6 +17,9 @@ package com.funbuilder.controller.commands {
 		
 		[Inject]
 		public var fileModel:FileModel;
+		
+		[Inject]
+		public var keysModel:KeysModel;
 		
 		// Commands.
 		
@@ -33,6 +37,7 @@ package com.funbuilder.controller.commands {
 		private var _file:File;
 		
 		override public function execute():void {
+			keysModel.clearModifiers();
 			_file = new File();
 			_file.addEventListener( Event.SELECT, onSelectFileToOpen );
 			_file.browseForOpen( "Select a Segment JSON file to open" );

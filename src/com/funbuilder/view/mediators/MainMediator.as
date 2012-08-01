@@ -6,6 +6,7 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
 	import com.funbuilder.controller.signals.MouseDownRequest;
+	import com.funbuilder.controller.signals.MouseMoveRequest;
 	import com.funbuilder.controller.signals.MouseUpRequest;
 	import com.funbuilder.controller.signals.RightMouseDownRequest;
 	import com.funbuilder.controller.signals.RightMouseUpRequest;
@@ -61,6 +62,9 @@ package com.funbuilder.view.mediators {
 		[Inject]
 		public var rightMouseUpRequest:RightMouseUpRequest;
 		
+		[Inject]
+		public var mouseMoveRequest:MouseMoveRequest;
+		
 		override public function onRegister():void {
 			// Add view listeners.
 			view.onKeyDownSignal.add( onKeyDown );
@@ -71,6 +75,7 @@ package com.funbuilder.view.mediators {
 			view.onMouseUpSignal.add( onMouseUp );
 			view.onRightMouseDownSignal.add( onRightMouseDown );
 			view.onRightMouseUpSignal.add( onRightMouseUp );
+			view.onMouseMoveSignal.add( onMouseMove );
 			addView3DRequest.add( onAddView3DRequested );
 			showStatsRequest.add( onShowStatsRequested );
 			setEditingModeRequest.add( onSetEditingModeRequested );
@@ -106,6 +111,10 @@ package com.funbuilder.view.mediators {
 		
 		private function onRightMouseUp():void {
 			rightMouseUpRequest.dispatch();
+		}
+		
+		private function onMouseMove():void {
+			mouseMoveRequest.dispatch();
 		}
 		
 		private function onAddView3DRequested( view3D:View3D ):void {

@@ -51,14 +51,14 @@ package com.funbuilder.controller.commands
 			// While mouse is down.
 			if ( mouseModel.rightMouseDown || keysModel.command ) {
 				// If shift key isn't down, then we're panning.
-				if ( mouseModel.prev ) {
+				if ( mouseModel.prevPosition ) {
 					var camera:Camera3D = view3dModel.camera;
 					var mousePos:Point = new Point( contextView.mouseX, contextView.mouseY );
 					var cameraTheta:Number = Trig.thetaFrom(
 						new Point( camera.position.z, camera.position.x ),
 						new Point( cameraTargetModel.getPosition().z, cameraTargetModel.getPosition().x ) );
-					var mouseTheta:Number = Trig.thetaFrom( mousePos, mouseModel.prev );
-					var len:Number = Math.abs( mouseModel.prev.subtract( mousePos ).length );
+					var mouseTheta:Number = Trig.thetaFrom( mousePos, mouseModel.prevPosition );
+					var len:Number = Math.abs( mouseModel.prevPosition.subtract( mousePos ).length );
 					if ( len > 0 ) {
 						var boost = view3dModel.cameraController.distance * .03;
 						var distance = ( len + boost ) * -1;
@@ -87,12 +87,8 @@ package com.funbuilder.controller.commands
 			view3dModel.render();
 			
 			// Store mouse pos.
-			if ( mouseModel.prev ) {
-				mouseModel.prev.x = contextView.stage.mouseX;
-				mouseModel.prev.y = contextView.stage.mouseY;
-			}
+			mouseModel.updatePrevPosition( contextView.stage.mouseX, contextView.stage.mouseY );
 		}
-		
 		
 	}
 }

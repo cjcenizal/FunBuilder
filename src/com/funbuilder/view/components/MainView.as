@@ -23,6 +23,7 @@ package com.funbuilder.view.components {
 		public var onMouseUpSignal:Signal;
 		public var onRightMouseDownSignal:Signal;
 		public var onRightMouseUpSignal:Signal;
+		public var onMouseMoveSignal:Signal;
 		
 		private var _view:View3D;
 		private var _isDebugging:Boolean = false;
@@ -47,6 +48,7 @@ package com.funbuilder.view.components {
 			onMouseUpSignal = new Signal();
 			onRightMouseDownSignal = new Signal();
 			onRightMouseUpSignal = new Signal();
+			onMouseMoveSignal = new Signal();
 			
 			_bg = new Panel( this );
 			_menuBar = new MenuBarView( this );
@@ -67,6 +69,7 @@ package com.funbuilder.view.components {
 			stage.addEventListener( MouseEvent.RIGHT_MOUSE_DOWN, onRightMouseDown );
 			stage.addEventListener( MouseEvent.RIGHT_MOUSE_UP, onRightMouseUp );
 			stage.addEventListener( MouseEvent.MOUSE_WHEEL, onMouseWheel );
+			stage.addEventListener( MouseEvent.MOUSE_MOVE, onMouseMove );
 		}
 		
 		private function onStageResize( e:Event ):void {
@@ -136,6 +139,10 @@ package com.funbuilder.view.components {
 				onStageClickSignal.dispatch();
 			}
 			onMouseUpSignal.dispatch();
+		}
+		
+		private function onMouseMove( e:MouseEvent ):void {
+			onMouseMoveSignal.dispatch();
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {

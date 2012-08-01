@@ -10,6 +10,7 @@ package com.funbuilder.controller.commands
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.CubeGeometry;
 	import away3d.primitives.PlaneGeometry;
+	import away3d.primitives.SphereGeometry;
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
@@ -86,7 +87,7 @@ package com.funbuilder.controller.commands
 			addView3DRequest.dispatch( view );
 			
 			// Add camera target.
-			var target:Mesh = new Mesh( new CubeGeometry( 110, 110, 110 ), null );
+			var target:Mesh = new Mesh( new SphereGeometry( 10 ), null );
 			cameraTargetModel.setMesh( target );
 			cameraTargetModel.setPos( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
 			addObjectToSceneRequest.dispatch( target );

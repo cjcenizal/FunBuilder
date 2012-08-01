@@ -2,6 +2,7 @@ package com.funbuilder.controller.commands {
 
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.model.FileModel;
+	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
 	
 	import flash.events.Event;
@@ -21,6 +22,9 @@ package com.funbuilder.controller.commands {
 		[Inject]
 		public var fileModel:FileModel;
 		
+		[Inject]
+		public var keysModel:KeysModel;
+		
 		// Commands.
 		
 		[Inject]
@@ -31,6 +35,7 @@ package com.funbuilder.controller.commands {
 		private var _file:File;
 		
 		override public function execute():void {
+			keysModel.clearModifiers();
 			var path:String = ( fileModel.file ) ? fileModel.file.nativePath : File.applicationDirectory.nativePath;
 			_file = new File( path );
 			_file.addEventListener( Event.SELECT, onSelectFileToSave );

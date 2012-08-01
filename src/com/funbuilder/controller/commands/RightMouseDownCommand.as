@@ -12,8 +12,7 @@ package com.funbuilder.controller.commands
 		public var mouseModel:MouseModel;
 		
 		override public function execute():void {
-			mouseModel.rightMouseDown = true;
-			mouseModel.prev = new Point( contextView.stage.mouseX, contextView.stage.mouseY );
+			mouseModel.setRightMouseDown( contextView.stage.mouseX, contextView.stage.mouseY );
 		}
 	}
 }

@@ -32,7 +32,6 @@ package com.funbuilder.controller.commands
 			keysModel.shift = event.shiftKey;
 			keysModel.alt = event.altKey;
 			keysModel.control = event.controlKey;
-			
 			delete keysModel.keysDown[ event.keyCode ];
 			/*
 			switch ( event.keyCode ) {

@@ -16,8 +16,7 @@ package com.funbuilder.controller.commands
 		public var view3dModel:View3DModel;
 		
 		override public function execute():void {
-			mouseModel.mouseDown = true;
-			mouseModel.prev = new Point( contextView.stage.mouseX, contextView.stage.mouseY );
+			mouseModel.setMouseDown( contextView.stage.mouseX, contextView.stage.mouseY );
 			view3dModel.lastPanAngle = view3dModel.cameraController.panAngle;
 			view3dModel.lastTiltAngle = view3dModel.cameraController.tiltAngle;
 			view3dModel.lastMouseX = contextView.stage.mouseX;

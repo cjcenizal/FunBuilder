@@ -25,5 +25,9 @@ package com.funbuilder.model
 		public function get isSpaceDown():Boolean {
 			return keysDown[ Keyboard.SPACE ];
 		}
+		
+		public function clearModifiers():void {
+			shift = command = alt = control = false;
+		}
 	}
 }

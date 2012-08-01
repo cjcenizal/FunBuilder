@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands {
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.model.FileModel;
+	import com.funbuilder.model.KeysModel;
 	
 	import flash.filesystem.File;
 	
@@ -15,6 +16,9 @@ package com.funbuilder.controller.commands {
 		
 		[Inject]
 		public var fileModel:FileModel;
+		
+		[Inject]
+		public var keysModel:KeysModel;
 		
 		// Commands.
 		
@@ -28,6 +32,7 @@ package com.funbuilder.controller.commands {
 		public var showFileNameRequest:ShowFileNameRequest;
 		
 		override public function execute():void {
+			keysModel.clearModifiers();
 			var path:String = ( fileModel.file ) ? fileModel.file.parent.nativePath : File.applicationDirectory.nativePath;
 			fileModel.file = new File( path );
 			clearSegmentRequest.dispatch();
