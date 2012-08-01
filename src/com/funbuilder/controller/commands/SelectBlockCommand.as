@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
@@ -49,28 +50,12 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
 		
+		[Inject]
+		public var updateHandlesRequest:UpdateHandlesRequest;
+		
 		override public function execute():void
 		{
-			
-			// TO-DO:
-			
-			
-			// UX:
-			// Make scroll crane blocks
-			// Add history to deselect all blocks command
-			// Warning when a block intersects other blocks
-			// Duplicate selection
-			// New/open/exit should all prompt a save if unsaved
-			
-
-			
-			// "Thank you! Just for playing, you get 50 credits for free!"
-			
-			
-			
-			
-			
-			
+			// Save history.
 			if ( selectData.saveHistory ) {
 				addHistoryRequest.dispatch();
 			}
@@ -80,6 +65,8 @@ package com.funbuilder.controller.commands
 			// Snap target to block.
 			//cameraTargetModel.setPos( selectData.block.x, selectData.block.y + SegmentConstants.BLOCK_SIZE * .5, selectData.block.z );	
 			updateTargetAppearanceRequest.dispatch();
+			// Update handles.
+			updateHandlesRequest.dispatch();
 		}
 	}
 }

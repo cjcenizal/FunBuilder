@@ -9,6 +9,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.RightClickBlockRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.EditingModeModel;
+	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
@@ -30,6 +31,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var editingModeModel:EditingModeModel;
+		
+		[Inject]
+		public var keysModel:KeysModel;
 		
 		// Commands.
 		
@@ -69,7 +73,11 @@ package com.funbuilder.controller.commands
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {
-			clickBlockRequest.dispatch( e.object as Mesh );
+			if ( keysModel.command ) {
+				rightClickBlockRequest.dispatch( e.object as Mesh );
+			} else {
+				clickBlockRequest.dispatch( e.object as Mesh );
+			}
 		}
 		
 		private function onRightClick( e:MouseEvent3D ):void {

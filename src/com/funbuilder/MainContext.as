@@ -37,6 +37,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.StageClickCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
 	import com.funbuilder.controller.commands.UpdateElevationCommand;
+	import com.funbuilder.controller.commands.UpdateHandlesCommand;
 	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
 	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
 	import com.funbuilder.controller.signals.AddBlockRequest;
@@ -79,6 +80,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.StageClickRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
+	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
@@ -174,6 +176,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( StageClickRequest,						StageClickCommand );
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
 			signalCommandMap.mapSignalClass( UpdateElevationRequest,				UpdateElevationCommand );
+			signalCommandMap.mapSignalClass( UpdateHandlesRequest,					UpdateHandlesCommand );
 			signalCommandMap.mapSignalClass( UpdateTargetAppearanceRequest,			UpdateTargetAppearanceCommand );
 			
 			// Map views to mediators.

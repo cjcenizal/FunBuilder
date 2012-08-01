@@ -1,6 +1,5 @@
 package com.funbuilder.controller.commands
 {
-	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.SelectedBlocksModel;
@@ -23,9 +22,6 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
-		
-		[Inject]
-		public var addHistoryRequest:AddHistoryRequest;
 		
 		override public function execute():void
 		{

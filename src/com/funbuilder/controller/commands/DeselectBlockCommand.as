@@ -1,6 +1,7 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.DeselectBlockVO;
@@ -27,6 +28,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
 		
+		[Inject]
+		public var updateHandlesRequest:UpdateHandlesRequest;
+		
 		override public function execute():void
 		{
 			if ( deselectData.saveHistory ) {
@@ -34,6 +38,7 @@ package com.funbuilder.controller.commands
 			}
 			segmentModel.enableIndicatorFor( deselectData.block, false );
 			selectedBlocksModel.deselect( deselectData.block );
+			updateHandlesRequest.dispatch();
 		}
 	}
 }

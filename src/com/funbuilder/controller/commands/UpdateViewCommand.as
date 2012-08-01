@@ -52,6 +52,21 @@ package com.funbuilder.controller.commands
 		override public function execute():void
 		{
 			
+			// TO-DO:
+			
+			
+			// UX:
+			// Add history to deselect all blocks command
+			// Warning when a block intersects other blocks
+			// Duplicate selection
+			// New/open/exit should all prompt a save if unsaved
+			
+			
+			
+			// "Thank you! Just for playing, you get 50 credits for free!"
+			
+			
+			
 			// If a handle is grabbed, we are moving the selection.
 			if ( handlesModel.isGrabbed ) {
 				

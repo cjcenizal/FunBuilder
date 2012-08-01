@@ -57,7 +57,6 @@ package com.funbuilder.controller.commands
 			keysModel.alt = event.altKey;
 			keysModel.control = event.controlKey;
 			
-			
 			if ( !keysModel.keysDown[ event.keyCode ] ) {
 				keysModel.keysDown[ event.keyCode ] = true;
 				
