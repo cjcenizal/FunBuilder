@@ -146,6 +146,9 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( handlesModel.xHandle );
 			addObjectToSceneRequest.dispatch( handlesModel.yHandle );
 			addObjectToSceneRequest.dispatch( handlesModel.zHandle );
+			addObjectToSceneRequest.dispatch( handlesModel.xLine );
+			addObjectToSceneRequest.dispatch( handlesModel.yLine );
+			addObjectToSceneRequest.dispatch( handlesModel.zLine );
 			handlesModel.xHandle.addEventListener( MouseEvent3D.MOUSE_DOWN, onXHandleMouseDown );
 			handlesModel.yHandle.addEventListener( MouseEvent3D.MOUSE_DOWN, onYHandleMouseDown );
 			handlesModel.zHandle.addEventListener( MouseEvent3D.MOUSE_DOWN, onZHandleMouseDown );
