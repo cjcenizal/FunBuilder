@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	
 	import com.cenizal.utils.Trig;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.MoveBlocksRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.KeysModel;
@@ -49,6 +50,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
 		
+		[Inject]
+		public var moveBlocksRequest:MoveBlocksRequest;
+		
 		override public function execute():void
 		{
 			
@@ -69,7 +73,7 @@ package com.funbuilder.controller.commands
 			
 			// If a handle is grabbed, we are moving the selection.
 			if ( handlesModel.isGrabbed ) {
-				
+				moveBlocksRequest.dispatch();
 			} else {
 				// If shift key is down, then we're drag-adding/-removing to/from selection.
 				if ( keysModel.shift ) {

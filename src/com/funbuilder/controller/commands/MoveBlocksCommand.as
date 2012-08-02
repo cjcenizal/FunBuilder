@@ -5,21 +5,19 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
+	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
+	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	
+	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
 	import org.robotlegs.mvcs.Command;
 	
-	public class MoveBlockCommand extends Command
+	public class MoveBlocksCommand extends Command
 	{
-		
-		// Arguments.
-		
-		[Inject]
-		public var diff:Vector3D;
 		
 		// Models.
 		
@@ -28,6 +26,12 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var segmentModel:SegmentModel;
+		
+		[Inject]
+		public var handlesModel:HandlesModel;
+		
+		[Inject]
+		public var view3dModel:View3DModel;
 		
 		// Commands.
 		
@@ -42,6 +46,20 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
+			trace("move blocks along : " + handlesModel.axis);
+			
+			// Get vector defined by projected handle and line positions.
+			var handlePos:Vector3D = view3dModel.view.project( handlesModel.handlePosition );
+			var linePos:Vector3D = view3dModel.view.project( handlesModel.linePosition );
+			
+			
+			// Figure out if mouse position is less than or greater than the perpendicular line.
+			
+			// Move along axis.
+			
+			
+			
+			/*
 			if ( !selectedBlocksModel.isMoved && diff.length > 0 ) {
 				// Save history if we move the block and it's the first time it gets moved.
 				addHistoryRequest.dispatch( false );
@@ -71,7 +89,7 @@ package com.funbuilder.controller.commands
 				
 				invalidateSavedFileRequest.dispatch();
 				updateElevationRequest.dispatch();
-			}
+			}*/
 		}
 	}
 }

@@ -21,7 +21,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.MouseMoveCommand;
 	import com.funbuilder.controller.commands.MouseOverBlockCommand;
 	import com.funbuilder.controller.commands.MouseUpCommand;
-	import com.funbuilder.controller.commands.MoveBlockCommand;
+	import com.funbuilder.controller.commands.MoveBlocksCommand;
 	import com.funbuilder.controller.commands.NewFileCommand;
 	import com.funbuilder.controller.commands.OpenFileCommand;
 	import com.funbuilder.controller.commands.RedoEditCommand;
@@ -61,7 +61,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.MouseMoveRequest;
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
 	import com.funbuilder.controller.signals.MouseUpRequest;
-	import com.funbuilder.controller.signals.MoveBlockRequest;
+	import com.funbuilder.controller.signals.MoveBlocksRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.controller.signals.OpenFileRequest;
 	import com.funbuilder.controller.signals.RedoEditRequest;
@@ -162,7 +162,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( MouseUpRequest,						MouseUpCommand );
 			signalCommandMap.mapSignalClass( RightMouseDownRequest,					RightMouseDownCommand );
 			signalCommandMap.mapSignalClass( RightMouseUpRequest,					RightMouseUpCommand );
-			signalCommandMap.mapSignalClass( MoveBlockRequest,						MoveBlockCommand );
+			signalCommandMap.mapSignalClass( MoveBlocksRequest,						MoveBlocksCommand );
 			signalCommandMap.mapSignalClass( NewFileRequest,						NewFileCommand );
 			signalCommandMap.mapSignalClass( OpenFileRequest,						OpenFileCommand );
 			signalCommandMap.mapSignalClass( RedoEditRequest,						RedoEditCommand );

@@ -96,6 +96,30 @@ package com.funbuilder.model
 			_axis = axis;
 		}
 		
+		public function get handlePosition():Vector3D {
+			switch ( _axis ) {
+				case "x":
+					return xHandle.position;
+				case "y":
+					return yHandle.position;
+				case "z":
+					return zHandle.position;
+			}
+			return null;
+		}
+		
+		public function get linePosition():Vector3D {
+			switch ( _axis ) {
+				case "x":
+					return xLine.position;
+				case "y":
+					return yLine.position;
+				case "z":
+					return zLine.position;
+			}
+			return null;
+		}
+		
 		public function get isGrabbed():Boolean {
 			return _isGrabbed;
 		}
