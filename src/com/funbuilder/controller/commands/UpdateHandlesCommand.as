@@ -18,6 +18,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void {
 			if ( selectedBlocksModel.numBlocks > 0 ) {
+				selectedBlocksModel.update();
 				handlesModel.show();
 				handlesModel.setSize( selectedBlocksModel.max * .5 );
 				handlesModel.moveTo( selectedBlocksModel.centroid.x, selectedBlocksModel.centroid.y, selectedBlocksModel.centroid.z );

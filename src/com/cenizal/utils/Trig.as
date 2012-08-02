@@ -12,8 +12,17 @@ package com.cenizal.utils
 		public static const ONE_AND_HALF_PI:Number = Math.PI * 1.5;
 		public static const ONE_AND_THREE_QUARTERS_PI:Number = Math.PI * 1.75;
 		
-		public static function thetaFrom( p1:Point, p2:Point ):Number {
-			return Math.atan2( p2.x - p1.x, p2.y - p1.y );
+		public static function thetaFromPoints( p1:Point, p2:Point = null ):Number {
+			p2 = p2 || new Point();
+			return thetaFrom( p1.x, p1.y, p2.x, p2.y );
+		}
+		
+		public static function thetaFrom( p1x:Number, p1y:Number, p2x:Number = 0, p2y:Number = 0 ):Number {
+			return Math.atan2( p2x - p1x, p2y - p1y );
+		}
+		
+		public static function getDistanceFromPoints( p1:Point, p2:Point ):Number {
+			return ( p2.subtract( p1 ) ).length;
 		}
 	}
 }

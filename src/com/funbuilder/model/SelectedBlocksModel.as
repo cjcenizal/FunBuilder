@@ -25,8 +25,7 @@ package com.funbuilder.model
 		public function select( block:Mesh ):void {
 			_blocks.push( block );
 			_isMoved = false;
-			calculateCentroid();
-			calculateMax();
+			update();
 		}
 		
 		public function deselect( block:Mesh ):void {
@@ -39,6 +38,10 @@ package com.funbuilder.model
 					index = i;
 				}
 			}
+			update();
+		}
+		
+		public function update():void {
 			calculateCentroid();
 			calculateMax();
 		}

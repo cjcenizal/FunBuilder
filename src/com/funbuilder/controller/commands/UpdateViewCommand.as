@@ -71,6 +71,7 @@ package com.funbuilder.controller.commands
 			
 			
 			
+			
 			// If a handle is grabbed, we are moving the selection.
 			if ( handlesModel.isGrabbed ) {
 				moveBlocksRequest.dispatch();
@@ -84,11 +85,11 @@ package com.funbuilder.controller.commands
 						if ( mouseModel.prevPosition ) {
 							var camera:Camera3D = view3dModel.camera;
 							var mousePos:Point = new Point( contextView.mouseX, contextView.mouseY );
-							var cameraTheta:Number = Trig.thetaFrom(
+							var cameraTheta:Number = Trig.thetaFromPoints(
 								new Point( camera.position.z, camera.position.x ),
 								new Point( cameraTargetModel.getPosition().z, cameraTargetModel.getPosition().x ) );
-							var mouseTheta:Number = Trig.thetaFrom( mousePos, mouseModel.prevPosition );
-							var len:Number = Math.abs( mouseModel.prevPosition.subtract( mousePos ).length );
+							var mouseTheta:Number = Trig.thetaFromPoints( mousePos, mouseModel.prevPosition );
+							var len:Number = Trig.getDistanceFromPoints( mouseModel.prevPosition, mousePos );
 							if ( len > 0 ) {
 								var boost = view3dModel.cameraController.distance * .03;
 								var distance = ( len + boost ) * -1;

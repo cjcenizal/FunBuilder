@@ -24,6 +24,7 @@ package com.funbuilder.model
 		private var _pos:Vector3D = new Vector3D();
 		private var _minSize:Number = 250;
 		private var _size:Number = _minSize;
+		public var amountMoved:Number = 0;
 		
 		public function HandlesModel()
 		{
@@ -94,6 +95,7 @@ package com.funbuilder.model
 		public function grab( isGrabbed:Boolean, axis:String = null ):void {
 			_isGrabbed = isGrabbed;
 			_axis = axis;
+			amountMoved = 0;
 		}
 		
 		public function get handlePosition():Vector3D {
