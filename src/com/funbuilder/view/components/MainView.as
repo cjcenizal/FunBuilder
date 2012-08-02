@@ -27,11 +27,17 @@ package com.funbuilder.view.components {
 		public var onRightMouseDownSignal:Signal;
 		public var onRightMouseUpSignal:Signal;
 		public var onMouseMoveSignal:Signal;
+		public var onHandleMouseDownSignal:Signal;
 		
 		private var _bg:Panel;
 		private var _menuBar:MenuBarView;
 		private var _library:LibraryView;
+		
+		// Handles.
 		private var _handlesLayer:Sprite;
+		private var _handleX:Sprite;
+		private var _handleY:Sprite;
+		private var _handleZ:Sprite;
 		
 		private var _mouseDownTimestamp:int = 0;
 		
@@ -50,15 +56,35 @@ package com.funbuilder.view.components {
 			onRightMouseDownSignal = new Signal();
 			onRightMouseUpSignal = new Signal();
 			onMouseMoveSignal = new Signal();
+			onHandleMouseDownSignal = new Signal();
 			
 			_handlesLayer = new Sprite();
 			addChild( _handlesLayer );
 			_handlesLayer.mouseEnabled = false;
+			_handleX = addHandle( 0xff0000 );
+			_handleY = addHandle( 0x00ff00 );
+			_handleZ = addHandle( 0x0000ff );
+			_handleX.addEventListener( MouseEvent.MOUSE_DOWN, onHandleXMouseDown );
+			_handleY.addEventListener( MouseEvent.MOUSE_DOWN, onHandleYMouseDown );
+			_handleZ.addEventListener( MouseEvent.MOUSE_DOWN, onHandleZMouseDown );
+			hideHandles();
+			
 			_bg = new Panel( this );
 			_menuBar = new MenuBarView( this );
 			_library = new LibraryView( this );
 			_library.visible = false;
 			this.addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
+		}
+		
+		private function addHandle( color:uint ):Sprite {
+			var handle:Sprite = new Sprite();
+			addChild( handle );
+			var alpha:Number = .3;
+			var lineAlpha:Number = .4;
+			handle.graphics.beginFill( color, lineAlpha );
+			handle.graphics.lineStyle( 2, color, alpha );
+			handle.graphics.drawCircle( 0, 0, 30 );
+			return handle;
 		}
 		
 		private function onAddedToStage( e:Event ):void {
@@ -129,11 +155,29 @@ package com.funbuilder.view.components {
 			onScrollWheelSignal.dispatch( e.delta );
 		}
 		
+		private function onHandleXMouseDown( e:MouseEvent ):void {
+			onHandleMouseDownSignal.dispatch( "x" );
+		}
+		
+		private function onHandleYMouseDown( e:MouseEvent ):void {
+			onHandleMouseDownSignal.dispatch( "y" );
+		}
+		
+		private function onHandleZMouseDown( e:MouseEvent ):void {
+			onHandleMouseDownSignal.dispatch( "z" );
+		}
+		
+		public function hideHandles():void {
+			_handleX.visible = _handleY.visible = _handleZ.visible = false;
+			_handlesLayer.graphics.clear();
+		}
+		
 		public function drawHandles( originX:Point, arrowX:Point, colorX:uint,
 									 originY:Point, arrowY:Point, colorY:uint, 
 									 originZ:Point, arrowZ:Point, colorZ:uint ):void {
 			
-			var radius:Number = 30;
+			_handleX.visible = _handleY.visible = _handleZ.visible = true;
+			
 			var alpha:Number = .3;
 			var lineAlpha:Number = .4;
 			
@@ -143,20 +187,20 @@ package com.funbuilder.view.components {
 			g.lineStyle( 2, colorX, lineAlpha );
 			g.moveTo( originX.x, originX.y );
 			g.lineTo( arrowX.x, arrowX.y );
-			g.beginFill( colorX, alpha );
-			g.drawCircle( arrowX.x, arrowX.y, radius );
+			_handleX.x = arrowX.x;
+			_handleX.y = arrowX.y;
 			
 			g.lineStyle( 2, colorY, lineAlpha );
 			g.moveTo( originY.x, originY.y );
 			g.lineTo( arrowY.x, arrowY.y );
-			g.beginFill( colorY, alpha );
-			g.drawCircle( arrowY.x, arrowY.y, radius );
+			_handleY.x = arrowY.x;
+			_handleY.y = arrowY.y;
 			
 			g.lineStyle( 2, colorZ, lineAlpha );
 			g.moveTo( originZ.x, originZ.y );
 			g.lineTo( arrowZ.x, arrowZ.y );
-			g.beginFill( colorZ, alpha );
-			g.drawCircle( arrowZ.x, arrowZ.y, radius );
+			_handleZ.x = arrowZ.x;
+			_handleZ.y = arrowZ.y;
 			
 			g.endFill();
 		}

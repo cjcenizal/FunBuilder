@@ -1,6 +1,7 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.DrawHandlesRequest;
+	import com.funbuilder.controller.signals.HideHandlesRequest;
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.View3DModel;
@@ -26,6 +27,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var drawHandlesRequest:DrawHandlesRequest;
 		
+		[Inject]
+		public var hideHandlesRequest:HideHandlesRequest;
+		
 		override public function execute():void {
 			if ( selectedBlocksModel.numBlocks > 0 ) {
 				selectedBlocksModel.update();
@@ -38,6 +42,7 @@ package com.funbuilder.controller.commands
 					view3dModel.project( handlesModel.zLine.position ), view3dModel.project( handlesModel.zHandle.position ), handlesModel.zColor );
 			} else {
 				handlesModel.hide();
+				hideHandlesRequest.dispatch();
 			}
 		}
 	}

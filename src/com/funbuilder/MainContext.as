@@ -54,6 +54,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.DrawHandlesRequest;
 	import com.funbuilder.controller.signals.GrabHandleRequest;
+	import com.funbuilder.controller.signals.HideHandlesRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
@@ -138,6 +139,7 @@ package com.funbuilder
 			injector.mapSingleton( AddItemToLibraryRequest );
 			injector.mapSingleton( AddView3DRequest );
 			injector.mapSingleton( DrawHandlesRequest );
+			injector.mapSingleton( HideHandlesRequest );
 			injector.mapSingleton( ShowFileNameRequest );
 			injector.mapSingleton( ShowSelectionIndicatorRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );

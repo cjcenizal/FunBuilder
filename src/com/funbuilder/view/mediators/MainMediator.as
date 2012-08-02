@@ -4,6 +4,8 @@ package com.funbuilder.view.mediators {
 	
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.DrawHandlesRequest;
+	import com.funbuilder.controller.signals.GrabHandleRequest;
+	import com.funbuilder.controller.signals.HideHandlesRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
 	import com.funbuilder.controller.signals.MouseDownRequest;
@@ -64,7 +66,13 @@ package com.funbuilder.view.mediators {
 		public var mouseMoveRequest:MouseMoveRequest;
 		
 		[Inject]
+		public var hideHandlesRequest:HideHandlesRequest;
+		
+		[Inject]
 		public var drawHandlesRequest:DrawHandlesRequest;
+		
+		[Inject]
+		public var grabHandleRequest:GrabHandleRequest;
 		
 		override public function onRegister():void {
 			// Add view listeners.
@@ -77,8 +85,10 @@ package com.funbuilder.view.mediators {
 			view.onRightMouseDownSignal.add( onRightMouseDown );
 			view.onRightMouseUpSignal.add( onRightMouseUp );
 			view.onMouseMoveSignal.add( onMouseMove );
+			view.onHandleMouseDownSignal.add( onHandleMouseDown );
 			addView3DRequest.add( onAddView3DRequested );
 			setEditingModeRequest.add( onSetEditingModeRequested );
+			hideHandlesRequest.add( onHideHandlesRequested );
 			drawHandlesRequest.add( onDrawHandlesRequested );
 		}
 		
@@ -118,6 +128,10 @@ package com.funbuilder.view.mediators {
 			mouseMoveRequest.dispatch();
 		}
 		
+		private function onHandleMouseDown( axis:String ):void {
+			grabHandleRequest.dispatch( axis );
+		}
+		
 		private function onAddView3DRequested( view3D:View3D ):void {
 			this.view.view3D = view3D;
 		}
@@ -128,6 +142,10 @@ package com.funbuilder.view.mediators {
 			} else if ( mode == EditingModeModel.BUILD ) {
 				this.view.showLibrary( true );
 			}
+		}
+		
+		private function onHideHandlesRequested():void {
+			this.view.hideHandles();
 		}
 		
 		private function onDrawHandlesRequested( originX:Point, arrowX:Point, colorX:uint,

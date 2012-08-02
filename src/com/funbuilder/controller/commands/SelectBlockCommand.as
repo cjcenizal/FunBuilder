@@ -3,13 +3,11 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
-	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.SelectBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
@@ -50,9 +48,6 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
 		
-		[Inject]
-		public var updateHandlesRequest:UpdateHandlesRequest;
-		
 		override public function execute():void
 		{
 			// Save history.
@@ -65,8 +60,6 @@ package com.funbuilder.controller.commands
 			// Snap target to block.
 			//cameraTargetModel.setPos( selectData.block.x, selectData.block.y + SegmentConstants.BLOCK_SIZE * .5, selectData.block.z );	
 			updateTargetAppearanceRequest.dispatch();
-			// Update handles.
-			updateHandlesRequest.dispatch();
 		}
 	}
 }
