@@ -34,7 +34,7 @@ package com.funbuilder.controller.commands
 			if ( selectedBlockModel.numBlocks > 0 ) {
 				addHistoryRequest.dispatch();
 				for ( var i:int = selectedBlockModel.numBlocks - 1; i >= 0; i-- ) {
-					removeBlockRequest.dispatch( selectedBlockModel.getBlockAt( i ) );
+					removeBlockRequest.dispatch( selectedBlockModel.getAt( i ) );
 				}
 				invalidateSavedFileRequest.dispatch();
 				updateElevationRequest.dispatch();

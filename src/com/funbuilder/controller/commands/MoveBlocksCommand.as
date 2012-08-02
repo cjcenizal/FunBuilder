@@ -107,7 +107,7 @@ package com.funbuilder.controller.commands
 				var block:Mesh;
 				var indicator:Mesh;
 				for ( var i:int = 0; i < selectedBlocksModel.numBlocks; i++ ) {
-					block = selectedBlocksModel.getBlockAt( i );
+					block = selectedBlocksModel.getAt( i );
 					block.x += diff.x;
 					block.y += diff.y;
 					block.z += diff.z;

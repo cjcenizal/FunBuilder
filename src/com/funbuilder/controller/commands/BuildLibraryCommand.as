@@ -65,7 +65,7 @@ package com.funbuilder.controller.commands
 			var block:BlockVO;
 			for ( var i:int = 0; i < blocksModel.numBlocks; i++ ) {
 				// Add block to scene.
-				block = blocksModel.getBlockAt( i );
+				block = blocksModel.getAt( i );
 				block.mesh.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 				block.mesh.y = -50;
 				block.mesh.z = SegmentConstants.SEGMENT_HALF_DEPTH;

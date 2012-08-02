@@ -28,7 +28,7 @@ package com.funbuilder.model {
 			_bitmaps[ id ] = bitmap;
 		}
 		
-		public function getBlock( id:String ):BlockVO {
+		public function getWithId( id:String ):BlockVO {
 			return _blocks[ id ];
 		}
 		
@@ -38,14 +38,14 @@ package com.funbuilder.model {
 		
 		public function getBlockIndex( id:String ):int {
 			for ( var i:int = 0; i < _blocksArr.length; i++ ) {
-				if ( getBlockAt( i ).id == id ) {
+				if ( getAt( i ).id == id ) {
 					return i;
 				}
 			}
 			return -1;
 		}
 		
-		public function getBlockAt( index:int ):BlockVO {
+		public function getAt( index:int ):BlockVO {
 			return _blocksArr[ index ];
 		}
 		

@@ -48,7 +48,7 @@ package com.funbuilder.controller.commands
 			var mesh:Mesh;
 			for ( var i:int = 0; i < len; i++ ) {
 				dataItem = list[ i ];
-				refMesh = blocksModel.getBlock( dataItem.id ).mesh
+				refMesh = blocksModel.getWithId( dataItem.id ).mesh
 				mesh = refMesh.clone() as Mesh;
 				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( dataItem.x * 100, dataItem.y * 100, dataItem.z * 100 )
 				mesh.x = snappedPos.x;

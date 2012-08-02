@@ -54,7 +54,7 @@ package com.funbuilder.controller.commands {
 				var snapshot:String = segmentModel.getJson();
 				var selectedBlockKeys:Array = [];
 				for ( var i:int = 0; i < selectedBlockModel.numBlocks; i++ ) {
-					selectedBlockKeys.push( segmentModel.getKeyFor( selectedBlockModel.getBlockAt( i ) ) );
+					selectedBlockKeys.push( segmentModel.getKeyFor( selectedBlockModel.getAt( i ) ) );
 				}
 				newHistory = new HistoryVO( snapshot, selectedBlockKeys );
 			}

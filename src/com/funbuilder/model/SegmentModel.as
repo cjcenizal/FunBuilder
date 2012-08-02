@@ -19,6 +19,7 @@ package com.funbuilder.model
 	{
 		
 		private var _blocks:Dictionary;
+		private var _blocksArr:Array;
 		private var _indicators:Dictionary;
 		private var _nextKey:int = 0;
 		private var _namespaces:Dictionary;
@@ -31,6 +32,7 @@ package com.funbuilder.model
 		{
 			super();
 			_blocks = new Dictionary();
+			_blocksArr = new Array();
 			_indicators = new Dictionary();
 			_namespaces = new Dictionary(); 
 			_elevationMap = new Dictionary();
@@ -58,6 +60,7 @@ package com.funbuilder.model
 				_nextKey = int( key ) + 1;
 			}
 			_blocks[ key ] = block;
+			_blocksArr.push( block );
 			_indicators[ block ] = indicator;
 			_namespaces[ block ] = namespace;
 			addElevation( block.position );
@@ -92,6 +95,13 @@ package com.funbuilder.model
 		}
 		
 		public function remove( block:Mesh ):void {
+			var len:int = _blocksArr.length;
+			for ( var i:int = 0; i < len; i++ ) {
+				if ( _blocksArr[ i ] == block ) {
+					_blocksArr.splice( i, 1 );
+					break;
+				}
+			}
 			for ( var key:String in _blocks ) {
 				if ( _blocks[ key ] == block ) {
 					delete _blocks[ key ];
@@ -113,6 +123,10 @@ package com.funbuilder.model
 			return _blocks[ key ];
 		}
 		
+		public function getAt( index:int ):Mesh {
+			return _blocksArr[ index ];
+		}
+		
 		public function getKeyFor( block:Mesh ):String {
 			for ( var key:String in _blocks ) {
 				if ( _blocks[ key ] == block ) {
@@ -130,9 +144,10 @@ package com.funbuilder.model
 			return _indicators[ block ];
 		}
 		
-		public function enableIndicatorFor( block:Mesh, enabled:Boolean ):void {
+		public function enableIndicatorFor( block:Mesh, enabled:Boolean = true, isColliding:Boolean = false ):void {
 			var indicator:Mesh = getIndicatorFor( block );
 			( indicator.material as ColorMaterial ).alpha = ( enabled ) ? .5 : 0;
+			( indicator.material as ColorMaterial ).color = ( isColliding ) ? 0xff0000 : 0xffff00;
 		}
 		
 		public function getJson():String {
@@ -160,6 +175,10 @@ package com.funbuilder.model
 		
 		public function getNewIndicatorMesh():Mesh {
 			return new Mesh( _indicatorGeometry, new ColorMaterial( 0xFFFF00, 0 ) );
+		}
+		
+		public function get numBlocks():int {
+			return _blocksArr.length;
 		}
 	}
 }

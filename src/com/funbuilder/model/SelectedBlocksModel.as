@@ -81,10 +81,10 @@ package com.funbuilder.model
 		}
 		
 		public function getPositionAt( index:int ):Vector3D {
-			return getBlockAt( index ).position;
+			return getAt( index ).position;
 		}
 		
-		public function getBlockAt( index:int ):Mesh {
+		public function getAt( index:int ):Mesh {
 			return ( _blocks[ index ] as Mesh );
 		}
 		

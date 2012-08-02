@@ -31,7 +31,7 @@ package com.funbuilder.controller.commands
 			// (i.e. deselect it)
 			
 			while ( selectedBlocksModel.numBlocks > 0 ) {
-				deselectBlockRequest.dispatch( new DeselectBlockVO( selectedBlocksModel.getBlockAt( selectedBlocksModel.numBlocks - 1 ), false ) );
+				deselectBlockRequest.dispatch( new DeselectBlockVO( selectedBlocksModel.getAt( selectedBlocksModel.numBlocks - 1 ), false ) );
 			}
 			updateTargetAppearanceRequest.dispatch();
 		}

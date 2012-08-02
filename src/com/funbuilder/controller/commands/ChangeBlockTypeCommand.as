@@ -60,7 +60,7 @@ package com.funbuilder.controller.commands
 				
 				for ( var i:int = selectedBlocksModel.numBlocks - 1; i >= 0; i-- ) {
 					
-					var oldBlock:Mesh = selectedBlocksModel.getBlockAt( i );
+					var oldBlock:Mesh = selectedBlocksModel.getAt( i );
 					var oldId:String = segmentModel.getIdFor( oldBlock );
 					
 					// Create new block with position.
@@ -71,8 +71,8 @@ package com.funbuilder.controller.commands
 						index = blocksModel.numBlocks - 1;
 					}
 					
-					var newBlockData:BlockVO = blocksModel.getBlockAt( index );
-					var newBlock:Mesh = blocksModel.getBlock( newBlockData.id ).mesh.clone() as Mesh;
+					var newBlockData:BlockVO = blocksModel.getAt( index );
+					var newBlock:Mesh = blocksModel.getWithId( newBlockData.id ).mesh.clone() as Mesh;
 					newBlock.x = oldBlock.x;
 					newBlock.y = oldBlock.y;
 					newBlock.z = oldBlock.z;

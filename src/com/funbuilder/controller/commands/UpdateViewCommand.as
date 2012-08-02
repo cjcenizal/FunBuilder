@@ -5,6 +5,7 @@ package com.funbuilder.controller.commands
 	import com.cenizal.utils.Trig;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.MoveBlocksRequest;
+	import com.funbuilder.controller.signals.UpdateCollisionsRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.HandlesModel;
@@ -56,6 +57,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var updateHandlesRequest:UpdateHandlesRequest;
+		
+		[Inject]
+		public var updateCollisionsRequest:UpdateCollisionsRequest;
 		
 		override public function execute():void
 		{
@@ -124,6 +128,9 @@ package com.funbuilder.controller.commands
 			
 			// Update handles.
 			updateHandlesRequest.dispatch();
+			
+			// Update collisions.
+			updateCollisionsRequest.dispatch();
 			
 			// Store mouse pos.
 			mouseModel.updatePrevPosition( contextView.stage.mouseX, contextView.stage.mouseY );
