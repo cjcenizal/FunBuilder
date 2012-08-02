@@ -36,6 +36,12 @@ package com.funbuilder.model
 			_position.z += z;
 		}
 		
+		public function moveTo( x:Number, y:Number, z:Number ):void {
+			_position.x = x;
+			_position.y = y;
+			_position.z = z;
+		}
+		
 		public function setPos( x:Number, y:Number, z:Number ):void {
 			_position.x = x;
 			_position.y = y;

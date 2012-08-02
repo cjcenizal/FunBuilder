@@ -5,10 +5,12 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
+	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	
 	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -27,6 +29,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var selectedBlocksModel:SelectedBlocksModel;
+		
+		[Inject]
+		public var cameraTargetModel:CameraTargetModel;
 		
 		// Commands.
 		
@@ -57,8 +62,15 @@ package com.funbuilder.controller.commands
 			keysModel.alt = event.altKey;
 			keysModel.control = event.controlKey;
 			
-			if ( !keysModel.keysDown[ event.keyCode ] ) {
-				keysModel.keysDown[ event.keyCode ] = true;
+			var key:int = event.keyCode;
+			
+			if ( !keysModel.keysDown[ key ] ) {
+				keysModel.keysDown[ key ] = true;
+				
+				// Snap camera to selected blocks.
+				if ( key == Keyboard.SPACE && selectedBlocksModel.numBlocks > 0 ) {
+					cameraTargetModel.moveTo( selectedBlocksModel.centroid.x, cameraTargetModel.targetY, selectedBlocksModel.centroid.z );
+				}
 				
 				/*
 				switch ( event.keyCode ) {
