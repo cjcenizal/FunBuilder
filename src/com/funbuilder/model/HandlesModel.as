@@ -13,6 +13,9 @@ package com.funbuilder.model
 	public class HandlesModel extends Actor
 	{
 		
+		public var xColor:uint = 0xff0000;
+		public var yColor:uint = 0x00ff00;
+		public var zColor:uint = 0x0000ff;
 		public var xHandle:Mesh;
 		public var yHandle:Mesh;
 		public var zHandle:Mesh;
@@ -31,9 +34,10 @@ package com.funbuilder.model
 			super();
 			var radius:Number = 25;
 			var height:Number = 75;
-			var xMaterial:ColorMaterial = new ColorMaterial( 0xff0000 );
-			var yMaterial:ColorMaterial = new ColorMaterial( 0x00ff00 );
-			var zMaterial:ColorMaterial = new ColorMaterial( 0x0000ff );
+			var alpha:Number = 1;
+			var xMaterial:ColorMaterial = new ColorMaterial( xColor, alpha );
+			var yMaterial:ColorMaterial = new ColorMaterial( yColor, alpha );
+			var zMaterial:ColorMaterial = new ColorMaterial( zColor, alpha );
 			xHandle = new Mesh( new ConeGeometry( radius, height ), xMaterial );
 			yHandle = new Mesh( new ConeGeometry( radius, height ), yMaterial );
 			zHandle = new Mesh( new ConeGeometry( radius, height ), zMaterial );

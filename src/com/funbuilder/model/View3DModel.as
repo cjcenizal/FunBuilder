@@ -76,8 +76,9 @@ package com.funbuilder.model {
 			}
 		}
 		
-		public function get2DFrom3D( position:Vector3D ):Vector3D {
-			return _view.project( position );
+		public function project( position:Vector3D ):Point {
+			var pos:Vector3D = _view.project( position );
+			return new Point( pos.x, pos.y );
 		}
 		
 		public function lookAt( target:Vector3D ):void {

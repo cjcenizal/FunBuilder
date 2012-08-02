@@ -60,23 +60,27 @@ package com.funbuilder.controller.commands
 			var handlePos:Vector3D = view3dModel.view.project( handlesModel.handlePosition );
 			var linePos:Vector3D = view3dModel.view.project( handlesModel.linePosition );
 			var axisAngle:Number = Trig.thetaFrom( handlePos.x, handlePos.y, linePos.x, linePos.y );
+			
 			// Get angle of mouse movement.
 			var mousePos:Point = new Point( contextView.stage.mouseX, contextView.stage.mouseY );
 			var mouseAngle:Number = Trig.thetaFrom( mousePos.x, mousePos.y, mouseModel.prevPosition.x, mouseModel.prevPosition.y );
+			
 			// See if the mouseAngle relative to a normalized axisAngle is moving in the same direction.
 			var relativeMouseAngle:Number = Math.abs( mouseAngle - axisAngle );
 			var direction:Number = ( relativeMouseAngle <= Trig.HALF_PI ) ? 1 : -1;
 			var magnitude:Number = Trig.getDistanceFromPoints( mouseModel.prevPosition, mousePos );
 			handlesModel.amountMoved += magnitude * direction;
 			
-			//if ( !selectedBlocksModel.isMoved && diff.length > 0 ) {
-				// Save history if we move the block and it's the first time it gets moved.
-			//	addHistoryRequest.dispatch( false );
-			//}
-			
+			// Snap to blocks.
 			var blocksMoved:Number = Math.round( handlesModel.amountMoved / SegmentConstants.BLOCK_SIZE );
 			var snappedAmountMoved:Number = blocksMoved * SegmentConstants.BLOCK_SIZE;
+			
 			if ( blocksMoved != 0 ) {
+				// Save history if we move the block and it's the first time it gets moved.
+				//if ( !selectedBlocksModel.isMoved && diff.length > 0 ) {
+				//	addHistoryRequest.dispatch( false );
+				//}
+				
 				// Get diff vector.
 				var diff:Vector3D = new Vector3D();
 				switch ( handlesModel.axis ) {
@@ -121,53 +125,6 @@ package com.funbuilder.controller.commands
 				updateHandlesRequest.dispatch();
 				handlesModel.amountMoved = 0;
 			}
-			
-			
-			/*
-			var vector:Vector3D = new Vector3D();
-			
-			// Move along axis.
-			switch ( handlesModel.axis ) {
-				case "x":
-					break;
-				case "y":
-					break;
-				case "z":
-					break;
-			}*/
-			
-			
-			/*
-			if ( !selectedBlocksModel.isMoved && diff.length > 0 ) {
-				// Save history if we move the block and it's the first time it gets moved.
-				addHistoryRequest.dispatch( false );
-			}
-			if ( diff.length > 0 ) {
-				var src:Vector3D;
-				var dest:Vector3D;
-				for ( var i:int = 0; i < selectedBlocksModel.numBlocks; i++ ) {
-					src = selectedBlocksModel.getPositionAt( i );
-					dest = src.add( diff );
-					segmentModel.moveElevationPosition( src, dest );
-				}
-				// Set position of blocks and indicators.
-				var block:Mesh;
-				var indicator:Mesh;
-				for ( var i:int = 0; i < selectedBlocksModel.numBlocks; i++ ) {
-					block = selectedBlocksModel.getBlockAt( i );
-					block.x += diff.x;
-					block.y += diff.y;
-					block.z += diff.z;
-					indicator = segmentModel.getIndicatorFor( block );
-					indicator.x = block.x;
-					indicator.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
-					indicator.z = block.z;
-				}
-				selectedBlocksModel.setIsMoved( true );
-				
-				invalidateSavedFileRequest.dispatch();
-				updateElevationRequest.dispatch();
-			}*/
 		}
 	}
 }

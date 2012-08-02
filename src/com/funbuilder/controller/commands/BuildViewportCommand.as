@@ -18,7 +18,6 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.GrabHandleRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
-	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.EditingModeModel;
@@ -28,6 +27,8 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
+	
+	import flash.display.BlendMode;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -61,9 +62,6 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var addView3DRequest:AddView3DRequest;
-		
-		[Inject]
-		public var showStatsRequest:ShowStatsRequest;
 		
 		[Inject]
 		public var addObjectToSceneRequest:AddObjectToSceneRequest;
@@ -153,9 +151,6 @@ package com.funbuilder.controller.commands
 			handlesModel.yHandle.addEventListener( MouseEvent3D.MOUSE_DOWN, onYHandleMouseDown );
 			handlesModel.zHandle.addEventListener( MouseEvent3D.MOUSE_DOWN, onZHandleMouseDown );
 			handlesModel.moveTo( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
-			
-			// Show/hide stats.
-			showStatsRequest.dispatch( true );
 			
 			// Start interaction.
 			setEditingModeRequest.dispatch( EditingModeModel.LOOK );

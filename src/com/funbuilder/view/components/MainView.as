@@ -7,9 +7,12 @@ package com.funbuilder.view.components {
 	import com.bit101.components.Panel;
 	
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Graphics;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
 	import org.osflash.signals.Signal;
 	
@@ -25,12 +28,10 @@ package com.funbuilder.view.components {
 		public var onRightMouseUpSignal:Signal;
 		public var onMouseMoveSignal:Signal;
 		
-		private var _view:View3D;
-		private var _isDebugging:Boolean = false;
-		private var _awayStats:AwayStats;
 		private var _bg:Panel;
 		private var _menuBar:MenuBarView;
 		private var _library:LibraryView;
+		private var _handlesLayer:Sprite;
 		
 		private var _mouseDownTimestamp:int = 0;
 		
@@ -50,6 +51,9 @@ package com.funbuilder.view.components {
 			onRightMouseUpSignal = new Signal();
 			onMouseMoveSignal = new Signal();
 			
+			_handlesLayer = new Sprite();
+			addChild( _handlesLayer );
+			_handlesLayer.mouseEnabled = false;
 			_bg = new Panel( this );
 			_menuBar = new MenuBarView( this );
 			_library = new LibraryView( this );
@@ -80,38 +84,11 @@ package com.funbuilder.view.components {
 			_library.visible = visible;
 		}
 		
-		/**
-		 * Add debugging UI.
-		 */
-		public function debug( doDebug:Boolean ):void {
-			_isDebugging = doDebug;
-			if ( !_isDebugging ) {
-				if ( _awayStats ) {
-					_awayStats.registerView( null );
-					removeChild( _awayStats );
-					_awayStats = null;
-				}
-			} else {
-				if ( !_awayStats ) {
-					_awayStats = new AwayStats( _view );
-					addChildAt( _awayStats, 1 );
-					_awayStats.y = stage.stageHeight - _awayStats.height;
-				}
-			}
-		}
-		
 		public function set view3D( view:View3D ):void {
-			if ( _view ) {
-				removeChild( _view );
-				_view = null;
-			}
-			if ( view ) {
-				_view = view;
-				addChildAt( _view, 0 );
-				if ( _awayStats ) {
-					_awayStats.registerView( _view );
-				}
-			}
+			addChildAt( view, 0 );
+			var awayStats:AwayStats = new AwayStats( view );
+			addChildAt( awayStats, 1 );
+			awayStats.y = stage.stageHeight - awayStats.height;
 		}
 		
 		private function onRightMouseDown( event:MouseEvent ):void {
@@ -122,17 +99,11 @@ package com.funbuilder.view.components {
 			onRightMouseUpSignal.dispatch();
 		}
 		
-		/**
-		 * Mouse down listener for navigation
-		 */
 		private function onMouseDown( event:MouseEvent ):void {
 			_mouseDownTimestamp = new Date().time;
 			onMouseDownSignal.dispatch();
 		}
 		
-		/**
-		 * Mouse up listener for navigation
-		 */
 		private function onMouseUp( event:MouseEvent ):void {
 			var clickTime:int = new Date().time - _mouseDownTimestamp;
 			if ( clickTime < 200 ) {
@@ -156,6 +127,38 @@ package com.funbuilder.view.components {
 		
 		private function onMouseWheel( e:MouseEvent ):void {
 			onScrollWheelSignal.dispatch( e.delta );
+		}
+		
+		public function drawHandles( originX:Point, arrowX:Point, colorX:uint,
+									 originY:Point, arrowY:Point, colorY:uint, 
+									 originZ:Point, arrowZ:Point, colorZ:uint ):void {
+			
+			var radius:Number = 30;
+			var alpha:Number = .3;
+			var lineAlpha:Number = .4;
+			
+			var g:Graphics = _handlesLayer.graphics;
+			g.clear();
+			
+			g.lineStyle( 2, colorX, lineAlpha );
+			g.moveTo( originX.x, originX.y );
+			g.lineTo( arrowX.x, arrowX.y );
+			g.beginFill( colorX, alpha );
+			g.drawCircle( arrowX.x, arrowX.y, radius );
+			
+			g.lineStyle( 2, colorY, lineAlpha );
+			g.moveTo( originY.x, originY.y );
+			g.lineTo( arrowY.x, arrowY.y );
+			g.beginFill( colorY, alpha );
+			g.drawCircle( arrowY.x, arrowY.y, radius );
+			
+			g.lineStyle( 2, colorZ, lineAlpha );
+			g.moveTo( originZ.x, originZ.y );
+			g.lineTo( arrowZ.x, arrowZ.y );
+			g.beginFill( colorZ, alpha );
+			g.drawCircle( arrowZ.x, arrowZ.y, radius );
+			
+			g.endFill();
 		}
 	}
 }

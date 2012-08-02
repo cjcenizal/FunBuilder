@@ -3,6 +3,7 @@ package com.funbuilder.view.mediators {
 	import away3d.containers.View3D;
 	
 	import com.funbuilder.controller.signals.AddView3DRequest;
+	import com.funbuilder.controller.signals.DrawHandlesRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
 	import com.funbuilder.controller.signals.MouseDownRequest;
@@ -12,12 +13,12 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.controller.signals.RightMouseUpRequest;
 	import com.funbuilder.controller.signals.ScrollWheelRequest;
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
-	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.StageClickRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.view.components.MainView;
 	
 	import flash.events.KeyboardEvent;
+	import flash.geom.Point;
 	
 	import org.robotlegs.core.IMediator;
 	import org.robotlegs.mvcs.Mediator;
@@ -31,9 +32,6 @@ package com.funbuilder.view.mediators {
 		
 		[Inject]
 		public var addView3DRequest:AddView3DRequest;
-		
-		[Inject]
-		public var showStatsRequest:ShowStatsRequest;
 		
 		[Inject]
 		public var keyDownRequest:KeyDownRequest;
@@ -65,6 +63,9 @@ package com.funbuilder.view.mediators {
 		[Inject]
 		public var mouseMoveRequest:MouseMoveRequest;
 		
+		[Inject]
+		public var drawHandlesRequest:DrawHandlesRequest;
+		
 		override public function onRegister():void {
 			// Add view listeners.
 			view.onKeyDownSignal.add( onKeyDown );
@@ -77,8 +78,8 @@ package com.funbuilder.view.mediators {
 			view.onRightMouseUpSignal.add( onRightMouseUp );
 			view.onMouseMoveSignal.add( onMouseMove );
 			addView3DRequest.add( onAddView3DRequested );
-			showStatsRequest.add( onShowStatsRequested );
 			setEditingModeRequest.add( onSetEditingModeRequested );
+			drawHandlesRequest.add( onDrawHandlesRequested );
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {
@@ -121,16 +122,21 @@ package com.funbuilder.view.mediators {
 			this.view.view3D = view3D;
 		}
 		
-		private function onShowStatsRequested( showStats:Boolean ):void {
-			this.view.debug( showStats );
-		}
-		
 		private function onSetEditingModeRequested( mode:String ):void {
 			if ( mode == EditingModeModel.LOOK ) {
 				this.view.showLibrary( false );
 			} else if ( mode == EditingModeModel.BUILD ) {
 				this.view.showLibrary( true );
 			}
+		}
+		
+		private function onDrawHandlesRequested( originX:Point, arrowX:Point, colorX:uint,
+											   originY:Point, arrowY:Point, colorY:uint, 
+											   originZ:Point, arrowZ:Point, colorZ:uint ):void {
+			this.view.drawHandles(
+				originX, arrowX, colorX,
+				originY, arrowY, colorY,
+				originZ, arrowZ, colorZ );
 		}
 	}
 }

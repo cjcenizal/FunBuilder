@@ -5,6 +5,7 @@ package com.funbuilder.controller.commands
 	import com.cenizal.utils.Trig;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.MoveBlocksRequest;
+	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.KeysModel;
@@ -53,6 +54,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var moveBlocksRequest:MoveBlocksRequest;
 		
+		[Inject]
+		public var updateHandlesRequest:UpdateHandlesRequest;
+		
 		override public function execute():void
 		{
 			
@@ -60,11 +64,14 @@ package com.funbuilder.controller.commands
 			
 			
 			// UX:
-			// Add history to deselect all blocks command
-			// Warning when a block intersects other blocks
-			// Duplicate selection
+			// Fix history in general (and add history to deselect all blocks command)
+			// Persistent indicator of block collision
+			// Space bar centers on handles
+			// Duplicate selections by shift-dragging
 			// New/open/exit should all prompt a save if unsaved
-			
+			// Placing blocks enters brush mode:
+				// clicking and dragging places blocks on ground plane
+				// as long as there's no collision (establish height by first object clicked).
 			
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
@@ -114,6 +121,9 @@ package com.funbuilder.controller.commands
 			
 			// Render scene.
 			view3dModel.render();
+			
+			// Update handles.
+			updateHandlesRequest.dispatch();
 			
 			// Store mouse pos.
 			mouseModel.updatePrevPosition( contextView.stage.mouseX, contextView.stage.mouseY );

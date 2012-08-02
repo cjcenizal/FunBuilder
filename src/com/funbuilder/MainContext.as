@@ -52,6 +52,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.DrawHandlesRequest;
 	import com.funbuilder.controller.signals.GrabHandleRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
@@ -76,7 +77,6 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
-	import com.funbuilder.controller.signals.ShowStatsRequest;
 	import com.funbuilder.controller.signals.StageClickRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
@@ -137,9 +137,9 @@ package com.funbuilder
 			// Map signals.
 			injector.mapSingleton( AddItemToLibraryRequest );
 			injector.mapSingleton( AddView3DRequest );
+			injector.mapSingleton( DrawHandlesRequest );
 			injector.mapSingleton( ShowFileNameRequest );
 			injector.mapSingleton( ShowSelectionIndicatorRequest );
-			injector.mapSingleton( ShowStatsRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddBlockFromLibraryRequest,			AddBlockFromLibraryCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
