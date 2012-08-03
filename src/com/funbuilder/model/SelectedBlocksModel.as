@@ -16,6 +16,8 @@ package com.funbuilder.model
 		
 		private var _timeUntilMovement:int = 0;
 		
+		public var canDuplicate:Boolean = false;
+		
 		public function SelectedBlocksModel()
 		{
 			super();

@@ -84,8 +84,21 @@ package com.funbuilder.controller.commands
 			
 			// If a handle is grabbed, we are moving the selection.
 			if ( handlesModel.isGrabbed ) {
-				if ( keysModel.alt ) {
+				
+				
+				// updateGrabbedBlocks()
+				
+				// Check movement first.
+				
+				// If can move, do duplicate or move.
+				
+				
+				if ( selectedBlocksModel.canDuplicate ) {
 					// Duplicate blocks.
+					trace("dupe");
+					// For each selected block, duplicate it and add to segment.
+					
+					selectedBlocksModel.canDuplicate = false;
 				} else {
 					// Move blocks.
 					moveBlocksRequest.dispatch();
