@@ -48,13 +48,13 @@ package com.funbuilder.controller.commands
 			var mesh:Mesh;
 			for ( var i:int = 0; i < len; i++ ) {
 				dataItem = list[ i ];
-				refMesh = blocksModel.getWithId( dataItem.id ).mesh
+				refMesh = blocksModel.getWithId( dataItem.id ).mesh;
 				mesh = refMesh.clone() as Mesh;
 				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( dataItem.x * 100, dataItem.y * 100, dataItem.z * 100 )
 				mesh.x = snappedPos.x;
 				mesh.y = snappedPos.y;
 				mesh.z = snappedPos.z;
-				addBlockRequest.dispatch( new AddBlockVO( mesh, refMesh.assetNamespace, dataItem.key ) );
+				addBlockRequest.dispatch( new AddBlockVO( mesh, dataItem.key ) );
 			}
 		}
 	}

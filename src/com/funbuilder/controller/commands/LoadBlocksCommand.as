@@ -75,6 +75,7 @@ package com.funbuilder.controller.commands {
 				if ( event.asset.assetType == AssetType.MESH ) {
 					// Treat and assign mesh to block.
 					var mesh:Mesh = event.asset as Mesh;
+					mesh.name = blockData.id; // id and mesh.assetNamepsace are the same
 					mesh.geometry.scale( TrackConstants.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
 					//mesh.y = -50;
 					mesh.rotationY = 180;

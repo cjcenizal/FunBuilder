@@ -61,7 +61,7 @@ package com.funbuilder.controller.commands
 				for ( var i:int = selectedBlocksModel.numBlocks - 1; i >= 0; i-- ) {
 					
 					var oldBlock:Mesh = selectedBlocksModel.getAt( i );
-					var oldId:String = segmentModel.getIdFor( oldBlock );
+					var oldId:String = oldBlock.name;
 					
 					// Create new block with position.
 					var index:int = blocksModel.getBlockIndex( oldId ) + changeBlockTypeData.dir;
@@ -81,7 +81,7 @@ package com.funbuilder.controller.commands
 					removeBlockRequest.dispatch( oldBlock );
 					
 					// Add new block.
-					addBlockRequest.dispatch( new AddBlockVO( newBlock, newBlockData.id ) );
+					addBlockRequest.dispatch( new AddBlockVO( newBlock ) );
 					
 					// Select the new one.
 					selectBlockRequest.dispatch( new SelectBlockVO( newBlock ) );

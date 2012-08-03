@@ -6,6 +6,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.MoveBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateCollisionsRequest;
+	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.HandlesModel;
@@ -53,7 +54,7 @@ package com.funbuilder.controller.commands
 		public var addHistoryRequest:AddHistoryRequest;
 		
 		[Inject]
-		public var moveBlocksRequest:MoveBlocksRequest;
+		public var upgradeGrabbedBlocksRequest:UpdateGrabbedBlocksRequest;
 		
 		[Inject]
 		public var updateHandlesRequest:UpdateHandlesRequest;
@@ -76,6 +77,9 @@ package com.funbuilder.controller.commands
 				// clicking and dragging places blocks on ground plane
 				// as long as there's no collision (establish height by first object clicked).
 			
+			// On save, auto-check and remove colliding blocks.
+			// When dragging handles, disable ctrl-drag selection.
+			// Otherwise, when shift or ctrl is down, disable handles (hide them).
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			
@@ -84,25 +88,7 @@ package com.funbuilder.controller.commands
 			
 			// If a handle is grabbed, we are moving the selection.
 			if ( handlesModel.isGrabbed ) {
-				
-				
-				// updateGrabbedBlocks()
-				
-				// Check movement first.
-				
-				// If can move, do duplicate or move.
-				
-				
-				if ( selectedBlocksModel.canDuplicate ) {
-					// Duplicate blocks.
-					trace("dupe");
-					// For each selected block, duplicate it and add to segment.
-					
-					selectedBlocksModel.canDuplicate = false;
-				} else {
-					// Move blocks.
-					moveBlocksRequest.dispatch();
-				}
+				upgradeGrabbedBlocksRequest.dispatch();
 			} else {
 				// If shift or alt key is down, then we're drag-adding/-removing to/from selection.
 				if ( keysModel.shift || keysModel.alt ) {

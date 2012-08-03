@@ -22,7 +22,6 @@ package com.funbuilder.model
 		private var _blocksArr:Array;
 		private var _indicators:Dictionary;
 		private var _nextKey:int = 0;
-		private var _namespaces:Dictionary;
 		private var _elevationMap:Dictionary;
 		private var _elevationKeys:Object;
 		
@@ -33,8 +32,7 @@ package com.funbuilder.model
 			super();
 			_blocks = new Dictionary();
 			_blocksArr = new Array();
-			_indicators = new Dictionary();
-			_namespaces = new Dictionary(); 
+			_indicators = new Dictionary(); 
 			_elevationMap = new Dictionary();
 			_elevationKeys = {};
 		}
@@ -43,12 +41,11 @@ package com.funbuilder.model
 			_nextKey = 0;
 			_blocks = new Dictionary();
 			_indicators = new Dictionary();
-			_namespaces = new Dictionary();
 			_elevationMap = new Dictionary();
 			_elevationKeys = {};
 		}
 		
-		public function add( block:Mesh, indicator:Mesh, namespace:String, key:String ):String {
+		public function add( block:Mesh, indicator:Mesh, /*namespace:String,*/ key:String ):String {
 			// Assign new id if needed.
 			if ( !key || int( key ) < _nextKey ) {
 				key = _nextKey.toString();
@@ -62,7 +59,6 @@ package com.funbuilder.model
 			_blocks[ key ] = block;
 			_blocksArr.push( block );
 			_indicators[ block ] = indicator;
-			_namespaces[ block ] = namespace;
 			addElevation( block.position );
 			return key;
 		}
@@ -108,7 +104,6 @@ package com.funbuilder.model
 				}
 			}
 			delete _indicators[ block ];
-			delete _namespaces[ block ]; 
 		}
 		
 		public function getKeys():Array {
@@ -136,10 +131,6 @@ package com.funbuilder.model
 			return null;
 		}
 		
-		public function getIdFor( block:Mesh ):String {
-			return _namespaces[ block ];
-		}
-		
 		public function getIndicatorFor( block:Mesh ):Mesh {
 			return _indicators[ block ];
 		}
@@ -157,7 +148,7 @@ package com.funbuilder.model
 			var item:Object;
 			for ( var key:String in _blocks ) {
 				mesh = getWithKey( key );
-				name = _namespaces[ mesh ];
+				name = mesh.name;
 				item = {};
 				item.id = name;
 				item.key = key;

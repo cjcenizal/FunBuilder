@@ -37,6 +37,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.UndoEditCommand;
 	import com.funbuilder.controller.commands.UpdateCollisionsCommand;
 	import com.funbuilder.controller.commands.UpdateElevationCommand;
+	import com.funbuilder.controller.commands.UpdateGrabbedBlocksCommand;
 	import com.funbuilder.controller.commands.UpdateHandlesCommand;
 	import com.funbuilder.controller.commands.UpdateTargetAppearanceCommand;
 	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
@@ -81,6 +82,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.controller.signals.UpdateCollisionsRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
+	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.BlocksModel;
@@ -178,6 +180,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
 			signalCommandMap.mapSignalClass( UpdateCollisionsRequest,				UpdateCollisionsCommand );
 			signalCommandMap.mapSignalClass( UpdateElevationRequest,				UpdateElevationCommand );
+			signalCommandMap.mapSignalClass( UpdateGrabbedBlocksRequest,			UpdateGrabbedBlocksCommand );
 			signalCommandMap.mapSignalClass( UpdateHandlesRequest,					UpdateHandlesCommand );
 			signalCommandMap.mapSignalClass( UpdateTargetAppearanceRequest,			UpdateTargetAppearanceCommand );
 			

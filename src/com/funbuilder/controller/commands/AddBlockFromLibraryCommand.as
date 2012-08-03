@@ -56,7 +56,7 @@ package com.funbuilder.controller.commands
 			mesh.x = snappedPos.x;
 			mesh.y = snappedPos.y;
 			mesh.z = snappedPos.z;
-			addBlockReuqest.dispatch( new AddBlockVO( mesh, id ) );
+			addBlockReuqest.dispatch( new AddBlockVO( mesh ) );
 			// Select it.
 			selectBlockRequest.dispatch( new SelectBlockVO( mesh ) );
 			invalidateSavedFileRequest.dispatch();
