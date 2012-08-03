@@ -33,12 +33,14 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			if ( deselectData.saveHistory ) {
-				addHistoryRequest.dispatch();
+			if ( selectedBlocksModel.contains( deselectData.block ) ) {
+				if ( deselectData.saveHistory ) {
+					addHistoryRequest.dispatch();
+				}
+				segmentModel.enableIndicatorFor( deselectData.block, false );
+				selectedBlocksModel.deselect( deselectData.block );
+				updateHandlesRequest.dispatch();
 			}
-			segmentModel.enableIndicatorFor( deselectData.block, false );
-			selectedBlocksModel.deselect( deselectData.block );
-			updateHandlesRequest.dispatch();
 		}
 	}
 }

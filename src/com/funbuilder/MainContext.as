@@ -27,7 +27,6 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.RedoEditCommand;
 	import com.funbuilder.controller.commands.RemoveBlockCommand;
 	import com.funbuilder.controller.commands.RemoveObjectFromSceneCommand;
-	import com.funbuilder.controller.commands.RightClickBlockCommand;
 	import com.funbuilder.controller.commands.RightMouseDownCommand;
 	import com.funbuilder.controller.commands.RightMouseUpCommand;
 	import com.funbuilder.controller.commands.SaveFileCommand;
@@ -70,7 +69,6 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.RedoEditRequest;
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
-	import com.funbuilder.controller.signals.RightClickBlockRequest;
 	import com.funbuilder.controller.signals.RightMouseDownRequest;
 	import com.funbuilder.controller.signals.RightMouseUpRequest;
 	import com.funbuilder.controller.signals.SaveFileRequest;
@@ -172,7 +170,6 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( RedoEditRequest,						RedoEditCommand );
 			signalCommandMap.mapSignalClass( RemoveBlockRequest,					RemoveBlockCommand );
 			signalCommandMap.mapSignalClass( RemoveObjectFromSceneRequest,			RemoveObjectFromSceneCommand );
-			signalCommandMap.mapSignalClass( RightClickBlockRequest,				RightClickBlockCommand );
 			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
 			signalCommandMap.mapSignalClass( ScrollWheelRequest,					ScrollWheelCommand );
 			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );

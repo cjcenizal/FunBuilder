@@ -6,7 +6,6 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.ClickBlockRequest;
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
-	import com.funbuilder.controller.signals.RightClickBlockRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
@@ -44,9 +43,6 @@ package com.funbuilder.controller.commands
 		public var clickBlockRequest:ClickBlockRequest;
 		
 		[Inject]
-		public var rightClickBlockRequest:RightClickBlockRequest;
-		
-		[Inject]
 		public var mouseOverBlockRequest:MouseOverBlockRequest;
 		
 		[Inject]
@@ -63,7 +59,6 @@ package com.funbuilder.controller.commands
 			addBlockData.mesh.mouseEnabled = true;
 			// Add listeners for click, right-click, and mouse-over.
 			addBlockData.mesh.addEventListener( MouseEvent3D.CLICK, onClick );
-			addBlockData.mesh.addEventListener( MouseEvent3D.RIGHT_CLICK, onRightClick );
 			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_OVER, onMouseOver );
 			
 			// Add to scene.
@@ -73,15 +68,7 @@ package com.funbuilder.controller.commands
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {
-			if ( keysModel.command ) {
-				rightClickBlockRequest.dispatch( e.object as Mesh );
-			} else {
-				clickBlockRequest.dispatch( e.object as Mesh );
-			}
-		}
-		
-		private function onRightClick( e:MouseEvent3D ):void {
-			rightClickBlockRequest.dispatch( e.object as Mesh );
+			clickBlockRequest.dispatch( e.object as Mesh );
 		}
 		
 		private function onMouseOver( e:MouseEvent3D ):void {

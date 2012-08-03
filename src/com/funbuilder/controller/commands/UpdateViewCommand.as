@@ -69,8 +69,7 @@ package com.funbuilder.controller.commands
 			
 			// UX:
 			// Fix history in general (and add history to deselect all blocks command)
-			// Persistent indicator of block collision
-			// Space bar centers on handles
+			
 			// Duplicate selections by shift-dragging
 			// New/open/exit should all prompt a save if unsaved
 			// Placing blocks enters brush mode:
@@ -85,10 +84,15 @@ package com.funbuilder.controller.commands
 			
 			// If a handle is grabbed, we are moving the selection.
 			if ( handlesModel.isGrabbed ) {
-				moveBlocksRequest.dispatch();
+				if ( keysModel.alt ) {
+					// Duplicate blocks.
+				} else {
+					// Move blocks.
+					moveBlocksRequest.dispatch();
+				}
 			} else {
-				// If shift key is down, then we're drag-adding/-removing to/from selection.
-				if ( keysModel.shift ) {
+				// If shift or alt key is down, then we're drag-adding/-removing to/from selection.
+				if ( keysModel.shift || keysModel.alt ) {
 				} else {
 					// While mouse is down 
 					if ( mouseModel.rightMouseDown || keysModel.command ) {

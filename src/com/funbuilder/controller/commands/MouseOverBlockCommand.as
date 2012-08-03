@@ -41,16 +41,16 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void {
 			// Add to and remove from current selection.
-			if ( keysModel.shift ) {
-				if ( mouseModel.mouseDown ) {
-					if ( !selectedBlocksModel.contains( block ) ) {
-						// Add to selection.
-						selectBlockRequest.dispatch( new SelectBlockVO( block, true, true ) );
-					}
-				} else if ( mouseModel.rightMouseDown ) {
+			if ( mouseModel.mouseDown ) {
+				if ( keysModel.alt ) {
 					if ( selectedBlocksModel.contains( block ) ) {
 						// Remove from selection.
 						deselectBlockRequest.dispatch( new DeselectBlockVO( block ) );
+					}
+				} else if ( keysModel.shift ) {
+					if ( !selectedBlocksModel.contains( block ) ) {
+						// Add to selection.
+						selectBlockRequest.dispatch( new SelectBlockVO( block, true, true ) );
 					}
 				}
 			}

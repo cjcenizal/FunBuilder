@@ -1,11 +1,7 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
-	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
-	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
-	import com.funbuilder.model.CameraTargetModel;
-	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.SelectBlockVO;
@@ -26,21 +22,9 @@ package com.funbuilder.controller.commands
 		public var selectedBlocksModel:SelectedBlocksModel;
 		
 		[Inject]
-		public var cameraTargetModel:CameraTargetModel;
-		
-		[Inject]
-		public var keysModel:KeysModel;
-		
-		[Inject]
 		public var segmentModel:SegmentModel;
 		
 		// Commands.
-		
-		[Inject]
-		public var deselectBlockRequest:DeselectBlockRequest;
-		
-		[Inject]
-		public var deselectAllBlocksRequest:DeselectAllBlocksRequest;
 		
 		[Inject]
 		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
@@ -50,16 +34,16 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			// Save history.
-			if ( selectData.saveHistory ) {
-				addHistoryRequest.dispatch();
+			if ( !selectedBlocksModel.contains( selectData.block ) ) {
+				// Save history.
+				if ( selectData.saveHistory ) {
+					addHistoryRequest.dispatch();
+				}
+				// Select block.
+				selectedBlocksModel.select( selectData.block );
+				segmentModel.enableIndicatorFor( selectData.block, true );
+				updateTargetAppearanceRequest.dispatch();
 			}
-			// Select block.
-			selectedBlocksModel.select( selectData.block );
-			segmentModel.enableIndicatorFor( selectData.block, true );
-			// Snap target to block.
-			//cameraTargetModel.setPos( selectData.block.x, selectData.block.y + SegmentConstants.BLOCK_SIZE * .5, selectData.block.z );	
-			updateTargetAppearanceRequest.dispatch();
 		}
 	}
 }
