@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
+	import com.funbuilder.controller.signals.DeselectBrushRequest;
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -31,11 +32,14 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addObjectToSceneRequest:AddObjectToSceneRequest;
 		
+		[Inject]
+		public var deselectBrushRequest:DeselectBrushRequest;
+		
 		override public function execute():void {
-			brushModel.data = blockData;
+			deselectBrushRequest.dispatch();
 			
 			// Add preview.
-			brushModel.preview = blockData.mesh.clone() as Mesh;
+			brushModel.select( blockData );
 			cameraTargetModel.matchPosition( brushModel.preview );
 			SegmentConstants.snapObjectToGrid( brushModel.preview );
 			brushModel.preview.scale( .5 );

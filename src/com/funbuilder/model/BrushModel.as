@@ -9,12 +9,30 @@ package com.funbuilder.model
 	public class BrushModel extends Actor
 	{
 		
-		public var data:BlockVO;
-		public var preview:Mesh;
+		private var _data:BlockVO;
+		private var _preview:Mesh;
 		
 		public function BrushModel()
 		{
 			super();
+		}
+		
+		public function select( data:BlockVO ):void {
+			_data = data;
+			_preview = data.mesh.clone() as Mesh;
+		}
+		
+		public function deselect():void {
+			_data = null;
+			_preview = null;
+		}
+		
+		public function get data():BlockVO {
+			return _data;
+		}
+		
+		public function get preview():Mesh {
+			return _preview;
 		}
 	}
 }

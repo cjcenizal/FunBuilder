@@ -80,7 +80,6 @@ package com.funbuilder.controller.commands
 			
 			
 			// Placing blocks enters brush mode:
-			//	- See transparent preview of block
 			//	- Click and drag
 			// 	- Raycast mouse position
 			//	- If intersect ground plane, move vertically until an empty space is found

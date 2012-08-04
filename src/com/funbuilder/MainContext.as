@@ -1,9 +1,9 @@
 package com.funbuilder
 {
 	import com.funbuilder.controller.commands.AddBlockCommand;
-	import com.funbuilder.controller.commands.BrushBlockCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
+	import com.funbuilder.controller.commands.BrushBlockCommand;
 	import com.funbuilder.controller.commands.ChangeBlockTypeCommand;
 	import com.funbuilder.controller.commands.ClearHistoryCommand;
 	import com.funbuilder.controller.commands.ClearSegmentCommand;
@@ -11,6 +11,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.DeleteBlockCommand;
 	import com.funbuilder.controller.commands.DeselectAllBlocksCommand;
 	import com.funbuilder.controller.commands.DeselectBlockCommand;
+	import com.funbuilder.controller.commands.DeselectBrushCommand;
 	import com.funbuilder.controller.commands.GrabHandleCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
 	import com.funbuilder.controller.commands.InvalidateSavedFileCommand;
@@ -39,12 +40,12 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.UpdateElevationCommand;
 	import com.funbuilder.controller.commands.UpdateGrabbedBlocksCommand;
 	import com.funbuilder.controller.commands.UpdateHandlesCommand;
-	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
+	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
 	import com.funbuilder.controller.signals.ClearHistoryRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
@@ -52,6 +53,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
+	import com.funbuilder.controller.signals.DeselectBrushRequest;
 	import com.funbuilder.controller.signals.DrawHandlesRequest;
 	import com.funbuilder.controller.signals.GrabHandleRequest;
 	import com.funbuilder.controller.signals.HideHandlesRequest;
@@ -155,6 +157,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( DeleteBlockRequest,					DeleteBlockCommand );
 			signalCommandMap.mapSignalClass( DeselectAllBlocksRequest,				DeselectAllBlocksCommand );
 			signalCommandMap.mapSignalClass( DeselectBlockRequest,					DeselectBlockCommand );
+			signalCommandMap.mapSignalClass( DeselectBrushRequest,					DeselectBrushCommand );
 			signalCommandMap.mapSignalClass( GrabHandleRequest,						GrabHandleCommand );
 			signalCommandMap.mapSignalClass( InvalidateSavedFileRequest,			InvalidateSavedFileCommand );
 			signalCommandMap.mapSignalClass( KeyDownRequest,						KeyDownCommand );

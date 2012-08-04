@@ -26,10 +26,6 @@ package com.funbuilder.controller.commands
 		public var addBlockRequest:AddBlockRequest;
 		
 		override public function execute():void {
-			
-			// Check movement first!
-			
-			
 			if ( selectedBlocksModel.canDuplicate ) {
 				// For each selected block, duplicate it and add to segment.
 				var len:int = selectedBlocksModel.numBlocks;
