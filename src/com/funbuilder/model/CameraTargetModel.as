@@ -1,7 +1,6 @@
 package com.funbuilder.model
 {
 	import away3d.entities.Mesh;
-	import away3d.materials.ColorMaterial;
 	
 	import flash.geom.Vector3D;
 	
@@ -21,7 +20,6 @@ package com.funbuilder.model
 		
 		public function setMesh( target:Mesh ):void {
 			this.target = target;
-			target.material = new ColorMaterial( 0xffffff, .1 );
 		}
 		
 		public function move( x:Number, y:Number, z:Number ):void {
@@ -55,7 +53,7 @@ package com.funbuilder.model
 		}
 		
 		public function getPosition():Vector3D {
-			return _position;
+			return _position.clone();
 		}
 		
 		public function get targetX():Number {

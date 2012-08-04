@@ -33,7 +33,7 @@ package com.funbuilder.controller.commands
 				posMesh = elevationModel.getAtPos( position, true );
 				negMesh = elevationModel.getAtPos( position, false );
 				if ( posMesh && negMesh ) {
-					if ( map[ pos ] > 0 ) {
+					if ( map[ pos ].length > 0 ) {
 						( posMesh.material as ColorMaterial ).alpha = .3;
 						( negMesh.material as ColorMaterial ).alpha = .3;
 					} else {

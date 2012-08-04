@@ -1,9 +1,12 @@
 package com.funbuilder.controller.commands
 {
 	import away3d.cameras.Camera3D;
+	import away3d.entities.Mesh;
 	
 	import com.cenizal.utils.Trig;
+	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.UpdateBrushRequest;
 	import com.funbuilder.controller.signals.UpdateCollisionsRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
@@ -16,8 +19,10 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.events.TimeEvent;
+	import com.funbuilder.model.vo.AddBlockVO;
 	
 	import flash.geom.Point;
+	import flash.ui.Keyboard;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -69,6 +74,12 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var updateElevationRequest:UpdateElevationRequest;
 		
+		[Inject]
+		public var updateBrushRequest:UpdateBrushRequest;
+		
+		[Inject]
+		public var addBlockRequest:AddBlockRequest;
+		
 		override public function execute():void
 		{
 			
@@ -99,9 +110,20 @@ package com.funbuilder.controller.commands
 			// Photonic
 			
 			
-			// Match brush to mouse
+			// Update brush.
+			updateBrushRequest.dispatch();
 			
-			
+			if ( brushModel.preview ) {
+				// If we're in brush mode, then see if we need to place a block.
+				if ( keysModel.contains( Keyboard.A ) ) {
+					if ( brushModel.canPlace() ) {
+						var block:Mesh = brushModel.preview.clone() as Mesh;
+						block.scaleX = block.scaleY = block.scaleZ = 1;
+						addBlockRequest.dispatch( new AddBlockVO( block ) );
+					}
+				}
+			}
+					
 			// If a handle is grabbed, we are moving the selection.
 			if ( handlesModel.isGrabbed ) {
 				upgradeGrabbedBlocksRequest.dispatch();
@@ -138,6 +160,7 @@ package com.funbuilder.controller.commands
 					}
 				}
 			}
+			
 			
 			// Update target.
 			cameraTargetModel.update();

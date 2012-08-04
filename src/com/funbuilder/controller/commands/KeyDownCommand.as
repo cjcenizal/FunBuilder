@@ -71,7 +71,6 @@ package com.funbuilder.controller.commands
 			keysModel.control = event.controlKey;
 			
 			var key:int = event.keyCode;
-			
 			if ( !keysModel.keysDown[ key ] ) {
 				keysModel.keysDown[ key ] = true;
 				// Snap camera to selected blocks.
@@ -89,26 +88,20 @@ package com.funbuilder.controller.commands
 					selectedBlocksModel.canDuplicate = true;
 				} else if ( key == Keyboard.TAB ) {
 					toggleLibraryRequest.dispatch();
+				} else if ( key == Keyboard.A ) {
+					brushModel.resetPlacement();
 				}
 				
 				/*
 				switch ( event.keyCode ) {
-					case Keyboard.BACKSPACE:
-						deleteBlockRequest.dispatch();
-						break;
 					case LEFT_ARROW:
 						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVO( -1 ) );
 						break;
 					case RIGHT_ARROW:
 						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVO( 1 ) );
 						break;
-					case Keyboard.ESCAPE:
-						addHistoryRequest.dispatch();
-						deselectAllBlocksRequest.dispatch();
-						break;
 				}*/
 				
-				//selectedBlocksModel.resetTimeUntilMovement();
 			}
 		}
 	}

@@ -24,5 +24,12 @@ package com.cenizal.utils
 		public static function getDistanceFromPoints( p1:Point, p2:Point ):Number {
 			return ( p2.subtract( p1 ) ).length;
 		}
+		
+		public static function crossProduct( p1:Vector3D, p2:Vector3D ):Vector3D {
+			var x:Number = p1.y * p2.z - p1.z * p2.y;
+			var y:Number = p1.z * p2.x - p1.x * p2.z;
+			var z:Number = p1.x * p2.y - p1.y * p2.x;
+			return new Vector3D( x, y, z );
+		}
 	}
 }

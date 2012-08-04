@@ -20,6 +20,12 @@ package com.funbuilder.model.constants
 			obj.z = snapToGrid( obj.z - BLOCK_SIZE * .5 ) + BLOCK_SIZE * .5;
 		}
 		
+		public static function snapPositionToGrid( pos:Vector3D ):void {
+			pos.x = snapToGrid( pos.x - BLOCK_SIZE * .5 ) + BLOCK_SIZE * .5;
+			pos.y = snapToGrid( pos.y - BLOCK_SIZE * .5 );
+			pos.z = snapToGrid( pos.z - BLOCK_SIZE * .5 ) + BLOCK_SIZE * .5;
+		}
+		
 		public static function snapPointGrid( x:Number, y:Number, z:Number ):Vector3D {
 			var point:Vector3D = new Vector3D();
 			point.x = snapToGrid( x - BLOCK_SIZE * .5 ) + BLOCK_SIZE * .5;

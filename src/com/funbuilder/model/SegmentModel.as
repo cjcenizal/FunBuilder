@@ -4,6 +4,8 @@ package com.funbuilder.model
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.CubeGeometry;
 	
+	import com.funbuilder.model.constants.SegmentConstants;
+	
 	import com.adobe.serialization.json.JSON;
 	
 	import flash.geom.Vector3D;
@@ -86,20 +88,25 @@ package com.funbuilder.model
 		}
 		
 		private function removeElevation( pos:Vector3D ):void {
-			var key:Vector3D = getKey( pos );
-			_elevationMap[ key ] --;
-		}
-		
-		private function addElevation( pos:Vector3D ):void {
-			var key:Vector3D = getKey( pos );
-			if ( !_elevationMap[ key ] ) {
-				_elevationMap[ key ] = 1;
-			} else {
-				_elevationMap[ key ] ++;
+			var key:Vector3D = getElevationKey( pos );
+			var arr:Array = _elevationMap[ key ];
+			for ( var i:int = 0; i < arr.length; i++ ) {
+				if ( pos.equals( arr[ i ] ) ) {
+					arr.splice( i, 1 );
+					return;
+				}
 			}
 		}
 		
-		private function getKey( pos:Vector3D ):Vector3D {
+		private function addElevation( pos:Vector3D ):void {
+			var key:Vector3D = getElevationKey( pos );
+			if ( !_elevationMap[ key ] ) {
+				_elevationMap[ key ] = [];
+			}
+			_elevationMap[ key ].push( pos );
+		}
+		
+		private function getElevationKey( pos:Vector3D ):Vector3D {
 			var key:String = pos.x + "," + pos.z;
 			if ( !_elevationKeys[ key ] ) {
 				_elevationKeys[ key ] = pos.clone();
@@ -167,6 +174,20 @@ package com.funbuilder.model
 		
 		public function getNewIndicatorMesh():Mesh {
 			return new Mesh( _indicatorGeometry, new ColorMaterial( 0xFFFF00, 0 ) );
+		}
+		
+		public function getMaxElevationAt( pos:Vector3D ):Number {
+			var key:Vector3D = getElevationKey( pos );
+			var arr:Array = _elevationMap[ key ];
+			var pos:Vector3D;
+			var y:Number = 0;
+			if ( arr ) {
+				for ( var i:int = 0; i < arr.length; i++ ) {
+					pos = arr[ i ];
+					y = Math.max( y, pos.y ) + SegmentConstants.BLOCK_SIZE;
+				}
+			}
+			return y;
 		}
 		
 		public function get numBlocks():int {

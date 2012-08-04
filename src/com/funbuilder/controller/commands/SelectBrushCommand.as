@@ -42,7 +42,6 @@ package com.funbuilder.controller.commands
 			brushModel.select( blockData );
 			cameraTargetModel.matchPosition( brushModel.preview );
 			SegmentConstants.snapObjectToGrid( brushModel.preview );
-			brushModel.preview.scale( .5 );
 			addObjectToSceneRequest.dispatch( brushModel.preview );
 		}
 	}

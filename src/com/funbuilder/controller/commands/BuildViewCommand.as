@@ -74,7 +74,8 @@ package com.funbuilder.controller.commands
 			addView3DRequest.dispatch( view );
 			
 			// Add camera target.
-			var target:Mesh = new Mesh( new SphereGeometry( 10 ), null );
+			var target:Mesh = new Mesh( new SphereGeometry( 4 ), null );
+			target.material = new ColorMaterial( 0xffffff, .5 );
 			cameraTargetModel.setMesh( target );
 			cameraTargetModel.setPos( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
 			addObjectToSceneRequest.dispatch( target );

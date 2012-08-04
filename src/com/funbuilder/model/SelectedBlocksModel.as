@@ -14,8 +14,6 @@ package com.funbuilder.model
 		private var _centroid:Vector3D;
 		private var _max:Number;
 		
-		private var _timeUntilMovement:int = 0;
-		
 		public var canDuplicate:Boolean = false;
 		
 		public function SelectedBlocksModel()
@@ -105,15 +103,5 @@ package com.funbuilder.model
 		public function get max():Number {
 			return _max;
 		}
-		
-		public function resetTimeUntilMovement():void {
-			_timeUntilMovement = 10;
-		}
-		
-		public function get timeUntilMovement():int {
-			if ( _timeUntilMovement > 0 ) _timeUntilMovement--;
-			return _timeUntilMovement; 
-		}
-		
 	}
 }
