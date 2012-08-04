@@ -1,7 +1,6 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
-	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
@@ -59,9 +58,6 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var deselectBrushRequest:DeselectBrushRequest;
 		
-		[Inject]
-		public var brushBlockRequest:BrushBlockRequest;
-		
 		// Private vars.
 		
 		private const LEFT_ARROW:int = 37;
@@ -92,9 +88,6 @@ package com.funbuilder.controller.commands
 					selectedBlocksModel.canDuplicate = true;
 				} else if ( key == Keyboard.TAB ) {
 					toggleLibraryRequest.dispatch();
-				} else if ( key == Keyboard.A ) {
-					brushModel.resetPlacement();
-					brushBlockRequest.dispatch();
 				}
 				
 				/*

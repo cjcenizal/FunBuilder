@@ -6,7 +6,6 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.model.BrushModel;
-	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.View3DModel;
@@ -14,7 +13,6 @@ package com.funbuilder.controller.commands
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-	import flash.ui.Mouse;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -28,9 +26,6 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var view3dModel:View3DModel;
-		
-		[Inject]
-		public var cameraTargetModel:CameraTargetModel;
 		
 		[Inject]
 		public var segmentModel:SegmentModel;

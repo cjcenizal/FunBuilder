@@ -1,10 +1,8 @@
 package com.funbuilder.controller.commands
 {
 	import away3d.cameras.Camera3D;
-	import away3d.entities.Mesh;
 	
 	import com.cenizal.utils.Trig;
-	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.UpdateBrushRequest;
@@ -20,7 +18,6 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.events.TimeEvent;
-	import com.funbuilder.model.vo.AddBlockVO;
 	
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
@@ -108,52 +105,50 @@ package com.funbuilder.controller.commands
 			updateBrushRequest.dispatch();
 			
 			// Add blocks with brush.
-			if ( brushModel.preview ) {
+			if ( brushModel.preview && keysModel.contains( Keyboard.SPACE ) ) {
 				// If we're in brush mode, then see if we need to place a block.
-				if ( !mouseModel.isMoving && keysModel.contains( Keyboard.A ) ) {
-					if ( brushModel.canPlace() ) {
-						brushBlockRequest.dispatch();
-					}
+				if ( !mouseModel.isMoving && mouseModel.mouseDown && brushModel.canPlace() ) {
+					brushBlockRequest.dispatch();
 				}
-			}
-					
-			// If a handle is grabbed, we are moving the selection.
-			if ( handlesModel.isGrabbed ) {
-				upgradeGrabbedBlocksRequest.dispatch();
 			} else {
-				// If shift or alt key is down, then we're drag-adding/-removing to/from selection.
-				if ( keysModel.shift || keysModel.alt ) {
+						
+				// If a handle is grabbed, we are moving the selection.
+				if ( handlesModel.isGrabbed ) {
+					upgradeGrabbedBlocksRequest.dispatch();
 				} else {
-					// While mouse is down 
-					if ( mouseModel.rightMouseDown || keysModel.command ) {
-						// If shift key isn't down, then we're panning.
-						if ( mouseModel.prevPosition ) {
-							var camera:Camera3D = view3dModel.camera;
-							var mousePos:Point = new Point( contextView.mouseX, contextView.mouseY );
-							var cameraTheta:Number = Trig.thetaFromPoints(
-								new Point( camera.position.z, camera.position.x ),
-								new Point( cameraTargetModel.getPosition().z, cameraTargetModel.getPosition().x ) );
-							var mouseTheta:Number = Trig.thetaFromPoints( mousePos, mouseModel.prevPosition );
-							var len:Number = Trig.getDistanceFromPoints( mouseModel.prevPosition, mousePos );
-							if ( len > 0 ) {
-								var boost = view3dModel.cameraController.distance * .03;
-								var distance = ( len + boost ) * -1;
-								var angle = cameraTheta + mouseTheta;
-								var moveX:Number = Math.cos( angle ) * distance;
-								var moveZ:Number = Math.sin( angle ) * distance;
-								camera.position.x += moveX;
-								camera.position.z += moveZ;
-								cameraTargetModel.move( moveX, 0, moveZ );
+					// If shift or alt key is down, then we're drag-adding/-removing to/from selection.
+					if ( keysModel.shift || keysModel.alt ) {
+					} else {
+						// While mouse is down 
+						if ( mouseModel.rightMouseDown || keysModel.command ) {
+							// If shift key isn't down, then we're panning.
+							if ( mouseModel.prevPosition ) {
+								var camera:Camera3D = view3dModel.camera;
+								var mousePos:Point = new Point( contextView.mouseX, contextView.mouseY );
+								var cameraTheta:Number = Trig.thetaFromPoints(
+									new Point( camera.position.z, camera.position.x ),
+									new Point( cameraTargetModel.getPosition().z, cameraTargetModel.getPosition().x ) );
+								var mouseTheta:Number = Trig.thetaFromPoints( mousePos, mouseModel.prevPosition );
+								var len:Number = Trig.getDistanceFromPoints( mouseModel.prevPosition, mousePos );
+								if ( len > 0 ) {
+									var boost = view3dModel.cameraController.distance * .03;
+									var distance = ( len + boost ) * -1;
+									var angle = cameraTheta + mouseTheta;
+									var moveX:Number = Math.cos( angle ) * distance;
+									var moveZ:Number = Math.sin( angle ) * distance;
+									camera.position.x += moveX;
+									camera.position.z += moveZ;
+									cameraTargetModel.move( moveX, 0, moveZ );
+								}
 							}
+						} else if ( mouseModel.mouseDown ) {
+							// Control the camera.
+							view3dModel.cameraController.panAngle = .35 * ( contextView.stage.mouseX - view3dModel.lastMouseX ) + view3dModel.lastPanAngle;
+							view3dModel.cameraController.tiltAngle = .35 * ( contextView.stage.mouseY - view3dModel.lastMouseY ) + view3dModel.lastTiltAngle;
 						}
-					} else if ( mouseModel.mouseDown ) {
-						// Control the camera.
-						view3dModel.cameraController.panAngle = .35 * ( contextView.stage.mouseX - view3dModel.lastMouseX ) + view3dModel.lastPanAngle;
-						view3dModel.cameraController.tiltAngle = .35 * ( contextView.stage.mouseY - view3dModel.lastMouseY ) + view3dModel.lastTiltAngle;
 					}
 				}
 			}
-			
 			
 			// Update target.
 			cameraTargetModel.update();

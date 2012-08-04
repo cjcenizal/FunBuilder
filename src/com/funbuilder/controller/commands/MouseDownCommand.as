@@ -1,5 +1,7 @@
 package com.funbuilder.controller.commands
 {
+	import com.funbuilder.controller.signals.BrushBlockRequest;
+	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.View3DModel;
 	
@@ -9,11 +11,22 @@ package com.funbuilder.controller.commands
 	
 	public class MouseDownCommand extends Command
 	{
+		
+		// Models.
+		
 		[Inject]
 		public var mouseModel:MouseModel;
 		
 		[Inject]
 		public var view3dModel:View3DModel;
+		
+		[Inject]
+		public var brushModel:BrushModel;
+		
+		// Commands.
+		
+		[Inject]
+		public var brushBlockRequest:BrushBlockRequest;
 		
 		override public function execute():void {
 			mouseModel.setMouseDown( contextView.stage.mouseX, contextView.stage.mouseY );
@@ -21,6 +34,10 @@ package com.funbuilder.controller.commands
 			view3dModel.lastTiltAngle = view3dModel.cameraController.tiltAngle;
 			view3dModel.lastMouseX = contextView.stage.mouseX;
 			view3dModel.lastMouseY = contextView.stage.mouseY;
+			
+			brushModel.resetPlacement();
+			brushBlockRequest.dispatch();
+			
 		}
 	}
 }

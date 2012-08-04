@@ -6,7 +6,10 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.model.BrushModel;
+	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.vo.AddBlockVO;
+	
+	import flash.ui.Keyboard;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -17,6 +20,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var brushModel:BrushModel;
+		
+		[Inject]
+		public var keysModel:KeysModel;
 		
 		// Commands.
 		
@@ -31,12 +37,14 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			addHistoryRequest.dispatch( false );
-			// Add block.
-			var block:Mesh = brushModel.preview.clone() as Mesh;
-			block.scaleX = block.scaleY = block.scaleZ = 1;
-			addBlockRequest.dispatch( new AddBlockVO( block ) );
-			invalidateSavedFileRequest.dispatch();
+			if ( brushModel.preview && keysModel.contains( Keyboard.SPACE ) ) {
+				addHistoryRequest.dispatch( false );
+				// Add block.
+				var block:Mesh = brushModel.preview.clone() as Mesh;
+				block.scaleX = block.scaleY = block.scaleZ = 1;
+				addBlockRequest.dispatch( new AddBlockVO( block ) );
+				invalidateSavedFileRequest.dispatch();
+			}
 		}
 	}
 }

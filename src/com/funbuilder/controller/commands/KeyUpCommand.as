@@ -1,6 +1,5 @@
 package com.funbuilder.controller.commands
 {
-	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	
@@ -22,9 +21,6 @@ package com.funbuilder.controller.commands
 		public var keysModel:KeysModel;
 		
 		[Inject]
-		public var brushModel:BrushModel;
-		
-		[Inject]
 		public var selectedBlocksModel:SelectedBlocksModel;
 		
 		override public function execute():void
@@ -38,8 +34,6 @@ package com.funbuilder.controller.commands
 			var key:int = event.keyCode;
 			if ( key == Keyboard.ALTERNATE ) {
 				selectedBlocksModel.canDuplicate = false;
-			} else if ( key == Keyboard.A ) {
-				brushModel.resetPlacement();
 			}
 		}
 	}
