@@ -76,8 +76,6 @@ package com.funbuilder.controller.commands
 			
 			
 			// Placing blocks enters brush mode:
-			//	- Tab opens and closes menu
-			//	- Click a block button and you're in brush mode
 			//	- See transparent preview of block
 			//	- Click and drag
 			// 	- Raycast mouse position

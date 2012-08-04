@@ -1,5 +1,7 @@
 package com.funbuilder.model.constants
 {
+	import away3d.entities.Mesh;
+	
 	import flash.geom.Vector3D;
 
 	public class SegmentConstants
@@ -11,6 +13,12 @@ package com.funbuilder.model.constants
 		public static const SEGMENT_DEPTH:int = NUM_BLOCKS_DEPTH * BLOCK_SIZE;
 		public static const SEGMENT_HALF_WIDTH:Number = SEGMENT_WIDTH * .5;
 		public static const SEGMENT_HALF_DEPTH:Number = SEGMENT_DEPTH * .5;
+		
+		public static function snapObjectToGrid( obj:Mesh ):void {
+			obj.x = snapToGrid( obj.x - BLOCK_SIZE * .5 ) + BLOCK_SIZE * .5;
+			obj.y = snapToGrid( obj.y - BLOCK_SIZE * .5 );
+			obj.z = snapToGrid( obj.z - BLOCK_SIZE * .5 ) + BLOCK_SIZE * .5;
+		}
 		
 		public static function snapPointGrid( x:Number, y:Number, z:Number ):Vector3D {
 			var point:Vector3D = new Vector3D();

@@ -32,7 +32,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.SaveFileCommand;
 	import com.funbuilder.controller.commands.ScrollWheelCommand;
 	import com.funbuilder.controller.commands.SelectBlockCommand;
-	import com.funbuilder.controller.commands.SelectLibraryBlockCommand;
+	import com.funbuilder.controller.commands.SelectBrushCommand;
 	import com.funbuilder.controller.commands.StageClickCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
 	import com.funbuilder.controller.commands.UpdateCollisionsCommand;
@@ -74,7 +74,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.SaveFileRequest;
 	import com.funbuilder.controller.signals.ScrollWheelRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
-	import com.funbuilder.controller.signals.SelectLibraryBlockRequest;
+	import com.funbuilder.controller.signals.SelectBrushRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
 	import com.funbuilder.controller.signals.StageClickRequest;
@@ -175,7 +175,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
 			signalCommandMap.mapSignalClass( ScrollWheelRequest,					ScrollWheelCommand );
 			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );
-			signalCommandMap.mapSignalClass( SelectLibraryBlockRequest,				SelectLibraryBlockCommand );
+			signalCommandMap.mapSignalClass( SelectBrushRequest,				SelectBrushCommand );
 			signalCommandMap.mapSignalClass( StageClickRequest,						StageClickCommand );
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
 			signalCommandMap.mapSignalClass( UpdateCollisionsRequest,				UpdateCollisionsCommand );

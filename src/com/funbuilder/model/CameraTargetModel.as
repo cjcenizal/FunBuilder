@@ -48,6 +48,12 @@ package com.funbuilder.model
 			target.z = _position.z;
 		}
 		
+		public function matchPosition( obj:Mesh ):void {
+			obj.x = _position.x;
+			obj.y = _position.y;
+			obj.z = _position.z;
+		}
+		
 		public function getPosition():Vector3D {
 			return _position;
 		}

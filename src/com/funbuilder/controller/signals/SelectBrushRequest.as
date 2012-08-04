@@ -4,9 +4,9 @@ package com.funbuilder.controller.signals
 	
 	import org.osflash.signals.Signal;
 	
-	public class SelectLibraryBlockRequest extends Signal
+	public class SelectBrushRequest extends Signal
 	{
-		public function SelectLibraryBlockRequest()
+		public function SelectBrushRequest()
 		{
 			super( BlockVO );
 		}

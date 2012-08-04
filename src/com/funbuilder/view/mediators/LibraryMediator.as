@@ -2,7 +2,7 @@ package com.funbuilder.view.mediators
 {
 	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
-	import com.funbuilder.controller.signals.SelectLibraryBlockRequest;
+	import com.funbuilder.controller.signals.SelectBrushRequest;
 	import com.funbuilder.model.vo.AddItemToLibraryVO;
 	import com.funbuilder.view.components.LibraryView;
 	
@@ -25,7 +25,7 @@ package com.funbuilder.view.mediators
 		public var addItemToLibraryRequest:AddItemToLibraryRequest;
 		
 		[Inject]
-		public var selectLibraryBlockRequest:SelectLibraryBlockRequest;
+		public var selectLibraryBlockRequest:SelectBrushRequest;
 		
 		override public function onRegister():void {
 			view.addEventListener( view.EVENT_SELECT, onSelectItem );
