@@ -1,7 +1,8 @@
 package com.funbuilder.view.mediators
 {
-	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
+	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
+	import com.funbuilder.controller.signals.SelectLibraryBlockRequest;
 	import com.funbuilder.model.vo.AddItemToLibraryVO;
 	import com.funbuilder.view.components.LibraryView;
 	
@@ -24,7 +25,7 @@ package com.funbuilder.view.mediators
 		public var addItemToLibraryRequest:AddItemToLibraryRequest;
 		
 		[Inject]
-		public var addBlockFromLibraryRequest:AddBlockFromLibraryRequest;
+		public var selectLibraryBlockRequest:SelectLibraryBlockRequest;
 		
 		override public function onRegister():void {
 			view.addEventListener( view.EVENT_SELECT, onSelectItem );
@@ -32,11 +33,11 @@ package com.funbuilder.view.mediators
 		}
 		
 		private function onSelectItem( e:Event ):void {
-			addBlockFromLibraryRequest.dispatch( view.selectedId );
+			selectLibraryBlockRequest.dispatch( view.selected );
 		}
 		
 		private function onAddItemToLibraryRequested( data:AddItemToLibraryVO ):void {
-			view.addItem( data.block.id, data.block.filename, data.bitmap );
+			view.addItem( data.block, data.bitmap );
 		}
 	}
 }

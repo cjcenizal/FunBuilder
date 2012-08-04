@@ -12,7 +12,6 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddItemToLibraryVO;
-	import com.funrun.model.vo.BlockVO;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -20,7 +19,6 @@ package com.funbuilder.controller.commands
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import org.robotlegs.mvcs.Command;
 	import org.robotlegs.utilities.macrobot.AsyncCommand;
 	
 	public class BuildLibraryCommand extends AsyncCommand

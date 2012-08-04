@@ -3,19 +3,12 @@ package com.funbuilder.model
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;
 	
-	import com.funbuilder.model.constants.SegmentConstants;
-	
 	import flash.geom.Vector3D;
 	
 	import org.robotlegs.mvcs.Actor;
 	
 	public class CameraTargetModel extends Actor
 	{
-		
-	//	public var lookUnselectedMaterial:ColorMaterial = new ColorMaterial( 0x00ccff, .1 );
-	//	public var buildSelectedMaterial:ColorMaterial = new ColorMaterial( 0x00ff78, .2 );
-	//	public var lookSelectedMaterial:ColorMaterial = new ColorMaterial( 0xffa200, .3 );
-	//	public var buildUnselectedMaterial:ColorMaterial = new ColorMaterial( 0xfff000, .3 );
 		
 		public var target:Mesh;
 		private var _position:Vector3D;
@@ -49,15 +42,10 @@ package com.funbuilder.model
 			_position.z = z;
 		}
 		
-	//	public function setMaterial( material:ColorMaterial ):void {
-	//		target.material = material;
-	//	}
-		
-		public function update( snap:Boolean = false ):void {
-			var pos:Vector3D = ( snap ) ? SegmentConstants.snapPointGrid( _position.x, _position.y, _position.z ) : _position;
-			target.x = pos.x;
-			target.y = pos.y;
-			target.z = pos.z;
+		public function update():void {
+			target.x = _position.x;
+			target.y = _position.y;
+			target.z = _position.z;
 		}
 		
 		public function getPosition():Vector3D {

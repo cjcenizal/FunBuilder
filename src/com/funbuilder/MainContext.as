@@ -1,7 +1,7 @@
 package com.funbuilder
 {
 	import com.funbuilder.controller.commands.AddBlockCommand;
-	import com.funbuilder.controller.commands.AddBlockFromLibraryCommand;
+	import com.funbuilder.controller.commands.BrushBlockCommand;
 	import com.funbuilder.controller.commands.AddHistoryCommand;
 	import com.funbuilder.controller.commands.AddObjectToSceneCommand;
 	import com.funbuilder.controller.commands.ChangeBlockTypeCommand;
@@ -32,13 +32,14 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.SaveFileCommand;
 	import com.funbuilder.controller.commands.ScrollWheelCommand;
 	import com.funbuilder.controller.commands.SelectBlockCommand;
+	import com.funbuilder.controller.commands.SelectLibraryBlockCommand;
 	import com.funbuilder.controller.commands.StageClickCommand;
 	import com.funbuilder.controller.commands.UndoEditCommand;
 	import com.funbuilder.controller.commands.UpdateCollisionsCommand;
 	import com.funbuilder.controller.commands.UpdateElevationCommand;
 	import com.funbuilder.controller.commands.UpdateGrabbedBlocksCommand;
 	import com.funbuilder.controller.commands.UpdateHandlesCommand;
-	import com.funbuilder.controller.signals.AddBlockFromLibraryRequest;
+	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
@@ -73,16 +74,18 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.SaveFileRequest;
 	import com.funbuilder.controller.signals.ScrollWheelRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
+	import com.funbuilder.controller.signals.SelectLibraryBlockRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
-	import com.funbuilder.controller.signals.ToggleLibraryRequest;
 	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
 	import com.funbuilder.controller.signals.StageClickRequest;
+	import com.funbuilder.controller.signals.ToggleLibraryRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
 	import com.funbuilder.controller.signals.UpdateCollisionsRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.model.BlocksModel;
+	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.FileModel;
@@ -117,6 +120,7 @@ package com.funbuilder
 			
 			// Map models.
 			injector.mapSingleton( BlocksModel );
+			injector.mapSingleton( BrushModel );
 			injector.mapSingleton( CameraTargetModel );
 			injector.mapSingleton( ElevationModel );
 			injector.mapSingleton( FileModel );
@@ -141,7 +145,7 @@ package com.funbuilder
 			injector.mapSingleton( ToggleLibraryRequest );
 			injector.mapSingleton( ShowSelectionIndicatorRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
-			signalCommandMap.mapSignalClass( AddBlockFromLibraryRequest,			AddBlockFromLibraryCommand );
+			signalCommandMap.mapSignalClass( BrushBlockRequest,			BrushBlockCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );
@@ -171,6 +175,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( SaveFileRequest,						SaveFileCommand );
 			signalCommandMap.mapSignalClass( ScrollWheelRequest,					ScrollWheelCommand );
 			signalCommandMap.mapSignalClass( SelectBlockRequest,					SelectBlockCommand );
+			signalCommandMap.mapSignalClass( SelectLibraryBlockRequest,				SelectLibraryBlockCommand );
 			signalCommandMap.mapSignalClass( StageClickRequest,						StageClickCommand );
 			signalCommandMap.mapSignalClass( UndoEditRequest,						UndoEditCommand );
 			signalCommandMap.mapSignalClass( UpdateCollisionsRequest,				UpdateCollisionsCommand );

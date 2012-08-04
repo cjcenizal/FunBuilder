@@ -17,7 +17,7 @@ package com.funbuilder.controller.commands
 	
 	import org.robotlegs.mvcs.Command;
 	
-	public class AddBlockFromLibraryCommand extends Command
+	public class BrushBlockCommand extends Command
 	{
 		
 		// Arguments.

@@ -5,6 +5,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.ToggleLibraryRequest;
+	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SelectedBlocksModel;
@@ -32,6 +33,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
+		
+		[Inject]
+		public var brushModel:BrushModel;
 		
 		// Commands.
 		
@@ -71,8 +75,12 @@ package com.funbuilder.controller.commands
 				if ( key == Keyboard.SPACE && selectedBlocksModel.numBlocks > 0 ) {
 					cameraTargetModel.moveTo( selectedBlocksModel.centroid.x, cameraTargetModel.targetY, selectedBlocksModel.centroid.z );
 				} else if ( key == Keyboard.ESCAPE ) {
-					addHistoryRequest.dispatch();
-					deselectAllBlocksRequest.dispatch();
+					if ( brushModel.block ) {
+						brushModel.block = null;
+					} else if ( selectedBlocksModel.numBlocks > 0 ) {
+						addHistoryRequest.dispatch();
+						deselectAllBlocksRequest.dispatch();
+					}
 				} else if ( key == Keyboard.BACKSPACE ) {
 					deleteBlockRequest.dispatch();
 				} else if ( key == Keyboard.ALTERNATE ) {

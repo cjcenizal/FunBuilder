@@ -2,9 +2,9 @@ package com.funbuilder.controller.signals
 {
 	import org.osflash.signals.Signal;
 	
-	public class AddBlockFromLibraryRequest extends Signal
+	public class BrushBlockRequest extends Signal
 	{
-		public function AddBlockFromLibraryRequest()
+		public function BrushBlockRequest()
 		{
 			super( String );
 		}

@@ -3,6 +3,7 @@ package com.funbuilder.view.components
 	import com.bit101.components.Component;
 	import com.bit101.components.Label;
 	import com.bit101.components.Panel;
+	import com.funrun.model.vo.BlockVO;
 	
 	import flash.display.Bitmap;
 	import flash.display.DisplayObjectContainer;
@@ -17,7 +18,7 @@ package com.funbuilder.view.components
 		
 		private var _bg:Panel;
 		private var _items:Array;
-		public var selectedId:String;
+		public var selected:BlockVO;
 		
 		public function LibraryView( parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number = 0 )
 		{
@@ -36,7 +37,7 @@ package com.funbuilder.view.components
 			setSize( _bg.width, _bg.height );
 		}
 		
-		public function addItem( id:String, name:String, bitmap:Bitmap ):void {
+		public function addItem( data:BlockVO, bitmap:Bitmap ):void {
 			var xpos:Number = ( _items.length > 0 ) ? _items[ _items.length - 1 ].x + _items[ _items.length - 1 ].width + 3 : 3;
 			var sprite:Sprite = new Sprite();
 			sprite.addChild( bitmap );
@@ -48,13 +49,13 @@ package com.funbuilder.view.components
 			sprite.x = xpos;
 			sprite.y = 3
 			_items.push( sprite );
-			sprite.addEventListener( MouseEvent.CLICK, getOnMouseDown( id ) );
+			sprite.addEventListener( MouseEvent.CLICK, getOnMouseDown( data ) );
 		}
 		
-		private function getOnMouseDown( id:String ):Function {
+		private function getOnMouseDown( data:BlockVO ):Function {
 			var self:LibraryView = this;
 			return function( e:MouseEvent ):void {
-				self.selectedId = id;
+				self.selected = data;
 				self.dispatchEvent( new Event( self.EVENT_SELECT ) );
 			}
 		}
