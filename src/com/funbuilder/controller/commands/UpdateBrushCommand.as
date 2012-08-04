@@ -49,7 +49,6 @@ package com.funbuilder.controller.commands
 				var intersection:Vector3D = drag.getIntersect( view3dModel.view.mouseX, view3dModel.view.mouseY );
 				SegmentConstants.snapPositionToGrid( intersection );
 				var y:Number = segmentModel.getMaxElevationAt( intersection );
-				//if ( y > 0 ) y += SegmentConstants.BLOCK_SIZE;
 				preview.x = intersection.x;
 				preview.y = y;
 				preview.z = intersection.z;

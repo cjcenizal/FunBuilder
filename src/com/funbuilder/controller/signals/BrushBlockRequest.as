@@ -6,7 +6,7 @@ package com.funbuilder.controller.signals
 	{
 		public function BrushBlockRequest()
 		{
-			super( String );
+			super();
 		}
 	}
 }

@@ -6,6 +6,7 @@ package com.funbuilder.controller.commands
 	import com.cenizal.utils.Trig;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.UpdateBrushRequest;
 	import com.funbuilder.controller.signals.UpdateCollisionsRequest;
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
@@ -78,7 +79,7 @@ package com.funbuilder.controller.commands
 		public var updateBrushRequest:UpdateBrushRequest;
 		
 		[Inject]
-		public var addBlockRequest:AddBlockRequest;
+		public var brushBlockRequest:BrushBlockRequest;
 		
 		override public function execute():void
 		{
@@ -110,16 +111,18 @@ package com.funbuilder.controller.commands
 			// Photonic
 			
 			
+			
+			
 			// Update brush.
 			updateBrushRequest.dispatch();
 			
+			// Add blocks with brush.
 			if ( brushModel.preview ) {
 				// If we're in brush mode, then see if we need to place a block.
 				if ( keysModel.contains( Keyboard.A ) ) {
 					if ( brushModel.canPlace() ) {
-						var block:Mesh = brushModel.preview.clone() as Mesh;
-						block.scaleX = block.scaleY = block.scaleZ = 1;
-						addBlockRequest.dispatch( new AddBlockVO( block ) );
+						trace("place");
+						brushBlockRequest.dispatch();
 					}
 				}
 			}

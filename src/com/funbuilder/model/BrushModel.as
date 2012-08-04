@@ -13,7 +13,7 @@ package com.funbuilder.model
 		private var _preview:Mesh;
 		
 		private var _count:int = 0;
-		private var _interval:int = 4;
+		private var _interval:int = 10;
 		
 		public function BrushModel()
 		{
@@ -23,7 +23,7 @@ package com.funbuilder.model
 		public function select( data:BlockVO ):void {
 			_data = data;
 			_preview = data.mesh.clone() as Mesh;
-			_count = _interval;
+			_count = 0;
 		}
 		
 		public function deselect():void {
@@ -41,7 +41,7 @@ package com.funbuilder.model
 		}
 		
 		public function resetPlacement():void {
-			_count == _interval;
+			_count = 0;
 		}
 		
 		public function get data():BlockVO {
