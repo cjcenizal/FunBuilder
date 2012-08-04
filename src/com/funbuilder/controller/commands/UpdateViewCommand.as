@@ -8,6 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
+	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.KeysModel;
@@ -44,6 +45,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var mouseModel:MouseModel;
+		
+		[Inject]
+		public var brushModel:BrushModel;
 		
 		[Inject]
 		public var handlesModel:HandlesModel;
@@ -95,6 +99,8 @@ package com.funbuilder.controller.commands
 			// Refer to Sonic racing game
 			// Photonic
 			
+			
+			// Match brush to mouse
 			
 			
 			// If a handle is grabbed, we are moving the selection.

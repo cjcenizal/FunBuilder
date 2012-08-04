@@ -75,8 +75,10 @@ package com.funbuilder.controller.commands
 				if ( key == Keyboard.SPACE && selectedBlocksModel.numBlocks > 0 ) {
 					cameraTargetModel.moveTo( selectedBlocksModel.centroid.x, cameraTargetModel.targetY, selectedBlocksModel.centroid.z );
 				} else if ( key == Keyboard.ESCAPE ) {
-					if ( brushModel.block ) {
-						brushModel.block = null;
+					if ( brushModel.data ) {
+						// TODO remove previe and abstract this into a command and a model method
+						brushModel.data = null;
+						brushModel.preview = null;
 					} else if ( selectedBlocksModel.numBlocks > 0 ) {
 						addHistoryRequest.dispatch();
 						deselectAllBlocksRequest.dispatch();

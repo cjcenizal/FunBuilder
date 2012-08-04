@@ -1,5 +1,7 @@
 package com.funbuilder.model
 {
+	import away3d.entities.Mesh;
+	
 	import com.funrun.model.vo.BlockVO;
 	
 	import org.robotlegs.mvcs.Actor;
@@ -7,7 +9,8 @@ package com.funbuilder.model
 	public class BrushModel extends Actor
 	{
 		
-		public var block:BlockVO;
+		public var data:BlockVO;
+		public var preview:Mesh;
 		
 		public function BrushModel()
 		{

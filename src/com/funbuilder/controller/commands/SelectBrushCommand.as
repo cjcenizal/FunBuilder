@@ -32,14 +32,14 @@ package com.funbuilder.controller.commands
 		public var addObjectToSceneRequest:AddObjectToSceneRequest;
 		
 		override public function execute():void {
-			brushModel.block = blockData;
+			brushModel.data = blockData;
 			
 			// Add preview.
-			var block:Mesh = blockData.mesh.clone() as Mesh;
-			cameraTargetModel.matchPosition( block );
-			SegmentConstants.snapObjectToGrid( block );
-			block.scale( .5 );
-			addObjectToSceneRequest.dispatch( block );
+			brushModel.preview = blockData.mesh.clone() as Mesh;
+			cameraTargetModel.matchPosition( brushModel.preview );
+			SegmentConstants.snapObjectToGrid( brushModel.preview );
+			brushModel.preview.scale( .5 );
+			addObjectToSceneRequest.dispatch( brushModel.preview );
 		}
 	}
 }
