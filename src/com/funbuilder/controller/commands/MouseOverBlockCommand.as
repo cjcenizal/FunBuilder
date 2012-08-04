@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
+	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SelectedBlocksModel;
@@ -31,6 +32,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var selectedBlocksModel:SelectedBlocksModel;
 		
+		[Inject]
+		public var handlesModel:HandlesModel;
+		
 		// Commands.
 		
 		[Inject]
@@ -41,7 +45,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void {
 			// Add to and remove from current selection.
-			if ( mouseModel.mouseDown ) {
+			if ( mouseModel.mouseDown && !handlesModel.isGrabbed ) {
 				if ( keysModel.alt ) {
 					if ( selectedBlocksModel.contains( block ) ) {
 						// Remove from selection.

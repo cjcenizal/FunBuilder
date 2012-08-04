@@ -4,7 +4,6 @@ package com.funbuilder.controller.commands
 	
 	import com.cenizal.utils.Trig;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
-	import com.funbuilder.controller.signals.MoveBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateCollisionsRequest;
 	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
@@ -71,15 +70,15 @@ package com.funbuilder.controller.commands
 			// UX:
 			// Fix history in general (and add history to deselect all blocks command)
 			
-			// Duplicate selections by shift-dragging
+			// When shift or ctrl is down, disable handles (hide them).
+			
 			// New/open/exit should all prompt a save if unsaved
 			// Placing blocks enters brush mode:
 				// clicking and dragging places blocks on ground plane
 				// as long as there's no collision (establish height by first object clicked).
 			
 			// On save, auto-check and remove colliding blocks.
-			// When dragging handles, disable ctrl-drag selection.
-			// Otherwise, when shift or ctrl is down, disable handles (hide them).
+			
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
 			

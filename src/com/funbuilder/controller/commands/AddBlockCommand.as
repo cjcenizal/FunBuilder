@@ -58,7 +58,7 @@ package com.funbuilder.controller.commands
 			// TO-DO: Should this be done here, or in initial set up?
 			addBlockData.mesh.mouseEnabled = true;
 			// Add listeners for click, right-click, and mouse-over.
-			addBlockData.mesh.addEventListener( MouseEvent3D.CLICK, onClick );
+			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_DOWN, onClick );
 			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_OVER, onMouseOver );
 			
 			// Add to scene.

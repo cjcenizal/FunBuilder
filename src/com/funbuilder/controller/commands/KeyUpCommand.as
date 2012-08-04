@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.SelectedBlocksModel;
 	
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -21,6 +22,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var keysModel:KeysModel;
 		
+		[Inject]
+		public var selectedBlocksModel:SelectedBlocksModel;
+		
 		// Commands.
 		
 		[Inject]
@@ -33,6 +37,12 @@ package com.funbuilder.controller.commands
 			keysModel.alt = event.altKey;
 			keysModel.control = event.controlKey;
 			delete keysModel.keysDown[ event.keyCode ];
+			
+			var key:int = event.keyCode;
+			if ( key == Keyboard.ALTERNATE ) {
+				selectedBlocksModel.canDuplicate = false;
+			}
+			
 			/*
 			switch ( event.keyCode ) {
 				case Keyboard.SPACE:

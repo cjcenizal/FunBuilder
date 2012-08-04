@@ -67,7 +67,6 @@ package com.funbuilder.controller.commands
 			if ( !keysModel.keysDown[ key ] ) {
 				keysModel.keysDown[ key ] = true;
 				
-				
 				// Snap camera to selected blocks.
 				if ( key == Keyboard.SPACE && selectedBlocksModel.numBlocks > 0 ) {
 					cameraTargetModel.moveTo( selectedBlocksModel.centroid.x, cameraTargetModel.targetY, selectedBlocksModel.centroid.z );
@@ -79,6 +78,7 @@ package com.funbuilder.controller.commands
 				} else if ( key == Keyboard.ALTERNATE ) {
 					selectedBlocksModel.canDuplicate = true;
 				}
+				
 				/*
 				switch ( event.keyCode ) {
 					case Keyboard.BACKSPACE:
