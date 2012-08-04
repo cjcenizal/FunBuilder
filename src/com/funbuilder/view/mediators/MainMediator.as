@@ -15,6 +15,7 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.controller.signals.RightMouseUpRequest;
 	import com.funbuilder.controller.signals.ScrollWheelRequest;
 	import com.funbuilder.controller.signals.StageClickRequest;
+	import com.funbuilder.controller.signals.ToggleLibraryRequest;
 	import com.funbuilder.view.components.MainView;
 	
 	import flash.events.KeyboardEvent;
@@ -69,6 +70,9 @@ package com.funbuilder.view.mediators {
 		[Inject]
 		public var grabHandleRequest:GrabHandleRequest;
 		
+		[Inject]
+		public var toggleLibraryRequest:ToggleLibraryRequest;
+		
 		override public function onRegister():void {
 			// Add view listeners.
 			view.onKeyDownSignal.add( onKeyDown );
@@ -84,6 +88,7 @@ package com.funbuilder.view.mediators {
 			addView3DRequest.add( onAddView3DRequested );
 			hideHandlesRequest.add( onHideHandlesRequested );
 			drawHandlesRequest.add( onDrawHandlesRequested );
+			toggleLibraryRequest.add( onToggleLibraryRequested );
 		}
 		
 		private function onKeyDown( e:KeyboardEvent ):void {
@@ -130,8 +135,8 @@ package com.funbuilder.view.mediators {
 			this.view.view3D = view3D;
 		}
 		
-		private function showLibrary( show:Boolean ):void {
-			this.view.showLibrary( show );
+		private function onToggleLibraryRequested():void {
+			this.view.toggleLibrary();
 		}
 		
 		private function onHideHandlesRequested():void {

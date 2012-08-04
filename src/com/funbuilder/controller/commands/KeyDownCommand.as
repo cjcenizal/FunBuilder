@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
+	import com.funbuilder.controller.signals.ToggleLibraryRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SelectedBlocksModel;
@@ -46,6 +47,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
 		
+		[Inject]
+		public var toggleLibraryRequest:ToggleLibraryRequest;
+		
 		// Private vars.
 		
 		private const LEFT_ARROW:int = 37;
@@ -73,6 +77,8 @@ package com.funbuilder.controller.commands
 					deleteBlockRequest.dispatch();
 				} else if ( key == Keyboard.ALTERNATE ) {
 					selectedBlocksModel.canDuplicate = true;
+				} else if ( key == Keyboard.TAB ) {
+					toggleLibraryRequest.dispatch();
 				}
 				
 				/*

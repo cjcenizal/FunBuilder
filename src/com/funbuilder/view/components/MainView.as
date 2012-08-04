@@ -106,8 +106,8 @@ package com.funbuilder.view.components {
 			_library.y = stage.stageHeight - _library.height;
 		}
 		
-		public function showLibrary( visible:Boolean ):void {
-			_library.visible = visible;
+		public function toggleLibrary():void {
+			_library.visible = !_library.visible;
 		}
 		
 		public function set view3D( view:View3D ):void {

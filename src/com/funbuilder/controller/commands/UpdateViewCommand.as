@@ -87,8 +87,6 @@ package com.funbuilder.controller.commands
 			// as long as there's no collision (establish height by first object clicked).
 			
 			
-			
-			
 			// New/open/exit should all prompt a save if unsaved
 			
 			
@@ -96,7 +94,8 @@ package com.funbuilder.controller.commands
 			
 			
 			// "Thank you! Just for playing, you get 50 credits for free!"
-			
+			// Refer to Sonic racing game
+			// Photonic
 			
 			
 			

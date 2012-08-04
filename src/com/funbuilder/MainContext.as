@@ -74,6 +74,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.ScrollWheelRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
+	import com.funbuilder.controller.signals.ToggleLibraryRequest;
 	import com.funbuilder.controller.signals.ShowSelectionIndicatorRequest;
 	import com.funbuilder.controller.signals.StageClickRequest;
 	import com.funbuilder.controller.signals.UndoEditRequest;
@@ -137,6 +138,7 @@ package com.funbuilder
 			injector.mapSingleton( DrawHandlesRequest );
 			injector.mapSingleton( HideHandlesRequest );
 			injector.mapSingleton( ShowFileNameRequest );
+			injector.mapSingleton( ToggleLibraryRequest );
 			injector.mapSingleton( ShowSelectionIndicatorRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
 			signalCommandMap.mapSignalClass( AddBlockFromLibraryRequest,			AddBlockFromLibraryCommand );
