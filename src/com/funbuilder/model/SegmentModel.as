@@ -63,6 +63,23 @@ package com.funbuilder.model
 			return key;
 		}
 		
+		public function remove( block:Mesh ):void {
+			var len:int = _blocksArr.length;
+			for ( var i:int = 0; i < len; i++ ) {
+				if ( _blocksArr[ i ] == block ) {
+					_blocksArr.splice( i, 1 );
+					break;
+				}
+			}
+			for ( var key:String in _blocks ) {
+				if ( _blocks[ key ] == block ) {
+					delete _blocks[ key ];
+				}
+			}
+			delete _indicators[ block ];
+			removeElevation( block.position );
+		}
+		
 		public function moveElevationPosition( from:Vector3D, to:Vector3D ):void {
 			removeElevation( from );
 			addElevation( to );
@@ -88,22 +105,6 @@ package com.funbuilder.model
 				_elevationKeys[ key ] = pos.clone();
 			}
 			return _elevationKeys[ key ];
-		}
-		
-		public function remove( block:Mesh ):void {
-			var len:int = _blocksArr.length;
-			for ( var i:int = 0; i < len; i++ ) {
-				if ( _blocksArr[ i ] == block ) {
-					_blocksArr.splice( i, 1 );
-					break;
-				}
-			}
-			for ( var key:String in _blocks ) {
-				if ( _blocks[ key ] == block ) {
-					delete _blocks[ key ];
-				}
-			}
-			delete _indicators[ block ];
 		}
 		
 		public function getKeys():Array {

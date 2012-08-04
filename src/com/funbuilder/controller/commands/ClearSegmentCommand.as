@@ -5,7 +5,6 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
-	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.SegmentModel;
 	
@@ -30,9 +29,6 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var deselectAllBlocksRequest:DeselectAllBlocksRequest;
 		
-		[Inject]
-		public var updateElevationRequest:UpdateElevationRequest;
-		
 		override public function execute():void {
 			deselectAllBlocksRequest.dispatch();
 			var keys:Array = segmentModel.getKeys();
@@ -46,7 +42,6 @@ package com.funbuilder.controller.commands
 			for ( var i:int = 0; i < elevationModel.count; i++ ) {
 				( elevationModel.getAt( i ).material as ColorMaterial ).alpha = 0;
 			}
-			updateElevationRequest.dispatch();
 		}
 	}
 }

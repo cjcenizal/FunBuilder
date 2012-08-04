@@ -6,7 +6,6 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.ClickBlockRequest;
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
-	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
@@ -45,9 +44,6 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var mouseOverBlockRequest:MouseOverBlockRequest;
 		
-		[Inject]
-		public var updateElevationRequest:UpdateElevationRequest;
-		
 		override public function execute():void
 		{
 			var indicator:Mesh = segmentModel.getNewIndicatorMesh();
@@ -64,7 +60,6 @@ package com.funbuilder.controller.commands
 			// Add to scene.
 			addObjectToSceneRequest.dispatch( addBlockData.mesh );
 			addObjectToSceneRequest.dispatch( indicator );
-			updateElevationRequest.dispatch();
 		}
 		
 		private function onClick( e:MouseEvent3D ):void {

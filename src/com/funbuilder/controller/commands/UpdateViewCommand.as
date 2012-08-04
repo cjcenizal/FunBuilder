@@ -5,6 +5,7 @@ package com.funbuilder.controller.commands
 	import com.cenizal.utils.Trig;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.UpdateCollisionsRequest;
+	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.model.CameraTargetModel;
@@ -61,6 +62,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var updateCollisionsRequest:UpdateCollisionsRequest;
 		
+		[Inject]
+		public var updateElevationRequest:UpdateElevationRequest;
+		
 		override public function execute():void
 		{
 			
@@ -70,12 +74,23 @@ package com.funbuilder.controller.commands
 			// UX:
 			// Fix history in general (and add history to deselect all blocks command)
 			
-			// When shift or ctrl is down, disable handles (hide them).
+			
+			// Placing blocks enters brush mode:
+			//	- Tab opens and closes menu
+			//	- Click a block button and you're in brush mode
+			//	- See transparent preview of block
+			//	- Click and drag
+			// 	- Raycast mouse position
+			//	- If intersect ground plane, move vertically until an empty space is found
+			//	- Place block there
+			// clicking and dragging places blocks on ground plane
+			// as long as there's no collision (establish height by first object clicked).
+			
+			
+			
 			
 			// New/open/exit should all prompt a save if unsaved
-			// Placing blocks enters brush mode:
-				// clicking and dragging places blocks on ground plane
-				// as long as there's no collision (establish height by first object clicked).
+			
 			
 			// On save, auto-check and remove colliding blocks.
 			
@@ -133,6 +148,9 @@ package com.funbuilder.controller.commands
 			
 			// Update collisions.
 			updateCollisionsRequest.dispatch();
+			
+			// Update elevation.
+			updateElevationRequest.dispatch();
 			
 			// Store mouse pos.
 			mouseModel.updatePrevPosition( contextView.stage.mouseX, contextView.stage.mouseY );

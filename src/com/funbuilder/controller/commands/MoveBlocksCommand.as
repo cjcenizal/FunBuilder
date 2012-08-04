@@ -5,7 +5,6 @@ package com.funbuilder.controller.commands
 	import com.cenizal.utils.Trig;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
-	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.MouseModel;
@@ -46,9 +45,6 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
-		
-		[Inject]
-		public var updateElevationRequest:UpdateElevationRequest;
 		
 		[Inject]
 		public var updateHandlesRequest:UpdateHandlesRequest;
@@ -119,7 +115,6 @@ package com.funbuilder.controller.commands
 				selectedBlocksModel.setIsMoved( true );
 				
 				//invalidateSavedFileRequest.dispatch();
-				updateElevationRequest.dispatch();
 				
 				// Update handle.
 				updateHandlesRequest.dispatch();
