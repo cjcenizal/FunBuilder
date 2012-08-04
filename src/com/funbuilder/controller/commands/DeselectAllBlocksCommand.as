@@ -1,7 +1,6 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
-	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.DeselectBlockVO;
 	
@@ -20,20 +19,11 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var deselectBlockRequest:DeselectBlockRequest;
 		
-		[Inject]
-		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
-		
 		override public function execute():void
 		{
-			
-			// TO-DO:
-			// Intersecting an existing block flashes red and doesn't allow you to leave it there
-			// (i.e. deselect it)
-			
 			while ( selectedBlocksModel.numBlocks > 0 ) {
 				deselectBlockRequest.dispatch( new DeselectBlockVO( selectedBlocksModel.getAt( selectedBlocksModel.numBlocks - 1 ), false ) );
 			}
-			updateTargetAppearanceRequest.dispatch();
 		}
 	}
 }

@@ -1,7 +1,5 @@
 package com.funbuilder.controller.commands
 {
-	import com.funbuilder.controller.signals.SetEditingModeRequest;
-	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	
@@ -25,11 +23,6 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var selectedBlocksModel:SelectedBlocksModel;
 		
-		// Commands.
-		
-		[Inject]
-		public var setEditingModeRequest:SetEditingModeRequest;
-		
 		override public function execute():void
 		{
 			keysModel.command = event.commandKey;
@@ -42,14 +35,6 @@ package com.funbuilder.controller.commands
 			if ( key == Keyboard.ALTERNATE ) {
 				selectedBlocksModel.canDuplicate = false;
 			}
-			
-			/*
-			switch ( event.keyCode ) {
-				case Keyboard.SPACE:
-					setEditingModeRequest.dispatch( EditingModeModel.LOOK );
-					break;
-			}*/
-			
 		}
 	}
 }

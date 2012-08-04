@@ -14,10 +14,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
-	import com.funbuilder.controller.signals.SetEditingModeRequest;
-	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.CameraTargetModel;
-	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.TimeModel;
@@ -42,9 +39,6 @@ package com.funbuilder.controller.commands
 		public var view3dModel:View3DModel;
 		
 		[Inject]
-		public var editingModeModel:EditingModeModel;
-		
-		[Inject]
 		public var elevationModel:ElevationModel;
 		
 		[Inject]
@@ -53,16 +47,10 @@ package com.funbuilder.controller.commands
 		// Commands.
 		
 		[Inject]
-		public var setEditingModeRequest:SetEditingModeRequest;
-		
-		[Inject]
 		public var addView3DRequest:AddView3DRequest;
 		
 		[Inject]
 		public var addObjectToSceneRequest:AddObjectToSceneRequest;
-		
-		[Inject]
-		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
 		
 		[Inject]
 		public var newFileRequest:NewFileRequest;
@@ -140,9 +128,6 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( handlesModel.yLine );
 			addObjectToSceneRequest.dispatch( handlesModel.zLine );
 			handlesModel.moveTo( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
-			
-			// Start interaction.
-			setEditingModeRequest.dispatch( EditingModeModel.LOOK );
 			
 			// Respond to time.
 			commandMap.mapEvent( TimeEvent.TICK, UpdateViewCommand, TimeEvent );

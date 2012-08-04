@@ -6,7 +6,6 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.ClickBlockRequest;
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
-	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -26,9 +25,6 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var segmentModel:SegmentModel;
-		
-		[Inject]
-		public var editingModeModel:EditingModeModel;
 		
 		[Inject]
 		public var keysModel:KeysModel;

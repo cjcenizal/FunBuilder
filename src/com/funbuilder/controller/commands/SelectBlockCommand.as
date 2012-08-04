@@ -1,7 +1,6 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
-	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.SelectBlockVO;
@@ -27,9 +26,6 @@ package com.funbuilder.controller.commands
 		// Commands.
 		
 		[Inject]
-		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
-		
-		[Inject]
 		public var addHistoryRequest:AddHistoryRequest;
 		
 		override public function execute():void
@@ -42,7 +38,6 @@ package com.funbuilder.controller.commands
 				// Select block.
 				selectedBlocksModel.select( selectData.block );
 				segmentModel.enableIndicatorFor( selectData.block, true );
-				updateTargetAppearanceRequest.dispatch();
 			}
 		}
 	}

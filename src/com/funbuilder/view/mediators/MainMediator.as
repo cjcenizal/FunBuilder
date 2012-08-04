@@ -14,9 +14,7 @@ package com.funbuilder.view.mediators {
 	import com.funbuilder.controller.signals.RightMouseDownRequest;
 	import com.funbuilder.controller.signals.RightMouseUpRequest;
 	import com.funbuilder.controller.signals.ScrollWheelRequest;
-	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.controller.signals.StageClickRequest;
-	import com.funbuilder.model.EditingModeModel;
 	import com.funbuilder.view.components.MainView;
 	
 	import flash.events.KeyboardEvent;
@@ -40,9 +38,6 @@ package com.funbuilder.view.mediators {
 		
 		[Inject]
 		public var keyUpRequest:KeyUpRequest;
-		
-		[Inject]
-		public var setEditingModeRequest:SetEditingModeRequest;
 		
 		[Inject]
 		public var stageClickRequest:StageClickRequest;
@@ -87,7 +82,6 @@ package com.funbuilder.view.mediators {
 			view.onMouseMoveSignal.add( onMouseMove );
 			view.onHandleMouseDownSignal.add( onHandleMouseDown );
 			addView3DRequest.add( onAddView3DRequested );
-			setEditingModeRequest.add( onSetEditingModeRequested );
 			hideHandlesRequest.add( onHideHandlesRequested );
 			drawHandlesRequest.add( onDrawHandlesRequested );
 		}
@@ -136,12 +130,8 @@ package com.funbuilder.view.mediators {
 			this.view.view3D = view3D;
 		}
 		
-		private function onSetEditingModeRequested( mode:String ):void {
-			if ( mode == EditingModeModel.LOOK ) {
-				this.view.showLibrary( false );
-			} else if ( mode == EditingModeModel.BUILD ) {
-				this.view.showLibrary( true );
-			}
+		private function showLibrary( show:Boolean ):void {
+			this.view.showLibrary( show );
 		}
 		
 		private function onHideHandlesRequested():void {

@@ -4,7 +4,6 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
-	import com.funbuilder.controller.signals.SetEditingModeRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SelectedBlocksModel;
@@ -34,9 +33,6 @@ package com.funbuilder.controller.commands
 		public var cameraTargetModel:CameraTargetModel;
 		
 		// Commands.
-		
-		[Inject]
-		public var setEditingModeRequest:SetEditingModeRequest;
 		
 		[Inject]
 		public var deleteBlockRequest:DeleteBlockRequest;

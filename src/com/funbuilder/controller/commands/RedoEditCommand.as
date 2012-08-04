@@ -5,7 +5,6 @@ package com.funbuilder.controller.commands {
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.LoadSegmentRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
-	import com.funbuilder.controller.signals.UpdateTargetAppearanceRequest;
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.vo.HistoryVO;
@@ -32,9 +31,6 @@ package com.funbuilder.controller.commands {
 		public var selectBlockRequest:SelectBlockRequest;
 		
 		[Inject]
-		public var updateTargetAppearanceRequest:UpdateTargetAppearanceRequest;
-		
-		[Inject]
 		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
 		
 		override public function execute():void {
@@ -47,7 +43,6 @@ package com.funbuilder.controller.commands {
 					selectBlockRequest.dispatch( new SelectBlockVO( block, true, false ) );
 				}
 			}
-			updateTargetAppearanceRequest.dispatch();
 			invalidateSavedFileRequest.dispatch();
 		}
 	}
