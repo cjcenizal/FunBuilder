@@ -7,6 +7,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -34,6 +35,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var segmentModel:SegmentModel;
 		
+		[Inject]
+		public var mouseModel:MouseModel;
+		
 		// Commands.
 		
 		[Inject]
@@ -46,9 +50,15 @@ package com.funbuilder.controller.commands
 			if ( preview ) {
 				// Position preview piled on top of ground plane.
 				var drag:Drag3D = new Drag3D( view3dModel.view );
-				var intersection:Vector3D = drag.getIntersect( view3dModel.view.mouseX, view3dModel.view.mouseY );
-				SegmentConstants.snapPositionToGrid( intersection );
-				brushModel.movePreview( intersection.x, segmentModel.getMaxElevationAt( intersection ), intersection.z );
+				var pos:Vector3D;
+				if ( mouseModel.overBlock ) {
+					pos = mouseModel.overBlock.position.clone();
+					pos.y = 0;
+				} else {
+					pos = drag.getIntersect( view3dModel.view.mouseX, view3dModel.view.mouseY );
+				}
+				SegmentConstants.snapPositionToGrid( pos );
+				brushModel.movePreview( pos.x, segmentModel.getMaxElevationAt( pos ), pos.z );
 				
 					
 				/*

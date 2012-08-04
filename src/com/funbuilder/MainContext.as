@@ -20,6 +20,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.LoadSegmentCommand;
 	import com.funbuilder.controller.commands.MouseDownCommand;
 	import com.funbuilder.controller.commands.MouseMoveCommand;
+	import com.funbuilder.controller.commands.MouseOutBlockCommand;
 	import com.funbuilder.controller.commands.MouseOverBlockCommand;
 	import com.funbuilder.controller.commands.MouseUpCommand;
 	import com.funbuilder.controller.commands.MoveBlocksCommand;
@@ -64,6 +65,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.LoadSegmentRequest;
 	import com.funbuilder.controller.signals.MouseDownRequest;
 	import com.funbuilder.controller.signals.MouseMoveRequest;
+	import com.funbuilder.controller.signals.MouseOutBlockRequest;
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
 	import com.funbuilder.controller.signals.MouseUpRequest;
 	import com.funbuilder.controller.signals.MoveBlocksRequest;
@@ -166,6 +168,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( KeyUpRequest,							KeyUpCommand );
 			signalCommandMap.mapSignalClass( LoadSegmentRequest,					LoadSegmentCommand );
 			signalCommandMap.mapSignalClass( MouseDownRequest,						MouseDownCommand );
+			signalCommandMap.mapSignalClass( MouseOutBlockRequest,					MouseOutBlockCommand );
 			signalCommandMap.mapSignalClass( MouseOverBlockRequest,					MouseOverBlockCommand );
 			signalCommandMap.mapSignalClass( MouseMoveRequest,						MouseMoveCommand );
 			signalCommandMap.mapSignalClass( MouseUpRequest,						MouseUpCommand );

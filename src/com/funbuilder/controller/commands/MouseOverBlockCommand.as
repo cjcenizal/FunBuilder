@@ -44,6 +44,8 @@ package com.funbuilder.controller.commands
 		public var deselectBlockRequest:DeselectBlockRequest;
 		
 		override public function execute():void {
+			mouseModel.mouseOver( block );
+			
 			// Add to and remove from current selection.
 			if ( mouseModel.mouseDown && !handlesModel.isGrabbed ) {
 				if ( keysModel.alt ) {

@@ -5,6 +5,7 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.ClickBlockRequest;
+	import com.funbuilder.controller.signals.MouseOutBlockRequest;
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
@@ -40,6 +41,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var mouseOverBlockRequest:MouseOverBlockRequest;
 		
+		[Inject]
+		public var mouseOutBlockRequest:MouseOutBlockRequest;
+		
 		override public function execute():void
 		{
 			var indicator:Mesh = segmentModel.getNewIndicatorMesh();
@@ -50,20 +54,25 @@ package com.funbuilder.controller.commands
 			// TO-DO: Should this be done here, or in initial set up?
 			addBlockData.mesh.mouseEnabled = true;
 			// Add listeners for click, right-click, and mouse-over.
-			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_DOWN, onClick );
+			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_DOWN, onMouseDown );
 			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_OVER, onMouseOver );
+			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_OUT, onMouseOut );
 			
 			// Add to scene.
 			addObjectToSceneRequest.dispatch( addBlockData.mesh );
 			addObjectToSceneRequest.dispatch( indicator );
 		}
 		
-		private function onClick( e:MouseEvent3D ):void {
+		private function onMouseDown( e:MouseEvent3D ):void {
 			clickBlockRequest.dispatch( e.object as Mesh );
 		}
 		
 		private function onMouseOver( e:MouseEvent3D ):void {
 			mouseOverBlockRequest.dispatch( e.object as Mesh );
+		}
+		
+		private function onMouseOut( e:MouseEvent3D ):void {
+			mouseOutBlockRequest.dispatch( e.object as Mesh );
 		}
 	}
 }

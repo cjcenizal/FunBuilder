@@ -1,5 +1,7 @@
 package com.funbuilder.model
 {
+	import away3d.entities.Mesh;
+	
 	import flash.geom.Point;
 	
 	import org.robotlegs.mvcs.Actor;
@@ -14,6 +16,8 @@ package com.funbuilder.model
 		
 		private var _mouseDown:Boolean = false;
 		private var _rightMouseDown:Boolean = false;
+		
+		private var _overBlock:Mesh;
 		
 		public function MouseModel()
 		{
@@ -49,6 +53,16 @@ package com.funbuilder.model
 			_currPosition.y = y;
 		}
 		
+		public function mouseOver( block:Mesh ):void {
+			_overBlock = block;
+		}
+		
+		public function mouseOut( block:Mesh ):void {
+			if ( _overBlock == block ) {
+				_overBlock = null;
+			}
+		}
+		
 		public function get isMoving():Boolean {
 			if ( _currPosition && _prevPosition ) {
 				return !_currPosition.equals( _prevPosition );
@@ -70,6 +84,10 @@ package com.funbuilder.model
 		
 		public function get prevPosition():Point {
 			return _prevPosition;
+		}
+		
+		public function get overBlock():Mesh {
+			return _overBlock;
 		}
 	}
 }
