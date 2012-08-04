@@ -115,13 +115,12 @@ package com.funbuilder.controller.commands
 			
 			// Update brush.
 			updateBrushRequest.dispatch();
-			
+			trace(mouseModel.isMoving);
 			// Add blocks with brush.
 			if ( brushModel.preview ) {
 				// If we're in brush mode, then see if we need to place a block.
 				if ( keysModel.contains( Keyboard.A ) ) {
 					if ( brushModel.canPlace() ) {
-						trace("place");
 						brushBlockRequest.dispatch();
 					}
 				}
@@ -181,7 +180,7 @@ package com.funbuilder.controller.commands
 			updateElevationRequest.dispatch();
 			
 			// Store mouse pos.
-			mouseModel.updatePrevPosition( contextView.stage.mouseX, contextView.stage.mouseY );
+			mouseModel.moveMouse( contextView.stage.mouseX, contextView.stage.mouseY );
 		}
 		
 	}

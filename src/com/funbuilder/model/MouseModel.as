@@ -8,7 +8,7 @@ package com.funbuilder.model
 	{
 		
 		// Mouse movement.
-		private var _prevPosition:Point = null;
+		private var _prevPosition:Point = new Point();
 		private var _downPosition:Point = new Point();
 		private var _currPosition:Point = new Point();
 		
@@ -31,7 +31,6 @@ package com.funbuilder.model
 		}
 		
 		private function doMouseDown( x:Number, y:Number ):void {
-			_prevPosition = new Point( x, y );
 			_downPosition.x = x;
 			_downPosition.y = y;
 			_currPosition.x = x;
@@ -41,19 +40,20 @@ package com.funbuilder.model
 		public function setMouseUp():void {
 			_mouseDown = false;
 			_rightMouseDown = false;
-			_prevPosition = null;
-		}
-		
-		public function updatePrevPosition( x:Number, y:Number ):void {
-			if ( _prevPosition ) {
-				_prevPosition.x = x;
-				_prevPosition.y = y;
-			}
 		}
 		
 		public function moveMouse( x:Number, y:Number ):void {
+			_prevPosition.x = _currPosition.x;
+			_prevPosition.y = _currPosition.y;
 			_currPosition.x = x;
 			_currPosition.y = y;
+		}
+		
+		public function get isMoving():Boolean {
+			if ( _currPosition && _prevPosition ) {
+				return !_currPosition.equals( _prevPosition );
+			}
+			return false;
 		}
 		
 		public function get mouseDown():Boolean {
