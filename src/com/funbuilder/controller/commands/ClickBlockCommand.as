@@ -5,6 +5,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
+	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SelectedBlocksModel;
@@ -32,6 +33,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var mouseModel:MouseModel;
 		
+		[Inject]
+		public var brushModel:BrushModel;
+		
 		// Commands.
 		
 		[Inject]
@@ -45,7 +49,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			if ( mouseModel.canClick ) {
+			if ( !brushModel.preview && mouseModel.canClick ) {
 				if ( keysModel.alt && keysModel.shift ) {
 					// Deselect block.
 					deselectBlockRequest.dispatch( new DeselectBlockVO( block ) );

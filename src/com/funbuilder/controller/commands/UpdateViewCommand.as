@@ -91,15 +91,6 @@ package com.funbuilder.controller.commands
 			// Fix history in general (and add history to deselect all blocks command)
 			
 			
-			// Placing blocks enters brush mode:
-			//	- Click and drag
-			// 	- Raycast mouse position
-			//	- If intersect ground plane, move vertically until an empty space is found
-			//	- Place block there
-			// clicking and dragging places blocks on ground plane
-			// as long as there's no collision (establish height by first object clicked).
-			
-			
 			// New/open/exit should all prompt a save if unsaved
 			
 			
@@ -115,11 +106,11 @@ package com.funbuilder.controller.commands
 			
 			// Update brush.
 			updateBrushRequest.dispatch();
-			trace(mouseModel.isMoving);
+			
 			// Add blocks with brush.
 			if ( brushModel.preview ) {
 				// If we're in brush mode, then see if we need to place a block.
-				if ( keysModel.contains( Keyboard.A ) ) {
+				if ( !mouseModel.isMoving && keysModel.contains( Keyboard.A ) ) {
 					if ( brushModel.canPlace() ) {
 						brushBlockRequest.dispatch();
 					}

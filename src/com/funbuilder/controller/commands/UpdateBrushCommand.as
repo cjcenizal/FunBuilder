@@ -44,14 +44,11 @@ package com.funbuilder.controller.commands
 			
 			var preview:Mesh = brushModel.preview;
 			if ( preview ) {
-				
+				// Position preview piled on top of ground plane.
 				var drag:Drag3D = new Drag3D( view3dModel.view );
 				var intersection:Vector3D = drag.getIntersect( view3dModel.view.mouseX, view3dModel.view.mouseY );
 				SegmentConstants.snapPositionToGrid( intersection );
-				var y:Number = segmentModel.getMaxElevationAt( intersection );
-				preview.x = intersection.x;
-				preview.y = y;
-				preview.z = intersection.z;
+				brushModel.movePreview( intersection.x, segmentModel.getMaxElevationAt( intersection ), intersection.z );
 				
 					
 				/*
