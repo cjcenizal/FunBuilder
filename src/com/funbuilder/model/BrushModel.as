@@ -58,12 +58,15 @@ package com.funbuilder.model
 		}
 		
 		public function get hasMoved():Boolean {
-			var snappedPrev:Vector3D = _prevPosition.clone();
-			SegmentConstants.snapPositionToGrid( snappedPrev );
-			var snappedCurr:Vector3D = _preview.position.clone();
-			SegmentConstants.snapPositionToGrid( snappedCurr );
-			snappedCurr.y = snappedPrev.y;
-			return ( !snappedPrev.equals( snappedCurr ) );
+			if ( _preview ) {
+				var snappedPrev:Vector3D = _prevPosition.clone();
+				SegmentConstants.snapPositionToGrid( snappedPrev );
+				var snappedCurr:Vector3D = _preview.position.clone();
+				SegmentConstants.snapPositionToGrid( snappedCurr );
+				snappedCurr.y = snappedPrev.y;
+				return ( !snappedPrev.equals( snappedCurr ) );
+			}
+			return false;
 		}
 		
 		public function get data():BlockVO {
