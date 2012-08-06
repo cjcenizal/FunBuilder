@@ -135,8 +135,8 @@ package com.funbuilder.view.mediators {
 			this.view.view3D = view3D;
 		}
 		
-		private function onToggleLibraryRequested():void {
-			this.view.toggleLibrary();
+		private function onToggleLibraryRequested( on:Boolean ):void {
+			this.view.toggleLibrary( on );
 		}
 		
 		private function onHideHandlesRequested():void {

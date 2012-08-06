@@ -1,5 +1,6 @@
 package com.funbuilder.controller.commands
 {
+	import com.funbuilder.controller.signals.ToggleLibraryRequest;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	
@@ -23,6 +24,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var selectedBlocksModel:SelectedBlocksModel;
 		
+		[Inject]
+		public var toggleLibraryRequest:ToggleLibraryRequest;
+		
 		override public function execute():void
 		{
 			keysModel.command = event.commandKey;
@@ -32,8 +36,13 @@ package com.funbuilder.controller.commands
 			delete keysModel.keysDown[ event.keyCode ];
 			
 			var key:int = event.keyCode;
-			if ( key == Keyboard.ALTERNATE ) {
-				selectedBlocksModel.canDuplicate = false;
+			switch ( key ) {
+				case Keyboard.ALTERNATE:
+					selectedBlocksModel.canDuplicate = false;
+					break;
+				case Keyboard.TAB:
+					toggleLibraryRequest.dispatch( false );
+					break;
 			}
 		}
 	}

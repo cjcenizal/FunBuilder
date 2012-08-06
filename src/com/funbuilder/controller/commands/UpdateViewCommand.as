@@ -87,6 +87,9 @@ package com.funbuilder.controller.commands
 			// UX:
 			// Fix history in general (and add history to deselect all blocks command)
 			
+			// Rotate selection.
+			
+			// Changing block types (depends on OBJ fix).
 			
 			// New/open/exit should all prompt a save if unsaved
 			

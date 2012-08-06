@@ -65,6 +65,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
+			
 			keysModel.command = event.commandKey;
 			keysModel.shift = event.shiftKey;
 			keysModel.alt = event.altKey;
@@ -73,21 +74,33 @@ package com.funbuilder.controller.commands
 			var key:int = event.keyCode;
 			if ( !keysModel.keysDown[ key ] ) {
 				keysModel.keysDown[ key ] = true;
-				// Snap camera to selected blocks.
-				if ( key == Keyboard.SPACE && selectedBlocksModel.numBlocks > 0 ) {
-					cameraTargetModel.moveTo( selectedBlocksModel.centroid.x, cameraTargetModel.targetY, selectedBlocksModel.centroid.z );
-				} else if ( key == Keyboard.ESCAPE ) {
-					deselectBrushRequest.dispatch();
-					if ( selectedBlocksModel.numBlocks > 0 ) {
-						addHistoryRequest.dispatch();
-						deselectAllBlocksRequest.dispatch();
-					}
-				} else if ( key == Keyboard.BACKSPACE ) {
-					deleteBlockRequest.dispatch();
-				} else if ( key == Keyboard.ALTERNATE ) {
-					selectedBlocksModel.canDuplicate = true;
-				} else if ( key == Keyboard.TAB ) {
-					toggleLibraryRequest.dispatch();
+				switch ( key ) {
+					case Keyboard.SPACE:
+						// Snap camera to selected blocks.
+						if ( selectedBlocksModel.numBlocks > 0 ) {
+							cameraTargetModel.moveTo( selectedBlocksModel.centroid.x, cameraTargetModel.targetY, selectedBlocksModel.centroid.z );
+						}
+						break;
+					case Keyboard.ESCAPE:
+						// Deselect brush/selected blocks.
+						deselectBrushRequest.dispatch();
+						if ( selectedBlocksModel.numBlocks > 0 ) {
+							addHistoryRequest.dispatch();
+							deselectAllBlocksRequest.dispatch();
+						}
+						break;
+					case Keyboard.BACKSPACE:
+						// Delete selected blocks.
+						deleteBlockRequest.dispatch();
+						break;
+					case Keyboard.ALTERNATE:
+						// Drag-duplicate selected blocks.
+						selectedBlocksModel.canDuplicate = true;
+						break;
+					case Keyboard.TAB:
+						// Show library.
+						toggleLibraryRequest.dispatch( true );
+						break;
 				}
 				
 				/*
