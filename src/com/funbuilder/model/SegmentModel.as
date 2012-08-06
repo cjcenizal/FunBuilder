@@ -159,7 +159,6 @@ package com.funbuilder.model
 				name = mesh.name;
 				item = {};
 				item.id = name;
-				item.key = key;
 				item.x = mesh.x / 100;
 				item.y = mesh.y / 100;
 				item.z = mesh.z / 100;
