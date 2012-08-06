@@ -54,7 +54,6 @@ package com.funbuilder.controller.commands
 				}
 				SegmentConstants.snapPositionToGrid( pos );
 				var y:Number = segmentModel.getMaxElevationAt( pos );
-				trace(y);
 				brushModel.movePreview( pos.x, y, pos.z );
 				
 					
