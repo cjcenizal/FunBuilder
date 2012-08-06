@@ -3,6 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
+	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
 	import com.funbuilder.controller.signals.DeselectBrushRequest;
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
@@ -35,8 +36,12 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var deselectBrushRequest:DeselectBrushRequest;
 		
+		[Inject]
+		public var deselectAllBlocksRequest:DeselectAllBlocksRequest;
+		
 		override public function execute():void {
 			deselectBrushRequest.dispatch();
+			deselectAllBlocksRequest.dispatch();
 			
 			// Add preview.
 			brushModel.select( blockData );
