@@ -184,8 +184,9 @@ package com.funbuilder.model
 			if ( arr ) {
 				for ( var i:int = 0; i < arr.length; i++ ) {
 					pos = arr[ i ];
-					y = Math.max( y, pos.y ) + SegmentConstants.BLOCK_SIZE;
+					y = Math.max( y, pos.y );
 				}
+				y += SegmentConstants.BLOCK_SIZE;
 			}
 			return y;
 		}

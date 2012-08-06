@@ -53,7 +53,9 @@ package com.funbuilder.controller.commands
 					pos = drag.getIntersect( view3dModel.view.mouseX, view3dModel.view.mouseY );
 				}
 				SegmentConstants.snapPositionToGrid( pos );
-				brushModel.movePreview( pos.x, segmentModel.getMaxElevationAt( pos ), pos.z );
+				var y:Number = segmentModel.getMaxElevationAt( pos );
+				trace(y);
+				brushModel.movePreview( pos.x, y, pos.z );
 				
 					
 				/*
