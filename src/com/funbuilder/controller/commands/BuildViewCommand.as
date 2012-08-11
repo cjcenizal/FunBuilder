@@ -81,7 +81,7 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( target );
 			
 			// Add camera controller.
-			var cameraController:HoverController = new HoverController( camera, target, 45, 10, 800 );
+			var cameraController:HoverController = new HoverController( camera, target, 180 + 45, 10, 800 );
 			cameraController.steps = 1;
 			view3dModel.cameraController = cameraController;
 			
