@@ -1,5 +1,6 @@
 package com.funbuilder.controller.commands
 {
+	import away3d.cameras.Camera3D;
 	import away3d.containers.View3D;
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;

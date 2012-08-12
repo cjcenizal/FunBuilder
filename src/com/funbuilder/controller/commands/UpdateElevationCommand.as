@@ -34,11 +34,13 @@ package com.funbuilder.controller.commands
 				negMesh = elevationModel.getAtPos( position, false );
 				if ( posMesh && negMesh ) {
 					if ( map[ pos ].length > 0 ) {
-						( posMesh.material as ColorMaterial ).alpha = .3;
-						( negMesh.material as ColorMaterial ).alpha = .3;
+						posMesh.visible = negMesh.visible = true;
+						//( posMesh.material as ColorMaterial ).alpha = .8;
+						//( negMesh.material as ColorMaterial ).alpha = .8;
 					} else {
-						( posMesh.material as ColorMaterial ).alpha = 0;
-						( negMesh.material as ColorMaterial ).alpha = 0;
+						posMesh.visible = negMesh.visible = false;
+						//( posMesh.material as ColorMaterial ).alpha = .8;
+						//( negMesh.material as ColorMaterial ).alpha = .8;
 					}
 				}
 			}

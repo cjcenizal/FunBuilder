@@ -81,7 +81,7 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( target );
 			
 			// Add camera controller.
-			var cameraController:HoverController = new HoverController( camera, target, 180 + 45, 10, 800 );
+			var cameraController:HoverController = new HoverController( camera, target, 180 + 45, 20, 2000 );
 			cameraController.steps = 1;
 			view3dModel.cameraController = cameraController;
 			
@@ -102,12 +102,16 @@ package com.funbuilder.controller.commands
 			var indicatorGeo:Geometry = new PlaneGeometry( side, side );
 			for ( var x:int = SegmentConstants.BLOCK_SIZE * .5; x < SegmentConstants.SEGMENT_WIDTH; x += SegmentConstants.BLOCK_SIZE ) {
 				for ( var z:int = SegmentConstants.BLOCK_SIZE * .5; z < SegmentConstants.SEGMENT_DEPTH; z += SegmentConstants.BLOCK_SIZE ) {
-					var positiveIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xddffdd, 0 );
-					var negativeIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xddddff, 0 );
+					var positiveIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xddffdd, .8 );
+					var negativeIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xddffdd, .8 );
+					positiveIndicatorMaterial.bothSides = false;
+					negativeIndicatorMaterial.bothSides = false;
+					
 					positiveIndicator = new Mesh( indicatorGeo, positiveIndicatorMaterial );
 					positiveIndicator.x = x;
 					positiveIndicator.y = 1;
 					positiveIndicator.z = z;
+					positiveIndicator.visible = false;
 					elevationModel.add( positiveIndicator, true );
 					addObjectToSceneRequest.dispatch( positiveIndicator );
 					
@@ -116,6 +120,7 @@ package com.funbuilder.controller.commands
 					negativeIndicator.x = x;
 					negativeIndicator.y = -1;
 					negativeIndicator.z = z;
+					negativeIndicator.visible = false;
 					elevationModel.add( negativeIndicator, false );
 					addObjectToSceneRequest.dispatch( negativeIndicator );
 				}

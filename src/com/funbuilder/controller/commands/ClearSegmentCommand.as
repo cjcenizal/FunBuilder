@@ -40,7 +40,7 @@ package com.funbuilder.controller.commands
 			segmentModel.clear();
 			
 			for ( var i:int = 0; i < elevationModel.count; i++ ) {
-				( elevationModel.getAt( i ).material as ColorMaterial ).alpha = 0;
+				elevationModel.getAt( i ).visible = false;
 			}
 		}
 	}
