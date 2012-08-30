@@ -65,31 +65,29 @@ package com.funbuilder.controller.commands
 			var relativeMouseAngle:Number = Math.abs( mouseAngle - axisAngle );
 			var direction:Number = ( relativeMouseAngle <= Trig.HALF_PI ) ? 1 : -1;
 			var magnitude:Number = Trig.getDistanceFromPoints( mouseModel.prevPosition, mousePos );
+			
 			handlesModel.amountMoved += magnitude * direction;
+
 			
-			// Snap to blocks.
-			var blocksMoved:Number = Math.round( handlesModel.amountMoved / SegmentConstants.BLOCK_SIZE );
-			var snappedAmountMoved:Number = blocksMoved * SegmentConstants.BLOCK_SIZE;
+			// Get diff vector.
+			var diff:Vector3D = new Vector3D();
+			switch ( handlesModel.axis ) {
+				case "x":
+					diff.x = Math.round( handlesModel.amountMoved / ( SegmentConstants.BLOCK_SIZE * 1 ) ) * ( SegmentConstants.BLOCK_SIZE * 1 );
+					break;
+				case "y":
+					diff.y = Math.round( handlesModel.amountMoved / ( SegmentConstants.BLOCK_SIZE * .2 ) ) * ( SegmentConstants.BLOCK_SIZE * .2 );
+					break;
+				case "z":
+					diff.z = Math.round( handlesModel.amountMoved / ( SegmentConstants.BLOCK_SIZE * 1 ) ) * ( SegmentConstants.BLOCK_SIZE * 1 );
+					break;
+			}
 			
-			if ( blocksMoved != 0 ) {
+			if ( diff.length > 0 ) {
 				// Save history if we move the block and it's the first time it gets moved.
 				//if ( !selectedBlocksModel.isMoved && diff.length > 0 ) {
 				//	addHistoryRequest.dispatch( false );
 				//}
-				
-				// Get diff vector.
-				var diff:Vector3D = new Vector3D();
-				switch ( handlesModel.axis ) {
-					case "x":
-						diff.x = snappedAmountMoved;
-						break;
-					case "y":
-						diff.y = snappedAmountMoved;
-						break;
-					case "z":
-						diff.z = snappedAmountMoved;
-						break;
-				}
 				
 				// Move elevation.
 				var src:Vector3D;

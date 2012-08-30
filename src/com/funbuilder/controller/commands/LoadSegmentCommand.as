@@ -9,8 +9,6 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
 	
-	import flash.geom.Vector3D;
-	
 	import org.robotlegs.mvcs.Command;
 	
 	public class LoadSegmentCommand extends Command
@@ -50,10 +48,9 @@ package com.funbuilder.controller.commands
 				dataItem = list[ i ];
 				refMesh = blocksModel.getWithId( dataItem.id ).mesh;
 				mesh = refMesh.clone() as Mesh;
-				var snappedPos:Vector3D = SegmentConstants.snapPointGrid( dataItem.x * 100, dataItem.y * 100, dataItem.z * 100 )
-				mesh.x = snappedPos.x;
-				mesh.y = snappedPos.y;
-				mesh.z = snappedPos.z;
+				mesh.x = dataItem.x * SegmentConstants.BLOCK_SIZE;
+				mesh.y = dataItem.y * SegmentConstants.BLOCK_SIZE;
+				mesh.z = dataItem.z * SegmentConstants.BLOCK_SIZE;
 				addBlockRequest.dispatch( new AddBlockVO( mesh, dataItem.key ) );
 			}
 		}

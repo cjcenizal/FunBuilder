@@ -47,7 +47,7 @@ package com.funbuilder.model
 			_elevationKeys = {};
 		}
 		
-		public function add( block:Mesh, indicator:Mesh, /*namespace:String,*/ key:String ):String {
+		public function add( block:Mesh, indicator:Mesh, key:String ):String {
 			// Assign new id if needed.
 			if ( !key || int( key ) < _nextKey ) {
 				key = _nextKey.toString();
@@ -159,9 +159,9 @@ package com.funbuilder.model
 				name = mesh.name;
 				item = {};
 				item.id = name;
-				item.x = mesh.x / 100;
-				item.y = mesh.y / 100;
-				item.z = mesh.z / 100;
+				item.x = mesh.x / SegmentConstants.BLOCK_SIZE;
+				item.y = mesh.y / SegmentConstants.BLOCK_SIZE;
+				item.z = mesh.z / SegmentConstants.BLOCK_SIZE;
 				list.push( item );
 			}
 			return com.adobe.serialization.json.JSON.encode( list );
