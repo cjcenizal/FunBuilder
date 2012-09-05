@@ -41,7 +41,7 @@ package com.funbuilder.view.components
 			var xpos:Number = ( _items.length > 0 ) ? _items[ _items.length - 1 ].x + _items[ _items.length - 1 ].width + 3 : 3;
 			var sprite:Sprite = new Sprite();
 			sprite.addChild( bitmap );
-			var label:Label = new Label( sprite, 0, 0, name );
+			var label:Label = new Label( sprite, 0, 0, data.id );
 			label.draw();
 			label.x = ( bitmap.width - label.width ) * .5;
 			label.y = bitmap.height - label.height;

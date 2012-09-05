@@ -64,6 +64,10 @@ package com.funbuilder.controller.commands
 				this.contextView.removeEventListener( Event.ENTER_FRAME, onEnterFrame );
 				
 				var view:View3D = view3dModel.view;
+				view3dModel.cameraController.distance = 600;
+				lightsModel.light.x = SegmentConstants.SEGMENT_HALF_WIDTH - 500;
+				lightsModel.light.y = 700;
+				lightsModel.light.z = SegmentConstants.SEGMENT_HALF_DEPTH - 500;
 				var prevWidth:Number = view.width;
 				var prevHeight:Number = view.height;
 				var prevGroundAlpha:Number = ( view3dModel.groundPlane.material as ColorMaterial ).alpha;
@@ -76,8 +80,8 @@ package com.funbuilder.controller.commands
 					// Add block to scene.
 					block = blocksModel.getAt( i ).mesh.clone() as Mesh;
 					block.x = SegmentConstants.SEGMENT_HALF_WIDTH;
-					block.y = -50;
 					block.z = SegmentConstants.SEGMENT_HALF_DEPTH;
+					block.y = -50;
 					
 					// Apply lights.
 					var material:TextureMaterial = block.material as TextureMaterial;

@@ -16,7 +16,6 @@ package {
 		/*
 		
 		TO-DO:
-			- Make colored blocks that represent each type of block we need
 			- Store floor as part of obstacle.
 			- This might cause performance problems. Can meshes be merged and still be interactive?
 			- Represent with matching colored bounding boxes
