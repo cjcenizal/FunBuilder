@@ -4,12 +4,14 @@ package com.funbuilder.controller.commands
 	import away3d.containers.View3D;
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;
+	import away3d.materials.TextureMaterial;
 	
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
+	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddItemToLibraryVO;
@@ -34,6 +36,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
+		
+		[Inject]
+		public var lightsModel:LightsModel;
 		
 		// Commands.
 		
@@ -73,6 +78,14 @@ package com.funbuilder.controller.commands
 					block.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 					block.y = -50;
 					block.z = SegmentConstants.SEGMENT_HALF_DEPTH;
+					
+					// Apply lights.
+					var material:TextureMaterial = block.material as TextureMaterial;
+					material.lightPicker = lightsModel.lightPicker;
+					material.specular = .25;
+					material.gloss = 20;
+					material.specularMethod = lightsModel.specularMethod;
+					
 					addObjectToSceneRequest.dispatch( block );
 					// Take snapshot.
 					var snapshot:BitmapData = new BitmapData( view.width, view.height );

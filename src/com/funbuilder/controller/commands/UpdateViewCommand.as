@@ -80,30 +80,6 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			
-			// TO-DO:
-			
-			
-			// UX:
-			// Fix history in general (and add history to deselect all blocks command)
-			
-			// Rotate selection.
-			
-			// Changing block types (depends on OBJ fix).
-			
-			// New/open/exit should all prompt a save if unsaved
-			
-			
-			// On save, auto-check and remove colliding blocks.
-			
-			
-			// "Thank you! Just for playing, you get 50 credits for free!"
-			// Refer to Sonic racing game
-			// Photonic
-			
-			
-			
-			
 			// Update brush.
 			updateBrushRequest.dispatch();
 			

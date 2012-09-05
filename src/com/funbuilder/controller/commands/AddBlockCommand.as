@@ -51,9 +51,9 @@ package com.funbuilder.controller.commands
 			indicator.y = addBlockData.mesh.y + SegmentConstants.BLOCK_SIZE * .5;
 			indicator.z = addBlockData.mesh.z;
 			segmentModel.add( addBlockData.mesh, indicator, addBlockData.key );
-			// TO-DO: Should this be done here, or in initial set up?
-			addBlockData.mesh.mouseEnabled = true;
+			
 			// Add listeners for click, right-click, and mouse-over.
+			addBlockData.mesh.mouseEnabled = true;
 			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_DOWN, onMouseDown );
 			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_OVER, onMouseOver );
 			addBlockData.mesh.addEventListener( MouseEvent3D.MOUSE_OUT, onMouseOut );

@@ -18,6 +18,8 @@ package com.funbuilder.controller.commands {
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
+	import old.OBJParser;
+	
 	import org.robotlegs.utilities.macrobot.AsyncCommand;
 	
 	public class LoadBlocksCommand extends AsyncCommand {
@@ -60,7 +62,7 @@ package com.funbuilder.controller.commands {
 					// Store in model.
 					blocksModel.addBlock( blockData );
 					// Load it.
-					var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( _filePath + blockData.filename ), context, blockData.id, new OBJParser() );
+					var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( _filePath + blockData.filename ), context, blockData.id, new old.OBJParser() );
 					token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( blockData ) );
 				}
 			}
@@ -73,11 +75,13 @@ package com.funbuilder.controller.commands {
 			var completeCallback:Function = this.dispatchComplete;
 			return function( event:AssetEvent ):void {
 				if ( event.asset.assetType == AssetType.MESH ) {
-					// Treat and assign mesh to block.
+					// Treat mesh.
 					var mesh:Mesh = event.asset as Mesh;
 					mesh.name = blockData.id; // id and mesh.assetNamepsace are the same
 					mesh.geometry.scale( TrackConstants.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
 					mesh.rotationY = 180;
+					
+					// Assign mesh to block.
 					blockData.mesh = mesh;
 					// Increment complete count and check if we're done.
 					_countLoaded++;

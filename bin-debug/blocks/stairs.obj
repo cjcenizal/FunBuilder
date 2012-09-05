@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib 001_brick_block.mtl
+mtllib stairs.mtl
 g default
 v -0.500000 0.000000 0.500000
 v 0.500000 0.000000 0.500000

@@ -98,6 +98,7 @@ package com.funbuilder
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
@@ -133,6 +134,7 @@ package com.funbuilder
 			injector.mapSingleton( HandlesModel );
 			injector.mapSingleton( HistoryModel );
 			injector.mapSingleton( KeysModel );
+			injector.mapSingleton( LightsModel );
 			injector.mapSingleton( MouseModel );
 			injector.mapSingleton( TimeModel );
 			injector.mapSingleton( SegmentModel );

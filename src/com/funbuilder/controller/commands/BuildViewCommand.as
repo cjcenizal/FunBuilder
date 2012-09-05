@@ -7,7 +7,10 @@ package com.funbuilder.controller.commands
 	import away3d.controllers.HoverController;
 	import away3d.core.base.Geometry;
 	import away3d.entities.Mesh;
+	import away3d.lights.PointLight;
 	import away3d.materials.ColorMaterial;
+	import away3d.materials.lightpickers.StaticLightPicker;
+	import away3d.materials.methods.FresnelSpecularMethod;
 	import away3d.primitives.PlaneGeometry;
 	import away3d.primitives.SphereGeometry;
 	
@@ -17,6 +20,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.HandlesModel;
+	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -43,6 +47,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var handlesModel:HandlesModel;
+		
+		[Inject]
+		public var lightsModel:LightsModel;
 		
 		// Commands.
 		
@@ -134,6 +141,25 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( handlesModel.yLine );
 			addObjectToSceneRequest.dispatch( handlesModel.zLine );
 			handlesModel.moveTo( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
+			
+			// Add lights.
+			// Add lights.
+			var light:PointLight = new PointLight();
+			light.x = SegmentConstants.SEGMENT_HALF_WIDTH;
+			light.y = 700;
+			light.z = -500; // Place the light at the front of the segment.
+			light.color = 0xffffff;
+			light.diffuse = 1;
+			light.specular = 1;
+			light.radius = 1200;
+			light.fallOff = 8000;
+			light.ambientColor = 0xa0a0c0;
+			light.ambient = .5;
+			addObjectToSceneRequest.dispatch( light );
+			
+			lightsModel.light = light;
+			lightsModel.lightPicker = new StaticLightPicker( [ light ] );
+			lightsModel.specularMethod = new FresnelSpecularMethod();
 			
 			// Respond to time.
 			commandMap.mapEvent( TimeEvent.TICK, UpdateViewCommand, TimeEvent );

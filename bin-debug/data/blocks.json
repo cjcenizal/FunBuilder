@@ -3,49 +3,20 @@
   "author" : "CJ Cenizal",
   "list" : [
     {
-      "id" : "001",
-      "filename" : "001_brick_block.obj",
-      "hit" : [
-          "all"
-        ],
-      "faces" : {
-          "t" : "walk",
-          "b" : "smack",
-          "l" : "slow",
-          "r" : "slow",
-          "f" : "smack",
-          "a" : "smack"
-        }
+      "id" : "floor",
+      "filename" : "floor.obj"
       },
     {
-      "id" : "000",
-      "filename" : "001_brick_block.obj",
-      "hit" : [
-          "all"
-          ],
-      "faces" : {
-          "t" : "walk",
-          "b" : "smack",
-          "l" : "slow",
-          "r" : "slow",
-          "f" : "smack",
-          "a" : "smack"
-        }
+      "id" : "basic",
+      "filename" : "basic.obj"
       },
     {
-      "id" : "002",
-      "filename" : "002_warning_block.obj",
-      "hit" : [
-          "all"
-        ],
-      "faces" : {
-          "t" : "walk",
-          "b" : "smack",
-          "l" : "slow",
-          "r" : "slow",
-          "f" : "smack",
-          "a" : "smack"
-        }
+      "id" : "launcher",
+      "filename" : "launcher.obj"
+      },
+    {
+      "id" : "stairs",
+      "filename" : "stairs.obj"
       }
   ]
 }
