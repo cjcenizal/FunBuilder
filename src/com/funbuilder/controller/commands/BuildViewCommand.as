@@ -88,7 +88,7 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( target );
 			
 			// Add camera controller.
-			var cameraController:HoverController = new HoverController( camera, target, 180 + 45, 20, 2000 );
+			var cameraController:HoverController = new HoverController( camera, target, 180 + 45, 20 );
 			cameraController.steps = 1;
 			view3dModel.cameraController = cameraController;
 			
@@ -143,11 +143,7 @@ package com.funbuilder.controller.commands
 			handlesModel.moveTo( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
 			
 			// Add lights.
-			// Add lights.
 			var light:PointLight = new PointLight();
-			light.x = SegmentConstants.SEGMENT_HALF_WIDTH;
-			light.y = 700;
-			light.z = -500; // Place the light at the front of the segment.
 			light.color = 0xffffff;
 			light.diffuse = 1;
 			light.specular = 1;

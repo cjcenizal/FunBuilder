@@ -10,6 +10,7 @@ package com.funbuilder.controller.commands
 			addCommand( LoadBlocksCommand );
 			addCommand( BuildViewCommand );
 			addCommand( BuildLibraryCommand );
+			addCommand( InitViewCommand );
 		}
 	}
 }
