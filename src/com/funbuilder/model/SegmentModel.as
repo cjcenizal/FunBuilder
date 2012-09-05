@@ -4,9 +4,8 @@ package com.funbuilder.model
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.CubeGeometry;
 	
-	import com.funbuilder.model.constants.SegmentConstants;
-	
 	import com.adobe.serialization.json.JSON;
+	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import flash.geom.Vector3D;
 	import flash.utils.Dictionary;
@@ -62,6 +61,7 @@ package com.funbuilder.model
 			_blocksArr.push( block );
 			_indicators[ block ] = indicator;
 			addElevation( block.position );
+			
 			return key;
 		}
 		

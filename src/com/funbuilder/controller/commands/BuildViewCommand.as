@@ -21,6 +21,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.LightsModel;
+	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -50,6 +51,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var lightsModel:LightsModel;
+		
+		[Inject]
+		public var segmentModel:SegmentModel;
 		
 		// Commands.
 		
