@@ -145,8 +145,10 @@ package com.funbuilder.model
 		
 		public function enableIndicatorFor( block:Mesh, enabled:Boolean = true, isColliding:Boolean = false ):void {
 			var indicator:Mesh = getIndicatorFor( block );
-			( indicator.material as ColorMaterial ).alpha = ( enabled ) ? .5 : 0;
-			( indicator.material as ColorMaterial ).color = ( isColliding ) ? 0xff0000 : 0xffff00;
+			if ( indicator ) {
+				( indicator.material as ColorMaterial ).alpha = ( enabled ) ? .5 : 0;
+				( indicator.material as ColorMaterial ).color = ( isColliding ) ? 0xff0000 : 0xffff00;
+			}
 		}
 		
 		public function getJson():String {
