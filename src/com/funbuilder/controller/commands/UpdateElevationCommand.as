@@ -35,12 +35,8 @@ package com.funbuilder.controller.commands
 				if ( posMesh && negMesh ) {
 					if ( map[ pos ].length > 0 ) {
 						posMesh.visible = negMesh.visible = true;
-						//( posMesh.material as ColorMaterial ).alpha = .8;
-						//( negMesh.material as ColorMaterial ).alpha = .8;
 					} else {
 						posMesh.visible = negMesh.visible = false;
-						//( posMesh.material as ColorMaterial ).alpha = .8;
-						//( negMesh.material as ColorMaterial ).alpha = .8;
 					}
 				}
 			}

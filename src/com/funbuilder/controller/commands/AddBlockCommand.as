@@ -7,6 +7,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.ClickBlockRequest;
 	import com.funbuilder.controller.signals.MouseOutBlockRequest;
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
+	import com.funbuilder.controller.signals.InvalidateHudRequest;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -44,6 +45,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var mouseOutBlockRequest:MouseOutBlockRequest;
 		
+		[Inject]
+		public var invalidateHudRequest:InvalidateHudRequest;
+		
 		override public function execute():void
 		{
 			var indicator:Mesh = segmentModel.getNewIndicatorMesh();
@@ -61,6 +65,9 @@ package com.funbuilder.controller.commands
 			// Add to scene.
 			addObjectToSceneRequest.dispatch( addBlockData.mesh );
 			addObjectToSceneRequest.dispatch( indicator );
+			
+			// Update HUD.
+			invalidateHudRequest.dispatch();
 		}
 		
 		private function onMouseDown( e:MouseEvent3D ):void {

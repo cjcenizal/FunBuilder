@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
+	import com.funbuilder.controller.signals.InvalidateHudRequest;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.DeselectBlockVO;
@@ -35,6 +36,9 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var removeObjectFromSceneRequest:RemoveObjectFromSceneRequest;
 		
+		[Inject]
+		public var invalidateHudRequest:InvalidateHudRequest;
+		
 		override public function execute():void
 		{
 			// Deselect block if necessary.
@@ -48,6 +52,9 @@ package com.funbuilder.controller.commands
 			
 			// Remove from model.
 			segmentModel.remove( block );
+			
+			// Update HUD.
+			invalidateHudRequest.dispatch();
 		}
 	}
 }

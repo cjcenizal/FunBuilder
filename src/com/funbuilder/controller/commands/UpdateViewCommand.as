@@ -13,6 +13,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.HandlesModel;
+	import com.funbuilder.model.HudModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SelectedBlocksModel;
@@ -54,6 +55,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var handlesModel:HandlesModel;
+		
+		[Inject]
+		public var hudModel:HudModel;
 		
 		// Commands.
 		
@@ -138,11 +142,15 @@ package com.funbuilder.controller.commands
 			// Update handles.
 			updateHandlesRequest.dispatch();
 			
-			// Update collisions.
-			updateCollisionsRequest.dispatch();
+			if ( !hudModel.isValid ) {
+				hudModel.isValid = true;
+				
+				// Update collisions.
+				updateCollisionsRequest.dispatch();
 			
-			// Update elevation.
-			updateElevationRequest.dispatch();
+				// Update elevation.
+				updateElevationRequest.dispatch();
+			}
 			
 			// Store mouse pos.
 			mouseModel.moveMouse( contextView.stage.mouseX, contextView.stage.mouseY );

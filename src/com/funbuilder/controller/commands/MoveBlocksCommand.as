@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	
 	import com.cenizal.utils.Trig;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.InvalidateHudRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
 	import com.funbuilder.model.HandlesModel;
@@ -48,6 +49,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var updateHandlesRequest:UpdateHandlesRequest;
+		
+		[Inject]
+		public var invalidateHudRequest:InvalidateHudRequest;
 		
 		override public function execute():void
 		{
@@ -117,6 +121,9 @@ package com.funbuilder.controller.commands
 				// Update handle.
 				updateHandlesRequest.dispatch();
 				handlesModel.amountMoved = 0;
+				
+				// Update HUD.
+				invalidateHudRequest.dispatch();
 			}
 		}
 	}

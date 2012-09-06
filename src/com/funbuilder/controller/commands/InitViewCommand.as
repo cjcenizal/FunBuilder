@@ -1,5 +1,6 @@
 package com.funbuilder.controller.commands
 {
+	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.View3DModel;
 	import com.funbuilder.model.constants.SegmentConstants;
@@ -17,6 +18,11 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var lightsModel:LightsModel;
 		
+		// Commands.
+		
+		[Inject]
+		public var newFileRequest:NewFileRequest;
+		
 		override public function execute():void {
 			lightsModel.light.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			lightsModel.light.y = 700;
@@ -25,6 +31,8 @@ package com.funbuilder.controller.commands
 			view3dModel.cameraController.panAngle = 180 + 45;
 			view3dModel.cameraController.tiltAngle = 20;
 			view3dModel.cameraController.distance = 2000;
+			
+			newFileRequest.dispatch();
 		}
 	}
 }

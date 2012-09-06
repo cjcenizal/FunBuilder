@@ -164,8 +164,6 @@ package com.funbuilder.controller.commands
 			// Respond to time.
 			commandMap.mapEvent( TimeEvent.TICK, UpdateViewCommand, TimeEvent );
 			
-			// Create a new file.
-			newFileRequest.dispatch();
 		}
 	}
 }

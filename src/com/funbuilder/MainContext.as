@@ -15,6 +15,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.FillFloorCommand;
 	import com.funbuilder.controller.commands.GrabHandleCommand;
 	import com.funbuilder.controller.commands.InitAppCommand;
+	import com.funbuilder.controller.commands.InvalidateHudCommand;
 	import com.funbuilder.controller.commands.InvalidateSavedFileCommand;
 	import com.funbuilder.controller.commands.KeyDownCommand;
 	import com.funbuilder.controller.commands.KeyUpCommand;
@@ -43,6 +44,7 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.UpdateElevationCommand;
 	import com.funbuilder.controller.commands.UpdateGrabbedBlocksCommand;
 	import com.funbuilder.controller.commands.UpdateHandlesCommand;
+	import com.funbuilder.controller.commands.UpdateHudCommand;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
@@ -61,6 +63,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.FillFloorRequest;
 	import com.funbuilder.controller.signals.GrabHandleRequest;
 	import com.funbuilder.controller.signals.HideHandlesRequest;
+	import com.funbuilder.controller.signals.InvalidateHudRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.KeyDownRequest;
 	import com.funbuilder.controller.signals.KeyUpRequest;
@@ -92,6 +95,7 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
+	import com.funbuilder.controller.signals.UpdateHudRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
@@ -99,6 +103,7 @@ package com.funbuilder
 	import com.funbuilder.model.FileModel;
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.HistoryModel;
+	import com.funbuilder.model.HudModel;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.MouseModel;
@@ -135,6 +140,7 @@ package com.funbuilder
 			injector.mapSingleton( FileModel );
 			injector.mapSingleton( HandlesModel );
 			injector.mapSingleton( HistoryModel );
+			injector.mapSingleton( HudModel );
 			injector.mapSingleton( KeysModel );
 			injector.mapSingleton( LightsModel );
 			injector.mapSingleton( MouseModel );
@@ -168,6 +174,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( DeselectBrushRequest,					DeselectBrushCommand );
 			signalCommandMap.mapSignalClass( FillFloorRequest,						FillFloorCommand );
 			signalCommandMap.mapSignalClass( GrabHandleRequest,						GrabHandleCommand );
+			signalCommandMap.mapSignalClass( InvalidateHudRequest,					InvalidateHudCommand );
 			signalCommandMap.mapSignalClass( InvalidateSavedFileRequest,			InvalidateSavedFileCommand );
 			signalCommandMap.mapSignalClass( KeyDownRequest,						KeyDownCommand );
 			signalCommandMap.mapSignalClass( KeyUpRequest,							KeyUpCommand );
@@ -196,6 +203,7 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( UpdateElevationRequest,				UpdateElevationCommand );
 			signalCommandMap.mapSignalClass( UpdateGrabbedBlocksRequest,			UpdateGrabbedBlocksCommand );
 			signalCommandMap.mapSignalClass( UpdateHandlesRequest,					UpdateHandlesCommand );
+			signalCommandMap.mapSignalClass( UpdateHudRequest,						UpdateHudCommand );
 			
 			// Map views to mediators.
 			mediatorMap.mapView( LibraryView, 					LibraryMediator );
