@@ -16,9 +16,11 @@ package {
 		/*
 		
 		TO-DO:
-			- This might cause performance problems. Can meshes be merged and still be interactive?
 			- Add points block
+				- Specify bounding box scale in json
 			- Build cool obstacles
+			- Turn off indicators for when a block is at ground level
+			- Fix stacking of blocks on the ground plane
 		
 		
 		// UX:

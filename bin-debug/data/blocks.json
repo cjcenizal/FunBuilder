@@ -17,6 +17,10 @@
     {
       "id" : "stairs",
       "filename" : "stairs.obj"
+      },
+    {
+      "id" : "point",
+      "filename" : "point.obj"
       }
   ]
 }
