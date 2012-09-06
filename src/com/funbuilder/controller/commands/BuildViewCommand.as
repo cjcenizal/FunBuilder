@@ -102,6 +102,7 @@ package com.funbuilder.controller.commands
 			planeMaterial.bothSides = true;
 			var planeMesh:Mesh = new Mesh( planeGeometry, planeMaterial );
 			planeMesh.x = SegmentConstants.SEGMENT_HALF_WIDTH;
+			planeMesh.y = SegmentConstants.BLOCK_SIZE * -.5;
 			planeMesh.z = SegmentConstants.SEGMENT_HALF_DEPTH;
 			addObjectToSceneRequest.dispatch( planeMesh );
 			view3dModel.groundPlane = planeMesh;
@@ -120,7 +121,7 @@ package com.funbuilder.controller.commands
 					
 					positiveIndicator = new Mesh( indicatorGeo, positiveIndicatorMaterial );
 					positiveIndicator.x = x;
-					positiveIndicator.y = 1;
+					positiveIndicator.y = -SegmentConstants.BLOCK_SIZE * .5 + 1;
 					positiveIndicator.z = z;
 					positiveIndicator.visible = false;
 					elevationModel.add( positiveIndicator, true );
@@ -129,7 +130,7 @@ package com.funbuilder.controller.commands
 					negativeIndicator = new Mesh( indicatorGeo, negativeIndicatorMaterial );
 					negativeIndicator.rotationX = 180;
 					negativeIndicator.x = x;
-					negativeIndicator.y = -1;
+					negativeIndicator.y = -SegmentConstants.BLOCK_SIZE * .5 - 1;
 					negativeIndicator.z = z;
 					negativeIndicator.visible = false;
 					elevationModel.add( negativeIndicator, false );

@@ -5,12 +5,11 @@ package com.funbuilder.controller.commands
 	
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.ClickBlockRequest;
+	import com.funbuilder.controller.signals.InvalidateHudRequest;
 	import com.funbuilder.controller.signals.MouseOutBlockRequest;
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
-	import com.funbuilder.controller.signals.InvalidateHudRequest;
 	import com.funbuilder.model.KeysModel;
 	import com.funbuilder.model.SegmentModel;
-	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVO;
 	
 	import org.robotlegs.mvcs.Command;
@@ -52,7 +51,7 @@ package com.funbuilder.controller.commands
 		{
 			var indicator:Mesh = segmentModel.getNewIndicatorMesh();
 			indicator.x = addBlockData.mesh.x;
-			indicator.y = addBlockData.mesh.y + SegmentConstants.BLOCK_SIZE * .5;
+			indicator.y = addBlockData.mesh.y;
 			indicator.z = addBlockData.mesh.z;
 			segmentModel.add( addBlockData.mesh, indicator, addBlockData.key );
 			
