@@ -4,9 +4,12 @@ package com.funbuilder.controller.commands
 	import away3d.materials.ColorMaterial;
 	
 	import com.funbuilder.model.ElevationModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.SegmentModel;
+	import com.funbuilder.model.View3dModel;
 	
 	import flash.geom.Vector3D;
+	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
 	
 	import org.robotlegs.mvcs.Command;
@@ -22,6 +25,12 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var elevationModel:ElevationModel;
 		
+		[Inject]
+		public var keyboardModel:KeyboardModel;
+		
+		[Inject]
+		public var view3dModel:View3dModel;
+		
 		override public function execute():void
 		{
 			var map:Dictionary = segmentModel.getElevationMap();
@@ -33,13 +42,18 @@ package com.funbuilder.controller.commands
 				posMesh = elevationModel.getAtPos( position, true );
 				negMesh = elevationModel.getAtPos( position, false );
 				if ( posMesh && negMesh ) {
-					if ( map[ pos ].length > 0 ) {
-						posMesh.visible = negMesh.visible = true;
+					if ( keyboardModel.contains( Keyboard.TAB ) ) {
+						if ( map[ pos ].length > 0 ) {
+							posMesh.visible = negMesh.visible = true;
+						} else {
+							posMesh.visible = negMesh.visible = false;
+						}
 					} else {
 						posMesh.visible = negMesh.visible = false;
 					}
 				}
 			}
+			view3dModel.groundPlane.visible = ( keyboardModel.contains( Keyboard.TAB ) );
 		}
 	}
 }

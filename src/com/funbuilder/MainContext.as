@@ -44,7 +44,6 @@ package com.funbuilder
 	import com.funbuilder.controller.commands.UpdateElevationCommand;
 	import com.funbuilder.controller.commands.UpdateGrabbedBlocksCommand;
 	import com.funbuilder.controller.commands.UpdateHandlesCommand;
-	import com.funbuilder.controller.commands.UpdateHudCommand;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
@@ -95,7 +94,6 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
-	import com.funbuilder.controller.signals.UpdateHudRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
@@ -104,13 +102,13 @@ package com.funbuilder
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.HudModel;
-	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.TimeModel;
-	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.View3dModel;
 	import com.funbuilder.view.components.LibraryView;
 	import com.funbuilder.view.components.MainView;
 	import com.funbuilder.view.components.MenuBarView;
@@ -141,13 +139,13 @@ package com.funbuilder
 			injector.mapSingleton( HandlesModel );
 			injector.mapSingleton( HistoryModel );
 			injector.mapSingleton( HudModel );
-			injector.mapSingleton( KeysModel );
+			injector.mapSingleton( KeyboardModel );
 			injector.mapSingleton( LightsModel );
 			injector.mapSingleton( MouseModel );
 			injector.mapSingleton( TimeModel );
 			injector.mapSingleton( SegmentModel );
 			injector.mapSingleton( SelectedBlocksModel );
-			injector.mapSingleton( View3DModel );
+			injector.mapSingleton( View3dModel );
 			
 			// Map services.
 			//injector.mapSingleton( MatchmakingService );
@@ -203,7 +201,6 @@ package com.funbuilder
 			signalCommandMap.mapSignalClass( UpdateElevationRequest,				UpdateElevationCommand );
 			signalCommandMap.mapSignalClass( UpdateGrabbedBlocksRequest,			UpdateGrabbedBlocksCommand );
 			signalCommandMap.mapSignalClass( UpdateHandlesRequest,					UpdateHandlesCommand );
-			signalCommandMap.mapSignalClass( UpdateHudRequest,						UpdateHudCommand );
 			
 			// Map views to mediators.
 			mediatorMap.mapView( LibraryView, 					LibraryMediator );

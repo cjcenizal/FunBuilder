@@ -2,7 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.model.LightsModel;
-	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.View3dModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import org.robotlegs.mvcs.Command;
@@ -13,7 +13,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var view3dModel:View3DModel;
+		public var view3dModel:View3dModel;
 		
 		[Inject]
 		public var lightsModel:LightsModel;

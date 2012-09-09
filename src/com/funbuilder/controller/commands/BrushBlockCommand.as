@@ -6,7 +6,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.model.BrushModel;
-	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.vo.AddBlockVO;
 	
 	import flash.ui.Keyboard;
@@ -22,7 +22,7 @@ package com.funbuilder.controller.commands
 		public var brushModel:BrushModel;
 		
 		[Inject]
-		public var keysModel:KeysModel;
+		public var keysModel:KeyboardModel;
 		
 		// Commands.
 		

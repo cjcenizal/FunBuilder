@@ -12,7 +12,7 @@ package com.funbuilder.model {
 	
 	import org.robotlegs.mvcs.Actor;
 	
-	public class View3DModel extends Actor {
+	public class View3dModel extends Actor {
 		
 		private var _view:View3D;
 		private var _scene:Scene3D;
@@ -27,7 +27,7 @@ package com.funbuilder.model {
 		public var lastMouseX:Number;
 		public var lastMouseY:Number;
 		
-		public function View3DModel() {
+		public function View3dModel() {
 			super();
 		}
 		

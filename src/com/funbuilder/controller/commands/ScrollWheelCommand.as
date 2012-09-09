@@ -1,6 +1,6 @@
 package com.funbuilder.controller.commands
 {
-	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.View3dModel;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -15,7 +15,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var view3dModel:View3DModel;
+		public var view3dModel:View3dModel;
 		
 		override public function execute():void
 		{

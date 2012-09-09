@@ -23,7 +23,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.TimeModel;
-	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.View3dModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
 	
@@ -41,7 +41,7 @@ package com.funbuilder.controller.commands
 		public var timeModel:TimeModel;
 		
 		[Inject]
-		public var view3dModel:View3DModel;
+		public var view3dModel:View3dModel;
 		
 		[Inject]
 		public var elevationModel:ElevationModel;
@@ -104,6 +104,7 @@ package com.funbuilder.controller.commands
 			planeMesh.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			planeMesh.y = SegmentConstants.BLOCK_SIZE * -.5;
 			planeMesh.z = SegmentConstants.SEGMENT_HALF_DEPTH;
+			planeMesh.visible = false;
 			addObjectToSceneRequest.dispatch( planeMesh );
 			view3dModel.groundPlane = planeMesh;
 			

@@ -4,7 +4,7 @@ package com.funbuilder.model
 	
 	import org.robotlegs.mvcs.Actor;
 	
-	public class KeysModel extends Actor
+	public class KeyboardModel extends Actor
 	{
 		
 		public var keysDown:Object = {};
@@ -13,7 +13,7 @@ package com.funbuilder.model
 		public var alt:Boolean = false;
 		public var control:Boolean = false;
 		
-		public function KeysModel()
+		public function KeyboardModel()
 		{
 			super();
 		}

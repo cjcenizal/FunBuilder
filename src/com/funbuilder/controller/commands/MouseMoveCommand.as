@@ -3,7 +3,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.UpdateBrushRequest;
 	import com.funbuilder.model.BrushModel;
-	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.MouseModel;
 	
 	import org.robotlegs.mvcs.Command;
@@ -20,7 +20,7 @@ package com.funbuilder.controller.commands
 		public var brushModel:BrushModel;
 		
 		[Inject]
-		public var keysModel:KeysModel;
+		public var keysModel:KeyboardModel;
 		
 		// Commands.
 		

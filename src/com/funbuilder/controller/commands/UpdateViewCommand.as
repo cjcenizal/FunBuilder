@@ -14,10 +14,10 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.HandlesModel;
 	import com.funbuilder.model.HudModel;
-	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.View3dModel;
 	import com.funbuilder.model.events.TimeEvent;
 	
 	import flash.geom.Point;
@@ -36,7 +36,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var view3dModel:View3DModel;
+		public var view3dModel:View3dModel;
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;
@@ -45,7 +45,7 @@ package com.funbuilder.controller.commands
 		public var selectedBlocksModel:SelectedBlocksModel;
 		
 		[Inject]
-		public var keysModel:KeysModel;
+		public var keyboardModel:KeyboardModel;
 		
 		[Inject]
 		public var mouseModel:MouseModel;
@@ -88,7 +88,7 @@ package com.funbuilder.controller.commands
 			updateBrushRequest.dispatch();
 			
 			// Add blocks with brush.
-			if ( brushModel.preview && keysModel.contains( Keyboard.SPACE ) ) {
+			if ( brushModel.preview && keyboardModel.contains( Keyboard.SPACE ) ) {
 				// If we're in brush mode, then see if we need to place a block.
 				if ( !mouseModel.isMoving && mouseModel.mouseDown && brushModel.canPlace() ) {
 					brushBlockRequest.dispatch();
@@ -100,10 +100,10 @@ package com.funbuilder.controller.commands
 					upgradeGrabbedBlocksRequest.dispatch();
 				} else {
 					// If shift or alt key is down, then we're drag-adding/-removing to/from selection.
-					if ( keysModel.shift || keysModel.alt ) {
+					if ( keyboardModel.shift || keyboardModel.alt ) {
 					} else {
 						// While mouse is down 
-						if ( mouseModel.rightMouseDown || keysModel.command ) {
+						if ( mouseModel.rightMouseDown || keyboardModel.command ) {
 							// If shift key isn't down, then we're panning.
 							if ( mouseModel.prevPosition ) {
 								var camera:Camera3D = view3dModel.camera;
@@ -146,10 +146,7 @@ package com.funbuilder.controller.commands
 				hudModel.isValid = true;
 				
 				// Update collisions.
-				updateCollisionsRequest.dispatch();
-			
-				// Update elevation.
-				updateElevationRequest.dispatch();
+				//updateCollisionsRequest.dispatch();
 			}
 			
 			// Store mouse pos.

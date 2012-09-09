@@ -2,7 +2,7 @@ package com.funbuilder.controller.commands {
 
 	import com.funbuilder.controller.signals.ShowFileNameRequest;
 	import com.funbuilder.model.FileModel;
-	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.SegmentModel;
 	
 	import flash.events.Event;
@@ -23,7 +23,7 @@ package com.funbuilder.controller.commands {
 		public var fileModel:FileModel;
 		
 		[Inject]
-		public var keysModel:KeysModel;
+		public var keysModel:KeyboardModel;
 		
 		// Commands.
 		

@@ -1,7 +1,7 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.ToggleLibraryRequest;
-	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	
 	import flash.events.KeyboardEvent;
@@ -19,7 +19,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var keysModel:KeysModel;
+		public var keysModel:KeyboardModel;
 		
 		[Inject]
 		public var selectedBlocksModel:SelectedBlocksModel;

@@ -2,7 +2,7 @@ package com.funbuilder.controller.commands {
 	
 	import away3d.containers.ObjectContainer3D;
 	
-	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.View3dModel;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -16,7 +16,7 @@ package com.funbuilder.controller.commands {
 		// Models.
 		
 		[Inject]
-		public var view3DModel:View3DModel;
+		public var view3DModel:View3dModel;
 		
 		override public function execute():void {
 			view3DModel.removeFromScene( object );

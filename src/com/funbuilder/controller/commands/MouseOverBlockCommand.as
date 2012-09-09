@@ -5,7 +5,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
 	import com.funbuilder.model.HandlesModel;
-	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.DeselectBlockVO;
@@ -24,7 +24,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var keysModel:KeysModel;
+		public var keysModel:KeyboardModel;
 		
 		[Inject]
 		public var mouseModel:MouseModel;

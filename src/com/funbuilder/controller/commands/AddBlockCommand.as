@@ -8,7 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.InvalidateHudRequest;
 	import com.funbuilder.controller.signals.MouseOutBlockRequest;
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
-	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.vo.AddBlockVO;
 	
@@ -28,7 +28,7 @@ package com.funbuilder.controller.commands
 		public var segmentModel:SegmentModel;
 		
 		[Inject]
-		public var keysModel:KeysModel;
+		public var keysModel:KeyboardModel;
 		
 		// Commands.
 		

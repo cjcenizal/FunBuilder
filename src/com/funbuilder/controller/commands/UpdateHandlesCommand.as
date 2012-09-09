@@ -3,9 +3,9 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.DrawHandlesRequest;
 	import com.funbuilder.controller.signals.HideHandlesRequest;
 	import com.funbuilder.model.HandlesModel;
-	import com.funbuilder.model.KeysModel;
+	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.View3dModel;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -21,10 +21,10 @@ package com.funbuilder.controller.commands
 		public var handlesModel:HandlesModel;
 		
 		[Inject]
-		public var view3dModel:View3DModel;
+		public var view3dModel:View3dModel;
 		
 		[Inject]
-		public var keysModel:KeysModel;
+		public var keysModel:KeyboardModel;
 		
 		// Commands.
 		

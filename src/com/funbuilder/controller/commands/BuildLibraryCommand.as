@@ -12,7 +12,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.LightsModel;
-	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.View3dModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddItemToLibraryVO;
 	
@@ -32,7 +32,7 @@ package com.funbuilder.controller.commands
 		public var blocksModel:BlocksModel;
 		
 		[Inject]
-		public var view3dModel:View3DModel;
+		public var view3dModel:View3dModel;
 		
 		[Inject]
 		public var cameraTargetModel:CameraTargetModel;

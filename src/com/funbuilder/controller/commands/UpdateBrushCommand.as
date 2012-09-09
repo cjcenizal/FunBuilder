@@ -8,7 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SegmentModel;
-	import com.funbuilder.model.View3DModel;
+	import com.funbuilder.model.View3dModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	
 	import flash.geom.Point;
@@ -25,7 +25,7 @@ package com.funbuilder.controller.commands
 		public var brushModel:BrushModel;
 		
 		[Inject]
-		public var view3dModel:View3DModel;
+		public var view3dModel:View3dModel;
 		
 		[Inject]
 		public var segmentModel:SegmentModel;
