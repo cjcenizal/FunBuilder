@@ -42,7 +42,7 @@ package com.funbuilder.controller.commands
 				posMesh = elevationModel.getAtPos( position, true );
 				negMesh = elevationModel.getAtPos( position, false );
 				if ( posMesh && negMesh ) {
-					if ( keyboardModel.contains( Keyboard.TAB ) ) {
+					if ( keyboardModel.isDown( Keyboard.TAB ) ) {
 						if ( map[ pos ].length > 0 ) {
 							posMesh.visible = negMesh.visible = true;
 						} else {
@@ -53,7 +53,7 @@ package com.funbuilder.controller.commands
 					}
 				}
 			}
-			view3dModel.groundPlane.visible = ( keyboardModel.contains( Keyboard.TAB ) );
+			view3dModel.groundPlane.visible = ( keyboardModel.isDown( Keyboard.TAB ) );
 		}
 	}
 }

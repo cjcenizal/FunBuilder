@@ -37,7 +37,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			if ( brushModel.preview && keysModel.contains( Keyboard.SPACE ) ) {
+			if ( brushModel.preview && keysModel.isDown( Keyboard.SPACE ) ) {
 				addHistoryRequest.dispatch( false );
 				// Add block.
 				var block:Mesh = brushModel.preview.clone() as Mesh;

@@ -10,6 +10,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.SelectedBlocksModel;
+	import com.funbuilder.model.vo.ChangeBlockTypeVO;
 	
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -72,8 +73,8 @@ package com.funbuilder.controller.commands
 			keysModel.control = event.controlKey;
 			
 			var key:int = event.keyCode;
-			if ( !keysModel.keysDown[ key ] ) {
-				keysModel.keysDown[ key ] = true;
+			if ( !keysModel.isDown( key ) ) {
+				keysModel.down( key );
 				switch ( key ) {
 					case Keyboard.SPACE:
 						// Snap camera to selected blocks.
@@ -103,7 +104,6 @@ package com.funbuilder.controller.commands
 						break;
 				}
 				
-				/*
 				switch ( event.keyCode ) {
 					case LEFT_ARROW:
 						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVO( -1 ) );
@@ -111,7 +111,7 @@ package com.funbuilder.controller.commands
 					case RIGHT_ARROW:
 						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVO( 1 ) );
 						break;
-				}*/
+				}
 				
 			}
 		}

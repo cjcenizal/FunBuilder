@@ -88,13 +88,12 @@ package com.funbuilder.controller.commands
 			updateBrushRequest.dispatch();
 			
 			// Add blocks with brush.
-			if ( brushModel.preview && keyboardModel.contains( Keyboard.SPACE ) ) {
+			if ( brushModel.preview && keyboardModel.isDown( Keyboard.SPACE ) ) {
 				// If we're in brush mode, then see if we need to place a block.
 				if ( !mouseModel.isMoving && mouseModel.mouseDown && brushModel.canPlace() ) {
 					brushBlockRequest.dispatch();
 				}
 			} else {
-						
 				// If a handle is grabbed, we are moving the selection.
 				if ( handlesModel.isGrabbed ) {
 					upgradeGrabbedBlocksRequest.dispatch();
