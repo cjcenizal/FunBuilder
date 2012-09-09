@@ -111,7 +111,7 @@ package com.funbuilder.controller.commands
 					block.z += diff.z;
 					indicator = segmentModel.getIndicatorFor( block );
 					indicator.x = block.x;
-					indicator.y = block.y + SegmentConstants.BLOCK_SIZE * .5;
+					indicator.y = block.y;
 					indicator.z = block.z;
 				}
 				selectedBlocksModel.setIsMoved( true );
