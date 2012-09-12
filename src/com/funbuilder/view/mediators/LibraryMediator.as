@@ -3,7 +3,7 @@ package com.funbuilder.view.mediators
 	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.SelectBrushRequest;
-	import com.funbuilder.model.vo.AddItemToLibraryVO;
+	import com.funbuilder.model.vo.AddItemToLibraryVo;
 	import com.funbuilder.view.components.LibraryView;
 	
 	import flash.events.Event;
@@ -36,7 +36,7 @@ package com.funbuilder.view.mediators
 			selectLibraryBlockRequest.dispatch( view.selected );
 		}
 		
-		private function onAddItemToLibraryRequested( data:AddItemToLibraryVO ):void {
+		private function onAddItemToLibraryRequested( data:AddItemToLibraryVo ):void {
 			view.addItem( data.block, data.bitmap );
 		}
 	}

@@ -1,6 +1,6 @@
 package com.funbuilder.model {
 	
-	import com.funrun.model.vo.BlockVO;
+	import com.funrun.model.vo.BlockVo;
 	
 	import flash.display.Bitmap;
 	
@@ -19,7 +19,7 @@ package com.funbuilder.model {
 			_bitmaps = {};
 		}
 		
-		public function addBlock( block:BlockVO ):void {
+		public function addBlock( block:BlockVo ):void {
 			_blocks[ block.id ] = block;
 			_blocksArr.push( block );
 		}
@@ -28,7 +28,7 @@ package com.funbuilder.model {
 			_bitmaps[ id ] = bitmap;
 		}
 		
-		public function getWithId( id:String ):BlockVO {
+		public function getWithId( id:String ):BlockVo {
 			return _blocks[ id ];
 		}
 		
@@ -45,7 +45,7 @@ package com.funbuilder.model {
 			return -1;
 		}
 		
-		public function getAt( index:int ):BlockVO {
+		public function getAt( index:int ):BlockVo {
 			return _blocksArr[ index ];
 		}
 		

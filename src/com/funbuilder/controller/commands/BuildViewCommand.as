@@ -11,6 +11,7 @@ package com.funbuilder.controller.commands
 	import away3d.materials.ColorMaterial;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.materials.methods.FresnelSpecularMethod;
+	import away3d.primitives.CylinderGeometry;
 	import away3d.primitives.PlaneGeometry;
 	import away3d.primitives.SphereGeometry;
 	
@@ -107,6 +108,28 @@ package com.funbuilder.controller.commands
 			planeMesh.visible = false;
 			addObjectToSceneRequest.dispatch( planeMesh );
 			view3dModel.groundPlane = planeMesh;
+			
+			// Add ground bounds.
+			var lineThickness:Number = 3;
+			var lineMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .2 );
+			var line:Mesh = new Mesh( new CylinderGeometry( lineThickness, lineThickness, 1 ), lineMaterial );
+			line.scaleY = SegmentConstants.SEGMENT_WIDTH;
+			line.rotationZ = 90;
+			line.x = SegmentConstants.SEGMENT_WIDTH * .5;
+			line.y = -SegmentConstants.BLOCK_SIZE * .5;
+			addObjectToSceneRequest.dispatch( line );
+			line = line.clone() as Mesh;
+			line.z = SegmentConstants.SEGMENT_DEPTH;
+			addObjectToSceneRequest.dispatch( line );
+			line = line.clone() as Mesh;
+			line.rotationX = 90;
+			line.scaleY = SegmentConstants.SEGMENT_DEPTH;
+			line.x = 0;
+			line.z = SegmentConstants.SEGMENT_DEPTH * .5;
+			addObjectToSceneRequest.dispatch( line );
+			line = line.clone() as Mesh;
+			line.x = SegmentConstants.SEGMENT_WIDTH;
+			addObjectToSceneRequest.dispatch( line );
 			
 			// Add elevation indicators.
 			var positiveIndicator:Mesh;

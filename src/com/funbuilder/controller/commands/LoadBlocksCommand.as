@@ -10,7 +10,7 @@ package com.funbuilder.controller.commands {
 	
 	import com.funbuilder.model.BlocksModel;
 	import com.funrun.model.constants.TrackConstants;
-	import com.funrun.model.vo.BlockVO;
+	import com.funrun.model.vo.BlockVo;
 	import com.funrun.services.JsonService;
 	import com.funrun.services.parsers.BlocksParser;
 	
@@ -56,7 +56,7 @@ package com.funbuilder.controller.commands {
 				var context:AssetLoaderContext = new AssetLoaderContext( true, _filePath );
 				
 				// Load the block objs.
-				var blockData:BlockVO;
+				var blockData:BlockVo;
 				for ( var i:int = 0; i < len; i++ ) {
 					blockData = parsedBlocks.getAt( i );
 					// Store in model.
@@ -71,7 +71,7 @@ package com.funbuilder.controller.commands {
 		/**
 		 * Listener function for asset complete event on loader
 		 */
-		private function getOnAssetComplete( blockData:BlockVO ):Function {
+		private function getOnAssetComplete( blockData:BlockVo ):Function {
 			var completeCallback:Function = this.dispatchComplete;
 			return function( event:AssetEvent ):void {
 				if ( event.asset.assetType == AssetType.MESH ) {

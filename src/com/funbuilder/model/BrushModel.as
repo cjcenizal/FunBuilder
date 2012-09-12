@@ -3,7 +3,7 @@ package com.funbuilder.model
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.model.constants.SegmentConstants;
-	import com.funrun.model.vo.BlockVO;
+	import com.funrun.model.vo.BlockVo;
 	
 	import flash.geom.Vector3D;
 	
@@ -12,7 +12,7 @@ package com.funbuilder.model
 	public class BrushModel extends Actor
 	{
 		
-		private var _data:BlockVO;
+		private var _data:BlockVo;
 		private var _preview:Mesh;
 		private var _prevPosition:Vector3D = new Vector3D();
 		
@@ -24,7 +24,7 @@ package com.funbuilder.model
 			super();
 		}
 		
-		public function select( data:BlockVO ):void {
+		public function select( data:BlockVo ):void {
 			_data = data;
 			_preview = data.mesh.clone() as Mesh;
 			_count = 0;
@@ -69,7 +69,7 @@ package com.funbuilder.model
 			return false;
 		}
 		
-		public function get data():BlockVO {
+		public function get data():BlockVo {
 			return _data;
 		}
 		

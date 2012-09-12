@@ -1,6 +1,6 @@
 package com.funbuilder.controller.signals
 {
-	import com.funbuilder.model.vo.DeselectBlockVO;
+	import com.funbuilder.model.vo.DeselectBlockVo;
 	
 	import org.osflash.signals.Signal;
 	
@@ -8,7 +8,7 @@ package com.funbuilder.controller.signals
 	{
 		public function DeselectBlockRequest()
 		{
-			super( DeselectBlockVO );
+			super( DeselectBlockVo );
 		}
 	}
 }

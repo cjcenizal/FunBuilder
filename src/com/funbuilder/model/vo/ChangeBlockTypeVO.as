@@ -1,11 +1,11 @@
 package com.funbuilder.model.vo
 {
-	public class ChangeBlockTypeVO
+	public class ChangeBlockTypeVo
 	{
 		
 		public var dir:int;
 		
-		public function ChangeBlockTypeVO( dir:int )
+		public function ChangeBlockTypeVo( dir:int )
 		{
 			this.dir = dir;
 		}

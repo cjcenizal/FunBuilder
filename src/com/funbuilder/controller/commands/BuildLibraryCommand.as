@@ -14,7 +14,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.View3dModel;
 	import com.funbuilder.model.constants.SegmentConstants;
-	import com.funbuilder.model.vo.AddItemToLibraryVO;
+	import com.funbuilder.model.vo.AddItemToLibraryVo;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -108,7 +108,7 @@ package com.funbuilder.controller.commands
 					// Remove it from scene.
 					removeObjectFromSceneRequest.dispatch( block );
 					// Add to library.
-					addItemToLibraryRequest.dispatch( new AddItemToLibraryVO( blocksModel.getAt( i ), bitmap ) );
+					addItemToLibraryRequest.dispatch( new AddItemToLibraryVo( blocksModel.getAt( i ), bitmap ) );
 				}
 				view.width = prevWidth;
 				view.height = prevHeight;

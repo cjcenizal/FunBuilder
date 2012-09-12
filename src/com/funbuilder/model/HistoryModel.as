@@ -1,6 +1,6 @@
 package com.funbuilder.model
 {
-	import com.funbuilder.model.vo.HistoryVO;
+	import com.funbuilder.model.vo.HistoryVo;
 	
 	import org.robotlegs.mvcs.Actor;
 	
@@ -21,7 +21,7 @@ package com.funbuilder.model
 			_history = [];
 		}
 		
-		public function add( history:HistoryVO ):void {
+		public function add( history:HistoryVo ):void {
 			// If we're adding a snapshot into our history,
 			// then we need to clear everything that follows.
 			_history.splice( _index );
@@ -32,11 +32,11 @@ package com.funbuilder.model
 			debug("add");
 		}
 		
-		public function undo( newHistory:HistoryVO = null ):HistoryVO {
+		public function undo( newHistory:HistoryVo = null ):HistoryVo {
 			// Move backwards through history.
 			if ( _index > 0 ) {
 				if ( _index > 0 ) _index--;
-				var history:HistoryVO = _history[ _index ];
+				var history:HistoryVo = _history[ _index ];
 				if ( newHistory ) {
 					_history.push( newHistory );
 				}
@@ -46,7 +46,7 @@ package com.funbuilder.model
 			return null;
 		}
 		
-		public function redo():HistoryVO {
+		public function redo():HistoryVo {
 			// Move forwards through history.
 			if ( _index < _history.length - 1 ) {
 				_index++;
@@ -60,7 +60,7 @@ package com.funbuilder.model
 			return !_history[ _index ] || !indexIsAtLatest() || getAt( _index ).snapshot != snapshot;
 		}
 		
-		public function getAt( index:int ):HistoryVO {
+		public function getAt( index:int ):HistoryVo {
 			return _history[ index ];
 		}
 		

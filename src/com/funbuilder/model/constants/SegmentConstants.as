@@ -8,7 +8,7 @@ package com.funbuilder.model.constants
 	{
 		public static const BLOCK_SIZE:Number = 100;
 		public static const NUM_BLOCKS_WIDE:Number = 14;
-		public static const NUM_BLOCKS_DEPTH:Number = 24;
+		public static const NUM_BLOCKS_DEPTH:Number = 40;
 		public static const SEGMENT_WIDTH:Number = NUM_BLOCKS_WIDE * BLOCK_SIZE;
 		public static const SEGMENT_DEPTH:Number = NUM_BLOCKS_DEPTH * BLOCK_SIZE;
 		public static const SEGMENT_HALF_WIDTH:Number = SEGMENT_WIDTH * .5;

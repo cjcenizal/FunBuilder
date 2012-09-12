@@ -5,7 +5,7 @@ package com.funrun.model.vo {
 	
 	import com.funrun.model.constants.FaceTypes;
 	
-	public class BlockVO {
+	public class BlockVo {
 		
 		private var _id:String;
 		private var _filename:String;
@@ -16,7 +16,7 @@ package com.funrun.model.vo {
 		//public var geo:PrimitiveBase;
 		public var mesh:Mesh;
 		
-		public function BlockVO(
+		public function BlockVo(
 			id:String,
 			filename:String,
 			collisions:Array,

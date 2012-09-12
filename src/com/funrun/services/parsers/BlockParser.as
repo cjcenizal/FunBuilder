@@ -1,7 +1,7 @@
 package com.funrun.services.parsers {
 	
 	import com.funrun.model.constants.FaceTypes;
-	import com.funrun.model.vo.BlockVO;
+	import com.funrun.model.vo.BlockVo;
 
 	public class BlockParser {
 		
@@ -11,7 +11,7 @@ package com.funrun.services.parsers {
 		public function BlockParser() {
 		}
 		
-		public function parse( data:Object ):BlockVO {
+		public function parse( data:Object ):BlockVo {
 			var id:String = new IdParser( data ).id;
 			var filename:String = new FilenameParser( data ).filename;
 			var collisions:Array = [];
@@ -35,7 +35,7 @@ package com.funrun.services.parsers {
 			for ( var key:String in faces ) {
 				numFaces++;
 			}
-			return new BlockVO( id, filename, collisions, faces, numFaces );
+			return new BlockVo( id, filename, collisions, faces, numFaces );
 		}
 	}
 }

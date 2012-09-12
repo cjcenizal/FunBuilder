@@ -1,6 +1,6 @@
 package com.funbuilder.controller.signals
 {
-	import com.funbuilder.model.vo.ChangeBlockTypeVO;
+	import com.funbuilder.model.vo.ChangeBlockTypeVo;
 	
 	import org.osflash.signals.Signal;
 	
@@ -8,7 +8,7 @@ package com.funbuilder.controller.signals
 	{
 		public function ChangeBlockTypeRequest()
 		{
-			super( ChangeBlockTypeVO );
+			super( ChangeBlockTypeVo );
 		}
 	}
 }

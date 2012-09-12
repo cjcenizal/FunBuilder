@@ -3,12 +3,11 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
-	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
 	import com.funbuilder.controller.signals.InvalidateHudRequest;
+	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.DeselectBlockVO;
-	import com.funbuilder.model.vo.SelectBlockVO;
+	import com.funbuilder.model.vo.DeselectBlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -43,7 +42,7 @@ package com.funbuilder.controller.commands
 		{
 			// Deselect block if necessary.
 			if ( selectedBlockModel.contains( block ) ) {
-				deselectBlockRequest.dispatch( new DeselectBlockVO( block ) );
+				deselectBlockRequest.dispatch( new DeselectBlockVo( block ) );
 			}
 			
 			// Remove from scene.

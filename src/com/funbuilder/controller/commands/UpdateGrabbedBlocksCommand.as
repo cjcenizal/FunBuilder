@@ -5,7 +5,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.MoveBlocksRequest;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.AddBlockVO;
+	import com.funbuilder.model.vo.AddBlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -32,7 +32,7 @@ package com.funbuilder.controller.commands
 				var block:Mesh;
 				for ( var i:int = 0; i < len; i++ ) {
 					block = selectedBlocksModel.getAt( i ).clone() as Mesh;
-					addBlockRequest.dispatch( new AddBlockVO( block ) );
+					addBlockRequest.dispatch( new AddBlockVo( block ) );
 				}
 				selectedBlocksModel.canDuplicate = false;
 			} else {

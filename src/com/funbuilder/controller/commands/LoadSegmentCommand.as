@@ -7,7 +7,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.constants.SegmentConstants;
-	import com.funbuilder.model.vo.AddBlockVO;
+	import com.funbuilder.model.vo.AddBlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -51,7 +51,7 @@ package com.funbuilder.controller.commands
 				mesh.x = dataItem.x * SegmentConstants.BLOCK_SIZE;
 				mesh.y = dataItem.y * SegmentConstants.BLOCK_SIZE;
 				mesh.z = dataItem.z * SegmentConstants.BLOCK_SIZE;
-				addBlockRequest.dispatch( new AddBlockVO( mesh, dataItem.key ) );
+				addBlockRequest.dispatch( new AddBlockVo( mesh, dataItem.key ) );
 			}
 		}
 	}

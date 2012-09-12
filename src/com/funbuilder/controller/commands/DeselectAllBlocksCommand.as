@@ -2,7 +2,7 @@ package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.DeselectBlockRequest;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.DeselectBlockVO;
+	import com.funbuilder.model.vo.DeselectBlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -22,7 +22,7 @@ package com.funbuilder.controller.commands
 		override public function execute():void
 		{
 			while ( selectedBlocksModel.numBlocks > 0 ) {
-				deselectBlockRequest.dispatch( new DeselectBlockVO( selectedBlocksModel.getAt( selectedBlocksModel.numBlocks - 1 ), false ) );
+				deselectBlockRequest.dispatch( new DeselectBlockVo( selectedBlocksModel.getAt( selectedBlocksModel.numBlocks - 1 ), false ) );
 			}
 		}
 	}

@@ -9,8 +9,8 @@ package com.funbuilder.controller.commands {
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.HistoryVO;
-	import com.funbuilder.model.vo.SelectBlockVO;
+	import com.funbuilder.model.vo.HistoryVo;
+	import com.funbuilder.model.vo.SelectBlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 
@@ -45,22 +45,22 @@ package com.funbuilder.controller.commands {
 		public var invalidateSavedFileRequest:InvalidateSavedFileRequest;
 		
 		override public function execute():void {
-			var newHistory:HistoryVO;
+			var newHistory:HistoryVo;
 			if ( historyModel.indexIsAtLatest() ) {
 				var snapshot:String = segmentModel.getJson();
 				var selectedBlockKeys:Array = [];
 				for ( var i:int = 0; i < selectedBlockModel.numBlocks; i++ ) {
 					selectedBlockKeys.push( segmentModel.getKeyFor( selectedBlockModel.getAt( i ) ) );
 				}
-				newHistory = new HistoryVO( snapshot, selectedBlockKeys );
+				newHistory = new HistoryVo( snapshot, selectedBlockKeys );
 			}
-			var history:HistoryVO = historyModel.undo( newHistory );
+			var history:HistoryVo = historyModel.undo( newHistory );
 			if ( history ) {
 				loadSegmentRequest.dispatch( history.snapshot );
 				var block:Mesh
 				for ( var i:int = 0; i < history.selectedBlockKeys.length; i++ ) {
 					block = segmentModel.getWithKey( history.selectedBlockKeys[ i ] );
-					selectBlockRequest.dispatch( new SelectBlockVO( block, true, false ) );
+					selectBlockRequest.dispatch( new SelectBlockVo( block, true, false ) );
 				}
 			}
 			invalidateSavedFileRequest.dispatch();

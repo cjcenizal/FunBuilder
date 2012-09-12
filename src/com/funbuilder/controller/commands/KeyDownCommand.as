@@ -10,7 +10,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.ChangeBlockTypeVO;
+	import com.funbuilder.model.vo.ChangeBlockTypeVo;
 	
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -106,10 +106,10 @@ package com.funbuilder.controller.commands
 				
 				switch ( event.keyCode ) {
 					case LEFT_ARROW:
-						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVO( -1 ) );
+						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVo( -1 ) );
 						break;
 					case RIGHT_ARROW:
-						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVO( 1 ) );
+						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVo( 1 ) );
 						break;
 				}
 				

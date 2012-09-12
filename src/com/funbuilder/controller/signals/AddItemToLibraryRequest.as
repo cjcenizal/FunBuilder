@@ -1,6 +1,6 @@
 package com.funbuilder.controller.signals
 {
-	import com.funbuilder.model.vo.AddItemToLibraryVO;
+	import com.funbuilder.model.vo.AddItemToLibraryVo;
 	
 	import org.osflash.signals.Signal;
 	
@@ -8,7 +8,7 @@ package com.funbuilder.controller.signals
 	{
 		public function AddItemToLibraryRequest()
 		{
-			super( AddItemToLibraryVO );
+			super( AddItemToLibraryVo );
 		}
 	}
 }

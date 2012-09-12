@@ -3,7 +3,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddHistoryRequest;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.SelectBlockVO;
+	import com.funbuilder.model.vo.SelectBlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -13,7 +13,7 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var selectData:SelectBlockVO;
+		public var selectData:SelectBlockVo;
 		
 		// Models.
 		

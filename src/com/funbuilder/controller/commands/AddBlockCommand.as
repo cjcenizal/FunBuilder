@@ -10,7 +10,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.MouseOverBlockRequest;
 	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.SegmentModel;
-	import com.funbuilder.model.vo.AddBlockVO;
+	import com.funbuilder.model.vo.AddBlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -20,7 +20,7 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var addBlockData:AddBlockVO;
+		public var addBlockData:AddBlockVo;
 		
 		// Models.
 		

@@ -2,7 +2,7 @@ package com.funbuilder.controller.signals
 {
 	import away3d.entities.Mesh;
 	
-	import com.funbuilder.model.vo.AddBlockVO;
+	import com.funbuilder.model.vo.AddBlockVo;
 	
 	import org.osflash.signals.Signal;
 	
@@ -10,7 +10,7 @@ package com.funbuilder.controller.signals
 	{
 		public function AddBlockRequest()
 		{
-			super( AddBlockVO );
+			super( AddBlockVo );
 		}
 	}
 }

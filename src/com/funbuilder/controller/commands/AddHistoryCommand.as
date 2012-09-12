@@ -3,7 +3,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.HistoryModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.HistoryVO;
+	import com.funbuilder.model.vo.HistoryVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -29,7 +29,7 @@ package com.funbuilder.controller.commands
 			for ( var i:int = 0; i < selectedBlockModel.numBlocks; i++ ) {
 				selectedBlockKeys.push( segmentModel.getKeyFor( selectedBlockModel.getAt( i ) ) );
 			}
-			var history:HistoryVO = new HistoryVO( snapshot, selectedBlockKeys );
+			var history:HistoryVo = new HistoryVo( snapshot, selectedBlockKeys );
 			
 			// Save history snapshot if not identical to the current history snapshot.
 			if ( historyModel.doesNotMatchCurrent( snapshot ) ) {

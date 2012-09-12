@@ -5,7 +5,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.constants.SegmentConstants;
-	import com.funbuilder.model.vo.AddBlockVO;
+	import com.funbuilder.model.vo.AddBlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -31,7 +31,7 @@ package com.funbuilder.controller.commands
 					block.x = x * SegmentConstants.BLOCK_SIZE + SegmentConstants.BLOCK_SIZE * .5;
 					block.y = -SegmentConstants.BLOCK_SIZE;
 					block.z = z * SegmentConstants.BLOCK_SIZE + SegmentConstants.BLOCK_SIZE * .5;
-					addBlockRequest.dispatch( new AddBlockVO( block ) );
+					addBlockRequest.dispatch( new AddBlockVo( block ) );
 				}
 			}
 		}

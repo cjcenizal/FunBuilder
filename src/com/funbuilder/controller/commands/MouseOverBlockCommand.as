@@ -8,8 +8,8 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.DeselectBlockVO;
-	import com.funbuilder.model.vo.SelectBlockVO;
+	import com.funbuilder.model.vo.DeselectBlockVo;
+	import com.funbuilder.model.vo.SelectBlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -51,12 +51,12 @@ package com.funbuilder.controller.commands
 				if ( keysModel.alt ) {
 					if ( selectedBlocksModel.contains( block ) ) {
 						// Remove from selection.
-						deselectBlockRequest.dispatch( new DeselectBlockVO( block ) );
+						deselectBlockRequest.dispatch( new DeselectBlockVo( block ) );
 					}
 				} else if ( keysModel.shift ) {
 					if ( !selectedBlocksModel.contains( block ) ) {
 						// Add to selection.
-						selectBlockRequest.dispatch( new SelectBlockVO( block, true, true ) );
+						selectBlockRequest.dispatch( new SelectBlockVo( block, true, true ) );
 					}
 				}
 			}

@@ -7,7 +7,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.KeyboardModel;
-	import com.funbuilder.model.vo.AddBlockVO;
+	import com.funbuilder.model.vo.AddBlockVo;
 	
 	import flash.ui.Keyboard;
 	
@@ -42,7 +42,7 @@ package com.funbuilder.controller.commands
 				// Add block.
 				var block:Mesh = brushModel.preview.clone() as Mesh;
 				block.scaleX = block.scaleY = block.scaleZ = 1;
-				addBlockRequest.dispatch( new AddBlockVO( block ) );
+				addBlockRequest.dispatch( new AddBlockVo( block ) );
 				invalidateSavedFileRequest.dispatch();
 			}
 		}

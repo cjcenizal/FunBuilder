@@ -10,10 +10,10 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
-	import com.funbuilder.model.vo.AddBlockVO;
-	import com.funbuilder.model.vo.ChangeBlockTypeVO;
-	import com.funbuilder.model.vo.SelectBlockVO;
-	import com.funrun.model.vo.BlockVO;
+	import com.funbuilder.model.vo.AddBlockVo;
+	import com.funbuilder.model.vo.ChangeBlockTypeVo;
+	import com.funbuilder.model.vo.SelectBlockVo;
+	import com.funrun.model.vo.BlockVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -23,7 +23,7 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var changeBlockTypeData:ChangeBlockTypeVO;
+		public var changeBlockTypeData:ChangeBlockTypeVo;
 		
 		// Models.
 		
@@ -71,7 +71,7 @@ package com.funbuilder.controller.commands
 						index = blocksModel.numBlocks - 1;
 					}
 					
-					var newBlockData:BlockVO = blocksModel.getAt( index );
+					var newBlockData:BlockVo = blocksModel.getAt( index );
 					var newBlock:Mesh = blocksModel.getWithId( newBlockData.id ).mesh.clone() as Mesh;
 					newBlock.x = oldBlock.x;
 					newBlock.y = oldBlock.y;
@@ -81,10 +81,10 @@ package com.funbuilder.controller.commands
 					removeBlockRequest.dispatch( oldBlock );
 					
 					// Add new block.
-					addBlockRequest.dispatch( new AddBlockVO( newBlock ) );
+					addBlockRequest.dispatch( new AddBlockVo( newBlock ) );
 					
 					// Select the new one.
-					selectBlockRequest.dispatch( new SelectBlockVO( newBlock ) );
+					selectBlockRequest.dispatch( new SelectBlockVo( newBlock ) );
 				}
 				
 				invalidateSavedFileRequest.dispatch();
