@@ -16,8 +16,6 @@ package {
 		/*
 		
 		TO-DO:
-			- Add points block
-				- Specify bounding box scale in json
 			- Build cool obstacles
 			- Turn off indicators for when a block is at ground level
 			- Fix stacking of blocks on the ground plane
