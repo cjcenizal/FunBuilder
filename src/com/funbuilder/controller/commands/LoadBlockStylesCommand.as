@@ -22,7 +22,7 @@ package com.funbuilder.controller.commands {
 	
 	import org.robotlegs.utilities.macrobot.AsyncCommand;
 	
-	public class LoadBlocksCommand extends AsyncCommand {
+	public class LoadBlockStylesCommand extends AsyncCommand {
 		
 		// Models.
 		
@@ -32,12 +32,12 @@ package com.funbuilder.controller.commands {
 		// Private vars.
 		
 		private var _loader:URLLoader;
-	//	private var _filePath:String = "blocks/";
-	//	private var _countTotal:int;
-	//	private var _countLoaded:int = 0;
+		private var _filePath:String = "blocks/";
+		private var _countTotal:int;
+		private var _countLoaded:int = 0;
 		
 		override public function execute():void {
-			_loader = new URLLoader( new URLRequest( 'data/blocks.json' ) );
+			_loader = new URLLoader( new URLRequest( 'data/block_styles.json' ) );
 			_loader.addEventListener( Event.COMPLETE, onLoadComplete );
 		}
 		
@@ -48,12 +48,12 @@ package com.funbuilder.controller.commands {
 			
 			// Store a count so we know when we're done loading the block objs.
 			var len:int = parsedBlocks.length;
-		//	_countTotal = len * 2; // Assume one mtl and obj pair per block.
+			_countTotal = len * 2; // Assume one mtl and obj pair per block.
 			if ( len == 0 ) {
 				dispatchComplete( true );
 			} else {
 				// Set up loading context.
-		//		var context:AssetLoaderContext = new AssetLoaderContext( true, _filePath );
+				var context:AssetLoaderContext = new AssetLoaderContext( true, _filePath );
 				
 				// Load the block objs.
 				var blockData:BlockVo;
@@ -62,17 +62,15 @@ package com.funbuilder.controller.commands {
 					// Store in model.
 					blocksModel.addBlock( blockData );
 					// Load it.
-					//var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( _filePath + blockData.filename ), context, blockData.id, new old.OBJParser() );
-					//token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( blockData ) );
+					var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( _filePath + blockData.filename ), context, blockData.id, new old.OBJParser() );
+					token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( blockData ) );
 				}
-				dispatchComplete( true );
 			}
 		}
 		
 		/**
 		 * Listener function for asset complete event on loader
 		 */
-		/*
 		private function getOnAssetComplete( blockData:BlockVo ):Function {
 			var completeCallback:Function = this.dispatchComplete;
 			return function( event:AssetEvent ):void {
@@ -92,6 +90,6 @@ package com.funbuilder.controller.commands {
 					}
 				}
 			}
-		}*/
+		}
 	}
 }

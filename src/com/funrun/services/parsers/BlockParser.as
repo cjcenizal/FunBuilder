@@ -2,40 +2,29 @@ package com.funrun.services.parsers {
 	
 	import com.funrun.model.constants.FaceTypes;
 	import com.funrun.model.vo.BlockVo;
+	import com.funrun.model.constants.Block;
+	
+	import flash.geom.Vector3D;
 
 	public class BlockParser {
 		
 		private const COLLISIONS:String = "hit";
 		private const FACES:String = "faces";
+		private const BOUNDS:String = "bounds";
 		
 		public function BlockParser() {
 		}
 		
 		public function parse( data:Object ):BlockVo {
 			var id:String = new IdParser( data ).id;
-			var filename:String = new FilenameParser( data ).filename;
-			var collisions:Array = [];
-			var collisionsData:Array = data[ COLLISIONS ];
-			if ( collisionsData ) {
-				for ( var i:int = 0; i < collisionsData.length; i++ ) {
-					if ( collisionsData[ i ] == FaceTypes.ALL ) {
-						collisions[ FaceTypes.TOP ] = true;
-						collisions[ FaceTypes.BOTTOM ] = true;
-						collisions[ FaceTypes.LEFT ] = true;
-						collisions[ FaceTypes.RIGHT ] = true;
-						collisions[ FaceTypes.FRONT ] = true;
-						collisions[ FaceTypes.BACK ] = true;
-					} else {
-						collisions[ collisionsData[ i ] ] = true;
-					}
-				}
-			}
-			var numFaces:int = 0;
+			//var filename:String = new FilenameParser( data ).filename;
 			var faces:Object = data[ FACES ] || {};
-			for ( var key:String in faces ) {
-				numFaces++;
-			}
-			return new BlockVo( id, filename, collisions, faces, numFaces );
+			var bounds:Array = data[ BOUNDS ];
+			var boundsMin:Vector3D = new Vector3D( bounds[ 0 ], bounds[ 1 ], bounds[ 2 ] );
+			boundsMin.scaleBy( Block.HALF_SIZE );
+			var boundsMax:Vector3D = new Vector3D( bounds[ 3 ], bounds[ 4 ], bounds[ 5 ] );
+			boundsMax.scaleBy( Block.HALF_SIZE );
+			return new BlockVo( id, faces, boundsMin, boundsMax );
 		}
 	}
 }

@@ -9,7 +9,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
-	import com.funbuilder.model.BlocksModel;
+	import com.funrun.model.BlocksModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.View3dModel;

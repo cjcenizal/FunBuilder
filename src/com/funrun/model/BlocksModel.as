@@ -1,4 +1,4 @@
-package com.funbuilder.model {
+package com.funrun.model {
 	
 	import com.funrun.model.vo.BlockVo;
 	
@@ -23,18 +23,18 @@ package com.funbuilder.model {
 			_blocks[ block.id ] = block;
 			_blocksArr.push( block );
 		}
-		
+		/*
 		public function addBitmap( bitmap:Bitmap, id:String ):void {
 			_bitmaps[ id ] = bitmap;
 		}
-		
+		*/
 		public function getWithId( id:String ):BlockVo {
 			return _blocks[ id ];
 		}
-		
+		/*
 		public function getBitmap( id:String ):Bitmap {
 			return _bitmaps[ id ];
-		}
+		}*/
 		
 		public function getBlockIndex( id:String ):int {
 			for ( var i:int = 0; i < _blocksArr.length; i++ ) {

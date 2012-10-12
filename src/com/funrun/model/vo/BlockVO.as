@@ -1,53 +1,65 @@
 package com.funrun.model.vo {
 	
-	import away3d.entities.Mesh;
-	import away3d.primitives.PrimitiveBase;
-	
-	import com.funrun.model.constants.FaceTypes;
+	import flash.geom.Vector3D;
 	
 	public class BlockVo {
 		
+		private static const TRANSLATIONS:Object = {};
+		TRANSLATIONS[ 'front' ] = 'f';
+		TRANSLATIONS[ 'back' ] = 'a';
+		TRANSLATIONS[ 'left' ] = 'l';
+		TRANSLATIONS[ 'right' ] = 'r';
+		TRANSLATIONS[ 'top' ] = 't';
+		TRANSLATIONS[ 'bottom' ] = 'b';
+		
 		private var _id:String;
-		private var _filename:String;
-		private var _collisions:Array;
 		private var _faces:Object;
-		private var _numFaces:int = 0;
+		private var _boundsMin:Vector3D;
+		private var _boundsMax:Vector3D;
 		
-		//public var geo:PrimitiveBase;
-		public var mesh:Mesh;
-		
-		public function BlockVo(
-			id:String,
-			filename:String,
-			collisions:Array,
-			faces:Object,
-			numFaces:int
-		) {
+		public function BlockVo( id:String, faces:Object, boundsMin:Vector3D, boundsMax:Vector3D ) {
 			_id = id;
-			_filename = filename;
-			_collisions = collisions;
 			_faces = faces;
-			_numFaces = numFaces;
+			_boundsMin = boundsMin;
+			_boundsMax = boundsMax;
 		}
 		
 		public function get id():String {
 			return _id;
 		}
 		
-		public function get filename():String {
-			return _filename;
+		public function get boundsMin():Vector3D {
+			return _boundsMin;
 		}
 		
-		public function get numFaces():int {
-			return _numFaces;
+		public function get boundsMax():Vector3D {
+			return _boundsMax;
 		}
 		
-		public function getEventAtFace( face:String ):String {
-			return _faces[ face ] || _faces[ FaceTypes.ALL ];
+		public function getEventAtFace( f:String ):String {
+			var face:String = TRANSLATIONS[ f ];
+			return _faces[ face ] || _faces[ 'all' ];
 		}
 		
-		public function doesFaceCollide( face:String ):Boolean {
-			return _collisions[ face ];
+		public function hasAnyEvent( events:Array ):Boolean {
+			for ( var i:int = 0; i < events.length; i++ ) {
+				for ( var face:String in _faces ) {
+					if ( events[ i ] == _faces[ face ] ) {
+						return true;
+					}
+				}
+			}
+			return false;
 		}
+		
+		public function toString():String {
+			var str:String = _id + ": {";
+			for ( var key:String in _faces ) {
+				str += " " + key + " : " + _faces[ key ] + " ,";
+			}
+			str += "}";
+			return str;
+		}
+		
 	}
 }

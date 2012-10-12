@@ -7,7 +7,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
-	import com.funbuilder.model.BlocksModel;
+	import com.funrun.model.BlocksModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.AddBlockVo;

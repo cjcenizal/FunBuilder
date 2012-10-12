@@ -94,7 +94,6 @@ package com.funbuilder
 	import com.funbuilder.controller.signals.UpdateElevationRequest;
 	import com.funbuilder.controller.signals.UpdateGrabbedBlocksRequest;
 	import com.funbuilder.controller.signals.UpdateHandlesRequest;
-	import com.funbuilder.model.BlocksModel;
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.ElevationModel;
@@ -116,6 +115,8 @@ package com.funbuilder
 	import com.funbuilder.view.mediators.LibraryMediator;
 	import com.funbuilder.view.mediators.MainMediator;
 	import com.funbuilder.view.mediators.MenuBarMediator;
+	import com.funrun.model.BlockStylesModel;
+	import com.funrun.model.BlocksModel;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
@@ -132,6 +133,7 @@ package com.funbuilder
 			
 			// Map models.
 			injector.mapSingleton( BlocksModel );
+			injector.mapSingleton( BlockStylesModel );
 			injector.mapSingleton( BrushModel );
 			injector.mapSingleton( CameraTargetModel );
 			injector.mapSingleton( ElevationModel );

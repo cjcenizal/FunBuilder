@@ -5,7 +5,7 @@ package com.funbuilder.controller.commands
 	import com.adobe.serialization.json.JSON;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
-	import com.funbuilder.model.BlocksModel;
+	import com.funrun.model.BlocksModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVo;
 	
