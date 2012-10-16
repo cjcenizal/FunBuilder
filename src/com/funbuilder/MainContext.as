@@ -161,9 +161,9 @@ package com.funbuilder
 			injector.mapSingleton( ToggleLibraryRequest );
 			injector.mapSingleton( ShowSelectionIndicatorRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
-			signalCommandMap.mapSignalClass( BrushBlockRequest,						BrushBlockCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
+			signalCommandMap.mapSignalClass( BrushBlockRequest,						BrushBlockCommand );
 			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );
 			signalCommandMap.mapSignalClass( ClearHistoryRequest,					ClearHistoryCommand );
 			signalCommandMap.mapSignalClass( ClearSegmentRequest,					ClearSegmentCommand );

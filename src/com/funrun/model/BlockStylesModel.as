@@ -16,7 +16,7 @@ package com.funrun.model
 		}
 		
 		public function add( style:BlockStyleVo ):void {
-			_styles[ style.id ] = _styles;
+			_styles[ style.id ] = style;
 		}
 		
 		public function getStyle( id:String ):BlockStyleVo {

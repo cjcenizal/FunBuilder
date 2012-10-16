@@ -1,4 +1,4 @@
-package com.funbuilder.controller.commands {
+package com.funrun.controller.commands {
 	
 	import away3d.entities.Mesh;
 	import away3d.events.AssetEvent;
@@ -6,13 +6,10 @@ package com.funbuilder.controller.commands {
 	import away3d.library.assets.AssetType;
 	import away3d.loaders.misc.AssetLoaderContext;
 	import away3d.loaders.misc.AssetLoaderToken;
-	import away3d.loaders.parsers.OBJParser;
 	
 	import com.funrun.model.BlockStylesModel;
-	import com.funrun.model.BlockTypesModel;
 	import com.funrun.model.constants.TrackConstants;
 	import com.funrun.model.vo.BlockStyleVo;
-	import com.funrun.model.vo.BlockTypeVo;
 	import com.funrun.services.JsonService;
 	import com.funrun.services.parsers.BlockStylesParser;
 	
@@ -47,8 +44,8 @@ package com.funbuilder.controller.commands {
 			var data:String = ( e.target as URLLoader ).data;
 			// Parse object to give it meaning.
 			var parsedBlocks:BlockStylesParser = new BlockStylesParser( new JsonService().readString( data ) );
-			var len:int = parsedBlocks.length;
-			if ( len == 0 ) {
+			_countTotal = parsedBlocks.length;
+			if ( _countTotal == 0 ) {
 				dispatchComplete( true );
 			} else {
 				// Set up loading context.
@@ -56,7 +53,7 @@ package com.funbuilder.controller.commands {
 				
 				// Load the block objs.
 				var style:BlockStyleVo, keys:Array, id:String, filename:String;
-				for ( var i:int = 0; i < len; i++ ) {
+				for ( var i:int = 0; i < _countTotal; i++ ) {
 					style = parsedBlocks.getAt( i );
 					keys = style.getKeys();
 					for ( var j:int = 0; j < keys.length; j++ ) {
@@ -64,8 +61,6 @@ package com.funbuilder.controller.commands {
 						filename = style.getFilename( id );
 						// Store in model.
 						blockStylesModel.add( style );
-						// Load both mtl and an obj for each block style.
-						_countTotal += 2;
 						// Load it.
 						var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( _filePath + filename ), context, id, new old.OBJParser() );
 						token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( style, id ) );
@@ -83,15 +78,17 @@ package com.funbuilder.controller.commands {
 				if ( event.asset.assetType == AssetType.MESH ) {
 					// Treat mesh.
 					var mesh:Mesh = event.asset as Mesh;
-					mesh.name = style.id; // id and mesh.assetNamepsace are the same
-					mesh.geometry.scale( TrackConstants.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
-					mesh.rotationY = 180;
-					// Store mesh.
-					style.addMesh( id, mesh );
-					// Increment complete count and check if we're done.
-					_countLoaded++;
-					if ( _countLoaded == _countTotal ) {
-						completeCallback.call( null, true );
+					if ( mesh.bounds.min.length > 0 || mesh.bounds.max.length > 0 ) {
+						mesh.name = style.id; // id and mesh.assetNamepsace are the same
+						mesh.geometry.scale( TrackConstants.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
+						mesh.rotationY = 180;
+						// Store mesh.
+						style.addMesh( id, mesh );
+						// Increment complete count and check if we're done.
+						_countLoaded++;
+						if ( _countLoaded == _countTotal ) {
+							completeCallback.call( null, true );
+						}
 					}
 				}
 			}

@@ -1,4 +1,4 @@
-package com.funbuilder.controller.commands {
+package com.funrun.controller.commands {
 	
 	import com.funrun.model.BlockTypesModel;
 	import com.funrun.model.vo.BlockTypeVo;

@@ -7,12 +7,14 @@ package com.funbuilder.model.vo
 	public class AddItemToLibraryVo
 	{
 		
-		public var block:BlockTypeVo;
+		public var id:String;
+		public var name:String;
 		public var bitmap:Bitmap;
 		
-		public function AddItemToLibraryVo( block:BlockTypeVo, bitmap:Bitmap )
+		public function AddItemToLibraryVo( id:String, name:String, bitmap:Bitmap )
 		{
-			this.block = block;
+			this.id = id;
+			this.name = name;
 			this.bitmap = bitmap;
 		}
 	}

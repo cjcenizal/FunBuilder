@@ -3,6 +3,16 @@
   "author" : "CJ Cenizal",
   "list" : [
       {
+        "id" : "default",
+        "blocks" : {
+            "floor" : "floor.obj",
+            "basic" : "basic.obj",
+            "launcher" : "launcher.obj",
+            "stairs" : "stairs.obj",
+            "point" : "point.obj"
+          }
+        },
+      {
         "id" : "grass",
         "blocks" : {
             "floor" : "floor.obj",
@@ -11,6 +21,6 @@
             "stairs" : "stairs.obj",
             "point" : "point.obj"
           }
-      }
+        }
     ]
 }

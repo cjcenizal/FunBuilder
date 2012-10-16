@@ -37,7 +37,7 @@ package com.funbuilder.view.mediators
 		}
 		
 		private function onAddItemToLibraryRequested( data:AddItemToLibraryVo ):void {
-			view.addItem( data.block, data.bitmap );
+			view.addItem( data.id, data.name, data.bitmap );
 		}
 	}
 }
