@@ -1,6 +1,6 @@
 package com.funbuilder.controller.signals
 {
-	import com.funrun.model.vo.BlockVo;
+	import com.funrun.model.vo.BlockTypeVo;
 	
 	import org.osflash.signals.Signal;
 	
@@ -8,7 +8,7 @@ package com.funbuilder.controller.signals
 	{
 		public function SelectBrushRequest()
 		{
-			super( BlockVo );
+			super( BlockTypeVo );
 		}
 	}
 }

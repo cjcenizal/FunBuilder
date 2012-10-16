@@ -1,25 +1,25 @@
 package com.funrun.model {
 	
-	import com.funrun.model.vo.BlockVo;
+	import com.funrun.model.vo.BlockTypeVo;
 	
 	import flash.display.Bitmap;
 	
 	import org.robotlegs.mvcs.Actor;
 	
-	public class BlocksModel extends Actor {
+	public class BlockTypesModel extends Actor {
 		
 		private var _blocks:Object;
 		private var _blocksArr:Array;
 		private var _bitmaps:Object;
 		
-		public function BlocksModel() {
+		public function BlockTypesModel() {
 			super();
 			_blocks = {};
 			_blocksArr = [];
 			_bitmaps = {};
 		}
 		
-		public function addBlock( block:BlockVo ):void {
+		public function addBlock( block:BlockTypeVo ):void {
 			_blocks[ block.id ] = block;
 			_blocksArr.push( block );
 		}
@@ -28,7 +28,7 @@ package com.funrun.model {
 			_bitmaps[ id ] = bitmap;
 		}
 		*/
-		public function getWithId( id:String ):BlockVo {
+		public function getWithId( id:String ):BlockTypeVo {
 			return _blocks[ id ];
 		}
 		/*
@@ -45,7 +45,7 @@ package com.funrun.model {
 			return -1;
 		}
 		
-		public function getAt( index:int ):BlockVo {
+		public function getAt( index:int ):BlockTypeVo {
 			return _blocksArr[ index ];
 		}
 		

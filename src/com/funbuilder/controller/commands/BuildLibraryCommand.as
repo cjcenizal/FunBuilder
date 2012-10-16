@@ -9,7 +9,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
-	import com.funrun.model.BlocksModel;
+	import com.funrun.model.BlockTypesModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.View3dModel;
@@ -29,7 +29,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var blocksModel:BlocksModel;
+		public var blocksModel:BlockTypesModel;
 		
 		[Inject]
 		public var view3dModel:View3dModel;
@@ -59,6 +59,7 @@ package com.funbuilder.controller.commands
 		}
 		
 		private function onEnterFrame( e:Event ):void {
+			/*
 			_count++;
 			if ( _count == 10 ) {
 				this.contextView.removeEventListener( Event.ENTER_FRAME, onEnterFrame );
@@ -115,7 +116,7 @@ package com.funbuilder.controller.commands
 				( view3dModel.groundPlane.material as ColorMaterial ).alpha = prevGroundAlpha;
 				( cameraTargetModel.target.material as ColorMaterial ).alpha = prevTargetAlpha;
 				dispatchComplete( true );
-			}
+			}*/
 		}
 	}
 }

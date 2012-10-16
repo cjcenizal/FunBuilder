@@ -7,13 +7,13 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
-	import com.funrun.model.BlocksModel;
+	import com.funrun.model.BlockTypesModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.AddBlockVo;
 	import com.funbuilder.model.vo.ChangeBlockTypeVo;
 	import com.funbuilder.model.vo.SelectBlockVo;
-	import com.funrun.model.vo.BlockVo;
+	import com.funrun.model.vo.BlockTypeVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -34,7 +34,7 @@ package com.funbuilder.controller.commands
 		public var segmentModel:SegmentModel;
 		
 		[Inject]
-		public var blocksModel:BlocksModel;
+		public var blocksModel:BlockTypesModel;
 		
 		// Commands.
 		
@@ -55,6 +55,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
+			/*
 			if ( selectedBlocksModel.numBlocks > 0 ) {
 				addHistoryRequest.dispatch();
 				
@@ -71,7 +72,7 @@ package com.funbuilder.controller.commands
 						index = blocksModel.numBlocks - 1;
 					}
 					
-					var newBlockData:BlockVo = blocksModel.getAt( index );
+					var newBlockData:BlockTypeVo = blocksModel.getAt( index );
 					var newBlock:Mesh = blocksModel.getWithId( newBlockData.id ).mesh.clone() as Mesh;
 					newBlock.x = oldBlock.x;
 					newBlock.y = oldBlock.y;
@@ -88,7 +89,7 @@ package com.funbuilder.controller.commands
 				}
 				
 				invalidateSavedFileRequest.dispatch();
-			}
+			}*/
 		}
 	}
 }

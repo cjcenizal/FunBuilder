@@ -1,21 +1,20 @@
 {
-  "doc" : "These are the blocks that compose obstacles.",
+  "doc" : "These are the block types that compose obstacles.",
   "author" : "CJ Cenizal",
   "list" : [
     {
       "id" : "floor",
-      "filename" : "floor.obj",
       "faces" : {
           "t" : "put_top"
         },
       "bounds" : [
           -1, -1, -1,
           1, 1, 1
-        ]
+        ],
+      "color" : "0xb3b3b3"
       },
     {
       "id" : "basic",
-      "filename" : "basic.obj",
       "faces" : {
           "t" : "put_top",
           "b" : "put_bottom",
@@ -27,11 +26,11 @@
       "bounds" : [
           -1, -1, -1,
           1, 1, 1
-        ]
+        ],
+        "color" : "0x00ff00"
       },
     {
       "id" : "launcher",
-      "filename" : "launcher.obj",
       "faces" : {
           "t" : "jump",
           "b" : "put_top",
@@ -43,11 +42,11 @@
       "bounds" : [
           -1, -1, -1,
           1, 1, 1
-        ]
+        ],
+        "color" : "0xffff00"
       },
     {
       "id" : "stairs",
-      "filename" : "stairs.obj",
       "faces" : {
           "t" : "put_top",
           "b" : "put_top",
@@ -59,11 +58,11 @@
       "bounds" : [
           -1, -1, -1,
           1, 1, 1
-        ]
+        ],
+        "color" : "0x896224"
       },
     {
       "id" : "point",
-      "filename" : "point.obj",
       "faces" : {
           "t" : "point",
           "b" : "point",
@@ -75,7 +74,8 @@
       "bounds" : [
           -0.5, -0.5, -0.5,
           0.5, 0.5, 0.5
-        ]
+        ],
+        "color" : "0x5ce8fd"
       }
   ]
 }

@@ -116,7 +116,7 @@ package com.funbuilder
 	import com.funbuilder.view.mediators.MainMediator;
 	import com.funbuilder.view.mediators.MenuBarMediator;
 	import com.funrun.model.BlockStylesModel;
-	import com.funrun.model.BlocksModel;
+	import com.funrun.model.BlockTypesModel;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
@@ -132,7 +132,7 @@ package com.funbuilder
 		override public function startup():void {
 			
 			// Map models.
-			injector.mapSingleton( BlocksModel );
+			injector.mapSingleton( BlockTypesModel );
 			injector.mapSingleton( BlockStylesModel );
 			injector.mapSingleton( BrushModel );
 			injector.mapSingleton( CameraTargetModel );
@@ -161,7 +161,7 @@ package com.funbuilder
 			injector.mapSingleton( ToggleLibraryRequest );
 			injector.mapSingleton( ShowSelectionIndicatorRequest );
 			signalCommandMap.mapSignalClass( AddBlockRequest,						AddBlockCommand );
-			signalCommandMap.mapSignalClass( BrushBlockRequest,			BrushBlockCommand );
+			signalCommandMap.mapSignalClass( BrushBlockRequest,						BrushBlockCommand );
 			signalCommandMap.mapSignalClass( AddHistoryRequest,						AddHistoryCommand );
 			signalCommandMap.mapSignalClass( AddObjectToSceneRequest,				AddObjectToSceneCommand );
 			signalCommandMap.mapSignalClass( ChangeBlockTypeRequest,				ChangeBlockTypeCommand );

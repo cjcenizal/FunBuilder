@@ -8,7 +8,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.constants.SegmentConstants;
-	import com.funrun.model.vo.BlockVo;
+	import com.funrun.model.vo.BlockTypeVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -18,7 +18,7 @@ package com.funbuilder.controller.commands
 		// Arguments.
 		
 		[Inject]
-		public var blockData:BlockVo;
+		public var blockData:BlockTypeVo;
 		
 		// Models.
 		

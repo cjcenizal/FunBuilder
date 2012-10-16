@@ -8,11 +8,13 @@ package com.funbuilder.controller.commands {
 	import away3d.loaders.misc.AssetLoaderToken;
 	import away3d.loaders.parsers.OBJParser;
 	
-	import com.funrun.model.BlocksModel;
+	import com.funrun.model.BlockStylesModel;
+	import com.funrun.model.BlockTypesModel;
 	import com.funrun.model.constants.TrackConstants;
-	import com.funrun.model.vo.BlockVo;
+	import com.funrun.model.vo.BlockStyleVo;
+	import com.funrun.model.vo.BlockTypeVo;
 	import com.funrun.services.JsonService;
-	import com.funrun.services.parsers.BlocksParser;
+	import com.funrun.services.parsers.BlockStylesParser;
 	
 	import flash.events.Event;
 	import flash.net.URLLoader;
@@ -27,7 +29,7 @@ package com.funbuilder.controller.commands {
 		// Models.
 		
 		[Inject]
-		public var blocksModel:BlocksModel;
+		public var blockStylesModel:BlockStylesModel;
 		
 		// Private vars.
 		
@@ -44,11 +46,8 @@ package com.funbuilder.controller.commands {
 		private function onLoadComplete( e:Event ):void {
 			var data:String = ( e.target as URLLoader ).data;
 			// Parse object to give it meaning.
-			var parsedBlocks:BlocksParser = new BlocksParser( new JsonService().readString( data ) );
-			
-			// Store a count so we know when we're done loading the block objs.
+			var parsedBlocks:BlockStylesParser = new BlockStylesParser( new JsonService().readString( data ) );
 			var len:int = parsedBlocks.length;
-			_countTotal = len * 2; // Assume one mtl and obj pair per block.
 			if ( len == 0 ) {
 				dispatchComplete( true );
 			} else {
@@ -56,14 +55,21 @@ package com.funbuilder.controller.commands {
 				var context:AssetLoaderContext = new AssetLoaderContext( true, _filePath );
 				
 				// Load the block objs.
-				var blockData:BlockVo;
+				var style:BlockStyleVo, keys:Array, id:String, filename:String;
 				for ( var i:int = 0; i < len; i++ ) {
-					blockData = parsedBlocks.getAt( i );
-					// Store in model.
-					blocksModel.addBlock( blockData );
-					// Load it.
-					var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( _filePath + blockData.filename ), context, blockData.id, new old.OBJParser() );
-					token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( blockData ) );
+					style = parsedBlocks.getAt( i );
+					keys = style.getKeys();
+					for ( var j:int = 0; j < keys.length; j++ ) {
+						id = keys[ j ];
+						filename = style.getFilename( id );
+						// Store in model.
+						blockStylesModel.add( style );
+						// Load both mtl and an obj for each block style.
+						_countTotal += 2;
+						// Load it.
+						var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( _filePath + filename ), context, id, new old.OBJParser() );
+						token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( style, id ) );
+					}
 				}
 			}
 		}
@@ -71,18 +77,17 @@ package com.funbuilder.controller.commands {
 		/**
 		 * Listener function for asset complete event on loader
 		 */
-		private function getOnAssetComplete( blockData:BlockVo ):Function {
+		private function getOnAssetComplete( style:BlockStyleVo, id:String ):Function {
 			var completeCallback:Function = this.dispatchComplete;
 			return function( event:AssetEvent ):void {
 				if ( event.asset.assetType == AssetType.MESH ) {
 					// Treat mesh.
 					var mesh:Mesh = event.asset as Mesh;
-					mesh.name = blockData.id; // id and mesh.assetNamepsace are the same
+					mesh.name = style.id; // id and mesh.assetNamepsace are the same
 					mesh.geometry.scale( TrackConstants.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
 					mesh.rotationY = 180;
-					
-					// Assign mesh to block.
-					blockData.mesh = mesh;
+					// Store mesh.
+					style.addMesh( id, mesh );
 					// Increment complete count and check if we're done.
 					_countLoaded++;
 					if ( _countLoaded == _countTotal ) {

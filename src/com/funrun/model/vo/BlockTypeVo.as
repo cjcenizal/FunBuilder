@@ -2,7 +2,7 @@ package com.funrun.model.vo {
 	
 	import flash.geom.Vector3D;
 	
-	public class BlockVo {
+	public class BlockTypeVo {
 		
 		private static const TRANSLATIONS:Object = {};
 		TRANSLATIONS[ 'front' ] = 'f';
@@ -17,7 +17,7 @@ package com.funrun.model.vo {
 		private var _boundsMin:Vector3D;
 		private var _boundsMax:Vector3D;
 		
-		public function BlockVo( id:String, faces:Object, boundsMin:Vector3D, boundsMax:Vector3D ) {
+		public function BlockTypeVo( id:String, faces:Object, boundsMin:Vector3D, boundsMax:Vector3D ) {
 			_id = id;
 			_faces = faces;
 			_boundsMin = boundsMin;

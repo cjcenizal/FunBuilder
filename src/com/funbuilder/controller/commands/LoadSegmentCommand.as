@@ -5,7 +5,7 @@ package com.funbuilder.controller.commands
 	import com.adobe.serialization.json.JSON;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
-	import com.funrun.model.BlocksModel;
+	import com.funrun.model.BlockTypesModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVo;
 	
@@ -22,7 +22,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var blocksModel:BlocksModel;
+		public var blocksModel:BlockTypesModel;
 		
 		// Commands.
 		
@@ -34,7 +34,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			
+			/*
 			// Clear old stuff.
 			clearSegmentRequest.dispatch();
 			
@@ -52,7 +52,7 @@ package com.funbuilder.controller.commands
 				mesh.y = dataItem.y * SegmentConstants.BLOCK_SIZE;
 				mesh.z = dataItem.z * SegmentConstants.BLOCK_SIZE;
 				addBlockRequest.dispatch( new AddBlockVo( mesh, dataItem.key ) );
-			}
+			}*/
 		}
 	}
 }

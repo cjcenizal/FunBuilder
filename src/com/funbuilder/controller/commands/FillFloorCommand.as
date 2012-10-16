@@ -3,7 +3,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	
 	import com.funbuilder.controller.signals.AddBlockRequest;
-	import com.funrun.model.BlocksModel;
+	import com.funrun.model.BlockTypesModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddBlockVo;
 	
@@ -15,7 +15,7 @@ package com.funbuilder.controller.commands
 		// Models.
 		
 		[Inject]
-		public var blocksModel:BlocksModel;
+		public var blocksModel:BlockTypesModel;
 		
 		// Commands.
 		
@@ -23,6 +23,7 @@ package com.funbuilder.controller.commands
 		public var addBlockRequest:AddBlockRequest;
 		
 		override public function execute():void {
+			/*
 			var block:Mesh;
 			for ( var x:int = 0; x < SegmentConstants.NUM_BLOCKS_WIDE; x++ ) {
 				for ( var z:int = 0; z < SegmentConstants.NUM_BLOCKS_DEPTH; z++ ) {
@@ -33,7 +34,7 @@ package com.funbuilder.controller.commands
 					block.z = z * SegmentConstants.BLOCK_SIZE + SegmentConstants.BLOCK_SIZE * .5;
 					addBlockRequest.dispatch( new AddBlockVo( block ) );
 				}
-			}
+			}*/
 		}
 	}
 }
