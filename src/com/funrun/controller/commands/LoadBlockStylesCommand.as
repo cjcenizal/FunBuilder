@@ -31,7 +31,7 @@ package com.funrun.controller.commands {
 		// Private vars.
 		
 		private var _loader:URLLoader;
-		private var _filePath:String = "blocks/";
+		private var _filePath:String = "blocks";
 		private var _countTotal:int;
 		private var _countLoaded:int = 0;
 		
@@ -48,21 +48,21 @@ package com.funrun.controller.commands {
 			if ( _countTotal == 0 ) {
 				dispatchComplete( true );
 			} else {
-				// Set up loading context.
-				var context:AssetLoaderContext = new AssetLoaderContext( true, _filePath );
-				
 				// Load the block objs.
 				var style:BlockStyleVo, keys:Array, id:String, filename:String;
 				for ( var i:int = 0; i < _countTotal; i++ ) {
 					style = parsedBlocks.getAt( i );
 					keys = style.getKeys();
+					// Set up loading context.
+					var path:String = _filePath + "/" + style.id + "/";
+					var context:AssetLoaderContext = new AssetLoaderContext( true, path);
 					for ( var j:int = 0; j < keys.length; j++ ) {
 						id = keys[ j ];
 						filename = style.getFilename( id );
 						// Store in model.
 						blockStylesModel.add( style );
 						// Load it.
-						var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( _filePath + filename ), context, id, new old.OBJParser() );
+						var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( path + filename ), context, id, new old.OBJParser() );
 						token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( style, id ) );
 					}
 				}
@@ -78,6 +78,7 @@ package com.funrun.controller.commands {
 				if ( event.asset.assetType == AssetType.MESH ) {
 					// Treat mesh.
 					var mesh:Mesh = event.asset as Mesh;
+					// This check is required since mtl files are being loaded and identified as meshes.
 					if ( mesh.bounds.min.length > 0 || mesh.bounds.max.length > 0 ) {
 						mesh.name = style.id; // id and mesh.assetNamepsace are the same
 						mesh.geometry.scale( TrackConstants.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
