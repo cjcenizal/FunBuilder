@@ -7,12 +7,13 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.InvalidateSavedFileRequest;
 	import com.funbuilder.controller.signals.RemoveBlockRequest;
 	import com.funbuilder.controller.signals.SelectBlockRequest;
-	import com.funrun.model.BlockTypesModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.vo.AddBlockVo;
 	import com.funbuilder.model.vo.ChangeBlockTypeVo;
 	import com.funbuilder.model.vo.SelectBlockVo;
+	import com.funrun.model.BlockStylesModel;
+	import com.funrun.model.BlockTypesModel;
 	import com.funrun.model.vo.BlockTypeVo;
 	
 	import org.robotlegs.mvcs.Command;
@@ -34,7 +35,10 @@ package com.funbuilder.controller.commands
 		public var segmentModel:SegmentModel;
 		
 		[Inject]
-		public var blocksModel:BlockTypesModel;
+		public var blockTypesModel:BlockTypesModel;
+		
+		[Inject]
+		public var blockStylesModel:BlockStylesModel;
 		
 		// Commands.
 		
@@ -55,7 +59,6 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void
 		{
-			/*
 			if ( selectedBlocksModel.numBlocks > 0 ) {
 				addHistoryRequest.dispatch();
 				
@@ -65,15 +68,15 @@ package com.funbuilder.controller.commands
 					var oldId:String = oldBlock.name;
 					
 					// Create new block with position.
-					var index:int = blocksModel.getBlockIndex( oldId ) + changeBlockTypeData.dir;
-					if ( index >= blocksModel.numBlocks ) {
+					var index:int = blockTypesModel.getBlockIndex( oldId ) + changeBlockTypeData.dir;
+					if ( index >= blockTypesModel.numBlocks ) {
 						index = 0;
 					} else if ( index < 0 ) {
-						index = blocksModel.numBlocks - 1;
+						index = blockTypesModel.numBlocks - 1;
 					}
 					
-					var newBlockData:BlockTypeVo = blocksModel.getAt( index );
-					var newBlock:Mesh = blocksModel.getWithId( newBlockData.id ).mesh.clone() as Mesh;
+					var newBlockData:BlockTypeVo = blockTypesModel.getAt( index );
+					var newBlock:Mesh = blockStylesModel.getMeshCloneForBlock( newBlockData.id );
 					newBlock.x = oldBlock.x;
 					newBlock.y = oldBlock.y;
 					newBlock.z = oldBlock.z;
@@ -89,7 +92,7 @@ package com.funbuilder.controller.commands
 				}
 				
 				invalidateSavedFileRequest.dispatch();
-			}*/
+			}
 		}
 	}
 }

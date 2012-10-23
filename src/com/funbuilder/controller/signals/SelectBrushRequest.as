@@ -8,7 +8,7 @@ package com.funbuilder.controller.signals
 	{
 		public function SelectBrushRequest()
 		{
-			super( BlockTypeVo );
+			super( String );
 		}
 	}
 }

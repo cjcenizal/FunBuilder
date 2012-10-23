@@ -24,12 +24,10 @@ package com.funbuilder.model
 			super();
 		}
 		
-		public function select( data:BlockTypeVo ):void {
-			/*
+		public function select( data:BlockTypeVo, mesh:Mesh ):void {
 			_data = data;
-			_preview = data.mesh.clone() as Mesh;
+			_preview = mesh;
 			_count = 0;
-			*/
 		}
 		
 		public function deselect():void {

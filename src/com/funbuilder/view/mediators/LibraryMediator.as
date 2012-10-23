@@ -1,6 +1,5 @@
 package com.funbuilder.view.mediators
 {
-	import com.funbuilder.controller.signals.BrushBlockRequest;
 	import com.funbuilder.controller.signals.AddItemToLibraryRequest;
 	import com.funbuilder.controller.signals.SelectBrushRequest;
 	import com.funbuilder.model.vo.AddItemToLibraryVo;
@@ -25,7 +24,7 @@ package com.funbuilder.view.mediators
 		public var addItemToLibraryRequest:AddItemToLibraryRequest;
 		
 		[Inject]
-		public var selectLibraryBlockRequest:SelectBrushRequest;
+		public var selectBrushRequest:SelectBrushRequest;
 		
 		override public function onRegister():void {
 			view.addEventListener( view.EVENT_SELECT, onSelectItem );
@@ -33,7 +32,7 @@ package com.funbuilder.view.mediators
 		}
 		
 		private function onSelectItem( e:Event ):void {
-			selectLibraryBlockRequest.dispatch( view.selected );
+			selectBrushRequest.dispatch( view.selected );
 		}
 		
 		private function onAddItemToLibraryRequested( data:AddItemToLibraryVo ):void {

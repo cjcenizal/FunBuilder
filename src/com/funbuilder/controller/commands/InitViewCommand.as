@@ -4,6 +4,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.View3dModel;
 	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funrun.model.BlockStylesModel;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -18,12 +19,19 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var lightsModel:LightsModel;
 		
+		[Inject]
+		public var blockStylesModel:BlockStylesModel;
+		
 		// Commands.
 		
 		[Inject]
 		public var newFileRequest:NewFileRequest;
 		
 		override public function execute():void {
+			// Set current blocks style.
+			blockStylesModel.currentStyle = "default";
+			
+			// Build scene.
 			lightsModel.light.x = SegmentConstants.SEGMENT_HALF_WIDTH;
 			lightsModel.light.y = 700;
 			lightsModel.light.z = -500; // Place the light at the front of the segment.
