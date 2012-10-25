@@ -1,6 +1,7 @@
 package com.funbuilder.controller.commands
 {
 	import com.funbuilder.controller.signals.AddHistoryRequest;
+	import com.funbuilder.controller.signals.ChangeBlockStyleRequest;
 	import com.funbuilder.controller.signals.ChangeBlockTypeRequest;
 	import com.funbuilder.controller.signals.DeleteBlockRequest;
 	import com.funbuilder.controller.signals.DeselectAllBlocksRequest;
@@ -10,6 +11,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.KeyboardModel;
 	import com.funbuilder.model.SelectedBlocksModel;
+	import com.funbuilder.model.vo.ChangeBlockStyleVo;
 	import com.funbuilder.model.vo.ChangeBlockTypeVo;
 	
 	import flash.events.KeyboardEvent;
@@ -48,6 +50,9 @@ package com.funbuilder.controller.commands
 		public var changeBlockTypeRequest:ChangeBlockTypeRequest;
 		
 		[Inject]
+		public var changeBlockStyleRequest:ChangeBlockStyleRequest;
+		
+		[Inject]
 		public var deselectAllBlocksRequest:DeselectAllBlocksRequest;
 		
 		[Inject]
@@ -63,6 +68,8 @@ package com.funbuilder.controller.commands
 		
 		private const LEFT_ARROW:int = 37;
 		private const RIGHT_ARROW:int = 39;
+		private const LEFT_BRACKET:int = 219;
+		private const RIGHT_BRACKET:int = 221;
 		
 		override public function execute():void
 		{
@@ -110,6 +117,12 @@ package com.funbuilder.controller.commands
 						break;
 					case RIGHT_ARROW:
 						changeBlockTypeRequest.dispatch( new ChangeBlockTypeVo( 1 ) );
+						break;
+					case LEFT_BRACKET:
+						changeBlockStyleRequest.dispatch( new ChangeBlockStyleVo( -1 ) );
+						break;
+					case RIGHT_BRACKET:
+						changeBlockStyleRequest.dispatch( new ChangeBlockStyleVo( 1 ) );
 						break;
 				}
 				

@@ -81,5 +81,6 @@ package com.funbuilder.view.mediators {
 		private function onShowSelectionIndicatorRequested( visible:Boolean ):void {
 			view.showSelectionIndicator( visible );
 		}
+		
 	}
 }

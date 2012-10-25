@@ -8,6 +8,7 @@ package com.funrun.model.vo
 	{
 		
 		public var id:String;
+		public var index:int;
 		private var _files:Object;
 		private var _meshes:Object;
 		private var _meshesArr:Array;

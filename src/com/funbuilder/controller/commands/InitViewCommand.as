@@ -29,7 +29,7 @@ package com.funbuilder.controller.commands
 		
 		override public function execute():void {
 			// Set current blocks style.
-			blockStylesModel.currentStyle = "default";
+			blockStylesModel.currentStyle = blockStylesModel.getStyle( "default" );
 			
 			// Build scene.
 			lightsModel.light.x = SegmentConstants.SEGMENT_HALF_WIDTH;
