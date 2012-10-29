@@ -52,6 +52,8 @@ package com.funrun.controller.commands {
 				var style:BlockStyleVo, keys:Array, id:String, filename:String;
 				for ( var i:int = 0; i < _countTotal; i++ ) {
 					style = parsedBlocks.getAt( i );
+					// Store in model.
+					blockStylesModel.add( style );
 					keys = style.getKeys();
 					// Set up loading context.
 					var path:String = _filePath + "/" + style.id + "/";
@@ -59,8 +61,6 @@ package com.funrun.controller.commands {
 					for ( var j:int = 0; j < keys.length; j++ ) {
 						id = keys[ j ];
 						filename = style.getFilename( id );
-						// Store in model.
-						blockStylesModel.add( style );
 						// Load it.
 						var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( path + filename ), context, id, new old.OBJParser() );
 						token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( style, id ) );
@@ -80,7 +80,10 @@ package com.funrun.controller.commands {
 					var mesh:Mesh = event.asset as Mesh;
 					// This check is required since mtl files are being loaded and identified as meshes.
 					if ( mesh.bounds.min.length > 0 || mesh.bounds.max.length > 0 ) {
-						mesh.name = style.id; // id and mesh.assetNamepsace are the same
+						var nameObj:Object = {};
+						nameObj[ 'style' ] = style.id;
+						nameObj[ 'type' ] = id;
+						mesh.name = JSON.stringify( nameObj );
 						mesh.geometry.scale( TrackConstants.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
 						mesh.rotationY = 180;
 						// Store mesh.

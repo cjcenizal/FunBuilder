@@ -65,7 +65,10 @@ package com.funbuilder.controller.commands
 				for ( var i:int = selectedBlocksModel.numBlocks - 1; i >= 0; i-- ) {
 					
 					var oldBlock:Mesh = selectedBlocksModel.getAt( i );
-					var oldId:String = oldBlock.name;
+					var oldNameObj:Object = JSON.parse( oldBlock.name );
+					var oldId:String = oldNameObj.type;
+					
+					// Get
 					
 					// Create new block with position.
 					var index:int = blockTypesModel.getBlockIndex( oldId ) + changeBlockTypeData.dir;
