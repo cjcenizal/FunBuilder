@@ -44,17 +44,18 @@ package com.funrun.controller.commands {
 			var data:String = ( e.target as URLLoader ).data;
 			// Parse object to give it meaning.
 			var parsedBlocks:BlockStylesParser = new BlockStylesParser( new JsonService().readString( data ) );
-			_countTotal = parsedBlocks.length;
-			if ( _countTotal == 0 ) {
+			if ( parsedBlocks.length == 0 ) {
 				dispatchComplete( true );
 			} else {
 				// Load the block objs.
 				var style:BlockStyleVo, keys:Array, id:String, filename:String;
-				for ( var i:int = 0; i < _countTotal; i++ ) {
+				for ( var i:int = 0; i < parsedBlocks.length; i++ ) {
 					style = parsedBlocks.getAt( i );
 					// Store in model.
 					blockStylesModel.add( style );
 					keys = style.getKeys();
+					// Increment count total.
+					_countTotal += keys.length;
 					// Set up loading context.
 					var path:String = _filePath + "/" + style.id + "/";
 					var context:AssetLoaderContext = new AssetLoaderContext( true, path);

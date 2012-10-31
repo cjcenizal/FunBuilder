@@ -9,6 +9,7 @@ package com.funbuilder.controller.commands
 	import away3d.entities.Mesh;
 	import away3d.lights.PointLight;
 	import away3d.materials.ColorMaterial;
+	import away3d.materials.TextureMaterial;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.materials.methods.FresnelSpecularMethod;
 	import away3d.primitives.CylinderGeometry;
@@ -18,6 +19,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.AddObjectToSceneRequest;
 	import com.funbuilder.controller.signals.AddView3DRequest;
 	import com.funbuilder.controller.signals.NewFileRequest;
+	import com.funbuilder.controller.signals.RemoveObjectFromSceneRequest;
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.ElevationModel;
 	import com.funbuilder.model.HandlesModel;
@@ -27,6 +29,9 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.View3dModel;
 	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
+	import com.funrun.model.BlockStylesModel;
+	import com.funrun.model.BlockTypesModel;
+	import com.funrun.model.vo.BlockStyleVo;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -56,6 +61,12 @@ package com.funbuilder.controller.commands
 		[Inject]
 		public var segmentModel:SegmentModel;
 		
+		[Inject]
+		public var blockStylesModel:BlockStylesModel;
+		
+		[Inject]
+		public var blockTypesModel:BlockTypesModel;
+		
 		// Commands.
 		
 		[Inject]
@@ -63,6 +74,9 @@ package com.funbuilder.controller.commands
 		
 		[Inject]
 		public var addObjectToSceneRequest:AddObjectToSceneRequest;
+		
+		[Inject]
+		public var removeObjectFromSceneRequest:RemoveObjectFromSceneRequest;
 		
 		[Inject]
 		public var newFileRequest:NewFileRequest;
@@ -185,6 +199,21 @@ package com.funbuilder.controller.commands
 			lightsModel.light = light;
 			lightsModel.lightPicker = new StaticLightPicker( [ light ] );
 			lightsModel.specularMethod = new FresnelSpecularMethod();
+			
+			// Light materials.
+			for ( var i:int = 0; i < blockStylesModel.numStyles; i++ ) {
+				var style:BlockStyleVo = blockStylesModel.getStyleAt( i );
+				for ( var j:int = 0; j < style.length; j++ ) {
+					var mesh:Mesh = style.getMeshAt( j );
+					var material:TextureMaterial = mesh.material as TextureMaterial;
+					material.lightPicker = lightsModel.lightPicker;
+					material.specular = .25;
+					material.gloss = 20;
+					material.specularMethod = lightsModel.specularMethod;
+					addObjectToSceneRequest.dispatch( mesh );
+					removeObjectFromSceneRequest.dispatch( mesh );
+				}
+			}
 			
 			// Respond to time.
 			commandMap.mapEvent( TimeEvent.TICK, UpdateViewCommand, TimeEvent );
