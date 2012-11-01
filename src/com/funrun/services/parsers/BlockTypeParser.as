@@ -1,8 +1,7 @@
 package com.funrun.services.parsers {
 	
-	import com.funrun.model.constants.FaceTypes;
-	import com.funrun.model.vo.BlockTypeVo;
 	import com.funrun.model.constants.Block;
+	import com.funrun.model.vo.BlockTypeVo;
 	
 	import flash.geom.Vector3D;
 

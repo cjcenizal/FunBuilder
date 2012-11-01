@@ -1,6 +1,5 @@
 package com.funrun.services.parsers {
 	import com.funrun.model.vo.BlockStyleVo;
-	import com.funrun.model.vo.BlockTypeVo;
 	
 	public class BlockStylesParser extends AbstractParser {
 		

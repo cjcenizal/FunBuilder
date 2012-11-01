@@ -3,12 +3,12 @@ package com.funrun.model.constants
 	public class TrackConstants
 	{
 		// Sizes.
-		public static const BLOCK_SIZE:Number = 100;
-		public static const BLOCK_SIZE_HALF:Number = BLOCK_SIZE * .5;
+	//	public static const BLOCK_SIZE:Number = 100;
+	//	public static const BLOCK_SIZE_HALF:Number = BLOCK_SIZE * .5;
 		public static const TRACK_WIDTH:int = 1200;
 		public static const TRACK_DEPTH:int = 8000;
-		public static const TRACK_WIDTH_BLOCKS:int = TRACK_WIDTH / BLOCK_SIZE;
-		public static const TRACK_DEPTH_BLOCKS:int = TRACK_DEPTH / BLOCK_SIZE;
+		public static const TRACK_WIDTH_BLOCKS:int = TRACK_WIDTH / Block.SIZE;
+		public static const TRACK_DEPTH_BLOCKS:int = TRACK_DEPTH / Block.SIZE;
 		public static const PLAYER_RADIUS:int = 50;
 		public static const PLAYER_HALF_SIZE:int = 55;
 		
@@ -28,7 +28,7 @@ package com.funrun.model.constants
 		public static const PLAYER_GRAVITY:Number = -8;
 		
 		// Segment constants.
-		public static const SEGMENT_DEPTH:Number = 24 * BLOCK_SIZE;
+		public static const SEGMENT_DEPTH:Number = 24 * Block.SIZE;
 		public static const SEGMENT_CULL_DEPTH_NEAR:Number = -2000 -SEGMENT_DEPTH;
 		public static const SEGMENT_CULL_DEPTH_FAR:Number = TRACK_DEPTH + SEGMENT_DEPTH;
 		public static const SEGMENT_ADD_DEPTH_NEAR:Number = SEGMENT_DEPTH + SEGMENT_CULL_DEPTH_NEAR;

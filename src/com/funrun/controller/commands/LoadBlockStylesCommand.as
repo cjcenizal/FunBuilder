@@ -8,7 +8,7 @@ package com.funrun.controller.commands {
 	import away3d.loaders.misc.AssetLoaderToken;
 	
 	import com.funrun.model.BlockStylesModel;
-	import com.funrun.model.constants.TrackConstants;
+	import com.funrun.model.constants.Block;
 	import com.funrun.model.vo.BlockStyleVo;
 	import com.funrun.services.JsonService;
 	import com.funrun.services.parsers.BlockStylesParser;
@@ -88,7 +88,7 @@ package com.funrun.controller.commands {
 						nameObj[ 'style' ] = style.id;
 						nameObj[ 'type' ] = id;
 						mesh.name = JSON.stringify( nameObj );
-						mesh.geometry.scale( TrackConstants.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
+						mesh.geometry.scale( Block.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
 						mesh.rotationY = 180;
 						// Store mesh.
 						style.addMesh( id, mesh );
