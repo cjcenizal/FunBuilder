@@ -88,7 +88,7 @@ package com.funrun.controller.commands {
 						nameObj[ 'style' ] = style.id;
 						nameObj[ 'type' ] = id;
 						mesh.name = JSON.stringify( nameObj );
-						mesh.geometry.scale( Block.BLOCK_SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
+						mesh.geometry.scale( Block.SIZE ); // Note: scale cannot be performed on mesh when using sub-surface diffuse method.
 						mesh.rotationY = 180;
 						// Store mesh.
 						style.addMesh( id, mesh );
