@@ -34,15 +34,18 @@ package com.funrun.model.vo
 		}
 		
 		public function addMesh( id:String, mesh:Mesh ):void {
-			_meshes[ id ] = mesh;
+			if ( !hasMesh( id ) ) _meshes[ id ] = [];
+			_meshes[ id ].push( mesh );
 			_meshesArr.push( mesh );
 		}
 		
-		public function getMesh( id:String ):Mesh {
-			return _meshes[ id ];
+		public function getRandomMesh( id:String ):Mesh {
+			var arr:Array = _meshes[ id ];
+			var index:int = Math.floor( Math.random() * arr.length );
+			return arr[ index ];
 		}
 		
-		public function getFilename( id:String ):String {
+		public function getFilenames( id:String ):Array {
 			return _files[ id ];
 		}
 		

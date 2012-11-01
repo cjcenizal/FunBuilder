@@ -43,28 +43,31 @@ package com.funrun.controller.commands {
 		private function onLoadComplete( e:Event ):void {
 			var data:String = ( e.target as URLLoader ).data;
 			// Parse object to give it meaning.
-			var parsedBlocks:BlockStylesParser = new BlockStylesParser( new JsonService().readString( data ) );
-			if ( parsedBlocks.length == 0 ) {
+			var parsedStyles:BlockStylesParser = new BlockStylesParser( new JsonService().readString( data ) );
+			if ( parsedStyles.length == 0 ) {
 				dispatchComplete( true );
 			} else {
 				// Load the block objs.
 				var style:BlockStyleVo, keys:Array, id:String, filename:String;
-				for ( var i:int = 0; i < parsedBlocks.length; i++ ) {
-					style = parsedBlocks.getAt( i );
+				for ( var i:int = 0; i < parsedStyles.length; i++ ) {
+					style = parsedStyles.getAt( i );
 					// Store in model.
 					blockStylesModel.add( style );
 					keys = style.getKeys();
-					// Increment count total.
-					_countTotal += keys.length;
 					// Set up loading context.
 					var path:String = _filePath + "/" + style.id + "/";
 					var context:AssetLoaderContext = new AssetLoaderContext( true, path);
 					for ( var j:int = 0; j < keys.length; j++ ) {
 						id = keys[ j ];
-						filename = style.getFilename( id );
-						// Load it.
-						var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( path + filename ), context, id, new old.OBJParser() );
-						token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( style, id ) );
+						var filenames:Array = style.getFilenames( id );
+						// Increment count total.
+						_countTotal += filenames.length;
+						for ( var k:int = 0; k < filenames.length; k++ ) {
+							filename = filenames[ k ];
+							// Load it.
+							var token:AssetLoaderToken = AssetLibrary.load( new URLRequest( path + filename ), context, id, new old.OBJParser() );
+							token.addEventListener( AssetEvent.ASSET_COMPLETE, getOnAssetComplete( style, id ) );
+						}
 					}
 				}
 			}

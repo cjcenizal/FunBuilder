@@ -68,8 +68,6 @@ package com.funbuilder.controller.commands
 					var oldNameObj:Object = JSON.parse( oldBlock.name );
 					var oldId:String = oldNameObj.type;
 					
-					// Get
-					
 					// Create new block with position.
 					var index:int = blockTypesModel.getBlockIndex( oldId ) + changeBlockTypeData.dir;
 					if ( index >= blockTypesModel.numBlocks ) {

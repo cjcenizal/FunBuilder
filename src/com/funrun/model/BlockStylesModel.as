@@ -34,7 +34,7 @@ package com.funrun.model
 		}
 		
 		public function getMeshCloneForBlock( id:String ):Mesh {
-			return _currentStyle.getMesh( id ).clone() as Mesh;
+			return _currentStyle.getRandomMesh( id ).clone() as Mesh;
 		}
 		
 		public function set currentStyle( style:BlockStyleVo ):void {

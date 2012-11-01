@@ -5,21 +5,21 @@
       {
         "id" : "default",
         "blocks" : {
-            "floor" : "floor.obj",
-            "basic" : "basic.obj",
-            "launcher" : "launcher.obj",
-            "stairs" : "stairs.obj",
-            "point" : "point.obj"
+            "floor" : [ "floor.obj" ],
+            "basic" : [ "basic.obj" ],
+            "launcher" : [ "launcher.obj" ],
+            "stairs" : [ "stairs.obj" ],
+            "point" : [ "point.obj" ]
           }
         },
       {
         "id" : "grass",
         "blocks" : {
-            "floor" : "floor.obj",
-            "basic" : "basic.obj",
-            "launcher" : "launcher.obj",
-            "stairs" : "stairs.obj",
-            "point" : "point.obj"
+            "floor" : [ "floor1.obj", "floor2.obj", "floor3.obj" ],
+            "basic" : [ "basic.obj" ],
+            "launcher" : [ "launcher.obj" ],
+            "stairs" : [ "stairs.obj" ],
+            "point" : [ "point.obj" ]
           }
         }
     ]
