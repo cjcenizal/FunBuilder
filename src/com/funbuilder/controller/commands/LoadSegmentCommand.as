@@ -5,7 +5,8 @@ package com.funbuilder.controller.commands
 	import com.adobe.serialization.json.JSON;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
-	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funrun.model.constants.Block;
+	import com.funbuilder.model.constants.Grid;
 	import com.funbuilder.model.vo.AddBlockVo;
 	import com.funrun.model.BlockStylesModel;
 	import com.funrun.model.BlockTypesModel;
@@ -46,9 +47,9 @@ package com.funbuilder.controller.commands
 			for ( var i:int = 0; i < len; i++ ) {
 				dataItem = list[ i ];
 				mesh = blockStylesModel.getMeshCloneForBlock( dataItem.id );
-				mesh.x = dataItem.x * SegmentConstants.BLOCK_SIZE;
-				mesh.y = dataItem.y * SegmentConstants.BLOCK_SIZE;
-				mesh.z = dataItem.z * SegmentConstants.BLOCK_SIZE;
+				mesh.x = dataItem.x * Block.SIZE;
+				mesh.y = dataItem.y * Block.SIZE;
+				mesh.z = dataItem.z * Block.SIZE;
 				addBlockRequest.dispatch( new AddBlockVo( mesh, dataItem.key ) );
 			}
 		}

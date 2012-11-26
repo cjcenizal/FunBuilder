@@ -2,7 +2,7 @@ package com.funbuilder.model
 {
 	import away3d.entities.Mesh;
 	
-	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funbuilder.model.constants.Grid;
 	import com.funrun.model.vo.BlockTypeVo;
 	
 	import flash.geom.Vector3D;
@@ -60,9 +60,9 @@ package com.funbuilder.model
 		public function get hasMoved():Boolean {
 			if ( _preview ) {
 				var snappedPrev:Vector3D = _prevPosition.clone();
-				SegmentConstants.snapPositionToGrid( snappedPrev );
+				Grid.snapPositionToGrid( snappedPrev );
 				var snappedCurr:Vector3D = _preview.position.clone();
-				SegmentConstants.snapPositionToGrid( snappedCurr );
+				Grid.snapPositionToGrid( snappedCurr );
 				snappedCurr.y = snappedPrev.y;
 				return ( !snappedPrev.equals( snappedCurr ) );
 			}

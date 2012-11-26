@@ -27,10 +27,11 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.TimeModel;
 	import com.funbuilder.model.View3dModel;
-	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.events.TimeEvent;
 	import com.funrun.model.BlockStylesModel;
 	import com.funrun.model.BlockTypesModel;
+	import com.funrun.model.constants.Block;
+	import com.funrun.model.constants.Segment;
 	import com.funrun.model.vo.BlockStyleVo;
 	
 	import org.robotlegs.mvcs.Command;
@@ -103,7 +104,7 @@ package com.funbuilder.controller.commands
 			var target:Mesh = new Mesh( new SphereGeometry( 4 ), null );
 			target.material = new ColorMaterial( 0xffffff, .5 );
 			cameraTargetModel.setMesh( target );
-			cameraTargetModel.setPos( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
+			cameraTargetModel.setPos( Segment.HALF_WIDTH, 0, Segment.HALF_DEPTH );
 			addObjectToSceneRequest.dispatch( target );
 			
 			// Add camera controller.
@@ -112,13 +113,13 @@ package com.funbuilder.controller.commands
 			view3dModel.cameraController = cameraController;
 			
 			// Add ground plane.
-			var planeGeometry:PlaneGeometry = new PlaneGeometry( SegmentConstants.SEGMENT_WIDTH, SegmentConstants.SEGMENT_DEPTH, 12, 26, true );
+			var planeGeometry:PlaneGeometry = new PlaneGeometry( Segment.WIDTH, Segment.DEPTH, 12, 26, true );
 			var planeMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .2 );
 			planeMaterial.bothSides = true;
 			var planeMesh:Mesh = new Mesh( planeGeometry, planeMaterial );
-			planeMesh.x = SegmentConstants.SEGMENT_HALF_WIDTH;
-			planeMesh.y = SegmentConstants.BLOCK_SIZE * -.5;
-			planeMesh.z = SegmentConstants.SEGMENT_HALF_DEPTH;
+			planeMesh.x = Segment.HALF_WIDTH;
+			planeMesh.y = Block.SIZE * -.5;
+			planeMesh.z = Segment.HALF_DEPTH;
 			planeMesh.visible = false;
 			addObjectToSceneRequest.dispatch( planeMesh );
 			view3dModel.groundPlane = planeMesh;
@@ -127,31 +128,31 @@ package com.funbuilder.controller.commands
 			var lineThickness:Number = 3;
 			var lineMaterial:ColorMaterial = new ColorMaterial( 0xffffff, .2 );
 			var line:Mesh = new Mesh( new CylinderGeometry( lineThickness, lineThickness, 1 ), lineMaterial );
-			line.scaleY = SegmentConstants.SEGMENT_WIDTH;
+			line.scaleY = Segment.WIDTH;
 			line.rotationZ = 90;
-			line.x = SegmentConstants.SEGMENT_WIDTH * .5;
-			line.y = -SegmentConstants.BLOCK_SIZE * .5;
+			line.x = Segment.WIDTH * .5;
+			line.y = -Block.SIZE * .5;
 			addObjectToSceneRequest.dispatch( line );
 			line = line.clone() as Mesh;
-			line.z = SegmentConstants.SEGMENT_DEPTH;
+			line.z = Segment.DEPTH;
 			addObjectToSceneRequest.dispatch( line );
 			line = line.clone() as Mesh;
 			line.rotationX = 90;
-			line.scaleY = SegmentConstants.SEGMENT_DEPTH;
+			line.scaleY = Segment.DEPTH;
 			line.x = 0;
-			line.z = SegmentConstants.SEGMENT_DEPTH * .5;
+			line.z = Segment.DEPTH * .5;
 			addObjectToSceneRequest.dispatch( line );
 			line = line.clone() as Mesh;
-			line.x = SegmentConstants.SEGMENT_WIDTH;
+			line.x = Segment.WIDTH;
 			addObjectToSceneRequest.dispatch( line );
 			
 			// Add elevation indicators.
 			var positiveIndicator:Mesh;
 			var negativeIndicator:Mesh;
-			var side:Number = SegmentConstants.BLOCK_SIZE - 3;
+			var side:Number = Block.SIZE - 3;
 			var indicatorGeo:Geometry = new PlaneGeometry( side, side );
-			for ( var x:int = SegmentConstants.BLOCK_SIZE * .5; x < SegmentConstants.SEGMENT_WIDTH; x += SegmentConstants.BLOCK_SIZE ) {
-				for ( var z:int = SegmentConstants.BLOCK_SIZE * .5; z < SegmentConstants.SEGMENT_DEPTH; z += SegmentConstants.BLOCK_SIZE ) {
+			for ( var x:int = Block.SIZE * .5; x < Segment.WIDTH; x += Block.SIZE ) {
+				for ( var z:int = Block.SIZE * .5; z < Segment.DEPTH; z += Block.SIZE ) {
 					var positiveIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xddffdd, .8 );
 					var negativeIndicatorMaterial:ColorMaterial = new ColorMaterial( 0xddffdd, .8 );
 					positiveIndicatorMaterial.bothSides = false;
@@ -159,7 +160,7 @@ package com.funbuilder.controller.commands
 					
 					positiveIndicator = new Mesh( indicatorGeo, positiveIndicatorMaterial );
 					positiveIndicator.x = x;
-					positiveIndicator.y = -SegmentConstants.BLOCK_SIZE * .5 + 1;
+					positiveIndicator.y = -Block.SIZE * .5 + 1;
 					positiveIndicator.z = z;
 					positiveIndicator.visible = false;
 					elevationModel.add( positiveIndicator, true );
@@ -168,7 +169,7 @@ package com.funbuilder.controller.commands
 					negativeIndicator = new Mesh( indicatorGeo, negativeIndicatorMaterial );
 					negativeIndicator.rotationX = 180;
 					negativeIndicator.x = x;
-					negativeIndicator.y = -SegmentConstants.BLOCK_SIZE * .5 - 1;
+					negativeIndicator.y = -Block.SIZE * .5 - 1;
 					negativeIndicator.z = z;
 					negativeIndicator.visible = false;
 					elevationModel.add( negativeIndicator, false );
@@ -183,7 +184,7 @@ package com.funbuilder.controller.commands
 			addObjectToSceneRequest.dispatch( handlesModel.xLine );
 			addObjectToSceneRequest.dispatch( handlesModel.yLine );
 			addObjectToSceneRequest.dispatch( handlesModel.zLine );
-			handlesModel.moveTo( SegmentConstants.SEGMENT_HALF_WIDTH, 0, SegmentConstants.SEGMENT_HALF_DEPTH );
+			handlesModel.moveTo( Segment.HALF_WIDTH, 0, Segment.HALF_DEPTH );
 			
 			// Add lights.
 			var light:PointLight = new PointLight();

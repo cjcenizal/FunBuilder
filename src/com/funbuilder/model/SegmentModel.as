@@ -5,7 +5,8 @@ package com.funbuilder.model
 	import away3d.primitives.CubeGeometry;
 	
 	import com.adobe.serialization.json.JSON;
-	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funbuilder.model.constants.Grid;
+	import com.funrun.model.constants.Block;
 	
 	import flash.geom.Vector3D;
 	import flash.utils.Dictionary;
@@ -161,9 +162,9 @@ package com.funbuilder.model
 				name = mesh.name;
 				item = {};
 				item.id = name;
-				item.x = mesh.x / SegmentConstants.BLOCK_SIZE;
-				item.y = mesh.y / SegmentConstants.BLOCK_SIZE;
-				item.z = mesh.z / SegmentConstants.BLOCK_SIZE;
+				item.x = mesh.x / Block.SIZE;
+				item.y = mesh.y / Block.SIZE;
+				item.z = mesh.z / Block.SIZE;
 				list.push( item );
 			}
 			return com.adobe.serialization.json.JSON.encode( list );
@@ -187,7 +188,7 @@ package com.funbuilder.model
 					pos = arr[ i ];
 					y = Math.max( y, pos.y );
 				}
-				y += SegmentConstants.BLOCK_SIZE;
+				y += Block.SIZE;
 			}
 			return y;
 		}

@@ -1,6 +1,5 @@
 package com.funbuilder.controller.commands
 {
-	import away3d.cameras.Camera3D;
 	import away3d.containers.View3D;
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;
@@ -12,10 +11,9 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.CameraTargetModel;
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.View3dModel;
-	import com.funbuilder.model.constants.SegmentConstants;
 	import com.funbuilder.model.vo.AddItemToLibraryVo;
 	import com.funrun.model.BlockStylesModel;
-	import com.funrun.model.BlockTypesModel;
+	import com.funrun.model.constants.Segment;
 	import com.funrun.model.vo.BlockStyleVo;
 	
 	import flash.display.Bitmap;
@@ -68,9 +66,9 @@ package com.funbuilder.controller.commands
 				
 				view3dModel.cameraController.distance = 600;
 				
-				lightsModel.light.x = SegmentConstants.SEGMENT_HALF_WIDTH - 500;
+				lightsModel.light.x = Segment.HALF_WIDTH - 500;
 				lightsModel.light.y = 700;
-				lightsModel.light.z = SegmentConstants.SEGMENT_HALF_DEPTH - 500;
+				lightsModel.light.z = Segment.HALF_DEPTH - 500;
 				
 				var view:View3D = view3dModel.view;
 				var prevWidth:Number = view.width;
@@ -86,8 +84,8 @@ package com.funbuilder.controller.commands
 				for ( var i:int = 0; i < style.length; i++ ) {
 					// Add block to scene.
 					block = style.getMeshAt( i ).clone() as Mesh;
-					block.x = SegmentConstants.SEGMENT_HALF_WIDTH;
-					block.z = SegmentConstants.SEGMENT_HALF_DEPTH;
+					block.x = Segment.HALF_WIDTH;
+					block.z = Segment.HALF_DEPTH;
 					block.y = -50;
 					
 					// Apply lights.

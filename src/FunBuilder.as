@@ -16,7 +16,12 @@ package {
 		/*
 		
 		TO-DO:
-			- Build cool obstacles
+		
+		- 1) Build cool obstacles
+			- Alternating converging and diverging
+			- Form points into lines on obstacles
+		- Derive block type and assign numerical ID (i.e. in a 3x3 cube of blocks, which type of block is it); we'll need models for each type of block in the styles
+		
 			- Turn off indicators for when a block is at ground level
 			- Fix stacking of blocks on the ground plane
 		

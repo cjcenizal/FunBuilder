@@ -7,7 +7,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.DeselectBrushRequest;
 	import com.funbuilder.model.BrushModel;
 	import com.funbuilder.model.CameraTargetModel;
-	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funbuilder.model.constants.Grid;
 	import com.funrun.model.BlockStylesModel;
 	import com.funrun.model.BlockTypesModel;
 	import com.funrun.model.vo.BlockTypeVo;
@@ -54,7 +54,7 @@ package com.funbuilder.controller.commands
 			// Add preview.
 			brushModel.select( blockTypesModel.getWithId( styleId ), blockStylesModel.getMeshCloneForBlock( styleId ) );
 			cameraTargetModel.matchPosition( brushModel.preview );
-			SegmentConstants.snapObjectToGrid( brushModel.preview );
+			Grid.snapObjectToGrid( brushModel.preview );
 			addObjectToSceneRequest.dispatch( brushModel.preview );
 		}
 	}

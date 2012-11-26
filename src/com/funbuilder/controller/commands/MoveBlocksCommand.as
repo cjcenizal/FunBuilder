@@ -12,7 +12,8 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.SelectedBlocksModel;
 	import com.funbuilder.model.View3dModel;
-	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funbuilder.model.constants.Grid;
+	import com.funrun.model.constants.Block;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -77,13 +78,13 @@ package com.funbuilder.controller.commands
 			var diff:Vector3D = new Vector3D();
 			switch ( handlesModel.axis ) {
 				case "x":
-					diff.x = Math.round( handlesModel.amountMoved / ( SegmentConstants.BLOCK_SIZE * 1 ) ) * ( SegmentConstants.BLOCK_SIZE * 1 );
+					diff.x = Math.round( handlesModel.amountMoved / ( Block.SIZE * 1 ) ) * ( Block.SIZE * 1 );
 					break;
 				case "y":
-					diff.y = Math.round( handlesModel.amountMoved / ( SegmentConstants.BLOCK_SIZE * .2 ) ) * ( SegmentConstants.BLOCK_SIZE * .2 );
+					diff.y = Math.round( handlesModel.amountMoved / ( Block.SIZE * .2 ) ) * ( Block.SIZE * .2 );
 					break;
 				case "z":
-					diff.z = Math.round( handlesModel.amountMoved / ( SegmentConstants.BLOCK_SIZE * 1 ) ) * ( SegmentConstants.BLOCK_SIZE * 1 );
+					diff.z = Math.round( handlesModel.amountMoved / ( Block.SIZE * 1 ) ) * ( Block.SIZE * 1 );
 					break;
 			}
 			

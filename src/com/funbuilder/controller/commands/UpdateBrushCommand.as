@@ -9,7 +9,7 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.model.MouseModel;
 	import com.funbuilder.model.SegmentModel;
 	import com.funbuilder.model.View3dModel;
-	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funbuilder.model.constants.Grid;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -52,7 +52,7 @@ package com.funbuilder.controller.commands
 				} else {
 					pos = drag.getIntersect( view3dModel.view.mouseX, view3dModel.view.mouseY );
 				}
-				SegmentConstants.snapPositionToGrid( pos );
+				Grid.snapPositionToGrid( pos );
 				var y:Number = segmentModel.getMaxElevationAt( pos );
 				brushModel.movePreview( pos.x, y, pos.z );
 				

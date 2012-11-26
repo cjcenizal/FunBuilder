@@ -3,8 +3,9 @@ package com.funbuilder.controller.commands
 	import com.funbuilder.controller.signals.NewFileRequest;
 	import com.funbuilder.model.LightsModel;
 	import com.funbuilder.model.View3dModel;
-	import com.funbuilder.model.constants.SegmentConstants;
+	import com.funbuilder.model.constants.Grid;
 	import com.funrun.model.BlockStylesModel;
+	import com.funrun.model.constants.Segment;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -32,7 +33,7 @@ package com.funbuilder.controller.commands
 			blockStylesModel.currentStyle = blockStylesModel.getStyle( "default" );
 			
 			// Build scene.
-			lightsModel.light.x = SegmentConstants.SEGMENT_HALF_WIDTH;
+			lightsModel.light.x = Segment.HALF_WIDTH;
 			lightsModel.light.y = 700;
 			lightsModel.light.z = -500; // Place the light at the front of the segment.
 			
