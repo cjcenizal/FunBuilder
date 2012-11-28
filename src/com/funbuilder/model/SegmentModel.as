@@ -4,7 +4,6 @@ package com.funbuilder.model
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.CubeGeometry;
 	
-	import com.adobe.serialization.json.JSON;
 	import com.funbuilder.model.constants.Grid;
 	import com.funrun.model.constants.Block;
 	
@@ -161,13 +160,15 @@ package com.funbuilder.model
 				mesh = getWithKey( key );
 				name = mesh.name;
 				item = {};
-				item.id = name;
+				item.id = {};
+				item.id.type = JSON.parse( mesh.name ).type;
+				item.id.pos = 'na';
 				item.x = mesh.x / Block.SIZE;
 				item.y = mesh.y / Block.SIZE;
 				item.z = mesh.z / Block.SIZE;
 				list.push( item );
 			}
-			return com.adobe.serialization.json.JSON.encode( list );
+			return JSON.stringify( list );
 		}
 		
 		public function getElevationMap():Dictionary {

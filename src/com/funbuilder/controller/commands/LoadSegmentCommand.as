@@ -2,14 +2,13 @@ package com.funbuilder.controller.commands
 {
 	import away3d.entities.Mesh;
 	
-	import com.adobe.serialization.json.JSON;
 	import com.funbuilder.controller.signals.AddBlockRequest;
 	import com.funbuilder.controller.signals.ClearSegmentRequest;
-	import com.funrun.model.constants.Block;
 	import com.funbuilder.model.constants.Grid;
 	import com.funbuilder.model.vo.AddBlockVo;
 	import com.funrun.model.BlockStylesModel;
 	import com.funrun.model.BlockTypesModel;
+	import com.funrun.model.constants.Block;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -40,13 +39,13 @@ package com.funbuilder.controller.commands
 			clearSegmentRequest.dispatch();
 			
 			// Add new stuff.
-			var list:Array = com.adobe.serialization.json.JSON.decode( json );
+			var list:Array = JSON.parse( json ) as Array;
 			var len:int = list.length;
 			var dataItem:Object;
 			var mesh:Mesh;
 			for ( var i:int = 0; i < len; i++ ) {
 				dataItem = list[ i ];
-				mesh = blockStylesModel.getMeshCloneForBlock( dataItem.id );
+				mesh = blockStylesModel.getMeshCloneForBlock( dataItem.id.type );
 				mesh.x = dataItem.x * Block.SIZE;
 				mesh.y = dataItem.y * Block.SIZE;
 				mesh.z = dataItem.z * Block.SIZE;
