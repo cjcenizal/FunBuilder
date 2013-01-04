@@ -43,9 +43,11 @@ package com.funbuilder.controller.commands
 			var len:int = list.length;
 			var dataItem:Object;
 			var mesh:Mesh;
+			var id:Object;
 			for ( var i:int = 0; i < len; i++ ) {
 				dataItem = list[ i ];
-				mesh = blockStylesModel.getMeshCloneForBlock( dataItem.id.type );
+				id = dataItem.id;
+				mesh = blockStylesModel.getMeshCloneForBlock( id.type );
 				mesh.x = dataItem.x * Block.SIZE;
 				mesh.y = dataItem.y * Block.SIZE;
 				mesh.z = dataItem.z * Block.SIZE;
