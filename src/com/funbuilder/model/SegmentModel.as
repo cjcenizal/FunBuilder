@@ -59,6 +59,10 @@ package com.funbuilder.model
 			}
 			_blocks[ key ] = block;
 			_blocksArr.push( block );
+			
+			// TODO: We need to add spatial partitioning here,
+			// so we can later find a block given an x, y, z coordinate.
+			
 			_indicators[ block ] = indicator;
 			addElevation( block.position );
 			
@@ -162,7 +166,7 @@ package com.funbuilder.model
 				item = {};
 				item.id = {};
 				item.id.type = JSON.parse( mesh.name ).type;
-				item.id.pos = 'na';
+				item.id.pos = 'na'; // TODO: tbl, tbc, tbr, tlc, tcc, trc, tfl, tfc, tfr, mbl, mbc, mbr, mlc, mcc, mrc, mfl, mfc, mfr, bbl, bbc, bbr, blc, bcc, brc, bfl, bfc, bfr
 				item.x = mesh.x / Block.SIZE;
 				item.y = mesh.y / Block.SIZE;
 				item.z = mesh.z / Block.SIZE;
